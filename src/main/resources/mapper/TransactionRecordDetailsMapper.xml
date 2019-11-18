@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forest.mapper.TransactionRecordDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.forest.entity.TransactionRecordDetails" >
+    <id column="trd_id" property="trdId" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="article_no" property="articleNo" jdbcType="INTEGER" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="raw_total_price" property="rawTotalPrice" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="REAL" />
+    <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    trd_id, order_number, article_no, quantity, raw_total_price, discount, total_price, 
+    state
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.TransactionRecordDetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from transaction_record_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from transaction_record_details
+    where trd_id = #{trdId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from transaction_record_details
+    where trd_id = #{trdId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.forest.entity.TransactionRecordDetailsExample" >
+    delete from transaction_record_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.forest.entity.TransactionRecordDetails" >
+    insert into transaction_record_details (trd_id, order_number, article_no, 
+      quantity, raw_total_price, discount, 
+      total_price, state)
+    values (#{trdId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{articleNo,jdbcType=INTEGER}, 
+      #{quantity,jdbcType=INTEGER}, #{rawTotalPrice,jdbcType=DECIMAL}, #{discount,jdbcType=REAL}, 
+      #{totalPrice,jdbcType=DECIMAL}, #{state,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.forest.entity.TransactionRecordDetails" >
+    insert into transaction_record_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trdId != null" >
+        trd_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="articleNo != null" >
+        article_no,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="rawTotalPrice != null" >
+        raw_total_price,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="totalPrice != null" >
+        total_price,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trdId != null" >
+        #{trdId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="articleNo != null" >
+        #{articleNo,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="rawTotalPrice != null" >
+        #{rawTotalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=REAL},
+      </if>
+      <if test="totalPrice != null" >
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.forest.entity.TransactionRecordDetailsExample" resultType="java.lang.Integer" >
+    select count(*) from transaction_record_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update transaction_record_details
+    <set >
+      <if test="record.trdId != null" >
+        trd_id = #{record.trdId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNumber != null" >
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.articleNo != null" >
+        article_no = #{record.articleNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.quantity != null" >
+        quantity = #{record.quantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.rawTotalPrice != null" >
+        raw_total_price = #{record.rawTotalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=REAL},
+      </if>
+      <if test="record.totalPrice != null" >
+        total_price = #{record.totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update transaction_record_details
+    set trd_id = #{record.trdId,jdbcType=INTEGER},
+      order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      article_no = #{record.articleNo,jdbcType=INTEGER},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      raw_total_price = #{record.rawTotalPrice,jdbcType=DECIMAL},
+      discount = #{record.discount,jdbcType=REAL},
+      total_price = #{record.totalPrice,jdbcType=DECIMAL},
+      state = #{record.state,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.TransactionRecordDetails" >
+    update transaction_record_details
+    <set >
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="articleNo != null" >
+        article_no = #{articleNo,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="rawTotalPrice != null" >
+        raw_total_price = #{rawTotalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=REAL},
+      </if>
+      <if test="totalPrice != null" >
+        total_price = #{totalPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where trd_id = #{trdId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forest.entity.TransactionRecordDetails" >
+    update transaction_record_details
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      article_no = #{articleNo,jdbcType=INTEGER},
+      quantity = #{quantity,jdbcType=INTEGER},
+      raw_total_price = #{rawTotalPrice,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=REAL},
+      total_price = #{totalPrice,jdbcType=DECIMAL},
+      state = #{state,jdbcType=TINYINT}
+    where trd_id = #{trdId,jdbcType=INTEGER}
+  </update>
+</mapper>

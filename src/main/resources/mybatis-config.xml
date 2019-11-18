@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- mybatis核心配置文件 -->
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybatis核心配置文件，配置mybatis特性，例如：数据库连接地址... -->
+<configuration>
+
+	<settings>
+		<!-- 开启2级缓存 -->
+		<setting name="cacheEnabled" value="true" />
+		<!-- 延迟加载/懒加载 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<!-- 是否立即加载 -->
+		<setting name="aggressiveLazyLoading" value="false" />
+	</settings>
+	
+	<!--引用分页插件 -->
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<!-- 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+			<property name="dialect" value="mysql" />
+			<!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+			<property name="rowBoundsWithCount" value="true" />
+		</plugin>
+	</plugins>
+	
+</configuration>

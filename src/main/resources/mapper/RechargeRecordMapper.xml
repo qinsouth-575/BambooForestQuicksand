@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forest.mapper.RechargeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.forest.entity.RechargeRecord" >
+    <id column="rr_id" property="rrId" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="recharge_money" property="rechargeMoney" jdbcType="DECIMAL" />
+    <result column="present_integral" property="presentIntegral" jdbcType="INTEGER" />
+    <result column="recharge_way" property="rechargeWay" jdbcType="INTEGER" />
+    <result column="present_balance" property="presentBalance" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    rr_id, member_id, recharge_money, present_integral, recharge_way, present_balance, 
+    create_time, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.RechargeRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from recharge_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from recharge_record
+    where rr_id = #{rrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from recharge_record
+    where rr_id = #{rrId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.forest.entity.RechargeRecordExample" >
+    delete from recharge_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.forest.entity.RechargeRecord" >
+    insert into recharge_record (rr_id, member_id, recharge_money, 
+      present_integral, recharge_way, present_balance, 
+      create_time, remark)
+    values (#{rrId,jdbcType=INTEGER}, #{memberId,jdbcType=INTEGER}, #{rechargeMoney,jdbcType=DECIMAL}, 
+      #{presentIntegral,jdbcType=INTEGER}, #{rechargeWay,jdbcType=INTEGER}, #{presentBalance,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.forest.entity.RechargeRecord" >
+    insert into recharge_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rrId != null" >
+        rr_id,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="rechargeMoney != null" >
+        recharge_money,
+      </if>
+      <if test="presentIntegral != null" >
+        present_integral,
+      </if>
+      <if test="rechargeWay != null" >
+        recharge_way,
+      </if>
+      <if test="presentBalance != null" >
+        present_balance,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rrId != null" >
+        #{rrId,jdbcType=INTEGER},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeMoney != null" >
+        #{rechargeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="presentIntegral != null" >
+        #{presentIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeWay != null" >
+        #{rechargeWay,jdbcType=INTEGER},
+      </if>
+      <if test="presentBalance != null" >
+        #{presentBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.forest.entity.RechargeRecordExample" resultType="java.lang.Integer" >
+    select count(*) from recharge_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update recharge_record
+    <set >
+      <if test="record.rrId != null" >
+        rr_id = #{record.rrId,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberId != null" >
+        member_id = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rechargeMoney != null" >
+        recharge_money = #{record.rechargeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.presentIntegral != null" >
+        present_integral = #{record.presentIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.rechargeWay != null" >
+        recharge_way = #{record.rechargeWay,jdbcType=INTEGER},
+      </if>
+      <if test="record.presentBalance != null" >
+        present_balance = #{record.presentBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update recharge_record
+    set rr_id = #{record.rrId,jdbcType=INTEGER},
+      member_id = #{record.memberId,jdbcType=INTEGER},
+      recharge_money = #{record.rechargeMoney,jdbcType=DECIMAL},
+      present_integral = #{record.presentIntegral,jdbcType=INTEGER},
+      recharge_way = #{record.rechargeWay,jdbcType=INTEGER},
+      present_balance = #{record.presentBalance,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.RechargeRecord" >
+    update recharge_record
+    <set >
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeMoney != null" >
+        recharge_money = #{rechargeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="presentIntegral != null" >
+        present_integral = #{presentIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeWay != null" >
+        recharge_way = #{rechargeWay,jdbcType=INTEGER},
+      </if>
+      <if test="presentBalance != null" >
+        present_balance = #{presentBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rr_id = #{rrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forest.entity.RechargeRecord" >
+    update recharge_record
+    set member_id = #{memberId,jdbcType=INTEGER},
+      recharge_money = #{rechargeMoney,jdbcType=DECIMAL},
+      present_integral = #{presentIntegral,jdbcType=INTEGER},
+      recharge_way = #{rechargeWay,jdbcType=INTEGER},
+      present_balance = #{presentBalance,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where rr_id = #{rrId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forest.mapper.PurchaseMainMapper" >
+  <resultMap id="BaseResultMap" type="com.forest.entity.PurchaseMain" >
+    <id column="pm_id" property="pmId" jdbcType="INTEGER" />
+    <result column="pm_odd" property="pmOdd" jdbcType="VARCHAR" />
+    <result column="delivery_time" property="deliveryTime" jdbcType="TIMESTAMP" />
+    <result column="sup_id" property="supId" jdbcType="INTEGER" />
+    <result column="lister" property="lister" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pm_id, pm_odd, delivery_time, sup_id, lister, shop_id, create_time, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.PurchaseMainExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from purchase_main
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_main
+    where pm_id = #{pmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from purchase_main
+    where pm_id = #{pmId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.forest.entity.PurchaseMainExample" >
+    delete from purchase_main
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.forest.entity.PurchaseMain" >
+    insert into purchase_main (pm_id, pm_odd, delivery_time, 
+      sup_id, lister, shop_id, 
+      create_time, remark)
+    values (#{pmId,jdbcType=INTEGER}, #{pmOdd,jdbcType=VARCHAR}, #{deliveryTime,jdbcType=TIMESTAMP}, 
+      #{supId,jdbcType=INTEGER}, #{lister,jdbcType=VARCHAR}, #{shopId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.forest.entity.PurchaseMain" >
+    insert into purchase_main
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pmId != null" >
+        pm_id,
+      </if>
+      <if test="pmOdd != null" >
+        pm_odd,
+      </if>
+      <if test="deliveryTime != null" >
+        delivery_time,
+      </if>
+      <if test="supId != null" >
+        sup_id,
+      </if>
+      <if test="lister != null" >
+        lister,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pmId != null" >
+        #{pmId,jdbcType=INTEGER},
+      </if>
+      <if test="pmOdd != null" >
+        #{pmOdd,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null" >
+        #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supId != null" >
+        #{supId,jdbcType=INTEGER},
+      </if>
+      <if test="lister != null" >
+        #{lister,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.forest.entity.PurchaseMainExample" resultType="java.lang.Integer" >
+    select count(*) from purchase_main
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update purchase_main
+    <set >
+      <if test="record.pmId != null" >
+        pm_id = #{record.pmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pmOdd != null" >
+        pm_odd = #{record.pmOdd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliveryTime != null" >
+        delivery_time = #{record.deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.supId != null" >
+        sup_id = #{record.supId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lister != null" >
+        lister = #{record.lister,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update purchase_main
+    set pm_id = #{record.pmId,jdbcType=INTEGER},
+      pm_odd = #{record.pmOdd,jdbcType=VARCHAR},
+      delivery_time = #{record.deliveryTime,jdbcType=TIMESTAMP},
+      sup_id = #{record.supId,jdbcType=INTEGER},
+      lister = #{record.lister,jdbcType=VARCHAR},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.PurchaseMain" >
+    update purchase_main
+    <set >
+      <if test="pmOdd != null" >
+        pm_odd = #{pmOdd,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryTime != null" >
+        delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="supId != null" >
+        sup_id = #{supId,jdbcType=INTEGER},
+      </if>
+      <if test="lister != null" >
+        lister = #{lister,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pm_id = #{pmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forest.entity.PurchaseMain" >
+    update purchase_main
+    set pm_odd = #{pmOdd,jdbcType=VARCHAR},
+      delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      sup_id = #{supId,jdbcType=INTEGER},
+      lister = #{lister,jdbcType=VARCHAR},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where pm_id = #{pmId,jdbcType=INTEGER}
+  </update>
+</mapper>

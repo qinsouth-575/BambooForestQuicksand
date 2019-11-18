@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>会员信息-会员-竹林流沙商品管理系统</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <link href="css/style_programmer.css" id="theme" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon -->
+                        <b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span>
+                            <!-- dark Logo text -->
+                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                        </span>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0 ">
+                        <!-- This is  -->
+                        <li class="nav-item"> 
+                        	<a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)">
+                        		<i class="ti-menu"></i>
+                        	</a> 
+                        </li>
+                        <li class="nav-item hidden-sm-down">
+                            <form class="app-search p-l-20">
+                                <input type="text" class="form-control" placeholder="Search for..."> 
+                            	<a class="srh-btn"><i class="ti-search"></i></a>
+                            </form>
+                        </li>
+                        <li class="nav-item" style="margin-left: 30px;">
+                        	<a href="a_index.html" class="waves-effect _account">
+                            	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="b_cashier.html" class="waves-effect _account">
+                            	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="c_shop.html" class="waves-effect _account">
+                            	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="d_commodity.html" class="waves-effect _account">
+                            	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="e_inventory.html" class="waves-effect _account">
+                            	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="f_member.html" class="waves-effect _account nav_li_active">
+                            	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="c_user.html" aria-haspopup="true" aria-expanded="false">
+                            	<img src="assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li>
+                            <a href="f_member.html" class="waves-effect active">
+                            	<i class="fa fa-users m-r-10" aria-hidden="true"></i>会员信息
+                            </a>
+                        </li>
+                        <li>
+                            <a href="f_member_level.html" class="waves-effect">
+                            	<i class="fa fa-cogs m-r-10" aria-hidden="true"></i>等级设置
+                            </a>
+                        </li>
+                        <li>
+                            <a href="f_member_credits.html" class="waves-effect">
+                            	<i class="fa fa-cog m-r-10" aria-hidden="true"></i>积分设置
+                            </a>
+                        </li>
+                        <li>
+                            <a href="f_member_recharge.html" class="waves-effect">
+                            	<i class="fa fa-building m-r-10" aria-hidden="true"></i>充值抵扣
+                            </a>
+                        </li>
+                        <li>
+                            <a href="f_member_make.html" class="waves-effect">
+                            	<i class="fa fa-barcode m-r-10" aria-hidden="true"></i>成交记录
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">会员信息</h3>
+                    </div>
+                    <div class="col-md-7 col-4 align-self-center" style="padding-left: 60px;">
+                        <select class="form-control form-control-line f_input" style="width: 120px;">
+                            <option>全部等级</option>
+                            <option>India</option>
+                            <option>Usa</option>
+                            <option>Canada</option>
+                            <option>Thailand</option>
+                        </select>
+                        
+                        <div class="f_input" style="position: relative;">
+                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
+							<a href="javascript:;" class="list_search"></a>
+                        </div>
+                        
+                        <a href="#" class="btn hidden-sm-down btn-success">导出会员</a>
+                        <a href="#" class="btn hidden-sm-down btn-success">批量导入</a>
+                        
+                        <!-- Button trigger modal -->
+                        <a href="#" class="btn hidden-sm-down btn-info" data-toggle="modal" data-target=".bs-example-modal-lg">添加会员</a>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-sm-12">
+                        <div class="card" style="height: 420px;overflow: hidden;">
+                            <div class="card-block">
+                                <!--<h4 class="card-title">Basic Table</h4>
+                                <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>序号</th>
+                                                <th>姓名</th>
+                                                <th>手机</th>
+                                                <th>等级</th>
+                                                <th>成交次数</th>
+                                                <th>成交金额</th>
+                                                <th>余额</th>
+                                                <th>积分</th>
+                                                <th>最近成交</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Deshmukh</td>
+                                                <td>Prohaska</td>
+                                                <td>@Genelia</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Sanghani</td>
+                                                <td>Gusikowski</td>
+                                                <td>@Govinda</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Roshan</td>
+                                                <td>Rogahn</td>
+                                                <td>@Hritik</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Joshi</td>
+                                                <td>Hickle</td>
+                                                <td>@Maruti</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>Nigam</td>
+                                                <td>Eichmann</td>
+                                                <td>@Sonu</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        	<tr>
+                                        		<td colspan="10" class="text-right">
+							                        <a href="#" class="btn hidden-sm-down btn-info">首页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info">上一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info">下一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info">尾页</a>
+                                        		</td>
+                                        	</tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+            	<p style="margin-bottom: 0px;">版权所有 -&nbsp;-&nbsp;&copy;2019  竹林流沙工作室 保留所有权利 -&nbsp;-&nbsp;
+					更多模板从<a href="http://www.cssmoban.com/" target="_blank" title="竹林流沙工作室">竹林流沙工作室</a>收集
+				</p>
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Modal -->
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">添加会员</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline">
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5" style="position: relative;">
+							<span class="span_bitian">*</span>
+							<label for="exampleInputName2">手机：</label>&nbsp;
+							<input type="text" class="form-control" id="exampleInputName2" placeholder="请输入需绑定的手机号">
+						</div>
+						<div class="form-group col-md-6" style="position: relative;">
+							<span class="span_bitian">*</span>
+							<label for="exampleInputEmail2">名称：</label>&nbsp;
+							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="请输入会员名称">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">等级：</label>&nbsp;
+							<select class="form-control form-control-line" style="width: 202px;">
+                                <option>请选择等级</option>
+                                <option>India</option>
+                                <option>Usa</option>
+                                <option>Canada</option>
+                                <option>Thailand</option>
+                            </select>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail2">密码：</label>&nbsp;
+							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="请输入密码">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-11" data-toggle="distpicker">
+							<label for="exampleInputName2">地址：</label>&nbsp;
+							<select class="form-control form-control-line" id="province1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line" id="city1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line" id="district1"></select>
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-11">
+							<label for="exampleInputEmail2">街道：</label>&nbsp;
+							<input type="email" class="form-control col-md-6" placeholder="请输入街道/详细地址">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    <!-- End Modal -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/waves.js"></script>
+    <script src="js/sidebarmenu.js"></script>
+    <script src="assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    
+	<script src="assets/plugins/address/distpicker.data.min.js"></script>
+  	<script src="assets/plugins/address/distpicker.min.js"></script>
+  	<script src="assets/plugins/address/main.js"></script>
+</body>
+
+</html>

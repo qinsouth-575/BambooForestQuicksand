@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>收银-竹林流沙商品管理系统</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <link href="css/style_programmer.css" id="theme" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+    <link href="css/style_b_cashier.css" id="theme" rel="stylesheet">
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon -->
+                        <b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span>
+                            <!-- dark Logo text -->
+                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                        </span>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0 ">
+                        <!-- This is  -->
+                        <li class="nav-item"> 
+                        	<a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)">
+                        		<i class="ti-menu"></i>
+                        	</a> 
+                        </li>
+                        <li class="nav-item hidden-sm-down">
+                            <form class="app-search p-l-20">
+                                <input type="text" class="form-control" placeholder="Search for..."> 
+                            	<a class="srh-btn"><i class="ti-search"></i></a>
+                            </form>
+                        </li>
+                        <li class="nav-item" style="margin-left: 30px;">
+                        	<a href="a_index.html" class="waves-effect _account">
+                            	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="b_cashier.html" class="waves-effect _account nav_li_active">
+                            	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="c_shop.html" class="waves-effect _account">
+                            	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="d_commodity.html" class="waves-effect _account">
+                            	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="e_inventory.html" class="waves-effect _account">
+                            	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="f_member.html" class="waves-effect _account">
+                            	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="c_user.html" aria-haspopup="true" aria-expanded="false">
+                            	<img src="assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <table class="sidebarnav">
+                	<colgroup>
+						<col width="50%">
+						<col width="22%">
+						<col width="22%">
+					</colgroup>
+					
+                	<thead>
+                		<tr>
+                			<th colspan="3" style="background-color: #FFF;">
+                				<div class="pull-left">
+                        			<i class="fa fa-shopping-cart m-r-10" aria-hidden="true" style="font-size: 33px;margin: 6px 0 6px 9px;"></i>
+                				</div>
+                				
+                				<div class="pull-right">
+	                    			<button class="btn btn-default" style="margin: 6px 6px 6px 0;">挂</button>
+                				</div>
+                			</th>
+                		</tr>
+                	</thead>
+                	
+                	<tbody>
+                		<tr>
+                			<td class="ellipsis-type">高领毛衣123131231231321<br/><i class="fa fa-code" aria-hidden="true"></i></td>
+                			<td>1<br/>第二行效果</td>
+                			<td>192.00<br/>第二行效果</td>
+                		</tr>
+                		<tr>
+                			<td class="ellipsis-type">高领毛衣<br/><i class="fa fa-code" aria-hidden="true"></i></td>
+                			<td>1</td>
+                			<td>192.00</td>
+                		</tr>
+                		<tr>
+                			<td class="ellipsis-type">高领毛衣431122<br/><i class="fa fa-code" aria-hidden="true"></i></td>
+                			<td>1</td>
+                			<td>192.00</td>
+                		</tr>
+                	</tbody>
+                	<tfoot>
+                		<tr>
+                			<td>合计</td>
+                			<td>1</td>
+                			<td>192.00</td>
+                		</tr>
+                		<tr>
+                			<td colspan="3">
+                    			<i class="fa fa-archive m-r-20" aria-hidden="true"></i>
+                    			<button class="btn btn-default">挂起</button>
+                    			<button class="btn btn-danger">收款</button>
+                			</td>
+                		</tr>
+                	</tfoot>
+                </table>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles">
+                    <div class="col-md-6 col-8 align-self-center">
+                    	<a href="#" class="btn pull-left hidden-sm-down btn-primary">&nbsp;会&nbsp;员&nbsp;</a>&nbsp;	
+                    	<a href="#" class="btn hidden-sm-down btn-info">&nbsp;商&nbsp;品&nbsp;</a>
+                    </div>
+                    <div class="col-md-6 col-4 align-self-center">
+                        <div class="f_input pull-right" style="position: relative;">
+                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 230px;">
+							<a href="javascript:;" class="list_search"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-sm-12">
+                        <div class="card" style="height: 422px;overflow: hidden;">
+                            <div class="card-block" style="padding-top: 0px;">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed">
+                                    	<thead>
+                                    		<tr>
+                                    			<th colspan="5">
+						                    		<button class="btn btn-success">全部</button>
+						                    		<span id="list_type">
+						                    			<button class="btn btn-default">羽绒服</button>
+							                    		<button class="btn btn-default">双面羊绒大衣</button>
+							                    		<button class="btn btn-default">打底</button>
+							                    		<button class="btn btn-default">衬衣</button>
+							                    		<button class="btn btn-default">毛衣</button>
+							                    		<button class="btn btn-default">卫衣</button>
+							                    		<button class="btn btn-default">背带</button>
+							                    		<button class="btn btn-default">短裤</button>
+							                    		<button class="btn btn-default">饰品</button>
+							                    		<button class="btn btn-default">半身裙</button>
+						                    		</span>
+						                    		
+						                    		<button class="btn btn-info pull-right" style="margin-left: 5px;">下一页</button>
+						                    		<button class="btn btn-info pull-right">上一页</button>
+                                    			</th>
+                                    		</tr>
+                                    	</thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/bg1.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="腰包">腰包43123431</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">204.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/HeadPortrait.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="高领毛衣">高领毛衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">192.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/SameDestiny.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="短裙">短裙134143</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">204.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/HeadPortrait.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="涂鸦卫衣">涂鸦卫衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">243.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/SameDestiny.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="闪电毛衣">闪电毛衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">225.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/bg1.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="腰包">腰包</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">204.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/HeadPortrait.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="高领毛衣">高领毛衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">192.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/SameDestiny.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="短裙">短裙</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">204.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/HeadPortrait.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="涂鸦卫衣">涂鸦卫衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">243.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/SameDestiny.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="闪电毛衣">闪电毛衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">225.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/bg1.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="腰包">腰包</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">204.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/HeadPortrait.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="高领毛衣">高领毛衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">192.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/SameDestiny.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="短裙">短裙</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">204.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/HeadPortrait.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="涂鸦卫衣">涂鸦卫衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">243.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                                <td>
+                                                	<div class="commodity">
+                                                		<div class="commodity_img">
+                                                			<img src="images/SameDestiny.jpg"/>
+                                                		</div>
+                                                		
+                                                		<div class="commodity_info">
+                                                			<p class="info_name ellipsis-type" title="闪电毛衣">闪电毛衣</p>
+                                                			<p class="info_i">
+                                                				<i class="fa fa-code m-r-10" aria-hidden="true"></i>
+                                                			</p>
+                                                			<p class="info_money">225.00</p>
+                                                		</div>
+                                                	</div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+            	<p style="margin-bottom: 0px;">版权所有 -&nbsp;-&nbsp;&copy;2019  竹林流沙工作室 保留所有权利 -&nbsp;-&nbsp;
+					更多模板从<a href="http://www.cssmoban.com/" target="_blank" title="竹林流沙工作室">竹林流沙工作室</a>收集
+				</p>
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!-- Flot Charts JavaScript - 比3和4 多以下三个js引入 -->
+    <script src="assets/plugins/flot/jquery.flot.js"></script>
+    <script src="assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="js/flot-data.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    
+    <script type="text/javascript">
+    	/*
+    	 * 
+    	 * 这个页面的查询，比较麻烦，也不是用vue或jQuery的区别，而是因为table，分了三列
+    	 * 解决办法（建议）：
+    	 * 后台一样的查十五条
+    	 * 前台显示，假设用vue，就用三个data保存，查到数据返回到这边 前台时，用循环和if解决，每5个添加到一个data里，
+    	 * 然后页面标签自然用三个 v-for
+    	 * 
+    	 * */
+    </script>
+</body>
+
+</html>

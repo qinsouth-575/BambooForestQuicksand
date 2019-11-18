@@ -1,0 +1,110 @@
+.scroll-sidebar {
+	position: relative;
+	background-color: #F5F2F0;
+	padding-bottom: 0px;
+	padding-top: 0px
+}
+
+.sidebarnav {
+	margin: 7px;
+}
+
+.sidebarnav>tbody>tr{
+	height: 61px;
+	border-bottom: 1px solid #000;
+}
+.sidebarnav>tbody>tr>td:first-child{
+	font-weight: bold;
+}
+
+.sidebarnav>tfoot {
+	width: 226px;
+	background-color: #FFF;
+	position: absolute;
+	bottom: 7px;
+}
+
+.sidebarnav>tfoot>tr:first-child>td:first-child {
+	width: 50%;
+}
+
+.sidebarnav>tfoot>tr:first-child>td:nth-child(2) {
+	width: 22%;
+}
+
+.sidebarnav>tfoot>tr:first-child>td:nth-child(3) {
+	width: 22%;
+}
+
+.sidebarnav>tfoot>tr:last-child>td>i {
+	font-size: 30px;
+	position: relative;
+	top: 4px;
+	left: 12px;
+}
+
+.sidebarnav>tfoot td>button {
+	padding: 9px 25px;
+	margin-bottom: 5px;
+}
+
+
+/*会员-商品按钮*/
+
+.align-self-center>a {
+	padding: 7px 39px;
+}
+
+
+/*商品列表样式*/
+
+.commodity {
+	width: 174px;
+	height: 94px;
+	border: 1px solid #000;
+	border-radius: 5px;
+	background-color: #FDFDFD;
+	cursor: pointer;
+}
+
+.commodity:active {
+	background-color: #F2F2FA;
+}
+
+.commodity>div {
+	float: left;
+}
+
+.commodity_img {
+	padding: 7px 5px 7px 7px;
+}
+
+.commodity_img>img {
+	width: 77px;
+	height: 77px;
+}
+
+.commodity_info>p {
+	margin: 6px;
+}
+
+.info_name {
+	font-weight: bold;
+}
+
+.info_money {
+	color: red;
+}
+
+.ellipsis-type {
+	max-width: 65px;
+	/*显示宽度*/
+	white-space: nowrap;
+	/*文本不换行*/
+	overflow: hidden;
+	/*超过部分隐藏*/
+	text-overflow: ellipsis;
+	/*超过部分用...代替*/
+	cursor: pointer;
+	/*鼠标设置(不是必须)*/
+}

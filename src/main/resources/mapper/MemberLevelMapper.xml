@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forest.mapper.MemberLevelMapper" >
+  <resultMap id="BaseResultMap" type="com.forest.entity.MemberLevel" >
+    <id column="ml_id" property="mlId" jdbcType="SMALLINT" />
+    <result column="ml_name" property="mlName" jdbcType="VARCHAR" />
+    <result column="discount" property="discount" jdbcType="REAL" />
+    <result column="upgrade" property="upgrade" jdbcType="INTEGER" />
+    <result column="validity" property="validity" jdbcType="INTEGER" />
+    <result column="upgrade_rule" property="upgradeRule" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ml_id, ml_name, discount, upgrade, validity, upgrade_rule
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.MemberLevelExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from member_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_level
+    where ml_id = #{mlId,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from member_level
+    where ml_id = #{mlId,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.forest.entity.MemberLevelExample" >
+    delete from member_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.forest.entity.MemberLevel" >
+    insert into member_level (ml_id, ml_name, discount, 
+      upgrade, validity, upgrade_rule
+      )
+    values (#{mlId,jdbcType=SMALLINT}, #{mlName,jdbcType=VARCHAR}, #{discount,jdbcType=REAL}, 
+      #{upgrade,jdbcType=INTEGER}, #{validity,jdbcType=INTEGER}, #{upgradeRule,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.forest.entity.MemberLevel" >
+    insert into member_level
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mlId != null" >
+        ml_id,
+      </if>
+      <if test="mlName != null" >
+        ml_name,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="upgrade != null" >
+        upgrade,
+      </if>
+      <if test="validity != null" >
+        validity,
+      </if>
+      <if test="upgradeRule != null" >
+        upgrade_rule,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mlId != null" >
+        #{mlId,jdbcType=SMALLINT},
+      </if>
+      <if test="mlName != null" >
+        #{mlName,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=REAL},
+      </if>
+      <if test="upgrade != null" >
+        #{upgrade,jdbcType=INTEGER},
+      </if>
+      <if test="validity != null" >
+        #{validity,jdbcType=INTEGER},
+      </if>
+      <if test="upgradeRule != null" >
+        #{upgradeRule,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.forest.entity.MemberLevelExample" resultType="java.lang.Integer" >
+    select count(*) from member_level
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update member_level
+    <set >
+      <if test="record.mlId != null" >
+        ml_id = #{record.mlId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.mlName != null" >
+        ml_name = #{record.mlName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=REAL},
+      </if>
+      <if test="record.upgrade != null" >
+        upgrade = #{record.upgrade,jdbcType=INTEGER},
+      </if>
+      <if test="record.validity != null" >
+        validity = #{record.validity,jdbcType=INTEGER},
+      </if>
+      <if test="record.upgradeRule != null" >
+        upgrade_rule = #{record.upgradeRule,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update member_level
+    set ml_id = #{record.mlId,jdbcType=SMALLINT},
+      ml_name = #{record.mlName,jdbcType=VARCHAR},
+      discount = #{record.discount,jdbcType=REAL},
+      upgrade = #{record.upgrade,jdbcType=INTEGER},
+      validity = #{record.validity,jdbcType=INTEGER},
+      upgrade_rule = #{record.upgradeRule,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.MemberLevel" >
+    update member_level
+    <set >
+      <if test="mlName != null" >
+        ml_name = #{mlName,jdbcType=VARCHAR},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=REAL},
+      </if>
+      <if test="upgrade != null" >
+        upgrade = #{upgrade,jdbcType=INTEGER},
+      </if>
+      <if test="validity != null" >
+        validity = #{validity,jdbcType=INTEGER},
+      </if>
+      <if test="upgradeRule != null" >
+        upgrade_rule = #{upgradeRule,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ml_id = #{mlId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forest.entity.MemberLevel" >
+    update member_level
+    set ml_name = #{mlName,jdbcType=VARCHAR},
+      discount = #{discount,jdbcType=REAL},
+      upgrade = #{upgrade,jdbcType=INTEGER},
+      validity = #{validity,jdbcType=INTEGER},
+      upgrade_rule = #{upgradeRule,jdbcType=DECIMAL}
+    where ml_id = #{mlId,jdbcType=SMALLINT}
+  </update>
+</mapper>

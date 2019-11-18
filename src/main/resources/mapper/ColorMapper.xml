@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forest.mapper.ColorMapper" >
+  <resultMap id="BaseResultMap" type="com.forest.entity.Color" >
+    <id column="color_id" property="colorId" jdbcType="INTEGER" />
+    <result column="color_name" property="colorName" jdbcType="VARCHAR" />
+    <result column="parent_gc_id" property="parentGcId" jdbcType="INTEGER" />
+    <result column="color_prcture" property="colorPrcture" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    color_id, color_name, parent_gc_id, color_prcture
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.ColorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from color
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from color
+    where color_id = #{colorId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from color
+    where color_id = #{colorId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.forest.entity.ColorExample" >
+    delete from color
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.forest.entity.Color" >
+    insert into color (color_id, color_name, parent_gc_id, 
+      color_prcture)
+    values (#{colorId,jdbcType=INTEGER}, #{colorName,jdbcType=VARCHAR}, #{parentGcId,jdbcType=INTEGER}, 
+      #{colorPrcture,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.forest.entity.Color" >
+    insert into color
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="colorId != null" >
+        color_id,
+      </if>
+      <if test="colorName != null" >
+        color_name,
+      </if>
+      <if test="parentGcId != null" >
+        parent_gc_id,
+      </if>
+      <if test="colorPrcture != null" >
+        color_prcture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="colorId != null" >
+        #{colorId,jdbcType=INTEGER},
+      </if>
+      <if test="colorName != null" >
+        #{colorName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentGcId != null" >
+        #{parentGcId,jdbcType=INTEGER},
+      </if>
+      <if test="colorPrcture != null" >
+        #{colorPrcture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.forest.entity.ColorExample" resultType="java.lang.Integer" >
+    select count(*) from color
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update color
+    <set >
+      <if test="record.colorId != null" >
+        color_id = #{record.colorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.colorName != null" >
+        color_name = #{record.colorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentGcId != null" >
+        parent_gc_id = #{record.parentGcId,jdbcType=INTEGER},
+      </if>
+      <if test="record.colorPrcture != null" >
+        color_prcture = #{record.colorPrcture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update color
+    set color_id = #{record.colorId,jdbcType=INTEGER},
+      color_name = #{record.colorName,jdbcType=VARCHAR},
+      parent_gc_id = #{record.parentGcId,jdbcType=INTEGER},
+      color_prcture = #{record.colorPrcture,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.Color" >
+    update color
+    <set >
+      <if test="colorName != null" >
+        color_name = #{colorName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentGcId != null" >
+        parent_gc_id = #{parentGcId,jdbcType=INTEGER},
+      </if>
+      <if test="colorPrcture != null" >
+        color_prcture = #{colorPrcture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where color_id = #{colorId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forest.entity.Color" >
+    update color
+    set color_name = #{colorName,jdbcType=VARCHAR},
+      parent_gc_id = #{parentGcId,jdbcType=INTEGER},
+      color_prcture = #{colorPrcture,jdbcType=VARCHAR}
+    where color_id = #{colorId,jdbcType=INTEGER}
+  </update>
+</mapper>

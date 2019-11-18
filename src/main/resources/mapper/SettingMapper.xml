@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forest.mapper.SettingMapper" >
+  <resultMap id="BaseResultMap" type="com.forest.entity.Setting" >
+    <id column="set_id" property="setId" jdbcType="SMALLINT" />
+    <result column="property_name" property="propertyName" jdbcType="VARCHAR" />
+    <result column="property_value" property="propertyValue" jdbcType="VARCHAR" />
+    <result column="prev1" property="prev1" jdbcType="VARCHAR" />
+    <result column="prev2" property="prev2" jdbcType="VARCHAR" />
+    <result column="prev3" property="prev3" jdbcType="VARCHAR" />
+    <result column="prev4" property="prev4" jdbcType="VARCHAR" />
+    <result column="prev5" property="prev5" jdbcType="VARCHAR" />
+    <result column="prev6" property="prev6" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    set_id, property_name, property_value, prev1, prev2, prev3, prev4, prev5, prev6
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.SettingExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from setting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from setting
+    where set_id = #{setId,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from setting
+    where set_id = #{setId,jdbcType=SMALLINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.forest.entity.SettingExample" >
+    delete from setting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.forest.entity.Setting" >
+    insert into setting (set_id, property_name, property_value, 
+      prev1, prev2, prev3, 
+      prev4, prev5, prev6
+      )
+    values (#{setId,jdbcType=SMALLINT}, #{propertyName,jdbcType=VARCHAR}, #{propertyValue,jdbcType=VARCHAR}, 
+      #{prev1,jdbcType=VARCHAR}, #{prev2,jdbcType=VARCHAR}, #{prev3,jdbcType=VARCHAR}, 
+      #{prev4,jdbcType=VARCHAR}, #{prev5,jdbcType=VARCHAR}, #{prev6,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.forest.entity.Setting" >
+    insert into setting
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="setId != null" >
+        set_id,
+      </if>
+      <if test="propertyName != null" >
+        property_name,
+      </if>
+      <if test="propertyValue != null" >
+        property_value,
+      </if>
+      <if test="prev1 != null" >
+        prev1,
+      </if>
+      <if test="prev2 != null" >
+        prev2,
+      </if>
+      <if test="prev3 != null" >
+        prev3,
+      </if>
+      <if test="prev4 != null" >
+        prev4,
+      </if>
+      <if test="prev5 != null" >
+        prev5,
+      </if>
+      <if test="prev6 != null" >
+        prev6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="setId != null" >
+        #{setId,jdbcType=SMALLINT},
+      </if>
+      <if test="propertyName != null" >
+        #{propertyName,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyValue != null" >
+        #{propertyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="prev1 != null" >
+        #{prev1,jdbcType=VARCHAR},
+      </if>
+      <if test="prev2 != null" >
+        #{prev2,jdbcType=VARCHAR},
+      </if>
+      <if test="prev3 != null" >
+        #{prev3,jdbcType=VARCHAR},
+      </if>
+      <if test="prev4 != null" >
+        #{prev4,jdbcType=VARCHAR},
+      </if>
+      <if test="prev5 != null" >
+        #{prev5,jdbcType=VARCHAR},
+      </if>
+      <if test="prev6 != null" >
+        #{prev6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.forest.entity.SettingExample" resultType="java.lang.Integer" >
+    select count(*) from setting
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update setting
+    <set >
+      <if test="record.setId != null" >
+        set_id = #{record.setId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.propertyName != null" >
+        property_name = #{record.propertyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.propertyValue != null" >
+        property_value = #{record.propertyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prev1 != null" >
+        prev1 = #{record.prev1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prev2 != null" >
+        prev2 = #{record.prev2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prev3 != null" >
+        prev3 = #{record.prev3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prev4 != null" >
+        prev4 = #{record.prev4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prev5 != null" >
+        prev5 = #{record.prev5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prev6 != null" >
+        prev6 = #{record.prev6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update setting
+    set set_id = #{record.setId,jdbcType=SMALLINT},
+      property_name = #{record.propertyName,jdbcType=VARCHAR},
+      property_value = #{record.propertyValue,jdbcType=VARCHAR},
+      prev1 = #{record.prev1,jdbcType=VARCHAR},
+      prev2 = #{record.prev2,jdbcType=VARCHAR},
+      prev3 = #{record.prev3,jdbcType=VARCHAR},
+      prev4 = #{record.prev4,jdbcType=VARCHAR},
+      prev5 = #{record.prev5,jdbcType=VARCHAR},
+      prev6 = #{record.prev6,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.Setting" >
+    update setting
+    <set >
+      <if test="propertyName != null" >
+        property_name = #{propertyName,jdbcType=VARCHAR},
+      </if>
+      <if test="propertyValue != null" >
+        property_value = #{propertyValue,jdbcType=VARCHAR},
+      </if>
+      <if test="prev1 != null" >
+        prev1 = #{prev1,jdbcType=VARCHAR},
+      </if>
+      <if test="prev2 != null" >
+        prev2 = #{prev2,jdbcType=VARCHAR},
+      </if>
+      <if test="prev3 != null" >
+        prev3 = #{prev3,jdbcType=VARCHAR},
+      </if>
+      <if test="prev4 != null" >
+        prev4 = #{prev4,jdbcType=VARCHAR},
+      </if>
+      <if test="prev5 != null" >
+        prev5 = #{prev5,jdbcType=VARCHAR},
+      </if>
+      <if test="prev6 != null" >
+        prev6 = #{prev6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where set_id = #{setId,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forest.entity.Setting" >
+    update setting
+    set property_name = #{propertyName,jdbcType=VARCHAR},
+      property_value = #{propertyValue,jdbcType=VARCHAR},
+      prev1 = #{prev1,jdbcType=VARCHAR},
+      prev2 = #{prev2,jdbcType=VARCHAR},
+      prev3 = #{prev3,jdbcType=VARCHAR},
+      prev4 = #{prev4,jdbcType=VARCHAR},
+      prev5 = #{prev5,jdbcType=VARCHAR},
+      prev6 = #{prev6,jdbcType=VARCHAR}
+    where set_id = #{setId,jdbcType=SMALLINT}
+  </update>
+</mapper>

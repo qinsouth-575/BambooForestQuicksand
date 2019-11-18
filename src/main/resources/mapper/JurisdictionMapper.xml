@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forest.mapper.JurisdictionMapper" >
+  <resultMap id="BaseResultMap" type="com.forest.entity.Jurisdiction" >
+    <id column="jur_id" property="jurId" jdbcType="INTEGER" />
+    <result column="jur_name" property="jurName" jdbcType="VARCHAR" />
+    <result column="parent_jur_id" property="parentJurId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    jur_id, jur_name, parent_jur_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.JurisdictionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from jurisdiction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from jurisdiction
+    where jur_id = #{jurId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from jurisdiction
+    where jur_id = #{jurId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.forest.entity.JurisdictionExample" >
+    delete from jurisdiction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.forest.entity.Jurisdiction" >
+    insert into jurisdiction (jur_id, jur_name, parent_jur_id
+      )
+    values (#{jurId,jdbcType=INTEGER}, #{jurName,jdbcType=VARCHAR}, #{parentJurId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.forest.entity.Jurisdiction" >
+    insert into jurisdiction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jurId != null" >
+        jur_id,
+      </if>
+      <if test="jurName != null" >
+        jur_name,
+      </if>
+      <if test="parentJurId != null" >
+        parent_jur_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jurId != null" >
+        #{jurId,jdbcType=INTEGER},
+      </if>
+      <if test="jurName != null" >
+        #{jurName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentJurId != null" >
+        #{parentJurId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.forest.entity.JurisdictionExample" resultType="java.lang.Integer" >
+    select count(*) from jurisdiction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update jurisdiction
+    <set >
+      <if test="record.jurId != null" >
+        jur_id = #{record.jurId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jurName != null" >
+        jur_name = #{record.jurName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentJurId != null" >
+        parent_jur_id = #{record.parentJurId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update jurisdiction
+    set jur_id = #{record.jurId,jdbcType=INTEGER},
+      jur_name = #{record.jurName,jdbcType=VARCHAR},
+      parent_jur_id = #{record.parentJurId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.Jurisdiction" >
+    update jurisdiction
+    <set >
+      <if test="jurName != null" >
+        jur_name = #{jurName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentJurId != null" >
+        parent_jur_id = #{parentJurId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where jur_id = #{jurId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forest.entity.Jurisdiction" >
+    update jurisdiction
+    set jur_name = #{jurName,jdbcType=VARCHAR},
+      parent_jur_id = #{parentJurId,jdbcType=INTEGER}
+    where jur_id = #{jurId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>采购单-商品-竹林流沙商品管理系统</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <link href="css/style_programmer.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
+        </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <!-- Logo icon -->
+                        <b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                        <span>
+                            <!-- dark Logo text -->
+                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                        </span>
+                    </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto mt-md-0 ">
+                        <!-- This is  -->
+                        <li class="nav-item"> 
+                        	<a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)">
+                        		<i class="ti-menu"></i>
+                        	</a> 
+                        </li>
+                        <li class="nav-item hidden-sm-down">
+                            <form class="app-search p-l-20">
+                                <input type="text" class="form-control" placeholder="Search for..."> 
+                            	<a class="srh-btn"><i class="ti-search"></i></a>
+                            </form>
+                        </li>
+                        <li class="nav-item" style="margin-left: 30px;">
+                        	<a href="a_index.html" class="waves-effect _account">
+                            	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="b_cashier.html" class="waves-effect _account">
+                            	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="c_shop.html" class="waves-effect _account">
+                            	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="d_commodity.html" class="waves-effect _account nav_li_active">
+                            	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="e_inventory.html" class="waves-effect _account">
+                            	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                        	<a href="f_member.html" class="waves-effect _account">
+                            	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="c_user.html" aria-haspopup="true" aria-expanded="false">
+                            	<img src="assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li>
+                            <a href="d_commodity.html" class="waves-effect">
+                            	<i class="fa fa-eercast m-r-10" aria-hidden="true"></i>商品类别
+                            </a>
+                        </li>
+                        <li>
+                            <a href="d_commodity_manager.html" class="waves-effect">
+                            	<i class="fa fa-cogs m-r-10" aria-hidden="true"></i>商品管理
+                            </a>
+                        </li>
+                        <li>
+                            <a href="d_commodity_uploading.html" class="waves-effect">
+                            	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
+                            </a>
+                        </li>
+                        <li>
+                            <a href="d_commodity_supplier.html" class="waves-effect">
+                            	<i class="fa fa-smile-o m-r-10" aria-hidden="true"></i>供应商
+                            </a>
+                        </li>
+                        <li>
+                            <a href="d_commodity_po.html" class="waves-effect active">
+                            	<i class="fa fa-exchange m-r-10" aria-hidden="true"></i>采购单
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <div class="row page-titles">
+                    <div class="col-md-3 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">采购单</h3>
+                    </div>
+                    <div class="col-md-9 col-4 align-self-center" style="padding-left: 5px;">
+                        <div class="f_input" style="position: relative;background-color: #FFF;">
+		                    <div class="selectDate">
+								<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>
+								<input type="date" value="" name="start_date" class="start_date" id="start_date">
+								<span>至</span>
+								<input type="date" value="" name="end_date" class="end_date" id="end_date">
+							</div>
+                        </div>
+                        
+                        <select class="form-control form-control-line f_input" style="width: 120px;">
+                            <option>全部店铺</option>
+                            <option>India</option>
+                            <option>Usa</option>
+                            <option>Canada</option>
+                            <option>Thailand</option>
+                        </select>
+                        
+                        <div class="f_input" style="position: relative;">
+                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
+							<a href="javascript:;" class="list_search"></a>
+                        </div>
+                        
+                        <!-- Button trigger modal -->
+                        <a href="d_commodity_po_insert.html" class="btn hidden-sm-down btn-info">新建采购单</a>
+                        <!--data-toggle="modal" data-target=".bs-example-modal-lg"-->
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Start Page Content -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- column -->
+                    <div class="col-sm-12">
+                        <div class="card" style="height: 420px;overflow: hidden;">
+                            <div class="card-block">
+                                <!--<h4 class="card-title">Basic Table</h4>
+                                <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>选择</th>
+                                                <th>序号</th>
+                                                <th>类别</th>
+                                                <th>品名</th>
+                                                <th>货号/条码</th>
+                                                <th>规格</th>
+                                                <th>库存</th>
+                                                <th>销售价</th>
+                                                <th>成本价</th>
+                                                <th>网店同步</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox" class="checkbox"></td>
+                                                <td>1</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>2</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>@Ritesh</td>
+                                                <td>
+                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
+                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="checkbox"></td>
+                                                <td>2</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>2</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>@Ritesh</td>
+                                                <td>
+                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
+                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="checkbox"></td>
+                                                <td>3</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>2</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>@Ritesh</td>
+                                                <td>
+                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
+                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="checkbox"></td>
+                                                <td>4</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>2</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>@Ritesh</td>
+                                                <td>
+                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
+                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" class="checkbox"></td>
+                                                <td>5</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>2</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>@Ritesh</td>
+                                                <td>
+                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
+                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        	<tr>
+                                        		<td colspan="11" class="text-right">
+							                        <a href="#" class="btn hidden-sm-down btn-info">首页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info">上一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info">下一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info">尾页</a>
+                                        		</td>
+                                        	</tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <footer class="footer text-center">
+            	<p style="margin-bottom: 0px;">版权所有 -&nbsp;-&nbsp;&copy;2019  竹林流沙工作室 保留所有权利 -&nbsp;-&nbsp;
+					更多模板从<a href="http://www.cssmoban.com/" target="_blank" title="竹林流沙工作室">竹林流沙工作室</a>收集
+				</p>
+            </footer>
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Modal -->
+    <!-- ============================================================== -->
+	<!--<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">添加供应商</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline">
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">公司名称：</label>&nbsp;
+							<input type="text" class="form-control" placeholder="请输入公司名称">
+						</div>
+						<div class="form-group col-md-6" style="position: relative;">
+							<span class="span_bitian">*</span>
+							<label for="exampleInputEmail2">公司简称：</label>&nbsp;
+							<input type="email" class="form-control" placeholder="请输入公司简称">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">联&nbsp;系&nbsp;人&nbsp;：&nbsp;</label>&nbsp;
+							<input type="email" class="form-control" placeholder="请输入联系人">
+						</div>
+						<div class="form-group col-md-6" style="position: relative;">
+							<span class="span_bitian">*</span>
+							<label for="exampleInputEmail2">&nbsp;&nbsp;手&nbsp;&nbsp;机&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<input type="email" class="form-control" placeholder="请输入手机号">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">&nbsp;&nbsp;邮&nbsp;&nbsp;箱&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<input type="email" class="form-control" placeholder="请输入邮箱">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail2">&nbsp;&nbsp;电&nbsp;&nbsp;话&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<input type="email" class="form-control" placeholder="请输入电话">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-11">
+							<label for="exampleInputName2">&nbsp;&nbsp;地&nbsp;&nbsp;址&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<select class="form-control form-control-line">
+                                <option>请选择省份</option>
+                                <option>India</option>
+                                <option>Usa</option>
+                                <option>Canada</option>
+                                <option>Thailand</option>
+                          	</select>&nbsp;-&nbsp;
+                          	<select class="form-control form-control-line">
+                                <option>请选择城市</option>
+                                <option>India</option>
+                                <option>Usa</option>
+                                <option>Canada</option>
+                                <option>Thailand</option>
+                          	</select>&nbsp;-&nbsp;
+                          	<select class="form-control form-control-line">
+                                <option>请选择地区</option>
+                                <option>India</option>
+                                <option>Usa</option>
+                                <option>Canada</option>
+                                <option>Thailand</option>
+                          	</select>
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-11">
+							<label for="exampleInputEmail2">&nbsp;&nbsp;街&nbsp;&nbsp;道&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<input type="email" class="form-control col-md-6" placeholder="请输入街道/详细地址">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>-->
+    <!-- ============================================================== -->
+    <!-- End Modal -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Start Datetime -->
+    <!-- ============================================================== -->
+    <div id="acquireDatetime">
+    	<input type="date" />
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Datetime -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="js/custom.min.js"></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!-- Flot Charts JavaScript - 比3和4 多以下三个js引入 -->
+    <script src="assets/plugins/flot/jquery.flot.js"></script>
+    <script src="assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="js/flot-data.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
+    <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    
+    <script type="text/javascript">
+    	$(function(){
+    		//1.时间选择框
+    		/*$(".selectDate>input:first").on("click", function(){
+    			alert("1111");
+    		});
+    		$(".selectDate>input:last").on("click", function(){
+    			alert("2222");
+    		});*/
+    		
+    	});
+    	
+    	function acquireDatetime(){
+    		
+    	}
+    </script>
+</body>
+
+</html>

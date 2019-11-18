@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.forest.mapper.TransactionRecordMainMapper" >
+  <resultMap id="BaseResultMap" type="com.forest.entity.TransactionRecordMain" >
+    <id column="trm_id" property="trmId" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="client" property="client" jdbcType="INTEGER" />
+    <result column="total_sum" property="totalSum" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="REAL" />
+    <result column="actual_income" property="actualIncome" jdbcType="DECIMAL" />
+    <result column="not_income" property="notIncome" jdbcType="DECIMAL" />
+    <result column="paymount" property="paymount" jdbcType="SMALLINT" />
+    <result column="shop_id" property="shopId" jdbcType="SMALLINT" />
+    <result column="cashier" property="cashier" jdbcType="VARCHAR" />
+    <result column="shop_assistant" property="shopAssistant" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    trm_id, order_number, client, total_sum, discount, actual_income, not_income, paymount, 
+    shop_id, cashier, shop_assistant, state, create_time, remark
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.TransactionRecordMainExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from transaction_record_main
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from transaction_record_main
+    where trm_id = #{trmId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from transaction_record_main
+    where trm_id = #{trmId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.forest.entity.TransactionRecordMainExample" >
+    delete from transaction_record_main
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.forest.entity.TransactionRecordMain" >
+    insert into transaction_record_main (trm_id, order_number, client, 
+      total_sum, discount, actual_income, 
+      not_income, paymount, shop_id, 
+      cashier, shop_assistant, state, 
+      create_time, remark)
+    values (#{trmId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{client,jdbcType=INTEGER}, 
+      #{totalSum,jdbcType=DECIMAL}, #{discount,jdbcType=REAL}, #{actualIncome,jdbcType=DECIMAL}, 
+      #{notIncome,jdbcType=DECIMAL}, #{paymount,jdbcType=SMALLINT}, #{shopId,jdbcType=SMALLINT}, 
+      #{cashier,jdbcType=VARCHAR}, #{shopAssistant,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.forest.entity.TransactionRecordMain" >
+    insert into transaction_record_main
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trmId != null" >
+        trm_id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="client != null" >
+        client,
+      </if>
+      <if test="totalSum != null" >
+        total_sum,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="actualIncome != null" >
+        actual_income,
+      </if>
+      <if test="notIncome != null" >
+        not_income,
+      </if>
+      <if test="paymount != null" >
+        paymount,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="cashier != null" >
+        cashier,
+      </if>
+      <if test="shopAssistant != null" >
+        shop_assistant,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trmId != null" >
+        #{trmId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="client != null" >
+        #{client,jdbcType=INTEGER},
+      </if>
+      <if test="totalSum != null" >
+        #{totalSum,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=REAL},
+      </if>
+      <if test="actualIncome != null" >
+        #{actualIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="notIncome != null" >
+        #{notIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="paymount != null" >
+        #{paymount,jdbcType=SMALLINT},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=SMALLINT},
+      </if>
+      <if test="cashier != null" >
+        #{cashier,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAssistant != null" >
+        #{shopAssistant,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.forest.entity.TransactionRecordMainExample" resultType="java.lang.Integer" >
+    select count(*) from transaction_record_main
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update transaction_record_main
+    <set >
+      <if test="record.trmId != null" >
+        trm_id = #{record.trmId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNumber != null" >
+        order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.client != null" >
+        client = #{record.client,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalSum != null" >
+        total_sum = #{record.totalSum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.discount != null" >
+        discount = #{record.discount,jdbcType=REAL},
+      </if>
+      <if test="record.actualIncome != null" >
+        actual_income = #{record.actualIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.notIncome != null" >
+        not_income = #{record.notIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.paymount != null" >
+        paymount = #{record.paymount,jdbcType=SMALLINT},
+      </if>
+      <if test="record.shopId != null" >
+        shop_id = #{record.shopId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.cashier != null" >
+        cashier = #{record.cashier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopAssistant != null" >
+        shop_assistant = #{record.shopAssistant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update transaction_record_main
+    set trm_id = #{record.trmId,jdbcType=INTEGER},
+      order_number = #{record.orderNumber,jdbcType=VARCHAR},
+      client = #{record.client,jdbcType=INTEGER},
+      total_sum = #{record.totalSum,jdbcType=DECIMAL},
+      discount = #{record.discount,jdbcType=REAL},
+      actual_income = #{record.actualIncome,jdbcType=DECIMAL},
+      not_income = #{record.notIncome,jdbcType=DECIMAL},
+      paymount = #{record.paymount,jdbcType=SMALLINT},
+      shop_id = #{record.shopId,jdbcType=SMALLINT},
+      cashier = #{record.cashier,jdbcType=VARCHAR},
+      shop_assistant = #{record.shopAssistant,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.TransactionRecordMain" >
+    update transaction_record_main
+    <set >
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="client != null" >
+        client = #{client,jdbcType=INTEGER},
+      </if>
+      <if test="totalSum != null" >
+        total_sum = #{totalSum,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=REAL},
+      </if>
+      <if test="actualIncome != null" >
+        actual_income = #{actualIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="notIncome != null" >
+        not_income = #{notIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="paymount != null" >
+        paymount = #{paymount,jdbcType=SMALLINT},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=SMALLINT},
+      </if>
+      <if test="cashier != null" >
+        cashier = #{cashier,jdbcType=VARCHAR},
+      </if>
+      <if test="shopAssistant != null" >
+        shop_assistant = #{shopAssistant,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where trm_id = #{trmId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.forest.entity.TransactionRecordMain" >
+    update transaction_record_main
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      client = #{client,jdbcType=INTEGER},
+      total_sum = #{totalSum,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=REAL},
+      actual_income = #{actualIncome,jdbcType=DECIMAL},
+      not_income = #{notIncome,jdbcType=DECIMAL},
+      paymount = #{paymount,jdbcType=SMALLINT},
+      shop_id = #{shopId,jdbcType=SMALLINT},
+      cashier = #{cashier,jdbcType=VARCHAR},
+      shop_assistant = #{shopAssistant,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where trm_id = #{trmId,jdbcType=INTEGER}
+  </update>
+</mapper>

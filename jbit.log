@@ -1,0 +1,503 @@
+DEBUG 2019-11-18 05:15:52,583 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:52,662 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:15:54,418 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,420 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,418 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,418 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,419 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,418 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,502 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,506 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,568 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,576 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,688 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,690 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,725 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,726 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,732 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,739 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,745 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,748 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,821 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,834 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,836 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,838 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,841 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,843 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,870 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,877 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:54,902 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:55,239 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:55,239 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:15:55,385 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:25:25,115 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:25:25,125 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:25:25,132 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:25:26,777 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:25:26,779 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:25:26,805 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:25:26,805 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:25:26,828 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:25:26,831 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:25:26,832 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:25:26,833 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:25:27,063 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:25:27,064 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:25:27,064 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:25:44,472 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:25:44,472 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:25:44,511 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:25:44,512 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:11,681 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:11,682 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:11,682 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:28:12,403 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,405 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,410 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,411 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,411 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,411 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,413 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,414 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,414 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,415 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,413 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,417 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,422 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,422 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,637 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,637 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,637 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:28:12,712 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-18 05:28:12,712 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,712 LoginInterceptor.java preHandle  拦截结果：true
+INFO 2019-11-18 05:28:12,712 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,797 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,798 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:28:12,800 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:28:12,800 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:15,540 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:15,542 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:30:15,542 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:15,545 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:30:15,884 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:15,885 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/font-awesome/css/font-awesome.min.css
+INFO 2019-11-18 05:30:15,885 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:15,908 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:15,910 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/simple-line-icons/css/simple-line-icons.css
+INFO 2019-11-18 05:30:15,911 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:15,922 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:15,928 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/weather-icons/css/weather-icons.min.css
+INFO 2019-11-18 05:30:15,929 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:15,955 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:15,957 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/linea-icons/linea.css
+INFO 2019-11-18 05:30:15,958 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:15,978 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:15,979 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/themify-icons/themify-icons.css
+INFO 2019-11-18 05:30:15,979 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:15,991 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:15,994 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/flag-icon-css/flag-icon.min.css
+INFO 2019-11-18 05:30:15,999 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:16,001 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:16,002 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/material-design-iconic-font/css/materialdesignicons.min.css
+INFO 2019-11-18 05:30:16,002 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:16,314 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:16,316 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/themify-icons/fonts/themify.woff
+INFO 2019-11-18 05:30:16,316 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:16,319 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:16,319 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/font-awesome//fonts/fontawesome-webfont.woff2
+INFO 2019-11-18 05:30:16,320 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:16,699 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:16,700 LoginInterceptor.java preHandle  当前拦截地址为：/scss/icons/material-design-iconic-font/css/materialdesignicons.min.css.map
+INFO 2019-11-18 05:30:16,701 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:16,707 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:16,708 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:30:16,708 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:16,717 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:16,718 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:30:16,718 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:16,718 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:30:59,471 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:30:59,472 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:30:59,472 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:30:59,472 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:31:00,159 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:31:00,159 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:31:00,159 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:31:00,268 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:31:00,269 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:31:00,269 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:31:00,270 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:33:05,398 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:33:05,400 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:33:05,400 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:33:05,405 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:33:05,817 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:33:05,818 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:33:05,818 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:33:05,818 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:33:13,023 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:33:13,023 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:33:13,024 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:33:13,084 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:33:13,085 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：null
+DEBUG 2019-11-18 05:34:03,926 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:34:03,926 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:34:03,927 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:34:03,928 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:34:04,090 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:34:04,092 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:34:04,093 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:34:04,094 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:34:06,818 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:34:06,818 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:34:06,819 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:34:06,820 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:34:06,821 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：1
+DEBUG 2019-11-18 05:34:09,498 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:34:09,499 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:34:09,499 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:34:09,500 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:34:09,501 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：3
+DEBUG 2019-11-18 05:36:57,435 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:36:57,437 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:36:57,437 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:36:57,444 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:36:57,906 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:36:57,907 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:36:57,907 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:36:57,908 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:36:59,541 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:36:59,541 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:36:59,542 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:36:59,553 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:36:59,553 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：2
+INFO 2019-11-18 05:36:59,558 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=2, ctName=双面羊绒大衣]
+DEBUG 2019-11-18 05:38:07,361 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:38:07,361 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:38:07,364 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:38:07,364 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:38:07,665 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:38:07,666 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:38:07,666 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:38:07,666 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:38:10,432 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:38:10,433 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:38:10,434 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:38:10,434 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:38:10,435 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：1
+INFO 2019-11-18 05:38:10,437 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=1, ctName=羽绒服]
+DEBUG 2019-11-18 05:40:29,710 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:40:29,710 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:40:29,710 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:40:29,711 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:40:29,853 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:40:29,854 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:40:29,854 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:40:29,858 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:40:36,845 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:40:36,845 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:40:36,845 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:40:36,846 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:40:36,846 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：1
+INFO 2019-11-18 05:40:36,849 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=1, ctName=羽绒服]
+DEBUG 2019-11-18 05:40:45,513 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:40:45,513 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:40:45,513 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:41:48,658 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:41:48,658 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:41:48,659 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:41:48,659 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:41:49,031 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:41:49,032 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:41:49,032 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:41:49,032 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:41:54,091 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:41:54,093 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:41:54,093 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:41:54,093 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:41:54,207 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:41:54,207 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:41:54,207 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:41:54,208 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:41:57,418 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:41:57,419 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:41:57,419 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:44:52,567 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:44:52,568 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:44:52,568 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:44:52,569 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:44:56,247 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:44:56,247 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:44:56,248 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:44:56,248 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:45:09,598 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:45:09,599 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:45:09,599 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:45:09,599 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:45:09,764 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:45:09,765 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:45:09,765 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:45:09,766 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:45:13,630 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:45:13,630 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:45:13,630 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:45:48,162 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:45:48,162 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:45:48,163 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:45:48,163 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:45:48,510 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:45:48,511 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:45:48,511 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:45:48,511 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:45:53,456 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:45:53,456 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:45:53,456 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:45:53,457 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:45:53,457 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：3
+INFO 2019-11-18 05:45:53,467 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=3, ctName=打底]
+DEBUG 2019-11-18 05:47:28,677 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:28,677 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:47:28,677 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:47:28,677 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:47:28,811 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:28,812 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:47:28,812 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:47:28,813 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:47:31,888 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:31,888 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:47:31,888 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:47:31,888 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:47:31,889 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：2
+INFO 2019-11-18 05:47:31,891 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=2, ctName=双面羊绒大衣]
+DEBUG 2019-11-18 05:47:34,159 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:34,159 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:47:34,159 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:47:34,297 CommodityTypeAction.java updateCommodityType  BambooForestQuicksand - CommodityTypeAction - updateCommodityType
+INFO 2019-11-18 05:47:34,297 CommodityTypeAction.java updateCommodityType  修改商品类别的对象信息为：CommodityType [ctId=2, ctName=双面羊绒大衣1]
+DEBUG 2019-11-18 05:47:42,239 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:42,239 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:47:42,240 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:47:42,240 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:47:42,376 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:42,377 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:47:42,377 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:47:42,377 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:47:45,268 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:45,268 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:47:45,268 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:47:45,269 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:47:45,270 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：2
+INFO 2019-11-18 05:47:45,274 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=2, ctName=双面羊绒大衣1]
+DEBUG 2019-11-18 05:47:47,096 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:47,097 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:47:47,097 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:47:47,098 CommodityTypeAction.java updateCommodityType  BambooForestQuicksand - CommodityTypeAction - updateCommodityType
+INFO 2019-11-18 05:47:47,099 CommodityTypeAction.java updateCommodityType  修改商品类别的对象信息为：CommodityType [ctId=2, ctName=双面羊绒大衣]
+DEBUG 2019-11-18 05:47:50,234 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:47:50,234 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:47:50,235 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:15,444 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:48:15,447 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:48:15,447 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:15,449 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:48:15,819 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:48:15,819 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:48:15,819 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:15,820 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:48:17,216 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:48:17,216 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:48:17,217 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:17,220 CommodityTypeAction.java deleteCommodityType  BambooForestQuicksand - CommodityTypeAction - deleteCommodityType
+INFO 2019-11-18 05:48:17,220 CommodityTypeAction.java deleteCommodityType  删除条件id为：null
+DEBUG 2019-11-18 05:48:19,689 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:48:19,689 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:48:19,689 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:19,690 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:48:19,811 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:48:19,811 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:48:19,812 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:19,813 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:48:26,043 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:48:26,044 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:48:26,045 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:26,045 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:48:26,046 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：1
+INFO 2019-11-18 05:48:26,049 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=1, ctName=羽绒服]
+DEBUG 2019-11-18 05:48:27,375 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:48:27,375 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:48:27,376 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:27,376 CommodityTypeAction.java updateCommodityType  BambooForestQuicksand - CommodityTypeAction - updateCommodityType
+INFO 2019-11-18 05:48:27,377 CommodityTypeAction.java updateCommodityType  修改商品类别的对象信息为：CommodityType [ctId=1, ctName=羽绒服1]
+DEBUG 2019-11-18 05:48:27,401 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:48:27,401 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:48:27,402 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:48:27,402 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:51:08,932 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:08,933 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:51:08,933 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:08,934 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:51:09,156 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:09,157 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:51:09,158 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:09,158 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:51:10,352 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:10,353 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:51:10,353 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:10,354 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:51:10,354 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：1
+INFO 2019-11-18 05:51:10,356 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=1, ctName=羽绒服1]
+DEBUG 2019-11-18 05:51:13,799 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:13,800 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:51:13,800 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:13,801 CommodityTypeAction.java updateCommodityType  BambooForestQuicksand - CommodityTypeAction - updateCommodityType
+INFO 2019-11-18 05:51:13,801 CommodityTypeAction.java updateCommodityType  修改商品类别的对象信息为：CommodityType [ctId=1, ctName=羽绒服]
+DEBUG 2019-11-18 05:51:13,827 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:13,827 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:51:13,827 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:13,827 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:51:15,527 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:15,527 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:51:15,528 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:15,528 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:51:15,529 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：2
+INFO 2019-11-18 05:51:15,532 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=2, ctName=双面羊绒大衣]
+DEBUG 2019-11-18 05:51:16,998 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:16,998 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:51:16,998 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:16,999 CommodityTypeAction.java updateCommodityType  BambooForestQuicksand - CommodityTypeAction - updateCommodityType
+INFO 2019-11-18 05:51:16,999 CommodityTypeAction.java updateCommodityType  修改商品类别的对象信息为：CommodityType [ctId=2, ctName=双面羊绒大衣1]
+DEBUG 2019-11-18 05:51:17,010 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:17,011 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:51:17,011 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:17,012 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:51:18,290 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:18,290 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:51:18,291 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:18,291 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:51:18,292 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：2
+INFO 2019-11-18 05:51:18,295 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=2, ctName=双面羊绒大衣1]
+DEBUG 2019-11-18 05:51:20,306 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:20,306 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:51:20,306 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:20,307 CommodityTypeAction.java updateCommodityType  BambooForestQuicksand - CommodityTypeAction - updateCommodityType
+INFO 2019-11-18 05:51:20,307 CommodityTypeAction.java updateCommodityType  修改商品类别的对象信息为：CommodityType [ctId=2, ctName=双面羊绒大衣]
+DEBUG 2019-11-18 05:51:20,319 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:20,319 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:51:20,320 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:20,320 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:51:47,009 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:47,009 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:51:47,009 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:47,009 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:51:47,153 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:47,154 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:51:47,154 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:47,155 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:51:48,198 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:48,198 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:51:48,199 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:48,199 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:51:48,200 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：2
+INFO 2019-11-18 05:51:48,202 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=2, ctName=双面羊绒大衣]
+DEBUG 2019-11-18 05:51:51,504 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:51,504 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:51:51,504 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:51,504 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:51:51,505 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：2
+INFO 2019-11-18 05:51:51,508 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=2, ctName=双面羊绒大衣]
+DEBUG 2019-11-18 05:51:53,173 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:51:53,174 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/queryCT
+INFO 2019-11-18 05:51:53,174 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:51:53,174 CommodityTypeAction.java queryCommodityTypeById  BambooForestQuicksand - CommodityTypeAction - queryCommodityTypeById
+INFO 2019-11-18 05:51:53,174 CommodityTypeAction.java queryCommodityTypeById  修改数据的ctId为：1
+INFO 2019-11-18 05:51:53,177 CommodityTypeAction.java queryCommodityTypeById  修改商品类别的对象信息为CommodityType [ctId=1, ctName=羽绒服]
+DEBUG 2019-11-18 05:52:05,634 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:52:05,634 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:52:05,634 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:52:05,635 CommodityTypeAction.java deleteCommodityType  BambooForestQuicksand - CommodityTypeAction - deleteCommodityType
+INFO 2019-11-18 05:52:05,635 CommodityTypeAction.java deleteCommodityType  删除条件id为：16
+DEBUG 2019-11-18 05:52:07,468 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:52:07,469 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:52:07,469 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:52:07,469 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:52:09,218 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:52:09,219 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:52:09,219 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:52:09,221 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:52:23,020 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:52:23,020 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:52:23,020 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:52:23,021 CommodityTypeAction.java insertCommodityType  BambooForestQuicksand - CommodityTypeAction - insertCommodityType
+INFO 2019-11-18 05:52:23,021 CommodityTypeAction.java insertCommodityType  新增商品类别对象信息为：CommodityType [ctId=0, ctName=上衣]
+DEBUG 2019-11-18 05:52:28,151 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:52:28,151 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:52:28,151 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:52:28,152 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:52:28,279 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:52:28,280 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:52:28,280 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:52:28,280 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:53:21,115 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:53:21,116 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:53:21,116 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:53:21,117 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:53:21,344 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:53:21,345 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:53:21,346 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:53:21,347 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:53:23,820 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:53:23,820 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:53:23,820 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:53:23,820 CommodityTypeAction.java deleteCommodityType  BambooForestQuicksand - CommodityTypeAction - deleteCommodityType
+INFO 2019-11-18 05:53:23,821 CommodityTypeAction.java deleteCommodityType  删除条件id为：17
+DEBUG 2019-11-18 05:53:23,860 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:53:23,861 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:53:23,861 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:53:23,861 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:53:29,968 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:53:29,970 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:53:29,971 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:53:29,971 CommodityTypeAction.java insertCommodityType  BambooForestQuicksand - CommodityTypeAction - insertCommodityType
+INFO 2019-11-18 05:53:29,971 CommodityTypeAction.java insertCommodityType  新增商品类别对象信息为：CommodityType [ctId=0, ctName=上衣]
+DEBUG 2019-11-18 05:53:35,600 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:53:35,600 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:53:35,601 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:53:57,610 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:53:57,610 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/toPage
+INFO 2019-11-18 05:53:57,611 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:53:57,611 CommodityTypeAction.java toD_Commodity  BambooForestQuicksand - CommodityTypeAction - toD_Commodity
+DEBUG 2019-11-18 05:53:58,021 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:53:58,021 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:53:58,021 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:53:58,022 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:54:01,057 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:54:01,058 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:54:01,058 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:54:01,058 CommodityTypeAction.java deleteCommodityType  BambooForestQuicksand - CommodityTypeAction - deleteCommodityType
+INFO 2019-11-18 05:54:01,058 CommodityTypeAction.java deleteCommodityType  删除条件id为：18
+DEBUG 2019-11-18 05:54:01,079 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:54:01,079 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:54:01,080 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:54:01,080 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:54:06,654 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:54:06,655 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:54:06,655 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:54:06,657 CommodityTypeAction.java insertCommodityType  BambooForestQuicksand - CommodityTypeAction - insertCommodityType
+INFO 2019-11-18 05:54:06,659 CommodityTypeAction.java insertCommodityType  新增商品类别对象信息为：CommodityType [ctId=0, ctName=上衣]
+DEBUG 2019-11-18 05:54:06,687 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:54:06,687 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/ct
+INFO 2019-11-18 05:54:06,687 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:54:06,687 CommodityTypeAction.java queryAll  BambooForestQuicksand - CommodityTypeAction - queryAll
+DEBUG 2019-11-18 05:54:13,485 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:54:13,485 LoginInterceptor.java preHandle  当前拦截地址为：/commoditytypes/d_commodity_manager.html
+INFO 2019-11-18 05:54:13,485 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:54:13,492 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:54:13,493 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:54:13,493 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:54:14,078 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:54:14,079 LoginInterceptor.java preHandle  当前拦截地址为：/favicon.ico
+INFO 2019-11-18 05:54:14,079 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-18 05:54:14,080 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-18 05:54:14,080 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-18 05:54:14,080 LoginInterceptor.java preHandle  拦截结果：true
