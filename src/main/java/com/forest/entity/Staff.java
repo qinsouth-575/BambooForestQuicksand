@@ -16,7 +16,34 @@ public class Staff {
     private String password;
     private String shopName;
     private String posName;
-    public String getShopName() {
+    private String trade;
+    private String headPortraitPath;
+    private String phone;
+    public String getTrade() {
+		return trade;
+	}
+
+	public void setTrade(String trade) {
+		this.trade = trade;
+	}
+
+	public String getHeadPortraitPath() {
+		return headPortraitPath;
+	}
+
+	public void setHeadPortraitPath(String headPortraitPath) {
+		this.headPortraitPath = headPortraitPath;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getShopName() {
 		return shopName;
 	}
 
