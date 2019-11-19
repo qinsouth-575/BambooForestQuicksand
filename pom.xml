@@ -24,7 +24,19 @@
 	<dependencies>
 		
 		
-		<!-- ************************************各自需要添加的依赖放在这个上面**************************************** -->
+		<!-- **************************各自需要添加的依赖**告诉我**我来放在这个上面***************************** -->
+		
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>RELEASE</version>
+		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
