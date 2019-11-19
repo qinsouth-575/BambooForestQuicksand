@@ -10,6 +10,9 @@
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="staff_state" property="staffState" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="trade" property="trade" jdbcType="VARCHAR" />
+    <result column="head_portrait_path" property="headPortraitPath" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
