@@ -239,56 +239,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>@Genelia</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
+                                            <tr v-for="item in PageList.list">
+                                                <td>{{item.memberId}}</td>
+                                                <td>{{item.memberName}}</td>
+                                                <td>{{item.phoen}}</td>
+                                                <td>{{item.ml_name}}</td>
+                                                <td>{{item.cs}}</td>
+                                                <td>{{item.je}}</td>
+                                                <td>{{item.balance}}</td>
+                                                <td>{{item.integral}}</td>
+                                                <td>-</td>
+                                                <td><a>编辑</a></td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sanghani</td>
-                                                <td>Gusikowski</td>
-                                                <td>@Govinda</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Roshan</td>
-                                                <td>Rogahn</td>
-                                                <td>@Hritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Joshi</td>
-                                                <td>Hickle</td>
-                                                <td>@Maruti</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Nigam</td>
-                                                <td>Eichmann</td>
-                                                <td>@Sonu</td>
-                                            </tr>
+                                            
                                         </tbody>
                                         <tfoot>
                                         	<tr>
                                         		<td colspan="10" class="text-right">
-							                        <a href="#" class="btn hidden-sm-down btn-info">首页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">上一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">下一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">尾页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="sPage">首页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="prePage">上一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="nextPage">下一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="wPage">尾页</a>
                                         		</td>
                                         	</tr>
                                         </tfoot>
@@ -411,7 +382,9 @@
 				el:"#etc",
 				data(){
 					return {
-						
+						PageList:{
+							list:[]
+						}
 					}
 				},
 				methods:{
@@ -429,8 +402,35 @@
 					},
 					toCredits:function(){
 						location.href="http://localhost:8080/MemberManage/toCredits";
+					},
+					prePage:function(){
+	 					this.goPage(this.PageList.prePage);
+	 				},
+	 				nextPage:function(){
+	 					if(this)
+	 					this.goPage(this.PageList.nextPage);
+	 				},
+	 				sPage:function(){
+	 					this.goPage(1);
+	 				},
+	 				wPage:function(){
+	 					this.goPage(this.PageList.pageCount);
+	 				},
+					goPage:function(pageNum){
+						var _this=this;
+						$.ajax({
+							url:"[[@{/MemberManage/queryAllByPage}]]",
+							type:"get",
+							data:{pageNum:pageNum},
+							dataType:"json",
+							"success":function(res){
+								_this.PageList=res;
+							}
+						});
 					}
-				}
+				},created:function(){
+	 				this.goPage(1);
+	 			}
 			});
 	</script>
 </body>

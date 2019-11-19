@@ -29,8 +29,38 @@ public class Member {
     private String wechatNum;
 
     private Date createTime;
+    
+    private Integer cs;//会员成交次数
+    
+    private float je;//会员成交金额
+    
+    private String ml_name;//会员等级名称
+    
+    public String getMl_name() {
+		return ml_name;
+	}
 
-    public Integer getMemberId() {
+	public void setMl_name(String ml_name) {
+		this.ml_name = ml_name;
+	}
+
+	public Integer getCs() {
+		return cs;
+	}
+
+	public void setCs(Integer cs) {
+		this.cs = cs;
+	}
+
+	public float getJe() {
+		return je;
+	}
+
+	public void setJe(float je) {
+		this.je = je;
+	}
+
+	public Integer getMemberId() {
         return memberId;
     }
 

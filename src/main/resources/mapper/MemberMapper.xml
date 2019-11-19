@@ -335,4 +335,9 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
+  <select id="queryAllByPage" resultType="com.forest.entity.Member">
+  		SELECT `member_id`,member_name,m.`phoen`,l.`ml_name`,COUNT(t.client) AS cs,SUM(t.actual_income) AS je,m.balance,m.integral FROM `member` AS m,`member_level` AS l,`transaction_record_main` AS t
+		WHERE m.`member_id`=t.`client` AND m.`ml_id`=l.`ml_id`
+		GROUP BY m.`member_id`
+  </select>
 </mapper>

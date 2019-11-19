@@ -1,11 +1,19 @@
 package com.forest.action;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.forest.biz.MemberBiz;
+import com.forest.entity.Member;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("MemberManage")
 public class MemberManageAction {
+				@Autowired
+				private MemberBiz memberBiz;
 				/**
 				 * 进入会员主页面
 				 * @return
@@ -49,5 +57,16 @@ public class MemberManageAction {
 				@RequestMapping("/toCredits")
 				public String toCredits() {
 					return "f_member_credits";
+				}
+				/**
+				 * 分页查询会员信息
+				 * @param pageNum
+				 * @return
+				 */
+				@RequestMapping("/queryAllByPage")
+				@ResponseBody
+				public PageInfo<Member> queryAllByPage(Integer pageNum){
+					System.out.println("当前页数----"+pageNum);
+					return memberBiz.queryAllByPage(pageNum);
 				}
 }
