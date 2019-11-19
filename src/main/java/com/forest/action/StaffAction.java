@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +37,7 @@ public class StaffAction {
 			staff.setJobNumber(jobNumber);
 			staff.setPosId(posId);
 			staff.setShopId(shopId);
+			System.out.println(staff);
 			return sb.queryShopAndPos(staff);
 		}
 		@RequestMapping("/queryPos")
@@ -82,5 +85,10 @@ public class StaffAction {
 			map.put("code", "修改成功");
 			return map;
 		}
-	
+		@RequestMapping("/session")
+		@ResponseBody
+		public Staff StaffSession(HttpSession session) {
+			Staff staff=(Staff) session.getAttribute("account");
+			return staff;
+		}	
 }
