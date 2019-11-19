@@ -179,21 +179,18 @@
                         <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">员工管理</h3>
                     </div>
                     <div class="col-md-8 col-4 align-self-center" style="padding-left: 30px;">
-                        <select class="form-control form-control-line f_input" style="width: 120px;">
+                        <select class="form-control form-control-line f_input" style="width: 130px;" id="posId">
                             <option v-for="item in pos" :value="item.posId">{{item.posName}}</option>
                             
                         </select>
-                        <select class="form-control form-control-line f_input" style="width: 130px;">
-                            <option v-for="item in shop" :value="item.shopId">{{item.shopName}}</option>
+                        <select class="form-control form-control-line f_input" style="width: 130px;" id="shopId">
+                            <option v-for="item in shop1" :value="item.shopId">{{item.shopName}}</option>
                             
                        </select>
                         <div class="f_input" style="position: relative;">
-                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
+                        	<input type="text" id="gNo" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
 							<a href="#" class="list_search" @click="select"></a>
                         </div>
-                        
-                        
-                        
                         <!-- Button trigger modal -->
                         <a href="#" class="btn hidden-sm-down btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" @click="jz">添加员工</a>
                         
@@ -524,6 +521,21 @@
 						});
 					},
 					select:function(){
+						var this_=this;
+						$.ajax({
+							url:"[[@{/querySandP}]]",
+							type:"get",
+							data:{
+								jobNumber:$("#gNo").val(),
+								shopId:$("#shopId").val(),
+								posId:$("#posId").val()
+							},
+							success:function(res){
+								//alert(res);
+								this_.staff=res;
+							}
+							
+						});
 					},
 					jz:function(){
 						var this_=this;

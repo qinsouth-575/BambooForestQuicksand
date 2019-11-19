@@ -104,11 +104,9 @@
   </delete>
   <insert id="insert" parameterType="com.forest.entity.Staff" >
     insert into staff (staff_id, shop_id, pos_id, 
-      job_number, staff_name, password, 
-      staff_state, create_time)
+      job_number, staff_name, password)
     values (#{staffId,jdbcType=INTEGER}, #{shopId,jdbcType=SMALLINT}, #{posId,jdbcType=INTEGER}, 
-      #{jobNumber,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{staffState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+      #{jobNumber,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.forest.entity.Staff" >
     insert into staff
@@ -263,29 +261,15 @@
 	GROUP BY sf.`staff_id`
   </select>
   <select id="queryShopIdAndPosId" resultMap="BaseResultMap" parameterType="com.forest.entity.Staff">
- 	 SELECT * FROM staff
- 	 <where>
+ 	 SELECT *,s.`shop_name` AS shopName,p.`pos_name` AS posName FROM staff sf,shop s,`position` p WHERE sf.`shop_id`=s.`shop_id` AND p.`pos_id`=sf.`pos_id`
   	  <if test="shopId != null" >
-        shop_id = #{shopId,jdbcType=SMALLINT},
+		and sf.shop_id = #{shopId} 
       </if>
       <if test="posId != null" >
-        pos_id = #{posId,jdbcType=INTEGER},
+        and  sf.pos_id = #{posId,jdbcType=INTEGER}
       </if>
-      <if test="jobNumber != null" >
-        job_number = #{jobNumber,jdbcType=VARCHAR},
+      <if test="jobNumber != null">
+        and sf.job_number LIKE '%${jobNumber}%'
       </if>
-      <if test="staffName != null" >
-        staff_name = #{staffName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="staffState != null" >
-        staff_state = #{staffState,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      </where>
   </select>
 </mapper>
