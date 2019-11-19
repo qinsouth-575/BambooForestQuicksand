@@ -14,8 +14,25 @@ public class Staff {
     private String staffName;
 
     private String password;
+    private String shopName;
+    private String posName;
+    public String getShopName() {
+		return shopName;
+	}
 
-    private Integer staffState;
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getPosName() {
+		return posName;
+	}
+
+	public void setPosName(String posName) {
+		this.posName = posName;
+	}
+
+	private Integer staffState;
 
     private Date createTime;
 
@@ -82,4 +99,11 @@ public class Staff {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	@Override
+	public String toString() {
+		return "Staff [staffId=" + staffId + ", shopId=" + shopId + ", posId=" + posId + ", jobNumber=" + jobNumber
+				+ ", staffName=" + staffName + ", password=" + password + ", shopName=" + shopName + ", posName="
+				+ posName + ", staffState=" + staffState + ", createTime=" + createTime + "]";
+	}
 }

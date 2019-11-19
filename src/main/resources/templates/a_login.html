@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
     	<meta charset="utf-8">
 		<link rel="icon" type="image/png" sizes="16x16" href="assets/images/apple-icon.png">
+		<script th:src="@{/js/vue.js}"></script>
 		<title>竹林流沙-登录</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript">
@@ -44,22 +45,23 @@
 			<div class="avtar">
 				<img src="images/avtar.png" />
 			</div>
-			<form>
+			<form action="/login" method="get">
 				<div class="username">
-					<input type="text" class="userName" value="UserName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'UserName';}">
+					<input type="text" class="userName" name="staffName"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'UserName';}">
 				</div>
 				<div class="userpwd">
-					<input type="password" class="userPwd" value="Password_abcd" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password_abcd';}">
+					<input type="password" class="userPwd" name="password"   onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password_abcd';}">
 				</div>
 				<div class="random">
 					<input type="text" class="randomCode" value="RandomCode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'RandomCode';}">
 					<img src="assets/images/big/img2.jpg" id="getRandomCode" width="90xpx" height="35px" />
 					<!--/Y2ProjectC_Tenement/GenerateCodeAction?method=image-->
 				</div>
-			</form>
+			
 			<div class="signin">
 				<input type="submit" value="登录">
 			</div>
+			</form>
 		</div>
 		<div class="copy-rights">
 			<p>版权所有 &copy;2019  竹林流沙工作室 保留所有权利 &nbsp;&nbsp;更多模板从
@@ -67,14 +69,24 @@
 				<!--<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>-->
 			</p>
 		</div>
+
 		
 		<script type="text/javascript">
 			$(function(){
 				$("input[type='submit']").on("click", function(){
 					alert($(".userName").val() + " - " + $(".userPwd").val() + " - " + $(".randomCode").val());
-					location.href="a_index.html";
+					if($(".userName").val()==null||$(".userName").val()==""){
+						alert("账户名不能为空");
+						return false;
+					}
+					if($(".userPwd").val()==null||$(".userPwd").val()==""){
+						alert("密码不能为空");
+						return false;
+					}
+					//location.href="a_index.html";
 				});
 			});
+			
 		</script>
 	</body>
 </html>

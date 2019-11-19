@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -83,7 +83,7 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a href="a_index.html" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/find}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
@@ -93,22 +93,22 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="c_shop.html" class="waves-effect _account">
+                        	<a th:href="@{/findshop}" class="waves-effect _account">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="d_commodity.html" class="waves-effect _account">
+                        	<a th:href="d_commodity.html" class="waves-effect _account">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="e_inventory.html" class="waves-effect _account">
+                        	<a th:href="e_inventory.html" class="waves-effect _account">
                             	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="f_member.html" class="waves-effect _account">
+                        	<a th:href="f_member.html" class="waves-effect _account">
                             	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
                             </a>
                         </li>
@@ -190,10 +190,10 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-6 col-8 align-self-center">
-                        <h3 class="text-themecolor m-b-0 m-t-0">预留页面</h3>
+                        <h3 class="text-themecolor m-b-0 m-t-0">Dashboard</h3>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="javascript:void(0)">本类其他功能</a></li>
-                            <li class="breadcrumb-item active">都还没有画页面</li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                            <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
                     </div>
                     <div class="col-md-6 col-4 align-self-center">

@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    shop_id, account, shop_name, phone, telephone, province, city, region, street, info
+    shop_id, account, shop_name, phone, telephone, province, city, region, street, info,linkman
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.ShopExample" >
     select
@@ -88,13 +88,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="int" >
     select 
     <include refid="Base_Column_List" />
     from shop
     where shop_id = #{shopId,jdbcType=SMALLINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from shop
     where shop_id = #{shopId,jdbcType=SMALLINT}
   </delete>
@@ -287,4 +287,8 @@
       info = #{info,jdbcType=VARCHAR}
     where shop_id = #{shopId,jdbcType=SMALLINT}
   </update>
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="com.forest.entity.Shop">
+  	select *,count(staff.`shop_id`) as staffcount from shop left join  staff on shop.`shop_id`=staff.`shop_id`
+	group by shop.`shop_id`
+  </select>
 </mapper>

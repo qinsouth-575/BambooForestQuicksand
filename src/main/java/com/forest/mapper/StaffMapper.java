@@ -27,4 +27,11 @@ public interface StaffMapper {
     int updateByPrimaryKeySelective(Staff record);
 
     int updateByPrimaryKey(Staff record);
+    
+    List<Staff> queryAll();
+    //查询账户密码登录
+    Staff queryNameAndPwd(Staff account);
+    //根据店铺编号、职位编号、工号查询
+    List<Staff> queryShopIdAndPosId(Staff staff);
+
 }

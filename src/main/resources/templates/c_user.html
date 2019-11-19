@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -93,7 +93,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="c_shop.html" class="waves-effect _account">
+                        	<a th:href="@{/findshop}" class="waves-effect _account">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
@@ -149,7 +149,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="c_shop.html" class="waves-effect">
+                            <a th:href="@{/findshop}"  class="waves-effect">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
@@ -166,11 +166,6 @@
                         <li>
                             <a href="f_member.html" class="waves-effect">
                             	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
-                            </a>
-                        </li>
-                        <li>
-                            <a href="c_user.html" class="waves-effect active">
-                            	<i class="fa fa-user-circle-o m-r-10" aria-hidden="true"></i>系统用户
                             </a>
                         </li>
                     </ul>
@@ -250,12 +245,6 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12">行业：</label>
-                                        <div class="col-md-12">
-                                            <input type="text" placeholder="服饰" class="form-control form-control-line">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <div class="col-sm-12">
                                             <button class="btn btn-success">更新账户信息</button>
                                         </div>
@@ -322,5 +311,10 @@
     <!-- ============================================================== -->
     <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
 </body>
+	<scritp th:src="@{/js/vue.js}"></scritp>
+	<script>
+		
+	
+	</script>
 
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,19 +12,18 @@
     <title>店铺-竹林流沙商品管理系统</title>
     <!-- Bootstrap Core CSS -->
     <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
-    <!-- You can change the theme colors from here -->
     <link href="css/colors/blue.css" id="theme" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <link href="css/style_programmer.css" id="theme" rel="stylesheet">
+    
+    
 </head>
 
-<body class="fix-header fix-sidebar card-no-border">
+<body class="fix-header fix-sidebar card-no-border" >
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
+    <div id="ok">
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
@@ -79,7 +78,7 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a href="a_index.html" class="waves-effect _account">
+                        	<a th:href="@{/find}" class="waves-effect _account">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
@@ -89,7 +88,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="c_shop.html" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/findshop}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
@@ -135,17 +134,17 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="c_shop_management.html" class="waves-effect active">
+                            <a th:href="@{/findshop}" class="waves-effect active">
                             	<i class="fa fa-twitter-square m-r-10" aria-hidden="true"></i>店铺管理
                             </a>
                         </li>
                         <li>
-                            <a href="c_position-of-authority.html" class="waves-effect">
+                            <a th:href="@{/findposition}" class="waves-effect">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>职位权限
                             </a>
                         </li>
                         <li>
-                            <a href="c_staff.html" class="waves-effect">
+                            <a th:href="@{/findstaff}" class="waves-effect">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>员工管理
                             </a>
                         </li>
@@ -183,7 +182,7 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <div class="row">
+                <div class="row " id="sb">
                     <!-- column -->
                     <div class="col-sm-12">
                         <div class="card">
@@ -206,46 +205,16 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>@Genelia</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td><a href="#" class="btn hidden-sm-down btn-info" data-toggle="modal" data-target=".bs-example-modal-lg">编辑</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sanghani</td>
-                                                <td>Gusikowski</td>
-                                                <td>@Govinda</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Roshan</td>
-                                                <td>Rogahn</td>
-                                                <td>@Hritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Joshi</td>
-                                                <td>Hickle</td>
-                                                <td>@Maruti</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Nigam</td>
-                                                <td>Eichmann</td>
-                                                <td>@Sonu</td>
+                                            <tr v-for="item,index in list">
+                                                <td>{{(index+1)}}</td>
+                                                <td>{{item.account}}</td>
+                                                <td>{{item.shopName}}</td>
+                                                <td>{{item.staffcount}}</td>
+                                                <td>{{item.linkman}}</td>
+                                                <td>{{item.phone}}</td>
+                                                <td>{{item.telephone}}</td>
+                                                <td>{{item.province}}{{item.city}}{{item.region}}{{item.street}}</td>
+                                                <td><a href="#" class="btn hidden-sm-down btn-info" data-toggle="modal" data-target=".bs-example-modal-lg" @click="queryId(item.shopId)">编辑</a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -292,68 +261,44 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-inline">
+						<input type="hidden" id="shopId">
+						<input type="hidden" id="account">
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputName2">店铺名：</label>&nbsp;
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+							<input type="text" class="form-control" id="shopName" placeholder="Jane Doe">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">手机：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="手机号">
+							<input type="email" class="form-control" id="phone" placeholder="手机号">
 						</div>
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputEmail2">联系人：</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="联系人">
+							<input type="email" class="form-control" id="linkman" placeholder="联系人">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">固话：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="电话">
+							<input type="email" class="form-control" id="telephone" placeholder="电话">
 						</div>
-						<div class="form-group col-md-1"></div>
-						<div class="form-group col-md-11">
-							<label for="exampleInputName2">时&nbsp;&nbsp;&nbsp;&nbsp;间：</label>&nbsp;
-							<select class="form-control form-control-line" style="width: 202px;">
-								<option>开始时间</option>
-								<option>India</option>
-								<option>Usa</option>
-								<option>Canada</option>
-								<option>Thailand</option>
-							</select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" style="width: 202px;">
-								<option>结束时间</option>
-								<option>India</option>
-								<option>Usa</option>
-								<option>Canada</option>
-								<option>Thailand</option>
-							</select>
-						</div>
-	
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11" data-toggle="distpicker">
-							<label>地&nbsp;&nbsp;&nbsp;&nbsp;址：</label>&nbsp;
-							<select class="form-control form-control-line" id="province1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="city1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="district1"></select>
+							<label for="exampleInputName2">地&nbsp;&nbsp;&nbsp;&nbsp;址：</label>&nbsp;
+							<select class="form-control form-control-line province" id="province1" ></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line city" id="city1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line region" id="district1"></select>
 						</div>
 	
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
-							<label for="exampleInputEmail2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control col-md-6" id="exampleInputEmail2" placeholder="填写详细地址">
-						</div>
-	
-						<div class="form-group col-md-12">
-							<label for="exampleInputName2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;店铺简称：</label>
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="店铺简称">
-						</div>
-						<div class="form-group col-md-12">
-							<textarea rows="5" cols="80" placeholder="店铺简介"></textarea>
+							<label for="exampleInputEmail2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;
+							<input type="text" id="stree" class="form-control col-md-6"  placeholder="填写详细地址">
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-danger" @click="del" data-dismiss="modal">删除</button>
+					<button type="button" class="btn btn-primary" @click="update" data-dismiss="modal">修改保存</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -361,72 +306,58 @@
 	</div>
 	
 	<div class="modal fade" id="insert" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog modal-lg" id="sb">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="myModalLabel">添加门店</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></+>
 				</div>
 				<div class="modal-body">
 					<form class="form-inline">
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputName2">店铺名：</label>&nbsp;
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="店铺名">
+							<input type="text" class="form-control" id="exampleInputName2" v-model="shop.shopName" placeholder="店铺名">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">账户：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="账户">
+							<input type="email" class="form-control" id="exampleInputEmail2"  v-model="shop.account"  placeholder="账户">
 						</div>
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputEmail2">手机号：</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="手机号">
+							<input type="email" class="form-control" id="exampleInputEmail2"  v-model="shop.phone"  placeholder="手机号">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">电话：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="电话">
+							<input type="email" class="form-control" id="exampleInputEmail2"  v-model="shop.telephone"  placeholder="电话">
 						</div>
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
-							<label for="exampleInputName2">时&nbsp;&nbsp;&nbsp;&nbsp;间：</label>&nbsp;
-							<select class="form-control form-control-line" style="width: 202px;">
-								<option>开始时间</option>
-								<option>India</option>
-								<option>Usa</option>
-								<option>Canada</option>
-								<option>Thailand</option>
-							</select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" style="width: 202px;">
-								<option>结束时间</option>
-								<option>India</option>
-								<option>Usa</option>
-								<option>Canada</option>
-								<option>Thailand</option>
-							</select>
+							<label for="exampleInputEmail2">联系人：</label>&nbsp;
+							<input type="email" class="form-control" id="exampleInputEmail2"  v-model="shop.linkman"  placeholder="联系人">
 						</div>
-	
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11" data-toggle="distpicker">
-							<label>地&nbsp;&nbsp;&nbsp;&nbsp;址：</label>&nbsp;
-							<select class="form-control form-control-line" id="province1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="city1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="district1"></select>
+							<label for="exampleInputName2">地&nbsp;&nbsp;&nbsp;&nbsp;址：</label>&nbsp;
+							<select class="form-control form-control-line" id="province1" v-model="shop.province"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line" id="city1" v-model="shop.city"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line" id="district1" v-model="shop.region"></select>
 						</div>
-	
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
-							<label for="exampleInputEmail2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control col-md-6" id="exampleInputEmail2" placeholder="填写详细地址">
+							<label for="exampleInputEmail2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;
+							<input type="text" v-model="shop.street" class="form-control col-md-6" id="exampleInputEmail2" placeholder="填写详细地址">
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-primary" @click="xz" data-dismiss="modal">新增</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
     <!-- ============================================================== -->
     <!-- End Model -->
@@ -435,19 +366,152 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
     <script src="assets/plugins/bootstrap/js/tether.min.js"></script>
     <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
     <script src="js/waves.js"></script>
+    <!--Menu sidebar -->
     <script src="js/sidebarmenu.js"></script>
+    <!--stickey kit -->
     <script src="assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <!--Custom JavaScript -->
     <script src="js/custom.min.js"></script>
     <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!-- Flot Charts JavaScript - 比3和4 多以下三个js引入 -->
+    <script src="assets/plugins/flot/jquery.flot.js"></script>
+    <script src="assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="js/flot-data.js"></script>
+    <!-- ============================================================== -->
+    <!-- Style switcher -->
+    <!-- ============================================================== -->
     <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-    
 	<script src="assets/plugins/address/distpicker.data.min.js"></script>
   	<script src="assets/plugins/address/distpicker.min.js"></script>
   	<script src="assets/plugins/address/main.js"></script>
+    <script th:src="@{/js/vue.js}"></script>
+    <script>
+    	 	var vue=new Vue({
+    			el:"#ok",
+    			data(){
+    				return {
+    					list:[],
+    					shop:{},
+    					sss:{}
+    				}
+    			},methods:{
+    				queryAll:function(){
+    					var this_=this;
+    					$.ajax({
+    						url:"[[@{/queryAll}]]",
+    						type:"get",
+    						success:function(res){
+    							this_.list=res;
+    						}
+    					});
+    				},
+    				xz:function(){
+    	 				var this_=this;
+    	 				alert(JSON.stringify(this_.shop));
+    	 				$.ajax({
+    	 					url:"[[@{/insert}]]",
+    	 					type:"post",
+    	 					data:this_.shop,
+    	 					dataType:"json",
+    	 					success:function(res){
+    	 						alert(res.code);
+    	 						this_.queryAll();
+    	 					}
+    	 				});
+    	 			},
+    	 			queryId:function(id){
+    	 				var this_=this;
+    	 				$.ajax({
+    	 					url:"[[@{/queryId}]]",
+    	 					type:"get",
+    	 					data:{
+    	 						id:id
+    	 					},
+    	 					success:function(res){
+    	 						this_.sss=res;
+    	 						alert(JSON.stringify(this_.sss));
+    	 						$("#shopName").val(this_.sss.shopName);
+    	 						//$("#shopName").val(this_.sss.shopName);
+    	 						$("#phone").val(this_.sss.phone);
+    	 						$("#linkman").val(this_.sss.linkman);
+    	 						$("#telephone").val(this_.sss.telephone);
+    	 						$('.province').val(this_.sss.province).trigger('change');
+    	 						$('.city').val(this_.sss.city).trigger('change');
+    	 						$('.region').val(this_.sss.region).trigger('change');
+    	 						$("#stree").val(this_.sss.street);
+    	 						$("#account").val(this_.sss.account);
+    	 						$("#shopId").val(this_.sss.shopId);
+    	 						
+    	 					}
+    	 				});
+    	 			},
+    	 			update:function(){
+    	 				var this_=this;
+    	 				var shop={
+            	 				shopName:$("#shopName").val(),
+            	 				phone:$("#phone").val(),
+            	 				telephone:$("#telephone").val(),
+            	 				province:$('.province').val(),
+            	 				linkman:$("#linkman").val(),
+            	 				city:$('.city').val(),
+            	 				region:$('.region').val(),
+            	 				street:$("#stree").val(),
+            	 				shopId:$("#shopId").val(),
+            	 				account:$("#account").val()
+            	 		};
+    	 				$.ajax({
+            	 			url:"[[@{/update}]]",
+            	 			type:"post",
+            	 			data:JSON.stringify(shop),
+            	 			contentType:"application/json;charset=utf-8",
+            	 			dataType:"json",
+            	 			success:function(res){
+            	 				alert(res.code);
+            	 				this_.queryAll();
+            	 			}
+            	 		});
+    	 			},
+    	 			del:function(){
+    	 				var this_=this;
+    	 				var id=$("#shopId").val();
+    	 				alert(id);
+    	 				$.ajax({
+            	 			url:"[[@{/delete}]]",
+            	 			type:"post",
+            	 			data:{
+            	 				id:id
+            	 			},
+            	 			dataType:"json",
+            	 			success:function(res){
+            	 				alert(res.code);
+            	 				this_.queryAll();
+            	 			}
+            	 		});
+    	 			}
+    			},created:function(){
+    				this.queryAll();
+    			}
+    		});
+    	 	
+    	/*  	$(function(){
+    	 		//alert(2312413);
+    	 		$("#tb").click(function(){
+    	 			//alert(1);
+        	 		
+        	 		alert(JSON.stringify(shop));
+        	 		
+        	 	});
+    	 	}); */
+    </script>
 </body>
 
 </html>

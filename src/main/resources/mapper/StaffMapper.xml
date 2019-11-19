@@ -255,4 +255,37 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where staff_id = #{staffId,jdbcType=INTEGER}
   </update>
+  <select id="queryNameAndPwd" resultMap="BaseResultMap">
+  	SELECT * FROM `staff` WHERE `staff_name`=#{staffName} AND `password`=#{password}
+  </select>
+  <select id="queryAll" resultMap="BaseResultMap">
+  	SELECT *,s.`shop_name` AS shopName,p.`pos_name` AS posName FROM staff sf,shop s,`position` p WHERE sf.`shop_id`=s.`shop_id` AND p.`pos_id`=sf.`pos_id`
+	GROUP BY sf.`staff_id`
+  </select>
+  <select id="queryShopIdAndPosId" resultMap="BaseResultMap" parameterType="com.forest.entity.Staff">
+ 	 SELECT * FROM staff
+ 	 <where>
+  	  <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=SMALLINT},
+      </if>
+      <if test="posId != null" >
+        pos_id = #{posId,jdbcType=INTEGER},
+      </if>
+      <if test="jobNumber != null" >
+        job_number = #{jobNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="staffState != null" >
+        staff_state = #{staffState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      </where>
+  </select>
 </mapper>

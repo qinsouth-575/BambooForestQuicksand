@@ -10,7 +10,7 @@ public interface ShopMapper {
 
     int deleteByExample(ShopExample example);
 
-    int deleteByPrimaryKey(Short shopId);
+    int deleteByPrimaryKey(int shopId);
 
     int insert(Shop record);
 
@@ -18,7 +18,7 @@ public interface ShopMapper {
 
     List<Shop> selectByExample(ShopExample example);
 
-    Shop selectByPrimaryKey(Short shopId);
+    Shop selectByPrimaryKey(Integer shopId);
 
     int updateByExampleSelective(@Param("record") Shop record, @Param("example") ShopExample example);
 
@@ -27,4 +27,6 @@ public interface ShopMapper {
     int updateByPrimaryKeySelective(Shop record);
 
     int updateByPrimaryKey(Shop record);
+    
+    List<Shop> queryAll();
 }

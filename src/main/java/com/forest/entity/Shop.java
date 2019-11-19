@@ -20,8 +20,24 @@ public class Shop {
     private String street;
 
     private String info;
+    private int staffcount;
+    
+    @Override
+	public String toString() {
+		return "Shop [shopId=" + shopId + ", account=" + account + ", shopName=" + shopName + ", phone=" + phone
+				+ ", telephone=" + telephone + ", province=" + province + ", city=" + city + ", region=" + region
+				+ ", street=" + street + ", info=" + info + ", staffcount=" + staffcount + ", linkman=" + linkman + "]";
+	}
 
-    public Short getShopId() {
+	public int getStaffcount() {
+		return staffcount;
+	}
+
+	public void setStaffcount(int staffcount) {
+		this.staffcount = staffcount;
+	}
+
+	public Short getShopId() {
         return shopId;
     }
 
@@ -60,8 +76,16 @@ public class Shop {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+    private String linkman;
+    public String getLinkman() {
+		return linkman;
+	}
 
-    public String getProvince() {
+	public void setLinkman(String linkman) {
+		this.linkman = linkman;
+	}
+
+	public String getProvince() {
         return province;
     }
 

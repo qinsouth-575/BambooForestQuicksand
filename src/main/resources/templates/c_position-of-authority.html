@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -92,7 +92,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="c_shop.html" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/findshop}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
@@ -138,17 +138,17 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="c_shop.html" class="waves-effect">
+                            <a th:href="@{/findshop}" class="waves-effect active">
                             	<i class="fa fa-twitter-square m-r-10" aria-hidden="true"></i>店铺管理
                             </a>
                         </li>
                         <li>
-                            <a href="c_position-of-authority.html" class="waves-effect active">
+                            <a th:href="@{/findposition}" class="waves-effect">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>职位权限
                             </a>
                         </li>
                         <li>
-                            <a href="c_staff.html" class="waves-effect">
+                            <a th:href="@{/findstaff}" class="waves-effect">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>员工管理
                             </a>
                         </li>
