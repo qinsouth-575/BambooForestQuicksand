@@ -633,3 +633,60 @@ INFO 2019-11-19 09:55:02,288 LoginInterceptor.java preHandle  拦截结果：tru
 DEBUG 2019-11-19 09:55:02,295 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
 INFO 2019-11-19 09:55:02,295 LoginInterceptor.java preHandle  当前拦截地址为：/queryPos
 INFO 2019-11-19 09:55:02,295 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:35,980 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:35,982 LoginInterceptor.java preHandle  当前拦截地址为：/find
+INFO 2019-11-19 11:00:35,982 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:36,312 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:36,314 LoginInterceptor.java preHandle  当前拦截地址为：/images/avtar.png
+INFO 2019-11-19 11:00:36,314 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:36,388 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+DEBUG 2019-11-19 11:00:36,388 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:36,388 LoginInterceptor.java preHandle  当前拦截地址为：/images/bg1.jpg
+INFO 2019-11-19 11:00:36,389 LoginInterceptor.java preHandle  当前拦截地址为：/images/close.png
+INFO 2019-11-19 11:00:36,391 LoginInterceptor.java preHandle  拦截结果：true
+INFO 2019-11-19 11:00:36,390 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:36,393 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:36,394 LoginInterceptor.java preHandle  当前拦截地址为：/images/adm.png
+INFO 2019-11-19 11:00:36,395 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:36,406 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:36,408 LoginInterceptor.java preHandle  当前拦截地址为：/images/key.png
+INFO 2019-11-19 11:00:36,408 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:36,409 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:36,410 LoginInterceptor.java preHandle  当前拦截地址为：/images/random4.png
+INFO 2019-11-19 11:00:36,411 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:36,407 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:36,412 LoginInterceptor.java preHandle  当前拦截地址为：/images/pass.png
+INFO 2019-11-19 11:00:36,412 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:49,155 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:49,155 LoginInterceptor.java preHandle  当前拦截地址为：/images/avtar.png
+INFO 2019-11-19 11:00:49,156 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:49,220 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:49,221 LoginInterceptor.java preHandle  当前拦截地址为：/images/bg1.jpg
+DEBUG 2019-11-19 11:00:49,220 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:49,221 LoginInterceptor.java preHandle  拦截结果：true
+INFO 2019-11-19 11:00:49,222 LoginInterceptor.java preHandle  当前拦截地址为：/images/close.png
+INFO 2019-11-19 11:00:49,222 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:49,236 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:49,236 LoginInterceptor.java preHandle  当前拦截地址为：/images/adm.png
+INFO 2019-11-19 11:00:49,236 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:49,237 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:49,237 LoginInterceptor.java preHandle  当前拦截地址为：/images/pass.png
+INFO 2019-11-19 11:00:49,237 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:49,236 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:49,239 LoginInterceptor.java preHandle  当前拦截地址为：/images/key.png
+INFO 2019-11-19 11:00:49,240 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:00:49,266 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:00:49,266 LoginInterceptor.java preHandle  当前拦截地址为：/images/random4.png
+INFO 2019-11-19 11:00:49,267 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:02:38,799 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:02:38,800 LoginInterceptor.java preHandle  当前拦截地址为：/b_cashier.html
+INFO 2019-11-19 11:02:38,801 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:02:38,807 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:02:38,807 LoginInterceptor.java preHandle  当前拦截地址为：/error
+INFO 2019-11-19 11:02:38,807 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:02:41,695 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:02:41,695 LoginInterceptor.java preHandle  当前拦截地址为：/findshop
+INFO 2019-11-19 11:02:41,695 LoginInterceptor.java preHandle  拦截结果：true
+DEBUG 2019-11-19 11:02:41,927 LoginInterceptor.java preHandle  LoginInterceptor - preHandle
+INFO 2019-11-19 11:02:41,927 LoginInterceptor.java preHandle  当前拦截地址为：/queryAll
+INFO 2019-11-19 11:02:41,928 LoginInterceptor.java preHandle  拦截结果：true
