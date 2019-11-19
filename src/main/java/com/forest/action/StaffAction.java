@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +30,14 @@ public class StaffAction {
 		public List<Staff> queryAll(){
 			return sb.queryAll();
 		}
-		@RequestMapping("/querySandP")
+		@GetMapping("/querySandP")
 		@ResponseBody
-		public List<Staff> querySandP(Staff staff){
+		public List<Staff> querySandP(Short shopId,Integer posId,String jobNumber){
+			Staff staff=new Staff();
+			staff.setJobNumber(jobNumber);
+			staff.setPosId(posId);
+			staff.setShopId(shopId);
+			System.out.println(staff);
 			return sb.queryShopAndPos(staff);
 		}
 		@RequestMapping("/queryPos")
@@ -54,7 +62,7 @@ public class StaffAction {
 		@ResponseBody
 		public Map<String,String> delete(Integer id){
 			System.out.println(id);
-			sb.delete(id);
+			System.out.println(sb.delete(id));
 			Map<String,String> map=new HashMap<String, String>();
 			map.put("code", "删除成功");
 			return map;
@@ -77,5 +85,10 @@ public class StaffAction {
 			map.put("code", "修改成功");
 			return map;
 		}
-	
+		@RequestMapping("/session")
+		@ResponseBody
+		public Staff StaffSession(HttpSession session) {
+			Staff staff=(Staff) session.getAttribute("account");
+			return staff;
+		}	
 }
