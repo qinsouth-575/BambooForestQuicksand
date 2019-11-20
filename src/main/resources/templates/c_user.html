@@ -197,20 +197,11 @@
                             <div class="card-block">
                                 <center class="m-t-30"> 
                                 	<img src="assets/images/users/HeadPortrait.jpg" class="img-circle" width="150" />
-                                    <h4 class="card-title m-t-10">丶秦南(Qin South)</h4>
-                                    <h6 class="card-subtitle">System Administrator</h6>
-                                    <div class="row text-center justify-content-md-center">
-                                        <div class="col-4">
-                                        	<a href="javascript:void(0)" class="link">
-                                        		<i class="icon-people"></i> <font class="font-medium">299</font>
-                                        	</a>
-                                        </div>
-                                        <div class="col-4">
-                                        	<a href="javascript:void(0)" class="link">
-                                        		<i class="icon-picture"></i> <font class="font-medium">54</font>
-                                        	</a>
-                                        </div>
-                                    </div>
+                                    <h4 class="card-title m-t-10" v-text="session.staffName"></h4>
+                                        <a href="#"
+										style="background: none repeat scroll 0 0 #FFFFFF; bottom: 0; color: #9e9e9e; display: block; height: 32px; left: 30px; line-height: 32px; position: absolute; text-align: center; width: 220px; opacity: 0.8;">
+										上传头像 </a> <input type="file" name="file"
+										style="display: block; width: 220px; height: 220px; opacity: 0; position: absolute; top: 0; left: 0px; cursor: pointer;"  id="ajaxfile"/>
                                 </center>
                             </div>
                         </div>
@@ -220,11 +211,12 @@
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">
                             <div class="card-block">
+                            <input type="hidden" v-model="session.staffId" id="id">
                                 <form class="form-horizontal form-material">
                                     <div class="form-group">
                                         <label class="col-md-12">账号：</label>
                                         <div class="col-md-12">
-                                            <input type="text" v-model="session.staffName" placeholder="userName" class="form-control form-control-line">
+                                            <input type="text" v-model="session.jobNumber" placeholder="userName" class="form-control form-control-line">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -247,7 +239,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                            <button class="btn btn-success" @click="updateUser">更新账户信息</button>
+                                        	<input type="button" class="btn btn-success" @click="updateUser" value="更新账户信息">
+                                          <!--   <button class="btn btn-success" @click="updateUser">更新账户信息</button> -->
                                         </div>
                                     </div>
                                 </form>
@@ -304,10 +297,6 @@
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->
-    <!-- Flot Charts JavaScript - 比3和4 多以下三个js引入 -->
-    <script src="assets/plugins/flot/jquery.flot.js"></script>
-    <script src="assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="js/flot-data.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
@@ -315,6 +304,29 @@
 </body>
 <script th:src="@{/js/vue.js}"></script>
 	<script>
+		$(function(){
+			$("#ajaxfile").change(function(){
+				var formData = new FormData($("[name=form]")[0]);
+				var id = $("#id").val();
+				formData.append("id",id);
+				$.ajax({
+					url:"[[@{/user/upload}]]",
+					type:"post",
+					data:formData,
+					mimeType:"multipart/form-data",
+					processData:false,
+					contentType:false,
+					success:function(res){
+						if (res != "0") {
+							$(".tpxgh").attr("src","/"+res);
+						} else if (res == "1") {
+							alert("修改失败，请重试！");
+						}
+					}
+				});
+			});
+		});
+		
 		var vv=new Vue({
 			el:"#user",
 			data(){
@@ -329,12 +341,26 @@
 						type:"get",
 						success:function(res){
 							this_.session=res;
-							alert(JSON.stringify(this_.session));
+							//alert(JSON.stringify(this_.session));
 						}
 					});
 				},
 				updateUser:function(){
-					
+					//alert(1);
+					var this_=this;
+					var obj=this_.session;
+					alert(JSON.stringify(obj));
+					$.ajax({
+						url:"[[@{/updateUser}]]",
+						type:"post",
+						data:JSON.stringify(obj),
+						contentType:"application/json;charset=utf-8",
+						dataType:"json",
+						success:function(res){
+							alert(res.code);
+							this_.querySession();
+						}
+					});
 				}
 			},
 			created:function(){

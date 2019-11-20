@@ -48,5 +48,8 @@ public class StaffBiz {
 		public List<Staff> queryShopAndPos(Staff staff){
 			return dao.queryShopIdAndPosId(staff);
 		}
+		public int updateStaff(Staff staff) {
+			return dao.updateStaff(staff);
+		}
 		
 }
