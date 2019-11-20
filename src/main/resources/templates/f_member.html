@@ -189,16 +189,13 @@
                         <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">会员信息</h3>
                     </div>
                     <div class="col-md-7 col-4 align-self-center" style="padding-left: 60px;">
-                        <select class="form-control form-control-line f_input" style="width: 120px;">
+                        <select class="form-control form-control-line f_input" style="width: 120px;" id="xlk">
                             <option>全部等级</option>
-                            <option>India</option>
-                            <option>Usa</option>
-                            <option>Canada</option>
-                            <option>Thailand</option>
+                            <option v-for="itr,index in LevelList" :value="itr.mlId">{{itr.mlName}}</option>
                         </select>
                         
                         <div class="f_input" style="position: relative;">
-                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
+                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;" id="mz">
 							<a href="javascript:;" class="list_search"></a>
                         </div>
                         
@@ -240,7 +237,7 @@
                                         </thead>
                                         <tbody>
                                             <tr v-for="item in PageList.list">
-                                                <td>{{item.memberId}}</td>
+                                                <td id="bh">{{item.memberId}}</td>
                                                 <td>{{item.memberName}}</td>
                                                 <td>{{item.phoen}}</td>
                                                 <td>{{item.ml_name}}</td>
@@ -249,9 +246,8 @@
                                                 <td>{{item.balance}}</td>
                                                 <td>{{item.integral}}</td>
                                                 <td>-</td>
-                                                <td><a>编辑</a></td>
+                                                <td><a data-toggle="modal" data-target=".bs-ee" @click="xgcx(item.memberId)">编辑</a></td>
                                             </tr>
-                                            
                                         </tbody>
                                         <tfoot>
                                         	<tr>
@@ -310,28 +306,25 @@
 						<div class="form-group col-md-5" style="position: relative;">
 							<span class="span_bitian">*</span>
 							<label for="exampleInputName2">手机：</label>&nbsp;
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="请输入需绑定的手机号">
+							<input type="text" class="form-control" id="phoen" placeholder="请输入需绑定的手机号">
 						</div>
 						<div class="form-group col-md-6" style="position: relative;">
 							<span class="span_bitian">*</span>
 							<label for="exampleInputEmail2">名称：</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="请输入会员名称">
+							<input type="email" class="form-control" id="memberName" placeholder="请输入会员名称">
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputName2">等级：</label>&nbsp;
-							<select class="form-control form-control-line" style="width: 202px;">
+							<select class="form-control form-control-line" style="width: 202px;" id="mlId">
                                 <option>请选择等级</option>
-                                <option>India</option>
-                                <option>Usa</option>
-                                <option>Canada</option>
-                                <option>Thailand</option>
+                                <option v-for="itr in LevelList" :value="itr.mlId">{{itr.mlName}}</option>
                             </select>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">密码：</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="请输入密码">
+							<input type="email" class="form-control" id="password" placeholder="请输入密码">
 						</div>
 						
 						<div class="form-group col-md-1"></div>
@@ -345,7 +338,67 @@
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
 							<label for="exampleInputEmail2">街道：</label>&nbsp;
-							<input type="email" class="form-control col-md-6" placeholder="请输入街道/详细地址">
+							<input type="email" class="form-control col-md-6" placeholder="请输入街道/详细地址" id="street">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" @click="xz">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	
+	
+	<div class="modal fade bs-ee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">编辑会员</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline">
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5" style="position: relative;">
+							<span class="span_bitian">*</span>
+							<label for="exampleInputName2">手机：</label>&nbsp;
+							<input type="text" class="form-control" id="phoen" placeholder="请输入需绑定的手机号">
+						</div>
+						<div class="form-group col-md-6" style="position: relative;">
+							<span class="span_bitian">*</span>
+							<label for="exampleInputEmail2">名称：</label>&nbsp;
+							<input type="email" class="form-control" id="memberName" placeholder="请输入会员名称">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">等级：</label>&nbsp;
+							<select class="form-control form-control-line" style="width: 202px;" id="mlId">
+                                <option>请选择等级</option>
+                                <option v-for="itr in LevelList" :value="itr.mlId">{{itr.mlName}}</option>
+                            </select>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail2">密码：</label>&nbsp;
+							<input type="email" class="form-control" id="password" placeholder="请输入密码" v-model="memberList.password">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-11" data-toggle="distpicker">
+							<label for="exampleInputName2">地址：</label>&nbsp;
+							<select class="form-control form-control-line" id="province1" v-model="memberList.province"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line" id="city1" v-model="memberList.city"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line" id="district1" v-model="memberList.region"></select>
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-11">
+							<label for="exampleInputEmail2">街道：</label>&nbsp;
+							<input type="email" class="form-control col-md-6" placeholder="请输入街道/详细地址" id="street" v-model="memberList.street">
 						</div>
 					</form>
 				</div>
@@ -357,7 +410,6 @@
 		</div>
 	</div>
 	</div>
-
     <!-- End Modal -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
@@ -384,7 +436,9 @@
 					return {
 						PageList:{
 							list:[]
-						}
+						},
+						LevelList:{},
+						memberList:{}
 					}
 				},
 				methods:{
@@ -404,32 +458,116 @@
 						location.href="http://localhost:8080/MemberManage/toCredits";
 					},
 					prePage:function(){
-	 					this.goPage(this.PageList.prePage);
+						if(this.PageList.prePage>=1){
+	 							this.goPage(this.PageList.prePage);
+						}
 	 				},
 	 				nextPage:function(){
-	 					if(this)
-	 					this.goPage(this.PageList.nextPage);
+	 					if(this.PageList.nextPage<=this.PageList.pages&&this.PageList.nextPage!=0){
+	 							this.goPage(this.PageList.nextPage);
+	 					}
 	 				},
 	 				sPage:function(){
 	 					this.goPage(1);
 	 				},
 	 				wPage:function(){
-	 					this.goPage(this.PageList.pageCount);
+	 					this.goPage(this.PageList.pages);
 	 				},
 					goPage:function(pageNum){
 						var _this=this;
 						$.ajax({
 							url:"[[@{/MemberManage/queryAllByPage}]]",
 							type:"get",
-							data:{pageNum:pageNum},
+							data:{
+								pageNum:pageNum
+							},
 							dataType:"json",
 							"success":function(res){
 								_this.PageList=res;
 							}
 						});
+					},
+					queryAllLe:function(){
+						var _t=this;
+						$.ajax({
+							url:"[[@{/MemberLevel/queryAll}]]",
+							type:"get",
+							data:{},
+							dataType:"json",
+							"success":function(res){
+								_t.LevelList=res;
+							}
+						});
+					},
+					xz:function(){
+						var _h=this;
+						var $phoen=$("#phoen").val();
+						var $memberName=$("#memberName").val();
+						var $mlId=$("#mlId").val();
+						var $password=$("#password").val();
+						var $province1=$("#province1").val();
+						var $city1=$("#city1").val();
+						var $district1=$("#district1").val();
+						var $street=$("#street").val();
+						alert($city1);
+						alert($district1);
+						if($phoen!=""&&$memberName!=""&&$mlId!="请选择等级"&&$password!=""&&$province1!=""&&$city1!=""&&$district1!=""&&$street!=""){
+							var createtime =new Date();
+							var year=createtime.getFullYear();
+							var month=createtime.getMonth()+1;
+							var date=createtime.getDate();
+							var hours=createtime.getHours();
+							var minutes=createtime.getMinutes();
+							var seconds=createtime.getSeconds();
+							var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
+							alert(create);
+							obj={
+									phoen:$phoen,
+									memberName:$memberName,
+									mlId:$mlId,
+									password:$password,
+									province:$province1,
+									city:$city1,
+									region:$district1,
+									street:$street,
+									balance:0,
+									integral:0,
+									wechatNum:"",
+									createTime:create
+							}
+							$.ajax({
+								url:"[[@{/MemberManage/insertMember}]]",
+								type:"post",
+								data:JSON.stringify(obj),
+								dataType:"json",
+								contentType:"application/json",
+								"success":function(res){
+									alert(res.msg);
+									location.href="http://localhost:8080/MemberManage/toMember";
+								}
+							});
+						}else{
+							alert("请完善信息");
+						}
+						
+					},
+					xgcx:function(id){
+						var _this=this;
+						$.ajax({
+							url:"[[@{/MemberManage/selectById}]]",
+							type:"get",
+							data:{
+								MemberId:id
+							},
+							dataType:"json",
+							"success":function(res){
+								_this.memberList=res;
+							}
+						});
 					}
 				},created:function(){
 	 				this.goPage(1);
+	 				this.queryAllLe();
 	 			}
 			});
 	</script>

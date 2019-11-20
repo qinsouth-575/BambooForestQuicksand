@@ -336,8 +336,24 @@
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
   <select id="queryAllByPage" resultMap="BaseResultMap">
-  		SELECT m.`member_id`,m.member_name,m.`phoen`,l.`ml_name`,COUNT(t.client) AS cs,SUM(t.actual_income) AS je,m.balance,m.integral FROM `member` AS m,`member_level` AS l,`transaction_record_main` AS t
-		WHERE m.`member_id`=t.`client` AND m.`ml_id`=l.`ml_id`
+  		SELECT m.`member_id`,m.member_name,m.`phoen`,l.`ml_name`,COUNT(t.client) AS cs,SUM(t.actual_income) AS je,m.balance,m.integral FROM `member` AS m
+		LEFT JOIN `member_level` AS l ON m.`ml_id`=l.`ml_id`
+		LEFT JOIN `transaction_record_main` AS t ON m.`member_id`=t.`client`
 		GROUP BY m.`member_id`
+  </select>
+  <insert id="insertMember" parameterType="com.forest.entity.Member" >
+    insert into member (phoen, member_name, 
+      ml_id, password, province, 
+      city, region, street, 
+      balance, integral, wechat_num, 
+      create_time)
+    values (#{phoen,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, 
+      #{mlId,jdbcType=SMALLINT}, #{password,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=DECIMAL}, #{integral,jdbcType=INTEGER}, #{wechatNum,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="queryById" resultMap="BaseResultMap" parameterType="int">
+  		select * from member where member_id=#{0}
   </select>
 </mapper>

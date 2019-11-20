@@ -29,4 +29,8 @@ public interface MemberMapper {
     int updateByPrimaryKey(Member record);
     
     List <Member> queryAllByPage();
+    
+    int insertMember(Member m);
+    
+    Member queryById(int MemberId);
 }
