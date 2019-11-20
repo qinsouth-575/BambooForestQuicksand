@@ -225,4 +225,7 @@
       upgrade_rule = #{upgradeRule,jdbcType=DECIMAL}
     where ml_id = #{mlId,jdbcType=SMALLINT}
   </update>
+  <select id="queryAll" resultMap="BaseResultMap">
+  		select * from member_level
+  </select>
 </mapper>

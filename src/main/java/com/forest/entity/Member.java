@@ -28,7 +28,7 @@ public class Member {
 
     private String wechatNum;
 
-    private Date createTime;
+    private String createTime;
     
     private Integer cs;//会员成交次数
     
@@ -156,11 +156,11 @@ public class Member {
         this.wechatNum = wechatNum;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 }

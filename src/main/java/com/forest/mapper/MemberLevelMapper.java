@@ -27,4 +27,6 @@ public interface MemberLevelMapper {
     int updateByPrimaryKeySelective(MemberLevel record);
 
     int updateByPrimaryKey(MemberLevel record);
+    
+    List<MemberLevel> queryAll();
 }

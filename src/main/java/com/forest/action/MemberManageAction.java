@@ -1,9 +1,15 @@
 package com.forest.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.RequestScope;
 
 import com.forest.biz.MemberBiz;
 import com.forest.entity.Member;
@@ -68,5 +74,34 @@ public class MemberManageAction {
 				public PageInfo<Member> queryAllByPage(Integer pageNum){
 					System.out.println("当前页数----"+pageNum);
 					return memberBiz.queryAllByPage(pageNum);
+				}
+				/**
+				 * 执行会员新增
+				 * @param m
+				 * @return
+				 */
+				@RequestMapping(value="/insertMember",method =RequestMethod.POST)
+				@ResponseBody
+				public Map<String, String> insertMember(@RequestBody Member m){
+					System.out.println("进入新增方法");
+					Map<String, String> map=new HashMap<String,String>();
+					boolean b=memberBiz.insertMember(m);
+					if(b) {
+						map.put("msg", "新增成功！");
+					}else {
+						map.put("msg", "新增失败！");
+					}
+					return map;
+				}
+				
+				/**
+				 * 根据会员编码查询会员信息
+				 * @param MemberId
+				 * @return
+				 */
+				@RequestMapping("/queryById")
+				@ResponseBody
+				public Member queryById(int MemberId) {
+					return memberBiz.queryById(MemberId);
 				}
 }

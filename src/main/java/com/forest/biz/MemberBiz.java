@@ -29,4 +29,21 @@ public class MemberBiz {
 						return page;
 				}
 				
+				/**
+				 * 执行会员新增
+				 * @param m
+				 * @return
+				 */
+				public boolean insertMember(Member m) {
+						return memberMapper.insertMember(m)>0;
+				}
+				
+				/**
+				 * 根据会员编号查询会员信息
+				 * @param MemberId
+				 * @return
+				 */
+				public Member queryById(int MemberId) {
+					return memberMapper.queryById(MemberId);
+				}
 }
