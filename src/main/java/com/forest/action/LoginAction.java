@@ -37,8 +37,7 @@ public class LoginAction {
 		}
 		@RequestMapping("/login")
 		public String queryNameAndPwd(Staff staff,HttpSession session) {
-			System.out.println(staff.getStaffName());
-			System.out.println(staff.getPassword());
+			System.out.println(staff);
 			if(lb.queryNameAndPwd(staff)!=null) {
 				System.out.println(1111);
 				session.setAttribute("account", lb.queryNameAndPwd(staff));

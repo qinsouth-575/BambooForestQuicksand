@@ -131,6 +131,9 @@ public class Staff {
 	public String toString() {
 		return "Staff [staffId=" + staffId + ", shopId=" + shopId + ", posId=" + posId + ", jobNumber=" + jobNumber
 				+ ", staffName=" + staffName + ", password=" + password + ", shopName=" + shopName + ", posName="
-				+ posName + ", staffState=" + staffState + ", createTime=" + createTime + "]";
+				+ posName + ", trade=" + trade + ", headPortraitPath=" + headPortraitPath + ", phone=" + phone
+				+ ", staffState=" + staffState + ", createTime=" + createTime + "]";
 	}
+
+	
 }

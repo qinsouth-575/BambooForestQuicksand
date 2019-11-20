@@ -257,7 +257,7 @@
     where staff_id = #{staffId,jdbcType=INTEGER}
   </update>
   <select id="queryNameAndPwd" resultMap="BaseResultMap">
-  	SELECT * FROM `staff` WHERE `staff_name`=#{staffName} AND `password`=#{password}
+  	SELECT * FROM `staff` WHERE `job_number`=#{jobNumber} AND `password`=#{password}
   </select>
   <select id="queryAll" resultMap="BaseResultMap">
   	SELECT *,s.`shop_name` AS shopName,p.`pos_name` AS posName FROM staff sf,shop s,`position` p WHERE sf.`shop_id`=s.`shop_id` AND p.`pos_id`=sf.`pos_id`
@@ -275,4 +275,7 @@
         and sf.job_number LIKE '%${jobNumber}%'
       </if>
   </select>
+  <update id="updateStaff"  parameterType="com.forest.entity.Staff">
+  	    UPDATE staff SET job_number=#{jobNumber},`password`=#{password},trade=#{trade},phone=#{phone} WHERE staff_id=#{staffId}
+  </update>
 </mapper>

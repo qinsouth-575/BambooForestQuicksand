@@ -90,5 +90,15 @@ public class StaffAction {
 		public Staff StaffSession(HttpSession session) {
 			Staff staff=(Staff) session.getAttribute("account");
 			return staff;
-		}	
+		}
+		@RequestMapping("/updateUser")
+		@ResponseBody
+		public Map<String,String> updateUser(@RequestBody Staff staff){
+			System.out.println(staff);
+			System.out.println(sb.updateStaff(staff));
+			Map<String,String> map=new HashMap<String, String>();
+			map.put("code", "修改成功");
+			return map;
+		}
+		
 }

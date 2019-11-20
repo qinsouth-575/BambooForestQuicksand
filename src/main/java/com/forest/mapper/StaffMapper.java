@@ -33,5 +33,7 @@ public interface StaffMapper {
     Staff queryNameAndPwd(Staff account);
     //根据店铺编号、职位编号、工号查询
     List<Staff> queryShopIdAndPosId(Staff staff);
+    //修改账户信息
+    int updateStaff(Staff staff);
 
 }
