@@ -279,6 +279,8 @@
   	    UPDATE staff SET job_number=#{jobNumber},`password`=#{password},trade=#{trade},phone=#{phone} WHERE staff_id=#{staffId}
   </update>
   <update id="updateUserByuserpic" parameterType="com.forest.entity.Staff">
-  		 update staff set head_portrait_path=#{headPortraitPath} where staff_id=#{staffId}
+  		UPDATE staff 
+  		SET head_portrait_path=#{headPortraitPath} 
+  		WHERE staff_id=#{staffId}
   </update>
 </mapper>
