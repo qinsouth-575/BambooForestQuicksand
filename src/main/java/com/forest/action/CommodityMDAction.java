@@ -35,10 +35,17 @@ public class CommodityMDAction {
 	@RequestMapping(value = "cm", method = RequestMethod.GET)
 	@ResponseBody
 	public PageInfo<CommodityMD> queryPage(Integer pageNum){
-		log.debug("BambooForestQuicksand - CommodityMDAction - queryAll");
+		log.debug("BambooForestQuicksand - CommodityMDAction - queryPage");
 		PageInfo<CommodityMD> page = cmdb.queryMDAllByManager(pageNum, 5);
 		log.info("分页类信息：" + page);
 		return page;
+	}
+	
+	@RequestMapping(value = "toUploading", method = RequestMethod.GET)
+	public String toCommodityUploading() {
+		log.debug("BambooForestQuicksand - CommodityMDAction - toCommodityUploading");
+		
+		return "d_commodity_uploading";
 	}
 	
 	

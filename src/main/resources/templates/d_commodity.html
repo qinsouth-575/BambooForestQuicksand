@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/favicon.png}">
     <title>商品类别-商品-竹林流沙商品管理系统</title>
     <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
@@ -15,7 +14,6 @@
     <link th:href="@{/css/colors/blue.css}" id="theme" rel="stylesheet">
     <link th:href="@{/css/style_programmer.css}" id="theme" rel="stylesheet">
 </head>
-
 <body class="fix-header fix-sidebar card-no-border">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -74,12 +72,12 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a href="a_index.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="b_cashier.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
                             </a>
                         </li>
@@ -89,17 +87,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="@{/commoditytypes/toPage}" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/commoditytypes/toPage}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="e_inventory.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="f_member.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
                             </a>
                         </li>
@@ -130,27 +128,27 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="@{/commoditytypes/toPage}" class="waves-effect active">
+                            <a th:href="@{/commoditytypes/toPage}" class="waves-effect active">
                             	<i class="fa fa-eercast m-r-10" aria-hidden="true"></i>商品类别
                             </a>
                         </li>
                         <li>
-                            <a href="@{/commodityManager/toPage}" class="waves-effect">
+                            <a th:href="@{/commodityManager/toPage}" class="waves-effect">
                             	<i class="fa fa-cogs m-r-10" aria-hidden="true"></i>商品管理
                             </a>
                         </li>
                         <li>
-                            <a href="d_commodity_uploading.html" class="waves-effect">
+                            <a th:href="@{/}" class="waves-effect">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
                         <li>
-                            <a href="d_commodity_supplier.html" class="waves-effect">
+                            <a th:href="@{/}" class="waves-effect">
                             	<i class="fa fa-smile-o m-r-10" aria-hidden="true"></i>供应商
                             </a>
                         </li>
                         <li>
-                            <a href="d_commodity_po.html" class="waves-effect">
+                            <a th:href="@{/}" class="waves-effect">
                             	<i class="fa fa-exchange m-r-10" aria-hidden="true"></i>采购单
                             </a>
                         </li>
