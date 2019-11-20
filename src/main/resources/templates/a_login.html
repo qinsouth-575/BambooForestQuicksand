@@ -71,7 +71,8 @@
 		<script type="text/javascript">
 			$(function(){
 				$("input[type='submit']").on("click", function(){
-					alert($(".userName").val() + " - " + $(".userPwd").val() + " - " + $(".randomCode").val());
+					//alert($(".userName").val() + " - " + $(".userPwd").val() + " - " + $(".randomCode").val());
+					
 					if($(".userName").val()==null||$(".userName").val()==""){
 						alert("账户名不能为空");
 						return false;

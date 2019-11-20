@@ -37,7 +37,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		log.info("当前拦截地址为：" + request.getRequestURI());
 		
 		boolean flag = HandlerInterceptor.super.preHandle(request, response, handler);
-		log.info("拦截结果：" + flag);
+		//log.info("拦截结果：" + flag);
 		return flag;
 	}
 	
@@ -45,6 +45,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
+		log.debug("LoginInterceptor - postHandle");
+		
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}
 	
@@ -52,6 +54,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
+		log.debug("LoginInterceptor - afterCompletion");
+		
 		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
 	}
 	

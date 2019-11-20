@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.forest.biz.LoginBiz;
 import com.forest.biz.StaffBiz;
 import com.forest.entity.Position;
 import com.forest.entity.Shop;
@@ -27,6 +28,8 @@ import com.forest.entity.Staff;
 public class StaffAction {
 	@Autowired
 		private StaffBiz sb;
+	@Autowired
+	private LoginBiz lb;
 		
 		@RequestMapping("/query")
 		@ResponseBody
@@ -117,6 +120,9 @@ public class StaffAction {
 		@ResponseBody
 		public Staff StaffSession(HttpSession session) {
 			Staff staff=(Staff) session.getAttribute("account");
+			System.out.println("session中获取：" + staff);
+			staff = lb.queryNameAndPwd(staff);
+			System.out.println("根据ID查询：" + staff);
 			return staff;
 		}
 		/**
@@ -131,40 +137,42 @@ public class StaffAction {
 			map.put("code", "修改成功");
 			return map;
 		}
+		
 		/**
-		 * 
-		 *修改图片路径
+		 * - 修改图片路径
 		 * @return
 		 */
 		@RequestMapping("/upload")
 		@ResponseBody
-		public String upload(HttpSession session,MultipartFile file,int id){
-			System.out.println(file+"\t"+id);
+		public String upload(HttpSession session, MultipartFile file, int id){
+			System.out.println(file + "\t" + id);
 			File directory = new File("/D:/Git/images");
 			if(!directory.exists()) {
 				directory.mkdirs();
 			}
 			
-			String url = "/D:/Git/images/";
-			url = url+"/"+file.getOriginalFilename();
-			System.out.println("图片名为：" + file.getOriginalFilename());
-			File f = new File(url);
 			try {
+				String url = "/D:/Git/images/";
+				url = url+"/"+file.getOriginalFilename();
+				File f = new File(url);
 				file.transferTo(f);
+				
+				System.out.println("图片名为：" + file.getOriginalFilename());
 			} catch (IllegalStateException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
-			Staff uu=new Staff(id,file.getOriginalFilename());
+			Staff uu = new Staff(id, file.getOriginalFilename());
 			System.out.println("修改前：" + uu);
-			if(sb.updateUserByuserpic(uu)>0) { 
-				 Staff user=sb.queryId(uu.getStaffId());
-				 session.setAttribute("user",user); 
+			if(sb.updateUserByuserpic(uu) > 0) {
+				 Staff user = sb.queryId(uu.getStaffId());
+				 session.setAttribute("user", user);
+				 
 				 System.out.println("修改后：" + user);
-				 return "/static/" + file.getOriginalFilename();
+				 return "/" + file.getOriginalFilename();
 			}else {
-				 return "0"; 
+				 return "break";
 			}
 		}
 		

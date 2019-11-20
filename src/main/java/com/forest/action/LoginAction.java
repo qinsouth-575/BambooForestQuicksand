@@ -39,8 +39,9 @@ public class LoginAction {
 		public String queryNameAndPwd(Staff staff,HttpSession session) {
 			System.out.println(staff);
 			if(lb.queryNameAndPwd(staff)!=null) {
-				System.out.println(1111);
-				session.setAttribute("account", lb.queryNameAndPwd(staff));
+				Staff stafff = lb.queryNameAndPwd(staff);
+				session.setAttribute("account", stafff);
+				System.out.println("保存进session：" + stafff);
 				return "c_user";
 			}
 			return "a_login";
