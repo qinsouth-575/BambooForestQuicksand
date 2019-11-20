@@ -19,7 +19,19 @@ public class Staff {
     private String trade;
     private String headPortraitPath;
     private String phone;
-    public String getTrade() {
+
+    
+	public Staff() {
+		super();
+	}
+
+	public Staff(Integer staffId, String headPortraitPath) {
+		super();
+		this.staffId = staffId;
+		this.headPortraitPath = headPortraitPath;
+	}
+
+	public String getTrade() {
 		return trade;
 	}
 
@@ -131,6 +143,9 @@ public class Staff {
 	public String toString() {
 		return "Staff [staffId=" + staffId + ", shopId=" + shopId + ", posId=" + posId + ", jobNumber=" + jobNumber
 				+ ", staffName=" + staffName + ", password=" + password + ", shopName=" + shopName + ", posName="
-				+ posName + ", staffState=" + staffState + ", createTime=" + createTime + "]";
+				+ posName + ", trade=" + trade + ", headPortraitPath=" + headPortraitPath + ", phone=" + phone
+				+ ", staffState=" + staffState + ", createTime=" + createTime + "]";
 	}
+
+	
 }

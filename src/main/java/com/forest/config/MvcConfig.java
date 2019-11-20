@@ -29,8 +29,8 @@ public class MvcConfig implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/**")
-		.addResourceLocations("classpath:/static/");
-		//.addResourceLocations("file:");
+		.addResourceLocations("classpath:/static/")
+		.addResourceLocations("file:/D:/Git/images/");
 		
 		//super.addResourceHandlers(registry);	改为实现WebMvcConfigurer接口后必须 注释/删除 这一句
 	}
@@ -89,6 +89,7 @@ public class MvcConfig implements WebMvcConfigurer {
     	pathPattern.add("/css/**");
     	pathPattern.add("/js/**");
     	pathPattern.add("/scss/**");
+    	pathPattern.add("/images/**");
     	
 		registry.addInterceptor(loginI).addPathPatterns("/**").excludePathPatterns(pathPattern);
     	WebMvcConfigurer.super.addInterceptors(registry);

@@ -175,52 +175,62 @@ public class CommodityMainExample {
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoEqualTo(Integer value) {
+        public Criteria andArticleNoEqualTo(String value) {
             addCriterion("article_no =", value, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoNotEqualTo(Integer value) {
+        public Criteria andArticleNoNotEqualTo(String value) {
             addCriterion("article_no <>", value, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoGreaterThan(Integer value) {
+        public Criteria andArticleNoGreaterThan(String value) {
             addCriterion("article_no >", value, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoGreaterThanOrEqualTo(Integer value) {
+        public Criteria andArticleNoGreaterThanOrEqualTo(String value) {
             addCriterion("article_no >=", value, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoLessThan(Integer value) {
+        public Criteria andArticleNoLessThan(String value) {
             addCriterion("article_no <", value, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoLessThanOrEqualTo(Integer value) {
+        public Criteria andArticleNoLessThanOrEqualTo(String value) {
             addCriterion("article_no <=", value, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoIn(List<Integer> values) {
+        public Criteria andArticleNoLike(String value) {
+            addCriterion("article_no like", value, "articleNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleNoNotLike(String value) {
+            addCriterion("article_no not like", value, "articleNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andArticleNoIn(List<String> values) {
             addCriterion("article_no in", values, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoNotIn(List<Integer> values) {
+        public Criteria andArticleNoNotIn(List<String> values) {
             addCriterion("article_no not in", values, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoBetween(Integer value1, Integer value2) {
+        public Criteria andArticleNoBetween(String value1, String value2) {
             addCriterion("article_no between", value1, value2, "articleNo");
             return (Criteria) this;
         }
 
-        public Criteria andArticleNoNotBetween(Integer value1, Integer value2) {
+        public Criteria andArticleNoNotBetween(String value1, String value2) {
             addCriterion("article_no not between", value1, value2, "articleNo");
             return (Criteria) this;
         }
@@ -542,6 +552,76 @@ public class CommodityMainExample {
 
         public Criteria andCtIdNotBetween(Integer value1, Integer value2) {
             addCriterion("ct_id not between", value1, value2, "ctId");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathIsNull() {
+            addCriterion("img_path is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathIsNotNull() {
+            addCriterion("img_path is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathEqualTo(String value) {
+            addCriterion("img_path =", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathNotEqualTo(String value) {
+            addCriterion("img_path <>", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathGreaterThan(String value) {
+            addCriterion("img_path >", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathGreaterThanOrEqualTo(String value) {
+            addCriterion("img_path >=", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathLessThan(String value) {
+            addCriterion("img_path <", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathLessThanOrEqualTo(String value) {
+            addCriterion("img_path <=", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathLike(String value) {
+            addCriterion("img_path like", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathNotLike(String value) {
+            addCriterion("img_path not like", value, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathIn(List<String> values) {
+            addCriterion("img_path in", values, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathNotIn(List<String> values) {
+            addCriterion("img_path not in", values, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathBetween(String value1, String value2) {
+            addCriterion("img_path between", value1, value2, "imgPath");
+            return (Criteria) this;
+        }
+
+        public Criteria andImgPathNotBetween(String value1, String value2) {
+            addCriterion("img_path not between", value1, value2, "imgPath");
             return (Criteria) this;
         }
 

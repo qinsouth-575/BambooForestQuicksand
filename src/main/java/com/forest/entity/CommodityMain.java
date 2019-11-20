@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class CommodityMain {
     private Integer cmId;
 
-    private Integer articleNo;
+    private String articleNo;
 
     private String brand;
 
@@ -17,6 +17,8 @@ public class CommodityMain {
 
     private Integer ctId;
 
+    private String imgPath;
+
     private String information;
 
     public Integer getCmId() {
@@ -27,11 +29,11 @@ public class CommodityMain {
         this.cmId = cmId;
     }
 
-    public Integer getArticleNo() {
+    public String getArticleNo() {
         return articleNo;
     }
 
-    public void setArticleNo(Integer articleNo) {
+    public void setArticleNo(String articleNo) {
         this.articleNo = articleNo;
     }
 
@@ -73,6 +75,14 @@ public class CommodityMain {
 
     public void setCtId(Integer ctId) {
         this.ctId = ctId;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     public String getInformation() {

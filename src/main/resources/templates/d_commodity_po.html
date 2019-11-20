@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,24 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/favicon.png}">
     <title>采购单-商品-竹林流沙商品管理系统</title>
-    <!-- Bootstrap Core CSS -->
-    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <!-- You can change the theme colors from here -->
-    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <link href="css/style_programmer.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-	<![endif]-->
+    <link th:href="@{/assets/plugins/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/colors/blue.css}" id="theme" rel="stylesheet">
+    <link th:href="@{/css/style_programmer.css}" id="theme" rel="stylesheet">
 </head>
-
 <body class="fix-header fix-sidebar card-no-border">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -52,13 +41,13 @@
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span>
                             <!-- dark Logo text -->
-                            <img src="assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <img src="/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
                         </span>
                     </a>
                 </div>
@@ -83,32 +72,32 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a href="a_index.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="b_cashier.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="c_shop.html" class="waves-effect _account">
+                        	<a th:href="@{/findshop}" class="waves-effect _account">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="d_commodity.html" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/commoditytypes/toPage}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="e_inventory.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="f_member.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
                             </a>
                         </li>
@@ -119,7 +108,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="c_user.html" aria-haspopup="true" aria-expanded="false">
-                            	<img src="assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img src="/assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
                     </ul>
@@ -139,27 +128,27 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="d_commodity.html" class="waves-effect">
+                            <a th:href="@{/commoditytypes/toPage}" class="waves-effect">
                             	<i class="fa fa-eercast m-r-10" aria-hidden="true"></i>商品类别
                             </a>
                         </li>
                         <li>
-                            <a href="d_commodity_manager.html" class="waves-effect">
+                            <a th:href="@{/commodityManager/toPage}" class="waves-effect">
                             	<i class="fa fa-cogs m-r-10" aria-hidden="true"></i>商品管理
                             </a>
                         </li>
                         <li>
-                            <a href="d_commodity_uploading.html" class="waves-effect">
+                            <a th:href="@{/}" class="waves-effect">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
                         <li>
-                            <a href="d_commodity_supplier.html" class="waves-effect">
+                            <a th:href="@{/}" class="waves-effect">
                             	<i class="fa fa-smile-o m-r-10" aria-hidden="true"></i>供应商
                             </a>
                         </li>
                         <li>
-                            <a href="d_commodity_po.html" class="waves-effect active">
+                            <a th:href="@{/}" class="waves-effect active">
                             	<i class="fa fa-exchange m-r-10" aria-hidden="true"></i>采购单
                             </a>
                         </li>
@@ -468,48 +457,26 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/plugins/bootstrap/js/tether.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="js/jquery.slimscroll.js"></script>
-    <!--Wave Effects -->
-    <script src="js/waves.js"></script>
-    <!--Menu sidebar -->
-    <script src="js/sidebarmenu.js"></script>
-    <!--stickey kit -->
-    <script src="assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <!--Custom JavaScript -->
-    <script src="js/custom.min.js"></script>
-    <!-- ============================================================== -->
-    <!-- This page plugins -->
-    <!-- ============================================================== -->
-    <!-- Flot Charts JavaScript - 比3和4 多以下三个js引入 -->
-    <script src="assets/plugins/flot/jquery.flot.js"></script>
-    <script src="assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-    <script src="js/flot-data.js"></script>
-    <!-- ============================================================== -->
-    <!-- Style switcher -->
-    <!-- ============================================================== -->
-    <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
+    <script th:src="@{/assets/plugins/bootstrap/js/tether.min.js}"></script>
+    <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.slimscroll.js}"></script>
+    <script th:src="@{/js/waves.js}"></script>
+    <script th:src="@{/js/sidebarmenu.js}"></script>
+    <script th:src="@{/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js}"></script>
+    <script th:src="@{/js/custom.min.js}"></script>
+    <script th:src="@{/assets/plugins/flot/jquery.flot.js}"></script>
+    <script th:src="@{/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js}"></script>
+    <script th:src="@{/js/flot-data.js}"></script>
+    <script th:src="@{/assets/plugins/styleswitcher/jQuery.style.switcher.js}"></script>
     
+    <script th:src="@{/js/vue.js}"></script>
     <script type="text/javascript">
-    	$(function(){
-    		//1.时间选择框
-    		/*$(".selectDate>input:first").on("click", function(){
-    			alert("1111");
-    		});
-    		$(".selectDate>input:last").on("click", function(){
-    			alert("2222");
-    		});*/
-    		
-    	});
     	
-    	function acquireDatetime(){
-    		
-    	}
-    </script>
+    	
+    	
+    	
+	</script>
 </body>
 
 </html>
