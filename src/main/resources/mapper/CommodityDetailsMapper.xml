@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.forest.entity.CommodityDetails" >
     <id column="cd_id" property="cdId" jdbcType="INTEGER" />
     <result column="cm_id" property="cmId" jdbcType="INTEGER" />
-    <result column="size" property="size" jdbcType="INTEGER" />
-    <result column="color" property="color" jdbcType="INTEGER" />
+    <result column="size_id" property="sizeId" jdbcType="INTEGER" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
   </resultMap>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cd_id, cm_id, size, color, quantity, bar_code
+    cd_id, cm_id, size_id, color, quantity, bar_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.CommodityDetailsExample" >
     select
@@ -101,11 +101,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.forest.entity.CommodityDetails" >
-    insert into commodity_details (cd_id, cm_id, size, 
+    insert into commodity_details (cd_id, cm_id, size_id, 
       color, quantity, bar_code
       )
-    values (#{cdId,jdbcType=INTEGER}, #{cmId,jdbcType=INTEGER}, #{size,jdbcType=INTEGER}, 
-      #{color,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{barCode,jdbcType=VARCHAR}
+    values (#{cdId,jdbcType=INTEGER}, #{cmId,jdbcType=INTEGER}, #{sizeId,jdbcType=INTEGER}, 
+      #{color,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, #{barCode,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.forest.entity.CommodityDetails" >
@@ -117,8 +117,8 @@
       <if test="cmId != null" >
         cm_id,
       </if>
-      <if test="size != null" >
-        size,
+      <if test="sizeId != null" >
+        size_id,
       </if>
       <if test="color != null" >
         color,
@@ -137,11 +137,11 @@
       <if test="cmId != null" >
         #{cmId,jdbcType=INTEGER},
       </if>
-      <if test="size != null" >
-        #{size,jdbcType=INTEGER},
+      <if test="sizeId != null" >
+        #{sizeId,jdbcType=INTEGER},
       </if>
       <if test="color != null" >
-        #{color,jdbcType=INTEGER},
+        #{color,jdbcType=VARCHAR},
       </if>
       <if test="quantity != null" >
         #{quantity,jdbcType=INTEGER},
@@ -166,11 +166,11 @@
       <if test="record.cmId != null" >
         cm_id = #{record.cmId,jdbcType=INTEGER},
       </if>
-      <if test="record.size != null" >
-        size = #{record.size,jdbcType=INTEGER},
+      <if test="record.sizeId != null" >
+        size_id = #{record.sizeId,jdbcType=INTEGER},
       </if>
       <if test="record.color != null" >
-        color = #{record.color,jdbcType=INTEGER},
+        color = #{record.color,jdbcType=VARCHAR},
       </if>
       <if test="record.quantity != null" >
         quantity = #{record.quantity,jdbcType=INTEGER},
@@ -187,8 +187,8 @@
     update commodity_details
     set cd_id = #{record.cdId,jdbcType=INTEGER},
       cm_id = #{record.cmId,jdbcType=INTEGER},
-      size = #{record.size,jdbcType=INTEGER},
-      color = #{record.color,jdbcType=INTEGER},
+      size_id = #{record.sizeId,jdbcType=INTEGER},
+      color = #{record.color,jdbcType=VARCHAR},
       quantity = #{record.quantity,jdbcType=INTEGER},
       bar_code = #{record.barCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -201,11 +201,11 @@
       <if test="cmId != null" >
         cm_id = #{cmId,jdbcType=INTEGER},
       </if>
-      <if test="size != null" >
-        size = #{size,jdbcType=INTEGER},
+      <if test="sizeId != null" >
+        size_id = #{sizeId,jdbcType=INTEGER},
       </if>
       <if test="color != null" >
-        color = #{color,jdbcType=INTEGER},
+        color = #{color,jdbcType=VARCHAR},
       </if>
       <if test="quantity != null" >
         quantity = #{quantity,jdbcType=INTEGER},
@@ -219,8 +219,8 @@
   <update id="updateByPrimaryKey" parameterType="com.forest.entity.CommodityDetails" >
     update commodity_details
     set cm_id = #{cmId,jdbcType=INTEGER},
-      size = #{size,jdbcType=INTEGER},
-      color = #{color,jdbcType=INTEGER},
+      size_id = #{sizeId,jdbcType=INTEGER},
+      color = #{color,jdbcType=VARCHAR},
       quantity = #{quantity,jdbcType=INTEGER},
       bar_code = #{barCode,jdbcType=VARCHAR}
     where cd_id = #{cdId,jdbcType=INTEGER}

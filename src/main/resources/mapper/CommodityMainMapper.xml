@@ -3,12 +3,13 @@
 <mapper namespace="com.forest.mapper.CommodityMainMapper" >
   <resultMap id="BaseResultMap" type="com.forest.entity.CommodityMain" >
     <id column="cm_id" property="cmId" jdbcType="INTEGER" />
-    <result column="article_no" property="articleNo" jdbcType="INTEGER" />
+    <result column="article_no" property="articleNo" jdbcType="VARCHAR" />
     <result column="brand" property="brand" jdbcType="VARCHAR" />
     <result column="cm_name" property="cmName" jdbcType="VARCHAR" />
     <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
     <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
     <result column="ct_id" property="ctId" jdbcType="INTEGER" />
+    <result column="img_path" property="imgPath" jdbcType="VARCHAR" />
     <result column="information" property="information" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -70,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cm_id, article_no, brand, cm_name, sale_price, cost_price, ct_id, information
+    cm_id, article_no, brand, cm_name, sale_price, cost_price, ct_id, img_path, information
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.CommodityMainExample" >
     select
@@ -105,10 +106,12 @@
   <insert id="insert" parameterType="com.forest.entity.CommodityMain" >
     insert into commodity_main (cm_id, article_no, brand, 
       cm_name, sale_price, cost_price, 
-      ct_id, information)
-    values (#{cmId,jdbcType=INTEGER}, #{articleNo,jdbcType=INTEGER}, #{brand,jdbcType=VARCHAR}, 
+      ct_id, img_path, information
+      )
+    values (#{cmId,jdbcType=INTEGER}, #{articleNo,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, 
       #{cmName,jdbcType=VARCHAR}, #{salePrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL}, 
-      #{ctId,jdbcType=INTEGER}, #{information,jdbcType=VARCHAR})
+      #{ctId,jdbcType=INTEGER}, #{imgPath,jdbcType=VARCHAR}, #{information,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.forest.entity.CommodityMain" >
     insert into commodity_main
@@ -134,6 +137,9 @@
       <if test="ctId != null" >
         ct_id,
       </if>
+      <if test="imgPath != null" >
+        img_path,
+      </if>
       <if test="information != null" >
         information,
       </if>
@@ -143,7 +149,7 @@
         #{cmId,jdbcType=INTEGER},
       </if>
       <if test="articleNo != null" >
-        #{articleNo,jdbcType=INTEGER},
+        #{articleNo,jdbcType=VARCHAR},
       </if>
       <if test="brand != null" >
         #{brand,jdbcType=VARCHAR},
@@ -159,6 +165,9 @@
       </if>
       <if test="ctId != null" >
         #{ctId,jdbcType=INTEGER},
+      </if>
+      <if test="imgPath != null" >
+        #{imgPath,jdbcType=VARCHAR},
       </if>
       <if test="information != null" >
         #{information,jdbcType=VARCHAR},
@@ -178,7 +187,7 @@
         cm_id = #{record.cmId,jdbcType=INTEGER},
       </if>
       <if test="record.articleNo != null" >
-        article_no = #{record.articleNo,jdbcType=INTEGER},
+        article_no = #{record.articleNo,jdbcType=VARCHAR},
       </if>
       <if test="record.brand != null" >
         brand = #{record.brand,jdbcType=VARCHAR},
@@ -195,6 +204,9 @@
       <if test="record.ctId != null" >
         ct_id = #{record.ctId,jdbcType=INTEGER},
       </if>
+      <if test="record.imgPath != null" >
+        img_path = #{record.imgPath,jdbcType=VARCHAR},
+      </if>
       <if test="record.information != null" >
         information = #{record.information,jdbcType=VARCHAR},
       </if>
@@ -206,12 +218,13 @@
   <update id="updateByExample" parameterType="map" >
     update commodity_main
     set cm_id = #{record.cmId,jdbcType=INTEGER},
-      article_no = #{record.articleNo,jdbcType=INTEGER},
+      article_no = #{record.articleNo,jdbcType=VARCHAR},
       brand = #{record.brand,jdbcType=VARCHAR},
       cm_name = #{record.cmName,jdbcType=VARCHAR},
       sale_price = #{record.salePrice,jdbcType=DECIMAL},
       cost_price = #{record.costPrice,jdbcType=DECIMAL},
       ct_id = #{record.ctId,jdbcType=INTEGER},
+      img_path = #{record.imgPath,jdbcType=VARCHAR},
       information = #{record.information,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -221,7 +234,7 @@
     update commodity_main
     <set >
       <if test="articleNo != null" >
-        article_no = #{articleNo,jdbcType=INTEGER},
+        article_no = #{articleNo,jdbcType=VARCHAR},
       </if>
       <if test="brand != null" >
         brand = #{brand,jdbcType=VARCHAR},
@@ -238,6 +251,9 @@
       <if test="ctId != null" >
         ct_id = #{ctId,jdbcType=INTEGER},
       </if>
+      <if test="imgPath != null" >
+        img_path = #{imgPath,jdbcType=VARCHAR},
+      </if>
       <if test="information != null" >
         information = #{information,jdbcType=VARCHAR},
       </if>
@@ -246,12 +262,13 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.forest.entity.CommodityMain" >
     update commodity_main
-    set article_no = #{articleNo,jdbcType=INTEGER},
+    set article_no = #{articleNo,jdbcType=VARCHAR},
       brand = #{brand,jdbcType=VARCHAR},
       cm_name = #{cmName,jdbcType=VARCHAR},
       sale_price = #{salePrice,jdbcType=DECIMAL},
       cost_price = #{costPrice,jdbcType=DECIMAL},
       ct_id = #{ctId,jdbcType=INTEGER},
+      img_path = #{imgPath,jdbcType=VARCHAR},
       information = #{information,jdbcType=VARCHAR}
     where cm_id = #{cmId,jdbcType=INTEGER}
   </update>

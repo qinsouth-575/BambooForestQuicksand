@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -82,22 +82,22 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a href="a_index.html" class="waves-effect _account">
+                        	<a th:href="a_index.html" class="waves-effect _account">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="b_cashier.html" class="waves-effect _account">
+                        	<a th:href="b_cashier.html" class="waves-effect _account">
                             	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="c_shop.html" class="waves-effect _account">
+                        	<a th:href="@{/findshop}" class="waves-effect _account">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="d_commodity.html" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/commoditytypes/toPage}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
                             </a>
                         </li>
@@ -138,12 +138,12 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="d_commodity.html" class="waves-effect">
+                            <a href="@{/commoditytypes/toPage}" class="waves-effect">
                             	<i class="fa fa-eercast m-r-10" aria-hidden="true"></i>商品类别
                             </a>
                         </li>
                         <li>
-                            <a href="d_commodity_manager.html" class="waves-effect">
+                            <a href="@{/commodityManager/toPage}" class="waves-effect">
                             	<i class="fa fa-cogs m-r-10" aria-hidden="true"></i>商品管理
                             </a>
                         </li>
