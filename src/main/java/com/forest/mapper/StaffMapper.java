@@ -35,5 +35,7 @@ public interface StaffMapper {
     List<Staff> queryShopIdAndPosId(Staff staff);
     //修改账户信息
     int updateStaff(Staff staff);
+    //修改头像
+    int updateUserByuserpic(Staff staff);
 
 }
