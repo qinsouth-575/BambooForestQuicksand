@@ -191,7 +191,7 @@
                         </div>
                         
                         <!-- Button trigger modal -->
-                        <a href="#" class="btn hidden-sm-down btn-info form-group" data-toggle="modal" data-target=".bs-example-modal-lg">添加供应商</a>
+                        <a href="#" class="btn hidden-sm-down btn-info form-group" data-toggle="modal" data-target=".bs-example-modal-lg" @click="tj">添加供应商</a>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -327,15 +327,15 @@
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11" data-toggle="distpicker">
 							<label>&nbsp;&nbsp;地&nbsp;&nbsp;址&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
-							<select class="form-control form-control-line" v-model="sup.province" id="province1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" v-model="sup.city" id="city1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" v-model="sup.region" id="district1"></select>
+							<select class="form-control form-control-line sheng" v-model="sup.province" id="province1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line s" v-model="sup.city" id="city1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line q" v-model="sup.region" id="district1"></select>
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
 							<label for="exampleInputEmail2">&nbsp;&nbsp;街&nbsp;&nbsp;道&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control col-md-6" v-model="sup.stree"  placeholder="请输入街道/详细地址">
+							<input type="email" class="form-control col-md-6" v-model="sup.street"  placeholder="请输入街道/详细地址">
 						</div>
 					</form>
 				</div>
@@ -497,7 +497,7 @@
     					dataType:"json",
     					success:function(res){
     						if(res.code == 200){
-        						this_.goPage(1);
+        						this_.goPage(this_.supplier.pageNum);
         						return false;
     						}
     						alert(res.message);
@@ -505,6 +505,7 @@
     				});
     			},
     			insertSupplier:function(){
+    				
     				var this_=this;
     				$.ajax({
     					url:"[[@{/supplier/insertSupplier}]]",
@@ -514,6 +515,7 @@
     					success:function(res){
     						alert(res.code);
     						this_.goPage(1);
+    						this_.sup="";
     					}
     				});
     			},
@@ -570,6 +572,23 @@
     						this_.goPage(1);
     					}
     				});
+    			},
+    			tj:function(){
+    				this.sup={
+    						companyName : "",
+    						shortName : "",
+    						linkman : "",
+    						phone : "",
+    						email : "",
+    						telephone : "",
+    						province : "",
+    						city : "",
+    						region : "",
+    						street : ""
+    				};
+    				$('.sheng').val(this.sup.province).trigger('change');
+    				$('.s').val(this.sup.city).trigger('change');
+    				$('.q').val(this.sup.region).trigger('change');
     			},
     			query:function(){
     				this.goPage(1);

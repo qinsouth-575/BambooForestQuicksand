@@ -421,7 +421,14 @@
 							url:"[[@{/query}]]",
 							type:"get",
 							success:function(res){
-								this_.staff=res
+								this_.staff=res;
+								//alert(JSON.stringify(this_.staff));
+								for(var i=0;i<this_.staff.length;i++){
+									if(this_.staff[i].posId==1){
+	    								this_.staff[i].posName="-";
+	    							}
+								}
+    							
 							}
 						});
 					},
@@ -510,7 +517,7 @@
 								staffName:$("#staffName1").val(),
 								staffId:$("#staffId").val()
 						};
-						alert(JSON.stringify(obj));
+						//alert(JSON.stringify(obj));
 						$.ajax({
 							url:"[[@{/updateStaff}]]",
 							type:"post",
@@ -524,7 +531,7 @@
 						});
 					},
 					select:function(){
-						alert(1);
+						//alert(1);
 						var this_=this;
 						var shopId=$("#shopId1").val();
 						if(shopId=="所有店铺"){
@@ -552,9 +559,9 @@
 						});
 					},
 					jz:function(){
-						var this_=this;
-						this_.queryShop();
-						this_.queryPosition();
+						 var this_=this;
+						 this_.queryShop();
+						 this_.queryPosition();
 					}
 				},created:function(){
 					this.queryAll();
