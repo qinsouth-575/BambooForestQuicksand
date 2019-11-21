@@ -3,7 +3,6 @@
 	<head>
     	<meta charset="utf-8">
 		<link rel="icon" type="image/png" sizes="16x16" th:href="@{/assets/images/apple-icon.png}">
-		<script th:src="@{/js/vue.js}"></script>
 		<title>竹林流沙-登录</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="application/x-javascript">
@@ -17,7 +16,6 @@
 		</script>
 		<meta name="keywords" content="Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates" />
 		<link th:href="@{/css/style_login.css}" rel='stylesheet' type='text/css' />
-    	<script src="assets/plugins/jquery/jquery.min.js"></script>
 	</head>
 	<body>
 		<script>
@@ -40,51 +38,82 @@
 			</div>
 			<div class="clear"> </div>
 			<div class="avtar">
-				<img src="images/avtar.png" />
+				<img src="/images/avtar.png" />
 			</div>
-			<form action="/login" method="get">
+			<form action="javascript:void(0);" method="get">
 				<div class="username">
-					<input type="text" class="userName" name="jobNumber"  onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'UserName';}">
+					<input type="text" class="userName" name="UserName" value="UserName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'UserName';}">
 				</div>
 				<div class="userpwd">
-					<input type="password" class="userPwd" name="password"   onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password_abcd';}">
+					<input type="password" class="userPwd" name="Password_abcd" value="Password_abcd" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password_abcd';}">
 				</div>
 				<div class="random">
 					<input type="text" class="randomCode" value="RandomCode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'RandomCode';}">
-					<img src="assets/images/big/img2.jpg" id="getRandomCode" width="90xpx" height="35px" />
+					<input type="image" th:src="@{/getRandomCode?method=image}" name="getRandomCode" id="getRandomCode" title="点击图片刷新验证码" width="90xpx" height="35px" />
 					<!--/Y2ProjectC_Tenement/GenerateCodeAction?method=image-->
 				</div>
 			
-			<div class="signin">
-				<input type="submit" value="登录">
-			</div>
+				<div class="signin">
+					<input type="submit" value="登录">
+				</div>
 			</form>
 		</div>
 		<div class="copy-rights">
 			<p>版权所有 &copy;2019  竹林流沙工作室 保留所有权利 &nbsp;&nbsp;更多模板从
 				<a href="http://www.cssmoban.com/" target="_blank" title="竹林流沙工作室">竹林流沙工作室</a>收集
-				<!--<a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a>-->
 			</p>
 		</div>
 
 		
+    	<script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
+		<script th:src="@{/js/vue.js}"></script>
 		<script type="text/javascript">
 			$(function(){
+				//1.点击图片更换验证码事件
+				$("#getRandomCode").on("click", function(){
+					$("#getRandomCode").attr("src", "/getRandomCode?"+Math.random());
+				});
+				
+				//2.登录提交验证
 				$("input[type='submit']").on("click", function(){
-					//alert($(".userName").val() + " - " + $(".userPwd").val() + " - " + $(".randomCode").val());
-					
 					if($(".userName").val()==null||$(".userName").val()==""){
 						alert("账户名不能为空");
 						return false;
-					}
-					if($(".userPwd").val()==null||$(".userPwd").val()==""){
+					} else if($(".userPwd").val()==null||$(".userPwd").val()==""){
 						alert("密码不能为空");
 						return false;
+					} else if($(".randomCode").val()==null||$(".randomCode").val()==""){
+						alert("请输入随机数验证码！");
+						return false;
+					} else {
+						var user = {
+							jobNumber : $(".userName").val(),
+							password : $(".userPwd").val(),
+							randomCode : $(".randomCode").val()
+						};
+						//alert(JSON.stringify(user));		数据正常
+		
+						$.ajax({
+		 					url : "[[@{/login}]]",
+							type : "post",
+							data : JSON.stringify(user),
+							contentType : "application/json",	//【注意】：如果请求数据格式为json格式，必须指定该类型
+							dataType : "json",
+							success : function(res){
+								//alert(res.message);
+								
+								if(res.code == "3"){
+									location.href = "[[@{/finduser}]]";
+								} else {
+									alert(res.message);
+									$("#getRandomCode").attr("src", "/getRandomCode?"+Math.random());
+								}
+							}
+						});
+						/* Ajax代码结束 */
 					}
-					//location.href="a_index.html";
 				});
 			});
-			
 		</script>
 	</body>
 </html>

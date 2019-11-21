@@ -248,82 +248,18 @@
                                                 <td>@Ritesh</td>
                                                 <td>@Ritesh</td>
                                                 <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
-                                                <td>3</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
-                                                <td>4</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
-                                                <td>5</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                	<a href="javascript:void(0);">删除</a><!-- class="btn delBtn" -->
+                                                	<a href="javascript:void(0);">修改</a><!-- class="btn editBtn" -->
                                                 </td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                         	<tr>
                                         		<td colspan="11" class="text-right">
-							                        <a href="#" class="btn hidden-sm-down btn-info">首页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">上一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">下一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">尾页</a>
+							                        <a href="javascript:void(0);" class="btn hidden-sm-down btn-info">首页</a>
+							                        <a href="javascript:void(0);" class="btn hidden-sm-down btn-info">上一页</a>
+							                        <a href="javascript:void(0);" class="btn hidden-sm-down btn-info">下一页</a>
+							                        <a href="javascript:void(0);" class="btn hidden-sm-down btn-info">尾页</a>
                                         		</td>
                                         	</tr>
                                         </tfoot>
@@ -359,35 +295,6 @@
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
-     <!-- ============================================================== -->
-    <!-- Start Modal -->
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  		<div class="modal-dialog modal-sm">
-    		<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">添加类别</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				</div>
-				<div class="modal-body">
-					<form class="form-inline">
-						<div class="form-group" style="position: relative;">
-							<label for="exampleInputName2">名称：</label>&nbsp;
-							<input type="text" class="form-control" placeholder="请输入类别名称">
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">确定</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-				</div>
-			</div>
-		</div>
-	</div>
-    <!-- End Modal -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
     <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
     <script th:src="@{/assets/plugins/bootstrap/js/tether.min.js}"></script>
     <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
@@ -403,35 +310,47 @@
     
     <script th:src="@{/js/vue.js}"></script>
     <script type="text/javascript">
-  //VUE
-	var vue = new Vue({
-		el:"#main-wrapper",
-		data(){
-			return {
-				cmdList:[],
-				cmd:{
-					ctId : 0,
-					ctName : ""
-				}
-			};
-		},methods:{
-			queryPage : function(){
- 				var this_ = this;
- 				$.ajax({
- 					url:"[[@{/commoditytypes/ct}]]",
- 					dataType:"json",
- 					type:"get",
- 					success:function(result){
- 						this_.ctList = result;
- 					}
- 				});
+	  //VUE
+		var vue = new Vue({
+			el:"#main-wrapper",
+			data(){
+				return {
+					cmdList:[],
+					cmd:{
+						ctId : 0,
+						ctName : ""
+					}
+				};
 			},
-			
-		},
-		created:function(){
-			this.queryPage();
-		}
-	});
+			methods:{
+				queryHeadPic : function(){
+					//1.Ajax查询后台 获得session后的值
+					$.ajax({
+						url:"[[@{/session}]]",
+						type:"get",
+						dataType : "json",
+						success:function(res){
+							//alert(JSON.stringify(res));
+							$(".profile-pic").attr("src", "/" + res.headPortraitPath);
+						}
+					});
+				},
+				queryPage : function(){
+	 				var this_ = this;
+	 				$.ajax({
+	 					url:"[[@{/commoditytypes/ct}]]",
+	 					dataType:"json",
+	 					type:"get",
+	 					success:function(result){
+	 						this_.ctList = result;
+	 					}
+	 				});
+				}
+			},
+			created:function(){
+				this.queryPage();
+			}
+		});
     	
 	</script>
 </body>

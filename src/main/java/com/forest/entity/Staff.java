@@ -19,7 +19,8 @@ public class Staff {
     private String trade;
     private String headPortraitPath;
     private String phone;
-
+	
+	private String randomCode;	//随机数验证码 - 11
     
 	public Staff() {
 		super();
@@ -138,14 +139,24 @@ public class Staff {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+	
+	/**
+	 * - 11.读取随机数验证吗
+	 * @return
+	 */
+	public String getRandomCode() {
+		return randomCode;
+	}
+	public void setRandomCode(String randomCode) {
+		this.randomCode = randomCode;
+	}
 
 	@Override
 	public String toString() {
 		return "Staff [staffId=" + staffId + ", shopId=" + shopId + ", posId=" + posId + ", jobNumber=" + jobNumber
 				+ ", staffName=" + staffName + ", password=" + password + ", shopName=" + shopName + ", posName="
 				+ posName + ", trade=" + trade + ", headPortraitPath=" + headPortraitPath + ", phone=" + phone
-				+ ", staffState=" + staffState + ", createTime=" + createTime + "]";
+				+ ", randomCode=" + randomCode + ", staffState=" + staffState + ", createTime=" + createTime + "]";
 	}
 
-	
 }
