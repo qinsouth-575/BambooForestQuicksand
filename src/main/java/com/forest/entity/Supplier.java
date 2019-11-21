@@ -3,7 +3,15 @@ package com.forest.entity;
 public class Supplier {
     private Integer supId;
 
-    private String companyName;
+    @Override
+	public String toString() {
+		return "Supplier [supId=" + supId + ", companyName=" + companyName + ", shortName=" + shortName + ", linkman="
+				+ linkman + ", phone=" + phone + ", email=" + email + ", telephone=" + telephone + ", province="
+				+ province + ", city=" + city + ", region=" + region + ", street=" + street + ", pageNum=" + pageNum
+				+ "]";
+	}
+
+	private String companyName;
 
     private String shortName;
 
@@ -22,8 +30,18 @@ public class Supplier {
     private String region;
 
     private String street;
+    
+    public int pageNum;
 
-    public Integer getSupId() {
+    public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public Integer getSupId() {
         return supId;
     }
 
@@ -54,7 +72,7 @@ public class Supplier {
     public void setLinkman(String linkman) {
         this.linkman = linkman;
     }
-
+    
     public String getPhone() {
         return phone;
     }
@@ -110,4 +128,5 @@ public class Supplier {
     public void setStreet(String street) {
         this.street = street;
     }
+    
 }
