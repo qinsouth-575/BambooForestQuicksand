@@ -46,4 +46,13 @@ public class MemberBiz {
 				public Member queryById(int MemberId) {
 					return memberMapper.queryById(MemberId);
 				}
+				
+				/**
+				 * 根据会员编号修改会员信息
+				 * @param m
+				 * @return
+				 */
+				public boolean updateById(Member m) {
+					return memberMapper.updateById(m)>0;
+				}
 }

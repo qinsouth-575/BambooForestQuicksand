@@ -217,44 +217,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>vip</td>
-                                                <td>70.00</td>
-                                                <td>-</td>
+                                            <tr v-for="item,index in list">
+                                                <td>{{item.mlId}}</td>
+                                                <td>{{item.mlName}}</td>
+                                                <td>{{item.discount}}</td>
+                                                <td>{{item.upgradeRule}}</td>
                                                 <td>
                                                 	<a class="btn delBtn" href="javascript:void(0);">删除</a>&nbsp;
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>&nbsp;
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sanghani</td>
-                                                <td>Gusikowski</td>
-                                                <td>@Govinda</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>&nbsp;
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Roshan</td>
-                                                <td>Rogahn</td>
-                                                <td>@Hritik</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>&nbsp;
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                	<a class="btn editBtn" href="javascript:void(0);" data-toggle="modal" data-target=".bs-example-modal-xgcx"  @click="xgcx(item.mlId)">修改</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -268,6 +238,7 @@
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
             </div>
+            
             <!-- ============================================================== -->
             <!-- End Container fluid  -->
             <!-- ============================================================== -->
@@ -305,11 +276,11 @@
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputName2">等级名称：</label>&nbsp;
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="">
+							<input type="text" class="form-control" placeholder="" id="mlName">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">优惠折扣：</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+							<input type="email" class="form-control" placeholder="" id="discount">
 						</div>
 						
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="form-group col-md-1"></div>
@@ -320,21 +291,71 @@
 						</div>
 						<div class="form-group col-md-12">
 								<ol>
-									<li>当会员消费达到<input type="text" style="width: 20%;">元时，自动升级到该等级。</li>
-									<li>该等级有效期：<input type="radio" name="s" checked="checked"/>永久<input type="radio" name="s"/>1年</li>
-									<li>当会员消费达到<input type="text" style="width: 20%;">元时，自动升级到该等级。</li>
+									<li>当会员消费达到<input type="text" style="width: 20%;" id="upgradeRule">元时，自动升级到该等级。</li>
+									<li>该等级有效期：<input type="radio" name="s" checked="checked" value="0"/>永久<input type="radio" name="s" value="1"/>1年</li>
+									<li>自动升级，将在消费达到要求后的第二天生效。</li>
 								</ol>
 						</div>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-primary" @click="xz">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
 		</div>
 	</div>
+    
+    
+    
+    
+    <div class="modal fade bs-example-modal-xgcx" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">修改等级</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline">
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">等级名称：</label>&nbsp;
+							<input type="text" class="form-control" placeholder="" id="mlName" v-model="mldx.mlName">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail2">优惠折扣：</label>&nbsp;
+							<input type="email" class="form-control" placeholder="" id="discount" v-model="mldx.discount">
+						</div>
+						
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="form-group col-md-1"></div>
+						<div style="border: 1px solid silver;">
+						<div class="form-group col-md-12" style="border-bottom: 1px solid silver;">
+							<label>自动升级</label>
+							
+						</div>
+						<div class="form-group col-md-12">
+								<ol>
+									<li>当会员消费达到<input type="text" style="width: 20%;" id="upgradeRule" v-model="mldx.upgradeRule">元时，自动升级到该等级。</li>
+									<li>该等级有效期：<input type="radio" name="d" value="0"/>永久<input type="radio" name="d" value="1"/>1年</li>
+									<li>自动升级，将在消费达到要求后的第二天生效。</li>
+								</ol>
+						</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" @click="xg">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    
+    
+    
     </div>
     
     
@@ -372,7 +393,8 @@
 				el:"#etc",
 				data(){
 					return {
-						
+						list:[],
+						mldx:{}
 					}
 				},
 				methods:{
@@ -390,7 +412,74 @@
 					},
 					toCredits:function(){
 						location.href="http://localhost:8080/MemberManage/toCredits";
+					},
+					queryAll:function(){
+						var _this=this;
+						$.ajax({
+							url:"[[@{/MemberLevel/queryAll}]]",
+							type:"get",
+							data:{},
+							dataType:"json",
+							"success":function(res){
+								_this.list=res;
+							}
+						});
+					},
+					xz:function(){
+						var $mlName=$("#mlName").val();
+						var $discount=$("#discount").val();
+						var $upgradeRule=$("#upgradeRule").val();
+						var $validity=$('input[name="s"]:checked').val();
+						var obj={
+								mlName:$mlName,
+								discount:$discount,
+								upgradeRule:$upgradeRule,
+								validity:$validity,
+								upgrade:0
+						}
+						$.ajax({
+							url:"[[@{/MemberLevel/insertAll}]]",
+							type:"post",
+							data:JSON.stringify(obj),
+							dataType:"json",
+							contentType:"application/json",
+							"success":function(res){
+								alert(res.msg);
+								location.href="http://localhost:8080/MemberManage/toLevel";
+							}
+						});
+					},
+					xgcx:function(id){
+						var _this=this;
+						$.ajax({
+							url:"[[@{/MemberLevel/queryById}]]",
+							type:"get",
+							data:{mlId:id},
+							dataType:"json",
+							"success":function(res){
+								_this.mldx=res;
+								$(":radio[name='d'][value='" + res.validity + "']").prop("checked", "checked");
+							}
+						});
+					},
+					xg:function(){
+						var _t=this;
+						_t.mldx.validity=$('input[name="d"]:checked').val();
+						$.ajax({
+							url:"[[@{/MemberLevel/updateAll}]]",
+							type:"put",
+							data:JSON.stringify(_t.mldx),
+							dataType:"json",
+							contentType:"application/json",
+							"success":function(res){
+								alert(res.msg);
+								location.href="http://localhost:8080/MemberManage/toLevel";
+							}
+						});
 					}
+				},
+				created:function(){
+					this.queryAll();
 				}
 			});
 	</script>

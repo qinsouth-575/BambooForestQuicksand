@@ -272,4 +272,19 @@
       prev6 = #{prev6,jdbcType=VARCHAR}
     where set_id = #{setId,jdbcType=SMALLINT}
   </update>
+  <select id="queryById" resultMap="BaseResultMap">
+  		select * from setting where set_id=1;
+  </select>
+  <update id="updataAll" parameterType="com.forest.entity.Setting">
+  		update setting
+    	set property_name = #{propertyName,jdbcType=VARCHAR},
+      property_value = #{propertyValue,jdbcType=VARCHAR},
+      prev1 = #{prev1,jdbcType=VARCHAR},
+      prev2 = #{prev2,jdbcType=VARCHAR},
+      prev3 = #{prev3,jdbcType=VARCHAR},
+      prev4 = #{prev4,jdbcType=VARCHAR},
+      prev5 = #{prev5,jdbcType=VARCHAR},
+      prev6 = #{prev6,jdbcType=VARCHAR}
+    	where set_id = #{setId,jdbcType=SMALLINT}
+  </update>
 </mapper>

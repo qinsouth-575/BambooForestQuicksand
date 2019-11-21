@@ -102,6 +102,25 @@ public class MemberManageAction {
 				@RequestMapping("/queryById")
 				@ResponseBody
 				public Member queryById(int MemberId) {
+					System.out.println("进入修改查询");
 					return memberBiz.queryById(MemberId);
+				}
+				
+				/**
+				 * 根据会员编号修改会员信息
+				 * @param m
+				 * @return
+				 */
+				@RequestMapping(value="/updateById",method = RequestMethod.PUT)
+				@ResponseBody
+				public Map<String, String> updateById(@RequestBody Member m){
+					Map<String, String> map=new HashMap<String, String>();
+					boolean b=memberBiz.updateById(m);
+					if(b) {
+						map.put("msg", "修改成功！");
+					}else {
+						map.put("msg", "修改失败！");
+					}
+					return map;
 				}
 }

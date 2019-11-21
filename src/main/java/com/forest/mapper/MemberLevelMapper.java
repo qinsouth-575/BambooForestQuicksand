@@ -29,4 +29,10 @@ public interface MemberLevelMapper {
     int updateByPrimaryKey(MemberLevel record);
     
     List<MemberLevel> queryAll();
+    
+    int insertAll(MemberLevel ml);
+    
+    MemberLevel queryById(int mlId);
+    
+    int updateAll(MemberLevel ml);
 }

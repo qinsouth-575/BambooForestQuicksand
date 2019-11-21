@@ -228,4 +228,24 @@
   <select id="queryAll" resultMap="BaseResultMap">
   		select * from member_level
   </select>
+  <insert id="insertAll" parameterType="com.forest.entity.MemberLevel">
+  		 insert into member_level ( ml_name, discount, 
+      upgrade, validity, upgrade_rule
+      )
+    values ( #{mlName,jdbcType=VARCHAR}, #{discount,jdbcType=REAL}, 
+      #{upgrade,jdbcType=INTEGER}, #{validity,jdbcType=INTEGER}, #{upgradeRule,jdbcType=DECIMAL}
+      )
+  </insert>
+  <select id="queryById" resultMap="BaseResultMap" parameterType="int">
+  			select * from member_level where ml_id=#{0}
+  </select>
+  <update id="updateAll" parameterType="com.forest.entity.MemberLevel">
+  			update member_level
+		    set ml_name = #{mlName,jdbcType=VARCHAR},
+		    discount = #{discount,jdbcType=REAL},
+		    upgrade = #{upgrade,jdbcType=INTEGER},
+		    validity = #{validity,jdbcType=INTEGER},
+		    upgrade_rule = #{upgradeRule,jdbcType=DECIMAL}
+		    where ml_id = #{mlId,jdbcType=SMALLINT}
+  </update>
 </mapper>

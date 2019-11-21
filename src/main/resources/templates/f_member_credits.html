@@ -208,9 +208,9 @@
                                 <div class="table-responsive">
                                     <div id="">
                                     	<p>积分抵扣</p>
-                                    	<p>使用积分<input type="text" value="100">可以抵扣1.00元</p>
+                                    	<p>使用积分<input type="text" v-model="cred.propertyValue">可以抵扣1.00元</p>
                                     </div>
-                                    <a href="#" class="btn pull-right hidden-sm-down btn-info">确定</a>
+                                    <a href="#" class="btn pull-right hidden-sm-down btn-info" @click="xg">确定</a>
                                 </div>
                             </div>
                         </div>
@@ -278,7 +278,7 @@
 				el:"#etc",
 				data(){
 					return {
-						
+						cred:{}
 					}
 				},
 				methods:{
@@ -296,8 +296,37 @@
 					},
 					toCredits:function(){
 						location.href="http://localhost:8080/MemberManage/toCredits";
+					},
+					queryById:function(){
+						var _this=this;
+						$.ajax({
+							url:"[[@{/Setting/queryById}]]",
+							type:"get",
+							data:{},
+							dataType:"json",
+							"success":function(res){
+								_this.cred=res;
+							}
+						});
+					},
+					xg:function(){
+						var _t=this;
+						$.ajax({
+							url:"[[@{/Setting/updataAll}]]",
+							type:"put",
+							data:JSON.stringify(_t.cred),
+							dataType:"json",
+							contentType:"application/json",
+							"success":function(res){
+								alert(res.msg)
+								location.href="http://localhost:8080/MemberManage/toCredits";
+							}
+						});
 					}
-				}
+				},
+				created:function(){
+	 				this.queryById();
+	 			}
 			});
 	</script>
 </body>
