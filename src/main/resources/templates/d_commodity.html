@@ -311,6 +311,18 @@
 					}
 				};
 			},methods:{
+				queryHeadPic : function(){
+					//1.Ajax查询后台 获得session后的值
+					$.ajax({
+						url:"[[@{/session}]]",
+						type:"get",
+						dataType : "json",
+						success:function(res){
+							//alert(JSON.stringify(res));
+							$(".profile-pic").attr("src", "/" + res.headPortraitPath);
+						}
+					});
+				},
 				queryAll:function(){
 	 				var this_ = this;
 	 				$.ajax({
@@ -400,6 +412,7 @@
 				}
 			},
 			created:function(){
+				this.queryHeadPic();
 				this.queryAll();
 			}
 		});
