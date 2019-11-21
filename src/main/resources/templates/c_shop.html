@@ -113,7 +113,7 @@
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="c_user.html" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
                             	<img src="assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
@@ -437,7 +437,7 @@
     	 						id:id
     	 					},
     	 					success:function(res){
-    	 						this_.sss=res;
+    	 						var this_.sss=res;
     	 						alert(JSON.stringify(this_.sss));
     	 						$("#shopName").val(this_.sss.shopName);
     	 						//$("#shopName").val(this_.sss.shopName);

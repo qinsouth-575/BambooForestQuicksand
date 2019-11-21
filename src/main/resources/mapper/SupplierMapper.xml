@@ -303,4 +303,16 @@
       street = #{street,jdbcType=VARCHAR}
     where sup_id = #{supId,jdbcType=INTEGER}
   </update>
+  <select id="querySupplier" resultMap="BaseResultMap">
+  	SELECT * FROM supplier where 1=1
+  	<if test="province != null and province != ''">
+  		and province = #{province}
+  	</if>
+  	<if test="city != null and city != ''">
+  		and city = #{city}
+  	</if>
+  	<if test="companyName != null and companyName != ''">
+  		and company_name LIKE '%${companyName}%'
+  	</if>
+   </select>
 </mapper>

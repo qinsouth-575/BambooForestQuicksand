@@ -27,4 +27,6 @@ public interface SupplierMapper {
     int updateByPrimaryKeySelective(Supplier record);
 
     int updateByPrimaryKey(Supplier record);
+    //查询所有供应商
+    List<Supplier> querySupplier(Supplier sup);
 }
