@@ -403,9 +403,35 @@
     
     <script th:src="@{/js/vue.js}"></script>
     <script type="text/javascript">
-    	
-    	
-    	
+  //VUE
+	var vue = new Vue({
+		el:"#main-wrapper",
+		data(){
+			return {
+				cmdList:[],
+				cmd:{
+					ctId : 0,
+					ctName : ""
+				}
+			};
+		},methods:{
+			queryPage : function(){
+ 				var this_ = this;
+ 				$.ajax({
+ 					url:"[[@{/commoditytypes/ct}]]",
+ 					dataType:"json",
+ 					type:"get",
+ 					success:function(result){
+ 						this_.ctList = result;
+ 					}
+ 				});
+			},
+			
+		},
+		created:function(){
+			this.queryPage();
+		}
+	});
     	
 	</script>
 </body>
