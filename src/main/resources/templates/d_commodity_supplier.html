@@ -18,6 +18,7 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
+    <div id="supper">
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
@@ -143,7 +144,7 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/}" class="waves-effect active">
+                            <a th:href="@{/supplier/toSupplier}" class="waves-effect active">
                             	<i class="fa fa-smile-o m-r-10" aria-hidden="true"></i>供应商
                             </a>
                         </li>
@@ -180,13 +181,13 @@
                     <div class="col-md-9 col-4 align-self-center form-inline">
                         <div class="form-group f_input" data-toggle="distpicker" style="margin-right: 4px;">
 							<label for="exampleInputName2">地区：</label>&nbsp;
-							<select class="form-control form-control-line" id="province1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="city1"></select>
+							<select class="form-control form-control-line shen" id="province1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line shi"  id="city1"></select>
 						</div>
                         
                         <div class="form-group f_input" style="margin-right: 4px;position: relative;">
-                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
-							<a href="javascript:;" class="list_search"></a>
+                        	<input type="text" placeholder="查找" id="gName" class="form-control form-control-line f_input" style="width: 170px;">
+							<a href="javascript:;" @click="query" class="list_search"></a>
                         </div>
                         
                         <!-- Button trigger modal -->
@@ -222,84 +223,28 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>@Genelia</td>
-                                                <td>Deshmukh</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>@Ritesh</td>
+                                            <tr v-for="item in supplier.list">
+                                                <td>{{item.supId}}</td>
+                                                <td>{{item.shortName}}</td>
+                                                <td>{{item.companyName}}</td>
+                                                <td>{{item.linkman}}</td>
+                                                <td>{{item.phone}}</td>
+                                                <td>{{item.telephone}}</td>
+                                                <td>{{item.email}}</td>
+                                                <td>{{item.province}}{{item.city}}{{item.region}}{{item.street}}</td>
                                                 <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>@Genelia</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>Deshmukh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                	<a class="btn delBtn" href="javascript:void(0);" @click="del(item.supId)">删除</a>
+                                                	<a class="btn editBtn" href="javascript:void(0);" data-toggle="modal" data-target=".update" @click="querySupplier(item.supId)">修改</a>
                                                 </td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                         	<tr>
                                         		<td colspan="10" class="text-right">
-							                        <a href="#" class="btn hidden-sm-down btn-info">首页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">上一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">下一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">尾页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goFirstPage">首页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goPrePage">上一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goNextPage">下一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goLastPage">尾页</a>
                                         		</td>
                                         	</tr>
                                         </tfoot>
@@ -350,56 +295,121 @@
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputName2">公司名称：</label>&nbsp;
-							<input type="text" class="form-control" placeholder="请输入公司名称">
+							<input type="text" class="form-control" v-model="sup.companyName" placeholder="请输入公司名称">
 						</div>
 						<div class="form-group col-md-6" style="position: relative;">
 							<span class="span_bitian">*</span>
 							<label for="exampleInputEmail2">公司简称：</label>&nbsp;
-							<input type="email" class="form-control" placeholder="请输入公司简称">
+							<input type="email" class="form-control" v-model="sup.shortName"  placeholder="请输入公司简称">
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputName2">联&nbsp;系&nbsp;人&nbsp;：&nbsp;</label>&nbsp;
-							<input type="email" class="form-control" placeholder="请输入联系人">
+							<input type="email" class="form-control" v-model="sup.linkman"  placeholder="请输入联系人">
 						</div>
 						<div class="form-group col-md-6" style="position: relative;">
 							<span class="span_bitian">*</span>
 							<label for="exampleInputEmail2">&nbsp;&nbsp;手&nbsp;&nbsp;机&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control" placeholder="请输入手机号">
+							<input type="email" class="form-control" v-model="sup.phone"  placeholder="请输入手机号">
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputName2">&nbsp;&nbsp;邮&nbsp;&nbsp;箱&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control" placeholder="请输入邮箱">
+							<input type="email" class="form-control" v-model="sup.email"  placeholder="请输入邮箱">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">&nbsp;&nbsp;电&nbsp;&nbsp;话&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control" placeholder="请输入电话">
+							<input type="email" class="form-control" v-model="sup.telephone"  placeholder="请输入电话">
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11" data-toggle="distpicker">
 							<label>&nbsp;&nbsp;地&nbsp;&nbsp;址&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
-							<select class="form-control form-control-line" id="province1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="city1"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="district1"></select>
+							<select class="form-control form-control-line" v-model="sup.province" id="province1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line" v-model="sup.city" id="city1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line" v-model="sup.region" id="district1"></select>
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
 							<label for="exampleInputEmail2">&nbsp;&nbsp;街&nbsp;&nbsp;道&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
-							<input type="email" class="form-control col-md-6" placeholder="请输入街道/详细地址">
+							<input type="email" class="form-control col-md-6" v-model="sup.stree"  placeholder="请输入街道/详细地址">
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="insertSupplier">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="modal fade update" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">编辑供应商</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<form class="form-inline">
+						<input type="hidden" id="supId">
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">公司名称：</label>&nbsp;
+							<input type="text" class="form-control" id="companyName" placeholder="请输入公司名称">
+						</div>
+						<div class="form-group col-md-6" style="position: relative;">
+							<span class="span_bitian">*</span>
+							<label for="exampleInputEmail2">公司简称：</label>&nbsp;
+							<input type="email" class="form-control" id="shortName"  placeholder="请输入公司简称">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">联&nbsp;系&nbsp;人&nbsp;：&nbsp;</label>&nbsp;
+							<input type="email" class="form-control" id="linkman"    placeholder="请输入联系人">
+						</div>
+						<div class="form-group col-md-6" style="position: relative;">
+							<span class="span_bitian">*</span>
+							<label for="exampleInputEmail2">&nbsp;&nbsp;手&nbsp;&nbsp;机&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<input type="email" class="form-control" id="phone"   placeholder="请输入手机号">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-5">
+							<label for="exampleInputName2">&nbsp;&nbsp;邮&nbsp;&nbsp;箱&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<input type="email" class="form-control" id="email"   placeholder="请输入邮箱">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="exampleInputEmail2">&nbsp;&nbsp;电&nbsp;&nbsp;话&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<input type="email" class="form-control" id="telephone"    placeholder="请输入电话">
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-11" data-toggle="distpicker">
+							<label>&nbsp;&nbsp;地&nbsp;&nbsp;址&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<select class="form-control form-control-line province"  id="province1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line city"   id="city1"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line region"   id="district1"></select>
+						</div>
+						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-11">
+							<label for="exampleInputEmail2">&nbsp;&nbsp;街&nbsp;&nbsp;道&nbsp;&nbsp;：&nbsp;&nbsp;</label>&nbsp;
+							<input type="email" class="form-control col-md-6" id="stree"  placeholder="请输入街道/详细地址">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" @click="updateSupplier">修改保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	</div>
     <!-- ============================================================== -->
     <!-- End Modal -->
@@ -419,13 +429,156 @@
     <script th:src="@{/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js}"></script>
     <script th:src="@{/js/flot-data.js}"></script>
     <script th:src="@{/assets/plugins/styleswitcher/jQuery.style.switcher.js}"></script>
-    
+    <script th:src="@{/assets/plugins/address/distpicker.data.min.js}"></script>
+  	<script th:src="@{/assets/plugins/address/distpicker.min.js}"></script>
+  	<script th:src="@{/assets/plugins/address/main.js}"></script>
     <script th:src="@{/js/vue.js}"></script>
     <script type="text/javascript">
-    	
-    	
-    	
-    	
+    	$(function(){
+    		$('.shen').val(null).trigger('change');
+			$('.shi').val(null).trigger('change');
+    	});
+    
+    	var sup=new Vue({
+    		el:"#supper",
+    		data(){
+    			return {
+    				supplier:{},
+    				sup:{},
+    				supp:{}
+    			};
+    		},methods:{
+    			goPage:function(pageNum){
+    				var this_=this;
+    				var su={
+    						pageNum:pageNum,
+    						province:$(".shen").val(),
+    						city:$(".shi").val(),
+    						companyNname:$("#gName").val()
+    				};
+    				//alert(JSON.stringify(su));
+    				$.ajax({
+    					url:"[[@{/supplier/goPage}]]",
+    					type:"post",
+    					data:JSON.stringify(su),
+    					contentType:"application/json;charset=utf-8",
+    					dataType:"json",
+    					success:function(res){
+    						this_.supplier=res;
+    					}
+    				});
+    			},
+    			goPrePage:function(){
+    				if(this.supplier.hasPreviousPage){
+        				this.goPage(this.supplier.prePage)
+        				alert(this.supplier.hasPreviousPage + " - " + this.supplier.prePage);
+    				}
+    			},
+    			goNextPage:function(){
+    				if(this.supplier.hasNextPage){
+        				this.goPage(this.supplier.nextPage)
+    				}
+    			},
+    			goFirstPage:function(){
+    				this.goPage(1)
+    			},
+    			goLastPage:function(){
+    				this.goPage(this.supplier.pages)
+    			},
+    			del:function(id){
+    				//alert(id);
+    				var this_=this;
+    				$.ajax({
+    					url:"[[@{/supplier/deleteSupplier}]]",
+    					type:"post",
+    					data:{
+    						id:id
+    					},
+    					dataType:"json",
+    					success:function(res){
+    						if(res.code == 200){
+        						this_.goPage(1);
+        						return false;
+    						}
+    						alert(res.message);
+    					}
+    				});
+    			},
+    			insertSupplier:function(){
+    				var this_=this;
+    				$.ajax({
+    					url:"[[@{/supplier/insertSupplier}]]",
+    					type:"post",
+    					data:this_.sup,
+    					dataType:"json",
+    					success:function(res){
+    						alert(res.code);
+    						this_.goPage(1);
+    					}
+    				});
+    			},
+    			querySupplier:function(id){
+    				var that=this;
+    				$.ajax({
+    					url:"[[@{/supplier/querySupplier}]]",
+    					type:"get",
+    					data:{
+    						supId:id
+    					},
+    					dataType:"json",
+    					success:function(res){
+    						that.supp=res;
+    						alert(JSON.stringify(that.supp));
+    						$("#supId").val(that.supp.supId);
+    						$("#companyName").val(that.supp.companyName);
+    						$("#shortName").val(that.supp.shortName);
+    						$("#linkman").val(that.supp.linkman);
+    						$("#phone").val(that.supp.phone);
+    						$("#telephone").val(that.supp.telephone);
+    						$("#email").val(that.supp.email);
+    						$("#stree").val(that.supp.street);
+    						$(".province").val(that.supp.province).trigger('change');
+    						$(".region").val(that.supp.region).trigger('change');
+    						$(".city").val(that.supp.city).trigger('change');
+    					}
+    					
+    				});
+    			},
+    			updateSupplier:function(){
+    				var this_=this;
+    				var obj={
+    						supId:$("#supId").val(),
+    						companyName:$("#companyName").val(),
+    						linkman:$("#linkman").val(),
+    						shortName:$("#shortName").val(),
+    						phone:$("#phone").val(),
+    						telephone:$("#telephone").val(),
+    						email:$("#email").val(),
+    						street:$("#stree").val(),
+    						province:$(".province").val(),
+    						region:$(".region").val(),
+    						city:$(".city").val()
+    				};
+    				$.ajax({
+    					url:"[[@{/supplier/updateSupplier}]]",
+    					type:"post",
+    					data:JSON.stringify(obj),
+    					dataType:"json",
+    					contentType:"application/json;charset=utf-8",
+    					success:function(res){
+    						alert(res.code);
+    						this_.goPage(1);
+    					}
+    				});
+    			},
+    			query:function(){
+    				this.goPage(1);
+    			}
+    		},
+    		created:function(){
+    			this.goPage(1);
+    		}
+    	});
 	</script>
 </body>
 
