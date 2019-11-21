@@ -349,7 +349,6 @@
 			</div>
 		</div>
 	</div>
-	</div>
 
 	
 	
@@ -357,7 +356,7 @@
   		<div class="modal-dialog modal-lg">
     		<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">编辑会员</h4>
+					<h4 class="modal-title">编辑会员</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<div class="modal-body">
@@ -366,44 +365,44 @@
 						<div class="form-group col-md-5" style="position: relative;">
 							<span class="span_bitian">*</span>
 							<label for="exampleInputName2">手机：</label>&nbsp;
-							<input type="text" class="form-control" id="phoen" placeholder="请输入需绑定的手机号">
+							<input type="text" class="form-control" placeholder="请输入需绑定的手机号" v-model="memberList.phoen">
 						</div>
 						<div class="form-group col-md-6" style="position: relative;">
 							<span class="span_bitian">*</span>
 							<label for="exampleInputEmail2">名称：</label>&nbsp;
-							<input type="email" class="form-control" id="memberName" placeholder="请输入会员名称">
+							<input type="email" class="form-control" placeholder="请输入会员名称" v-model="memberList.memberName">
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
 							<label for="exampleInputName2">等级：</label>&nbsp;
-							<select class="form-control form-control-line" style="width: 202px;" id="mlId">
+							<select class="form-control form-control" style="width: 202px;" v-model="memberList.mlId">
                                 <option>请选择等级</option>
-                                <option v-for="itr in LevelList" :value="itr.mlId">{{itr.mlName}}</option>
+                                <option v-for="itr,index in LevelList" :value="itr.mlId">{{itr.mlName}}</option>
                             </select>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">密码：</label>&nbsp;
-							<input type="email" class="form-control" id="password" placeholder="请输入密码" v-model="memberList.password">
+							<input type="email" class="form-control" placeholder="请输入密码" v-model="memberList.password">
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11" data-toggle="distpicker">
 							<label for="exampleInputName2">地址：</label>&nbsp;
-							<select class="form-control form-control-line" id="province1" v-model="memberList.province"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="city1" v-model="memberList.city"></select>&nbsp;-&nbsp;
-							<select class="form-control form-control-line" id="district1" v-model="memberList.region"></select>
+							<select class="form-control form-control-line province" v-model="memberList.province"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line city" v-model="memberList.city"></select>&nbsp;-&nbsp;
+							<select class="form-control form-control-line region" v-model="memberList.region"></select>
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
 							<label for="exampleInputEmail2">街道：</label>&nbsp;
-							<input type="email" class="form-control col-md-6" placeholder="请输入街道/详细地址" id="street" v-model="memberList.street">
+							<input type="email" class="form-control col-md-6" placeholder="请输入街道/详细地址" v-model="memberList.street">
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-primary" @click="xg">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -437,7 +436,7 @@
 						PageList:{
 							list:[]
 						},
-						LevelList:{},
+						LevelList:[],
 						memberList:{}
 					}
 				},
@@ -552,16 +551,37 @@
 						
 					},
 					xgcx:function(id){
-						var _this=this;
+						var _is=this;
 						$.ajax({
-							url:"[[@{/MemberManage/selectById}]]",
+							url:"[[@{/MemberManage/queryById}]]",
 							type:"get",
 							data:{
 								MemberId:id
 							},
 							dataType:"json",
 							"success":function(res){
-								_this.memberList=res;
+								_is.memberList=res;
+								$(".province").val(_is.memberList.province).trigger('change');
+								$(".city").val(_is.memberList.city).trigger('change');
+								$(".region").val(_is.memberList.region).trigger('change');
+								alert(JSON.stringify(_is.memberList));
+							}
+						});
+						
+					},
+					xg:function(){
+						var _tis=this;
+						var s=JSON.stringify(_tis.memberList);
+						alert(s);
+						$.ajax({
+							url:"[[@{/MemberManage/updateById}]]",
+							type:"put",
+							data:JSON.stringify(_tis.memberList),
+							dataType:"json",
+							contentType:"application/json",
+							"success":function(res){
+								alert(res.msg);
+								location.href="http://localhost:8080/MemberManage/toMember";
 							}
 						});
 					}

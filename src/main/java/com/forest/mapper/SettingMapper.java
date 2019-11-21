@@ -27,4 +27,8 @@ public interface SettingMapper {
     int updateByPrimaryKeySelective(Setting record);
 
     int updateByPrimaryKey(Setting record);
+    
+    Setting queryById();
+    
+    int updataAll(Setting s);
 }

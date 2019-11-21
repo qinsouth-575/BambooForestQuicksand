@@ -33,4 +33,6 @@ public interface MemberMapper {
     int insertMember(Member m);
     
     Member queryById(int MemberId);
+    
+    int updateById(Member m);
 }

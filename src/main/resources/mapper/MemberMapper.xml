@@ -356,4 +356,20 @@
   <select id="queryById" resultMap="BaseResultMap" parameterType="int">
   		select * from member where member_id=#{0}
   </select>
+  <update id="updateById" parameterType="com.forest.entity.Member">
+  		 update member
+    set phoen = #{phoen,jdbcType=INTEGER},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      ml_id = #{mlId,jdbcType=SMALLINT},
+      password = #{password,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      balance = #{balance,jdbcType=DECIMAL},
+      integral = #{integral,jdbcType=INTEGER},
+      wechat_num = #{wechatNum,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
 </mapper>
