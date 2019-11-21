@@ -3,6 +3,7 @@ package com.forest.action;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,14 +33,20 @@ public class CommodityMDAction {
 		return "d_commodity_manager";
 	}
 	
-	@RequestMapping(value = "cm", method = RequestMethod.GET)
+	@RequestMapping(value = "cm", method = RequestMethod.POST)
 	@ResponseBody
-	public PageInfo<CommodityMD> queryPage(Integer pageNum){
+	public PageInfo<CommodityMD> queryPage(@RequestBody CommodityMD cmd){
 		log.debug("BambooForestQuicksand - CommodityMDAction - queryPage");
-		PageInfo<CommodityMD> page = cmdb.queryMDAllByManager(pageNum, 5);
-		log.info("分页类信息：" + page);
+		log.info("多条件+分页查询 - 参数信息：" + cmd);
+		PageInfo<CommodityMD> page = cmdb.queryMDAllByManager(cmd);
+		log.info("查询结果分页类信息：" + page);
 		return page;
 	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value = "toUploading", method = RequestMethod.GET)
 	public String toCommodityUploading() {

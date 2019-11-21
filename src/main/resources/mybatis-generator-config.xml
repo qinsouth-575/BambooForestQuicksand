@@ -29,7 +29,8 @@
 		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
 		<!-- mapper接口生成 -->
 		<javaClientGenerator targetPackage="com.forest.mapper" targetProject="src/main/java" type="XMLMAPPER" />
-			<table schema="Account" tableName="account"></table>
+			<table schema="CommodityMain" tableName="commodity_main"></table>
+			<!-- <table schema="Account" tableName="account"></table>
 			<table schema="Shop" tableName="shop"></table>
 			<table schema="Jurisdiction" tableName="jurisdiction"></table>
 			<table schema="Position" tableName="position"></table>
@@ -49,7 +50,7 @@
 			<table schema="TransactionRecordMain" tableName="transaction_record_main"></table>
 			<table schema="TransactionRecordDetails" tableName="transaction_record_details"></table>
 			<table schema="Setting" tableName="setting"></table>
-			<table schema="Region" tableName="Region"></table>
+			<table schema="Region" tableName="Region"></table> -->
 			
 			
 <!-- 		<table schema="Sys_permissions" tableName="sys_permissions"></table> -->

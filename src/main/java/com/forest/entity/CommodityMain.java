@@ -21,6 +21,8 @@ public class CommodityMain {
 
     private String information;
 
+    private Short shopId;
+
     public Integer getCmId() {
         return cmId;
     }
@@ -91,5 +93,13 @@ public class CommodityMain {
 
     public void setInformation(String information) {
         this.information = information;
+    }
+
+    public Short getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Short shopId) {
+        this.shopId = shopId;
     }
 }

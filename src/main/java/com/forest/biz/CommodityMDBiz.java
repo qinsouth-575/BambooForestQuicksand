@@ -28,11 +28,14 @@ public class CommodityMDBiz {
 	 * - 1.查询全部
 	 * @return
 	 */
-    public PageInfo<CommodityMD> queryMDAllByManager(Integer pageNum, Integer pageSize){
-    	PageHelper.startPage(pageNum, pageSize);
-    	List<CommodityMD> comList = cmdDAO.queryMDAllByManager();
+    public PageInfo<CommodityMD> queryMDAllByManager(CommodityMD cmd){
+    	PageHelper.startPage(cmd.getPageNum(), 4);
+    	List<CommodityMD> comList = cmdDAO.queryMDAllByManager(cmd);
     	PageInfo<CommodityMD> page = new PageInfo<CommodityMD>(comList); 
     	return page;
     }
 	
+    
+    
+    
 }

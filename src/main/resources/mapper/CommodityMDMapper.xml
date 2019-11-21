@@ -14,14 +14,27 @@
   	<result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
     <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
+    <result column="shop_id" property="shopId" jdbcType="SMALLINT" />
+    <result column="ct_id" property="ctId" jdbcType="SMALLINT" />
   </resultMap>
   
-  <select id="queryMDAllByManager" resultMap="BaseResultMap">
-  	SELECT d.`cd_id`,m.`cm_id`,t.`ct_name`,m.`cm_name`,m.`article_no`,d.`bar_code`,d.`color`,s.`size_name`,d.`quantity`,m.`sale_price`,m.`cost_price`
+  <select id="queryMDAllByManager" parameterType="com.forest.entity.CommodityMD" resultMap="BaseResultMap">
+  	SELECT d.`cd_id`,m.`cm_id`,t.`ct_name`,m.`cm_name`,m.`article_no`,d.`bar_code`,d.`color`,s.`size_name`,d.`quantity`,m.`sale_price`,m.`cost_price`,m.`shop_id`,t.`ct_id`
 	FROM `commodity_main` AS m
 	LEFT JOIN `commodity_details` AS d ON m.`cm_id` = d.`cm_id`
 	LEFT JOIN `commodity_type` AS t ON m.`ct_id` = t.`ct_id`
-	left join `size` as s on d.`size_id` = s.`size_id`
+	LEFT JOIN `size` AS s ON d.`size_id` = s.`size_id`
+	<where>
+		<if test="shopId != null and shopId != ''">
+			AND m.`shop_id` = #{shopId}
+		</if>
+		<if test="ctId != null and ctId != ''">
+			AND t.`ct_id` = #{ctId}
+		</if>
+		<if test="cmName != null and cmName != ''">
+			AND m.`cm_name` LIKE '%${cmName}%'
+		</if>
+	</where>
 	GROUP BY d.`cd_id`
   </select>
   

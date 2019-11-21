@@ -16,5 +16,9 @@ public interface CommodityMDMapper {
 	 * - 1.查询全部
 	 * @return
 	 */
-    public List<CommodityMD> queryMDAllByManager();
+    public List<CommodityMD> queryMDAllByManager(CommodityMD cmd);
+    
+    
+    
+    
 }
