@@ -28,6 +28,7 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
+    <div id="pos">
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
@@ -198,45 +199,15 @@
                                         <thead>
                                             <tr>
                                                 <th>序号</th>
-                                                <th>地址</th>
+                                                <th>名称</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
+                                            <tr v-for="item,index in pos">
+                                                <td>{{(index+1)}}</td>
+                                                <td>{{item.posName}}</td>
                                                 <td><a href="#" class="btn hidden-sm-down btn-info" data-toggle="modal" data-target=".bs-example-modal-lg">编辑</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sanghani</td>
-                                                <td>Gusikowski</td>
-                                                <td>@Govinda</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Roshan</td>
-                                                <td>Rogahn</td>
-                                                <td>@Hritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Joshi</td>
-                                                <td>Hickle</td>
-                                                <td>@Maruti</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Nigam</td>
-                                                <td>Eichmann</td>
-                                                <td>@Sonu</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -412,19 +383,19 @@
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
 							<label for="exampleInputName2">库存：</label>&nbsp;
-							<input type="checkbox"><label for="exampleInputName2">入仓单</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox"><label for="exampleInputName2">出货单</label>&nbsp;&nbsp;&nbsp;
-							<input type="checkbox"><label for="exampleInputName2">调拨单</label>&nbsp;&nbsp;&nbsp;
-							<input type="checkbox"><label for="exampleInputName2">退货单</label>&nbsp;&nbsp;&nbsp;
+							<input type="checkbox"><label for="exampleInputName2">入仓单</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox"><label for="exampleInputName2">出货单</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox"><label for="exampleInputName2">调拨单</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox"><label for="exampleInputName2">退货单</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="checkbox"><label for="exampleInputName2">报损单</label>&nbsp;&nbsp;&nbsp;
 							<input type="checkbox"><label for="exampleInputName2">盘点单</label>&nbsp;&nbsp;&nbsp;
 						</div>
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
 							<label for="exampleInputName2">采购：</label>&nbsp;
-							<input type="checkbox"><label for="exampleInputName2">供应商</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="checkbox"><label for="exampleInputName2">订货会</label>&nbsp;&nbsp;&nbsp;
-							<input type="checkbox"><label for="exampleInputName2">采购单</label>&nbsp;&nbsp;&nbsp;
+							<input type="checkbox"><label for="exampleInputName2">供应商</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox"><label for="exampleInputName2">订货会</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="checkbox"><label for="exampleInputName2">采购单</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="checkbox"><label for="exampleInputName2">合同审核</label>&nbsp;&nbsp;&nbsp;
 						</div>
 						<div class="form-group col-md-1"></div>
@@ -443,6 +414,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
     <!-- ============================================================== -->
     <!-- End Model -->
@@ -475,5 +447,31 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script th:src="@{/js/vue.js}"></script>
+    <script>
+    		var vue=new Vue({
+    			el:"#pos",
+    			data(){
+    				return {
+    					pos:[]
+    				}
+    			},methods:{
+    				queryPosition:function(){
+    					var this_=this;
+    					$.ajax({
+    						url:"[[@{/pos/queryAll}]]",
+    						type:"get",
+    						success:function(res){
+    							this_.pos=res;
+    						}
+    					});
+    				}
+    			},
+    			created:function(){
+    				this.queryPosition();
+    			}
+    		});
+    
+    </script>
 </body>
 </html>

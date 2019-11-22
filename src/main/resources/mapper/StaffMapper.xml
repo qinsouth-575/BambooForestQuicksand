@@ -107,9 +107,9 @@
   </delete>
   <insert id="insert" parameterType="com.forest.entity.Staff" >
     insert into staff (staff_id, shop_id, pos_id, 
-      job_number, staff_name, password)
+      job_number, staff_name, password,staff_state,create_time)
     values (#{staffId,jdbcType=INTEGER}, #{shopId,jdbcType=SMALLINT}, #{posId,jdbcType=INTEGER}, 
-      #{jobNumber,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+      #{jobNumber,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},1,#{createTime})
   </insert>
   <insert id="insertSelective" parameterType="com.forest.entity.Staff" >
     insert into staff
