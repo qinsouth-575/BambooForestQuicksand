@@ -55,4 +55,22 @@ public class MemberBiz {
 				public boolean updateById(Member m) {
 					return memberMapper.updateById(m)>0;
 				}
+				
+				/**
+				 * 根据会员编号修改余额和积分(用于充值)
+				 * @param m
+				 * @return
+				 */
+				public boolean updatebi(Member m) {
+					return memberMapper.updatebi(m)>0;
+				}
+				
+				/**
+				 * 根据会员编号查询是否有该会员(用于充值)
+				 * @param MemberId
+				 * @return
+				 */
+				public int queryCont(int MemberId) {
+					return memberMapper.queryCont(MemberId);
+				}
 }

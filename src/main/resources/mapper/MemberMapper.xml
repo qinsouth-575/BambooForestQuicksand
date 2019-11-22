@@ -372,4 +372,14 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
+  <update id="updatebi" parameterType="com.forest.entity.Member">
+  		 update member
+    set balance = #{balance,jdbcType=DECIMAL},
+      integral = #{integral,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryCont" resultType="int" parameterType="int">
+  			select count(*) from member where member_id=#{0}
+  </select>
 </mapper>
