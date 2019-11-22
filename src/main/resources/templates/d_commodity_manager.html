@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/}" class="waves-effect">
+                            <a th:href="@{/commodityManager/toUploadingPage}" class="waves-effect">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
@@ -173,30 +173,30 @@
                 <!-- Bread crumb and right sidebar toggle -->
                 <!-- ============================================================== -->
                 <div class="row page-titles">
-                    <div class="col-md-4 col-8 align-self-center">
+                    <div class="col-md-3 col-8 align-self-center">
                         <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">商品管理</h3>
                     </div>
-                    <div class="col-md-8 col-4 align-self-center" style="padding-left: 27px;">
-                        <select class="form-control form-control-line f_input" style="width: 120px;">
-                            <option>所有店铺</option>
+                    <div class="col-md-9 col-4 align-self-center" style="padding-left: 27px;">
+                        <select class="form-control form-control-line f_input shopList" style="width: 129px;">
+                            <option value="">所有店铺</option>
                             <option v-for="item in shopList" :value="item.shopId">{{item.shopName}}</option>
                         </select>
                         
-                        <select class="form-control form-control-line f_input" style="width: 120px;">
-                            <option>所有职位</option>
+                        <select class="form-control form-control-line f_input typeList" style="width: 147px;">
+                            <option value="">所有职位</option>
                             <option v-for="item in typeList" :value="item.ctId">{{item.ctName}}</option>
                         </select>
                         
                         <div class="f_input" style="position: relative;">
-                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
-							<a href="javascript:;" class="list_search"></a>
+                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input ctName" style="width: 170px;">
+							<a href="javascript:;" class="list_search" @click="search"></a>
                         </div>
                         
                         <a href="#" class="btn hidden-sm-down btn-success">导出商品</a>
                         <a href="#" class="btn hidden-sm-down btn-success">批量导入</a>
                         
                         <!-- Button trigger modal -->
-                        <a href="#" class="btn hidden-sm-down btn-info" onclick="location.href='[[@{/commodity}]]'">商品上传</a>
+                        <a href="#" class="btn hidden-sm-down btn-info" onclick="location.href='/commodityManager/toUploadingPage'">商品上传</a>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -216,22 +216,22 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>选择</th>
-                                                <th>序号</th>
-                                                <th>类别</th>
-                                                <th>品名</th>
-                                                <th>货号/条码</th>
-                                                <th>规格</th>
-                                                <th>库存</th>
-                                                <th>销售价</th>
-                                                <th>成本价</th>
-                                                <th>网店同步</th>
-                                                <th>操作</th>
+                                                <th class="text-center">选择<input type="checkbox" @click="checkAll" v-model="checked"></th>
+                                                <th class="text-center">序号</th>
+                                                <th class="text-center">类别</th>
+                                                <th class="text-center">品名</th>
+                                                <th class="text-center">货号/条码</th>
+                                                <th class="text-center">规格</th>
+                                                <th class="text-center">库存</th>
+                                                <th class="text-center">销售价</th>
+                                                <th class="text-center">成本价</th>
+                                                <th class="text-center">网店同步</th>
+                                                <th class="text-center">操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="cmd in pageCmd.list">
-                                                <td><input type="checkbox" class="checkbox"></td>
+                                            <tr v-for="cmd in pageCmd.list" class="text-center">
+                                                <td><input type="checkbox" v-model="checkList" :value="cmd.cdId"></td>
                                                 <td>{{cmd.cdId}}</td>
                                                 <td>{{cmd.ctName}}</td>
                                                 <td>{{cmd.cmName}}</td>
@@ -242,8 +242,8 @@
                                                 <td>{{cmd.costPrice}}</td>
                                                 <td>-</td>
                                                 <td>
-                                                	<a href="javascript:void(0);">删除</a><!-- class="btn delBtn" -->
-                                                	<a href="javascript:void(0);">修改</a><!-- class="btn editBtn" -->
+                                                	<a href="javascript:void(0);">删除</a>
+                                                	<a href="javascript:void(0);">修改</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -304,21 +304,39 @@
     
     <script th:src="@{/js/vue.js}"></script>
     <script type="text/javascript">
-	  //VUE
+	  	//VUE
 		var vue = new Vue({
 			el : "#main-wrapper",
 			data(){
 				return {
 					pageCmd : {},
-					cmd : {
-						ctId : 0,
-						ctName : ""
-					},
 					shopList : [],
-					typeList : []
+					typeList : [],
+			　　　　	checked : false, 	//是否全选
+			　　　　	checkList : [] 		//双向数据绑定的数组，此处用的id
 				};
 			},
+			watch : {
+			　　	checkList : function(){
+   		　			if(this.checkList.length == this.pageCmd.list.length){
+			　　　　　　	this.checked = true;
+			　　　　	}else{
+			　　　　　　	this.checked = false;
+			　　　　	}
+			　　	}
+			},
 			methods:{
+				checkAll : function(){
+	   		　　		if(this.checked){
+	   		　　　　　　	this.checkList = [];
+	   		　　　　	}else{
+	   		　　　　　　	this.pageCmd.list.forEach((item)=>{
+		   		　　　　　　	if(this.checkList.indexOf(item.cdId) == -1){
+		   		　　　　　　　　	this.checkList.push(item.cdId);
+		   		　　　　　　	}
+	   		　　　　　　	});
+	   		　　　　	}
+	   		　	},
 				queryShopList : function(){
 					var this_=this;
 					$.ajax({
@@ -358,12 +376,12 @@
 				},
 				queryPage : function(pageNum){
 					var cmd = {
-							shopId : "",
-							ctId : "",
-							ctName : "",
+							shopId : $(".shopList").val(),
+							ctId : $(".typeList").val(),
+							ctName : $(".ctName").val(),
 							pageNum : pageNum
 					}
-					//alert(JSON.stringify(cmd));
+					//alert(JSON.stringify(cmd));	//11.22 09:12 - 测试完毕
 					
 	 				var this_ = this;
 	 				$.ajax({
@@ -374,23 +392,28 @@
 	 					dataType : "json",
 	 					success : function(result){
 	 						this_.pageCmd = result;
+	 						
+	 						this_.checked = false;
 	 					}
 	 				});
 				},
-    			goFirstPage:function(){
-    				this.queryPage(1)
-    			},
-    			goPrePage:function(){
-    				if(this.pageCmd.hasPreviousPage)
-       				this.queryPage(this.pageCmd.prePage)
-    			},
-    			goNextPage:function(){
-    				if(this.pageCmd.hasNextPage)
-       				this.queryPage(this.pageCmd.nextPage)
-    			},
-    			goLastPage:function(){
-    				this.queryPage(this.pageCmd.pages)
-    			},
+	   			goFirstPage : function(){
+	   				this.queryPage(1);
+	   			},
+	   			goPrePage : function(){
+	   				if(this.pageCmd.hasPreviousPage)
+	      				this.queryPage(this.pageCmd.prePage);
+	   			},
+	   			goNextPage : function(){
+	   				if(this.pageCmd.hasNextPage)
+	      				this.queryPage(this.pageCmd.nextPage);
+	   			},
+	   			goLastPage : function(){
+	   				this.queryPage(this.pageCmd.pages);
+	   			},
+	   			search : function(){
+	   				this.queryPage(1);
+	   			},
 			},
 			created:function(){
 				this.queryShopList();		//1.调用查询店铺列表的方法

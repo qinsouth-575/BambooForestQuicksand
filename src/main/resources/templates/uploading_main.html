@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8">
 		<title>商品上传主要部分</title>
-		<link rel="stylesheet" href="css/master.css" />
-		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
-		<script type="text/javascript" src="js/jquery.json-2.3.js"></script>
-		<!--<script type="text/javascript" src="js/jquery.jqzoom.min.js"></script>-->
-		<script type="text/javascript" src="js/jquery.form.js"></script>
-		<script type="text/javascript" charset="utf-8" src="js/ueditor.config.js"></script>
-		<script type="text/javascript" charset="utf-8" src="js/ueditor.all.min.js"></script>
+		<link rel="stylesheet" th:href="@{/css/master.css}" />
+		<script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/main.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.json-2.3.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.form.js}"></script>
+		<script type="text/javascript" charset="utf-8" th:src="@{/js/ueditor.config.js}"></script>
+		<script type="text/javascript" charset="utf-8" th:src="@{/js/ueditor.all.min.js}"></script>
 		
-		<link rel="stylesheet" href="uploading.css" />	
-		<script type="text/javascript" charset="utf-8" src="uploading.js"></script>
+		<link rel="stylesheet" th:href="@{/uploading.css}" />	
+		<script type="text/javascript" charset="utf-8" th:src="@{/uploading.js}"></script>
 		
 		<!-- 百度富文本编辑器CSS文件 -->
-	    <link href="umeditor-1.2.3/themes/default/_css/umeditor.css" type="text/css" rel="stylesheet">
+	    <link th:href="@{/umeditor-1.2.3/themes/default/_css/umeditor.css}" type="text/css" rel="stylesheet">
 		<!-- 百度富文本编辑器JS文件 -->
-	    <!--<script type="text/javascript" src="umeditor-1.2.3/third-party/jquery.min.js"></script>-->
-	    <script type="text/javascript" charset="utf-8" src="umeditor-1.2.3/umeditor.config.js"></script>
-	    <script type="text/javascript" charset="utf-8" src="umeditor-1.2.3/_examples/editor_api.js"></script>
-	    <script type="text/javascript" src="umeditor-1.2.3/lang/zh-cn/zh-cn.js"></script>
+	    <script type="text/javascript" charset="utf-8" th:src="@{/umeditor-1.2.3/umeditor.config.js}"></script>
+	    <script type="text/javascript" charset="utf-8" th:src="@{/umeditor-1.2.3/_examples/editor_api.js}"></script>
+	    <script type="text/javascript" th:src="@{/umeditor-1.2.3/lang/zh-cn/zh-cn.js}"></script>
 	</head>
 
 	<body>
@@ -33,22 +31,6 @@
 				<div class="uploadProductArea XXArea clearfix" guid="">
 					<!--右边信息 begin-->
 					<div class="rightDiv">
-						<div hidden class="synchroListDiv">
-							<i class="icon_arrow"></i>
-							<label class="frm_checkbox_label selected"><i class="icon_checkbox"></i>同步至微商城</label>
-							<div class="account_message_box">
-								<ul class="account_message_list">
-									<li>1、勾选后将该商品自动同步至微商城.</li>
-									<li>2、用户需开通微商城服务，若未开通请点击
-										<a href="http://www.poso2o.com/UserAccount/service_fees.jsp">前往开通></a>
-									</li>
-								</ul>
-								<span class="btn_closed">关闭</span>
-								<i class="message_arrow message_arrow_out"></i>
-								<i class="message_arrow message_arrow_in"></i>
-							</div>
-						</div>
-
 						<div class="ptype2">
 							<div class="listDiv">
 								<span class="title"><i>*</i>商品货号</span>
@@ -56,7 +38,6 @@
 
 								<span class="title">商品品牌</span>
 								<input type="text" value="" name="brand" class="inputText" maxlength="16">
-
 							</div>
 
 							<div class="listDiv">
@@ -67,23 +48,28 @@
 							<div class="listDiv">
 								<span class="title"><i>*</i>吊牌价格</span>
 								<input type="text" value="" name="price" class="inputText" maxlength="12">
+								
 								<span class="title"><i>*</i>成本价格</span>
 								<input type="text" value="" name="fprice" class="inputText" maxlength="12">
 							</div>
 							
 							<div class="listDiv">
 								<span class="title"><i>*</i>商品类别</span>
-								<span class="combox directoryBox dropDownBox"><input class="comboxText" type="text" style="width:138px" readonly value="请选择类别" comboxval=""><span class="comboxArrow"></span>
-								<div class="pannel hideDiv" style="width:172px;">
-									<ul class="directoryList">
-										<li>
-											<a comboxval="" default="请选择类别" href="javascript:void(0);">请选择类别</a>
-										</li>
-										<li>
-											<a comboxval="" default="1" href="javascript:void(0);">衬衫</a>
-										</li>
-									</ul>
-								</div>
+								<span class="combox directoryBox dropDownBox">
+									<input class="comboxText" type="text" style="width:138px" readonly value="请选择类别" comboxval="">
+									
+									<span class="comboxArrow"></span>
+									
+									<div class="pannel hideDiv" style="width:172px;">
+										<ul class="directoryList">
+											<li>
+												<a comboxval="" default="请选择类别" href="javascript:void(0);">请选择类别</a>
+											</li>
+											<li>
+												<a comboxval="" default="1" href="javascript:void(0);">衬衫</a>
+											</li>
+										</ul>
+									</div>
 								</span>
 							</div>
 
@@ -368,7 +354,7 @@
 						<div id="magnifier">
 							<div class="tb-booth tb-pic tb-s310">
 								<a href="javascript:void(0);">
-									<img src="picture/uploadimg150_150.jpg" alt="" rel="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" class="jqzoom">
+									<img src="/picture/uploadimg150_150.jpg" alt="" rel="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" class="jqzoom">
 								</a>
 							</div>
 						</div>
@@ -381,7 +367,7 @@
 									<ul class="tb-thumb productImgList" id="thumblist">
 										<!--<li class="">
 											<a href="javascript:void(0);" class="imgD">
-												<img big="http://img01.buyinchina.com/product/33734161724750798496/33734161724750798496-0.jpg" mid="http://img01.buyinchina.com/product/33734161724750798496/33734161724750798496-0_464_464.jpg" src="picture/33734161724750798496-0_66_66.jpg">
+												<img big="http://img01.buyinchina.com/product/33734161724750798496/33734161724750798496-0.jpg" mid="http://img01.buyinchina.com/product/33734161724750798496/33734161724750798496-0_464_464.jpg" src="/picture/33734161724750798496-0_66_66.jpg">
 											</a>
 											<div class="controlDiv">
 												<a class="leftBtn" href="javascript:void(0);">向左</a>
@@ -394,10 +380,9 @@
 											<label for="uploadImgFile" class="uploadImgFileLabel">&nbsp;</label>
 											<input type="file" name="file" class="file uploadImgFile" id="uploadImgFile" />
 											<a href="javascript:void(0);" class="imgD">
-												<img alt="" big="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" mid="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" src="picture/add_ico.png">
+												<img alt="" big="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" mid="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" src="/picture/add_ico.png">
 											</a>
 										</li>
-
 									</ul>
 								</div>
 							</div>
@@ -430,13 +415,22 @@
 		<!-- E containerArea -->
 		
 		<script type="text/javascript">
+			$(function(){
+				
+				
+				//2.
+				alert("uploading_main.html - 工厂函数");
+				
+			});
+		</script>
+		<script type="text/javascript">
 			//实例化编辑器
 		    var um = UM.getEditor('myEditor');
 		    um.addListener('blur',function(){
-		        $('#focush2').html('编辑器失去焦点了')
+		        $('#focush2').html('编辑器失去焦点了');
 		    });
 		    um.addListener('focus',function(){
-		        $('#focush2').html('')
+		        $('#focush2').html('');
 		    });
 		</script>
 	</body>

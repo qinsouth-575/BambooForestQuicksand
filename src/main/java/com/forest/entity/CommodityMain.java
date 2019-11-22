@@ -1,6 +1,7 @@
 package com.forest.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CommodityMain {
     private Integer cmId;
@@ -22,6 +23,8 @@ public class CommodityMain {
     private String information;
 
     private Short shopId;
+    
+    private List<CommodityDetails> cdList;
 
     public Integer getCmId() {
         return cmId;
@@ -102,4 +105,20 @@ public class CommodityMain {
     public void setShopId(Short shopId) {
         this.shopId = shopId;
     }
+
+	public List<CommodityDetails> getCdList() {
+		return cdList;
+	}
+
+	public void setCdList(List<CommodityDetails> cdList) {
+		this.cdList = cdList;
+	}
+
+	@Override
+	public String toString() {
+		return "CommodityMain [cmId=" + cmId + ", articleNo=" + articleNo + ", brand=" + brand + ", cmName=" + cmName
+				+ ", salePrice=" + salePrice + ", costPrice=" + costPrice + ", ctId=" + ctId + ", imgPath=" + imgPath
+				+ ", information=" + information + ", shopId=" + shopId + ", cdList=" + cdList + "]";
+	}
+    
 }

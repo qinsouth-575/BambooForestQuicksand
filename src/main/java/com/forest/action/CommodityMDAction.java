@@ -27,12 +27,14 @@ public class CommodityMDAction {
 	@Autowired
 	private CommodityMDBiz cmdb;
 	
+	//跳转 商品管理页面
 	@RequestMapping(value = "toPage", method = RequestMethod.GET)
-	public String toCommodityManager() {
-		log.debug("BambooForestQuicksand - CommodityMDAction - toCommodityManager");
+	public String toCommodityManagerPage() {
+		log.debug("BambooForestQuicksand - CommodityMDAction - toCommodityManagerPage");
 		return "d_commodity_manager";
 	}
 	
+	//1.商品多条件查询
 	@RequestMapping(value = "cm", method = RequestMethod.POST)
 	@ResponseBody
 	public PageInfo<CommodityMD> queryPage(@RequestBody CommodityMD cmd){
@@ -43,17 +45,24 @@ public class CommodityMDAction {
 		return page;
 	}
 	
-	
-	
-	
-	
-	
-	@RequestMapping(value = "toUploading", method = RequestMethod.GET)
-	public String toCommodityUploading() {
-		log.debug("BambooForestQuicksand - CommodityMDAction - toCommodityUploading");
-		
+	//跳转 商品上传页面
+	@RequestMapping(value = "toUploadingPage", method = RequestMethod.GET)
+	public String toCommodityUploadingPage() {
+		log.debug("BambooForestQuicksand - CommodityMDAction - toCommodityUploadingPage");
 		return "d_commodity_uploading";
 	}
+	
+	//跳转 商品上传编辑页面
+	@RequestMapping(value = "toUploadingMainPage", method = RequestMethod.GET)
+	public String toCommodityUploadingMainPage() {
+		log.debug("BambooForestQuicksand - CommodityMDAction - toCommodityUploadingMainPage");
+		return "uploading_main";
+	}
+	
+	
+	
+	
+	
 	
 	
 	

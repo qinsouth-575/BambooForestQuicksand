@@ -36,7 +36,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" th:href="@{/}">
                         <!-- Logo icon -->
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/}" class="waves-effect active">
+                            <a th:href="@{/commodityManager/toUploadingPage}" class="waves-effect active">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
@@ -186,7 +186,7 @@
                 <!-- Row Start 模板布局 -->
                 <div class="row" style="margin-left: 13px;">
 					<!--这是正常显示内容的iframe onload="setIframeHeight(this)" -->
-                	<iframe src="uploading_main.html" id="test" onload="this.height=1300" 
+                	<iframe th:src="@{/commodityManager/toUploadingMainPage}" id="test" onload="this.height=1300" 
                 		scrolling="no" width="1030px" frameborder="0"></iframe>
                 </div>
                 <!-- Row End 模板布局 -->
@@ -231,8 +231,63 @@
     
     <script th:src="@{/js/vue.js}"></script>
 	<script type="text/javascript">
+		var commodityMain = {
+				cmId : 0,
+				articleNo : "",
+				brand : "",
+				cmName : "",
+				salePrice : "",
+				costPrice : "",
+				ctId : "",
+				imgPath : "",
+				information : "",
+				shopId : "",
+				commodityDetails : [
+					{
+						cdId : 0,
+						cmId : 0,
+						sizeId : "",
+						color : "",
+						quantity : 0,
+						barCode : ""
+					},{
+						cdId : 0,
+						cmId : 0,
+						sizeId : "",
+						color : "",
+						quantity : 0,
+						barCode : ""
+					}
+				]
+		};
+		var typeList = [];
+		
 		$(function() {
-
+			//1.获取session中保存的登录用户的信息，更新头像
+			$.ajax({
+				url:"[[@{/session}]]",
+				type:"get",
+				dataType : "json",
+				success:function(res){
+					//alert(JSON.stringify(res));		看console控制台
+					$(".profile-pic").attr("src", "/" + res.headPortraitPath);
+					
+					$.ajax({
+						url:"[[@{/commoditytypes/ct}]]",
+						type:"get",
+						dataType : "json",
+						success:function(res){
+							typeList = res;//JSON.parse(res);
+							alert(JSON.stringify(typeList));	//
+						}
+					});
+					//Ajax代码结束
+				}
+			});
+			//Ajax代码结束
+			
+			//2.
+			alert("d_commodity_uploading.html - 工厂函数");
 		});
 
 		function reinitIframe() {
@@ -247,6 +302,21 @@
 		}
 		window.setInterval("reinitIframe()", 200);
 	</script>
+	<script type="text/javascript">
+		/* var vue = new Vue({
+			el : "#main-wrapper",
+			data(){
+				return {
+					pageCmd : {}
+				};
+			},
+			methods:{
+				
+			},
+			created:function(){
+				
+			}
+		}); */
+	</script>
 </body>
-
 </html>
