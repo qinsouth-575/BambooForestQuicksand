@@ -68,7 +68,7 @@
             'adapter/combobox.js'
         ],
         /*baseURL = '../_src/';*/
-        baseURL = 'umeditor-1.2.3/_src/';
+        baseURL = '/umeditor-1.2.3/_src/';
     for (var i=0,pi;pi = paths[i++];) {
         document.write('<script type="text/javascript" src="'+ baseURL + pi +'"></script>');
     }

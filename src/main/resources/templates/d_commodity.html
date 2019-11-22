@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/}" class="waves-effect">
+                            <a th:href="@{/commodityManager/toUploadingPage}" class="waves-effect">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
@@ -195,18 +195,18 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>序号</th>
-                                                <th>名称</th>
-                                                <th>操作</th>
+                                                <th class="text-center">序号</th>
+                                                <th class="text-center">名称</th>
+                                                <th class="text-center">操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="ct in ctList">
+                                            <tr v-for="ct in ctList" class="text-center">
                                                 <td>{{ct.ctId}}</td>
                                                 <td>{{ct.ctName}}</td>
                                                 <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);" @click="deleteCT(ct.ctId)">删除</a>&nbsp;
-                                                	<a class="btn editBtn" href="javascript:void(0);" @click="toUpdateCT(ct.ctId)">修改</a>
+                                                	<a href="javascript:void(0);" @click="toUpdateCT(ct.ctId)">修改</a>&nbsp;&nbsp;
+                                                	<a href="javascript:void(0);" @click="deleteCT(ct.ctId)">删除</a>
                                                 </td>
                                             </tr>
                                         </tbody>

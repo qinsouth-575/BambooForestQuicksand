@@ -88,10 +88,10 @@ $(function() {
 	/*
 	 * 上传图片
 	 */
-	$("#addProductPicBtn").live('click',function(){
+	$("#addProductPicBtn").live('click', function() {
 
-		if($("#thumblist li").size()>12){
-			("最多只能上传12张图片",'error');
+		if($("#thumblist li").size() > 12) {
+			("最多只能上传12张图片", 'error');
 			return false;
 		}
 		$("#uploadImgFile").trigger("click"); //处理事件
@@ -542,7 +542,7 @@ function getSizeInfo() {
 	paramObject.sessionKey = userInfo.password;
 	paramObject.wx = "1";
 	var paramJson = jQuery.param(paramObject);
-	$.ajax({
+	/*$.ajax({
 		type: "POST",
 		dataType: "json",
 		cache: false,
@@ -570,7 +570,7 @@ function getSizeInfo() {
 		error: function() {
 			fntopmessagebox('获取信息失效.', 'error');
 		}
-	}).always(function() {})
+	}).always(function() {})*/
 }
 
 //生成数量列表
@@ -938,7 +938,9 @@ $.fn.toUploadImgFileX = function() {
 	})
 }
 
-//上传商品
+/*
+ * 上传商品
+
 $("#toNewProductBtn").live("click", function() {
 
 	var paramObject = new Object();
@@ -1145,10 +1147,14 @@ $("#toNewProductBtn").live("click", function() {
 		$('.toNewProductBtn').attr('id', 'toNewProductBtn').removeClass("loadingBnt").html("发布商品");
 		$("#imloadingDialog, #itemOverlay").remove();
 	})
-
 })
+ *
+ */
 
-$(function() {
+
+/*$(function() {
+ * 	jQuery 入口函数 这里的ajax用不了，无法使用
+ * 
 	$(".navArea ul li:eq(1),.navList .nav_add").addClass("current");
 	//取店类型： 0=服装店，1=餐饮店，-1=未类型
 	if(userInfo.shoptype == "0") { //服装店
@@ -1164,9 +1170,9 @@ $(function() {
 	setWindowHeight();
 	getSizeInfo(); //获取尺码
 })
-/* *
+ *
  * 上传商品 - 设置高度
- */
+ * 
 function setWindowHeight() {
 	$(".containerArea").css("height", "auto");
 	var body_H = $(".containerArea").height() + 182;
@@ -1177,6 +1183,7 @@ function setWindowHeight() {
 		$(".containerArea").css("height", window_height - 206);
 	}
 }
+*/
 
 $(function() {
 	$(".uploadProductArea .fdSize .skuItem .inputText").val("");
@@ -1220,7 +1227,8 @@ var editProduct = {
 		paramObject.sessionKey = userInfo.password;
 		paramObject.guid = guid;
 		var paramJson = jQuery.param(paramObject);
-		$.ajax({
+		
+		/*$.ajax({
 			type: "POST",
 			dataType: "json",
 			cache: false,
@@ -1298,9 +1306,9 @@ var editProduct = {
 							}
 
 						}
-						/*if(sizeHTML==''){
-							sizeHTML+='<li class="" title="均码"><a href="javascript:void(0);">均码</a><i></i></li>';
-						}*/
+						//if(sizeHTML==''){
+						//	sizeHTML+='<li class="" title="均码"><a href="javascript:void(0);">均码</a><i></i></li>';
+						//}
 						$("#productsSizeList ul").append(sizeHTML);
 						//颜色
 						var colors = data.colors;
@@ -1395,6 +1403,8 @@ var editProduct = {
 			setTimeout(function() {
 				$("#imloadingDialog").remove();
 			}, 600);
-		})
+		});
+		*/
+		
 	}
 }

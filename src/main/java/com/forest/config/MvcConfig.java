@@ -20,11 +20,10 @@ import com.forest.intercepors.LoginInterceptor;
 @SuppressWarnings("deprecation")
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
+	//extends WebMvcConfigurationSupport
 	
 	@Autowired
 	LoginInterceptor loginI;
-	
-	//extends WebMvcConfigurationSupport
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -34,6 +33,28 @@ public class MvcConfig implements WebMvcConfigurer {
 		
 		//super.addResourceHandlers(registry);	改为实现WebMvcConfigurer接口后必须 注释/删除 这一句
 	}
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+    	// TODO Auto-generated method stub
+    	List<String> pathPattern = new ArrayList<String>();
+    	pathPattern.add("/login");
+    	pathPattern.add("/register");
+    	
+    	pathPattern.add("/assets/**");
+    	pathPattern.add("/css/**");
+    	pathPattern.add("/scss/**");
+    	pathPattern.add("/umeditor-1.2.3/**");	//百度富文本编辑器下的全部静态文件
+    	pathPattern.add("/uploading.css");		//商品编辑页面 抽取出的CSS文件
+    	pathPattern.add("/js/**");
+    	pathPattern.add("/uploading.js");		//商品编辑页面 抽取出的JS代码
+    	
+    	pathPattern.add("/images/**");
+    	pathPattern.add("/picture/**");
+    	
+		registry.addInterceptor(loginI).addPathPatterns("/**").excludePathPatterns(pathPattern);
+    	WebMvcConfigurer.super.addInterceptors(registry);
+    }
 	
 	/**
      * - 修改自定义消息转换器
@@ -77,22 +98,6 @@ public class MvcConfig implements WebMvcConfigurer {
         supportedMediaTypes.add(MediaType.TEXT_PLAIN);
         supportedMediaTypes.add(MediaType.TEXT_XML);
         return supportedMediaTypes;
-    }
-    
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-    	// TODO Auto-generated method stub
-    	List<String> pathPattern = new ArrayList<String>();
-    	pathPattern.add("/login");
-    	pathPattern.add("/register");
-    	pathPattern.add("/assets/**");
-    	pathPattern.add("/css/**");
-    	pathPattern.add("/js/**");
-    	pathPattern.add("/scss/**");
-    	pathPattern.add("/images/**");
-    	
-		registry.addInterceptor(loginI).addPathPatterns("/**").excludePathPatterns(pathPattern);
-    	WebMvcConfigurer.super.addInterceptors(registry);
     }
 
 }
