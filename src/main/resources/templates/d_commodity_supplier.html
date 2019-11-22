@@ -438,7 +438,6 @@
     		$('.shen').val(null).trigger('change');
 			$('.shi').val(null).trigger('change');
     	});
-    
     	var sup=new Vue({
     		el:"#supper",
     		data(){
@@ -456,7 +455,6 @@
     						city:$(".shi").val(),
     						companyNname:$("#gName").val()
     				};
-    				//alert(JSON.stringify(su));
     				$.ajax({
     					url:"[[@{/supplier/goPage}]]",
     					type:"post",
@@ -486,7 +484,6 @@
     				this.goPage(this.supplier.pages)
     			},
     			del:function(id){
-    				//alert(id);
     				var this_=this;
     				$.ajax({
     					url:"[[@{/supplier/deleteSupplier}]]",
@@ -530,7 +527,6 @@
     					dataType:"json",
     					success:function(res){
     						that.supp=res;
-    						alert(JSON.stringify(that.supp));
     						$("#supId").val(that.supp.supId);
     						$("#companyName").val(that.supp.companyName);
     						$("#shortName").val(that.supp.shortName);

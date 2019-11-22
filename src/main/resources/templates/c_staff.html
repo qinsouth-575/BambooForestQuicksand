@@ -356,9 +356,13 @@
 						</div>
 	
 						<div class="form-group col-md-1"></div>
-						<div class="form-group col-md-11">
+						<div class="form-group col-md-5">
 							<label for="exampleInputName2">密码：</label>&nbsp;
 							<input type="email" class="form-control" id="password">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="exampleInputName2">手机：</label>&nbsp;
+							<input type="email" class="form-control" id="phone">
 						</div>
 					</form>
 				</div>
@@ -422,7 +426,6 @@
 							type:"get",
 							success:function(res){
 								this_.staff=res;
-								//alert(JSON.stringify(this_.staff));
 								for(var i=0;i<this_.staff.length;i++){
 									if(this_.staff[i].posId==1){
 	    								this_.staff[i].posName="-";
@@ -491,9 +494,9 @@
 								posId:$(".pos").val(),
 								jobNumber:$("#jobNumber").val(),
 								password:$("#password").val(),
-								staffName:$("#staffName").val()
+								staffName:$("#staffName").val(),
+								phone:$("#phone").val(),
 						};
-						alert(JSON.stringify(obj));
 						$.ajax({
 							url:"[[@{/insertStaff}]]",
 							type:"post",
@@ -517,7 +520,6 @@
 								staffName:$("#staffName1").val(),
 								staffId:$("#staffId").val()
 						};
-						//alert(JSON.stringify(obj));
 						$.ajax({
 							url:"[[@{/updateStaff}]]",
 							type:"post",
@@ -531,18 +533,15 @@
 						});
 					},
 					select:function(){
-						//alert(1);
 						var this_=this;
 						var shopId=$("#shopId1").val();
 						if(shopId=="所有店铺"){
 							shopId="";
 						}
-						//alert(shopId);
 						var posId=$("#posId1").val();
 						if(posId=="所有职位"){
 							posId="";
 						}
-						//alert(posId);
 						$.ajax({
 							url:"[[@{/querySandP}]]",
 							type:"get",
@@ -552,7 +551,6 @@
 								posId:posId
 							},
 							success:function(res){
-								//alert(res);
 								this_.staff=res;
 							}
 							

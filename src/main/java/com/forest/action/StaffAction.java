@@ -2,6 +2,7 @@ package com.forest.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +30,22 @@ public class StaffAction {
 	
 	@Autowired
 	private StaffBiz sb;
-
+	/**
+	 * 查询所有员工
+	 * @return
+	 */
 	@RequestMapping("/query")
 	@ResponseBody
 	public List<Staff> queryAll(){
 		return sb.queryAll();
 	}
-	
+	/**
+	 * 根据店铺编号、职位编号、工号查询
+	 * @param shopId
+	 * @param posId
+	 * @param jobNumber
+	 * @return
+	 */
 	@GetMapping("/querySandP")
 	@ResponseBody
 	public List<Staff> querySandP(Short shopId,Integer posId,String jobNumber){
@@ -46,13 +56,19 @@ public class StaffAction {
 		System.out.println(staff);
 		return sb.queryShopAndPos(staff);
 	}
-	
+	/**
+	 * 查询所有职位
+	 * @return
+	 */
 	@RequestMapping("/queryPos")
 	@ResponseBody
 	public List<Position> queryPos(){
 		return sb.queryStaff();
 	}
-	
+	/**
+	 * 查询所有店铺
+	 * @return
+	 */
 	@RequestMapping("/queryShop")
 	@ResponseBody
 	public List<Shop> queryShop(){
@@ -97,6 +113,7 @@ public class StaffAction {
 	@ResponseBody
 	public Map<String,String> insert(@RequestBody Staff staff){
 		System.out.println(staff);
+		staff.setCreateTime(new Date());
 		sb.insert(staff);
 		Map<String,String> map=new HashMap<String, String>();
 		map.put("code", "新增成功");
