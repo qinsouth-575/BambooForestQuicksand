@@ -35,4 +35,8 @@ public interface MemberMapper {
     Member queryById(int MemberId);
     
     int updateById(Member m);
+    
+    int updatebi(Member m);
+    
+    int queryCont(int MemberId);
 }

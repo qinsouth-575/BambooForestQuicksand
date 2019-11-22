@@ -123,4 +123,33 @@ public class MemberManageAction {
 					}
 					return map;
 				}
+				
+				/**
+				 * 根据会员编号修改会员余额和积分(用于充值)
+				 * @param m
+				 * @return
+				 */
+				@RequestMapping(value="/updatebi",method = RequestMethod.PUT)
+				@ResponseBody
+				public Map<String, String> updatebi(@RequestBody Member m){
+					Map<String, String> map=new HashMap<String, String>();
+					boolean b=memberBiz.updatebi(m);
+					if(b) {
+						map.put("msg", "修改成功");
+					}else {
+						map.put("msg", "修改失败");
+					}
+					return map;
+				}
+				
+				/**
+				 * 根据会员编号查询是否存在该会员(用于充值)
+				 * @param MemberId
+				 * @return
+				 */
+				@RequestMapping("/queryCont")
+				@ResponseBody
+				public int queryCont(int MemberId) {
+					return memberBiz.queryCont(MemberId);
+				}
 }

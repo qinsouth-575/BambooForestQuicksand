@@ -16,7 +16,7 @@ public class RechargeRecord {
 
     private BigDecimal presentBalance;
 
-    private Date createTime;
+    private String createTime;
 
     private String remark;
     
@@ -28,7 +28,7 @@ public class RechargeRecord {
     
     private BigDecimal balance;
     
-    private float ye;
+    private float xf;
 
     public String getWechatNum() {
 		return wechatNum;
@@ -62,12 +62,12 @@ public class RechargeRecord {
 		this.balance = balance;
 	}
 
-	public float getYe() {
-		return ye;
+	public float getXf() {
+		return xf;
 	}
 
-	public void setYe(float ye) {
-		this.ye = ye;
+	public void setXf(float xf) {
+		this.xf = xf;
 	}
 
 	public Integer getRrId() {
@@ -118,11 +118,11 @@ public class RechargeRecord {
         this.presentBalance = presentBalance;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 

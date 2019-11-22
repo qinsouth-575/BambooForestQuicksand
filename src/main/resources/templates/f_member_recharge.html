@@ -229,56 +229,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Prohaska</td>
-                                                <td>@Genelia</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
+                                            <tr v-for="item,index in PageList.list">
+                                                <td>{{item.rrId}}</td>
+                                                <td>{{item.createTime}}</td>
+                                                <td>{{item.wechatNum}}</td>
+                                                <td>{{item.memberName}}</td>
+                                                <td>{{item.phoen}}</td>
+                                                <td>{{item.rechargeMoney}}</td>
+                                                <td>{{item.presentIntegral}}</td>
+                                                <td>{{item.xf}}</td>
+                                                <td>{{item.presentBalance}}</td>
+                                                <td>{{item.remark}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Sanghani</td>
-                                                <td>Gusikowski</td>
-                                                <td>@Govinda</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Roshan</td>
-                                                <td>Rogahn</td>
-                                                <td>@Hritik</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Joshi</td>
-                                                <td>Hickle</td>
-                                                <td>@Maruti</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Nigam</td>
-                                                <td>Eichmann</td>
-                                                <td>@Sonu</td>
-                                            </tr>
+                                            
                                         </tbody>
                                         <tfoot>
                                         	<tr>
                                         		<td colspan="10" class="text-right">
-							                        <a href="#" class="btn hidden-sm-down btn-info">首页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">上一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">下一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">尾页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="sPage">首页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="prePage">上一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="nextPage">下一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="wPage">尾页</a>
                                         		</td>
                                         	</tr>
                                         </tfoot>
@@ -354,7 +325,7 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" @click="xz">确定</button>
+					<button type="button" class="btn btn-primary" @click="qd">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -418,7 +389,7 @@
 					toCredits:function(){
 						location.href="http://localhost:8080/MemberManage/toCredits";
 					},
-					xz:function(pageNum){
+					qd:function(){
 						var $memberId=$("#memberId").val();
 						var $rechargeMoney=$("#rechargeMoney").val();
 						var $rechargeWay=$("#rechargeWay").val();
@@ -433,26 +404,81 @@
 							var minutes=createtime.getMinutes();
 							var seconds=createtime.getSeconds();
 							var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
-							var obj={
-									memberId:$memberId,
-									rechargeMoney:$rechargeMoney,
-									presentIntegral:$rechargeMoney,
-									rechargeWay:$rechargeWay,
-									remark:$remark,
-									createTime:create
-							}
+							
 							var _this=this;
 							$.ajax({
-								url:"[[@{/RechargeRecord/insertAll}]]",
-								type:"post",
-								data:JSON.stringify(obj),
+								url:"[[@{/MemberManage/queryCont}]]",
+								type:"get",
+								data:{MemberId:$memberId},
 								dataType:"json",
-								contentType:"application/json",
 								"success":function(res){
-									alert(res.msg);
-									location.href="http://localhost:8080/MemberManage/toRecharge";
+									if(res==0){
+										alert("没有找到该会员");
+									}else{
+										$.ajax({
+											url:"[[@{/MemberManage/queryById}]]",
+											type:"get",
+											data:{MemberId:$memberId},
+											dataType:"json",
+											"success":function(res){
+												var r=parseFloat($rechargeMoney);
+												var b=parseFloat(res.balance);
+												var $balance=r+b;
+												var p=parseInt($rechargeMoney);
+												var i=parseInt(res.integral);
+												var $integral=p+i;
+												alert(res.balance);
+												alert($balance);
+												var obt={
+														balance:$balance,
+														integral:$integral,
+														memberId:$memberId
+												}
+												$.ajax({
+													url:"[[@{/MemberManage/updatebi}]]",
+													type:"put",
+													data:JSON.stringify(obt),
+													dataType:"json",
+													contentType:"application/json",
+													"success":function(res){
+														if(res.msg=="修改成功"){
+															alert("充值成功！");
+															var obj={
+																	memberId:$memberId,
+																	rechargeMoney:$rechargeMoney,
+																	presentIntegral:$rechargeMoney,
+																	rechargeWay:$rechargeWay,
+																	remark:$remark,
+																	createTime:create,
+																	presentBalance:$balance
+															}
+															$.ajax({
+																url:"[[@{/RechargeRecord/insertAll}]]",
+																type:"post",
+																data:JSON.stringify(obj),
+																dataType:"json",
+																contentType:"application/json",
+																"success":function(res){
+																	alert(res.msg);
+																	location.href="http://localhost:8080/MemberManage/toRecharge";
+																}
+															});
+														}else{
+															alert("修改失败！");
+														}
+													}
+												});
+											}
+											});
+										
+										
+									}
 								}
 							});
+							
+							
+						}else{
+							alert("请完善信息");
 						}
 						
 					},

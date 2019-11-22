@@ -257,7 +257,7 @@
     where rr_id = #{rrId,jdbcType=INTEGER}
   </update>
   <select id="queryAll" resultMap="BaseResultMap">
-  			SELECT r.`rr_id`,r.`create_time`,m.`wechat_num`,m.`member_name`,m.`phoen`,r.`recharge_money`,r.`present_integral`,SUM(t.actual_income) as ye,m.`balance`,r.`remark` FROM `recharge_record` AS r
+  			SELECT r.`rr_id`,r.`create_time`,m.`wechat_num` as wechatNum,m.`member_name` as memberName ,m.`phoen`,r.`recharge_money`,r.`present_integral`,SUM(t.actual_income) as xf,r.present_balance,r.`remark` FROM `recharge_record` AS r
 			LEFT JOIN `member` AS m ON m.`member_id`=r.`member_id`
 			LEFT JOIN `transaction_record_main` AS t ON m.`member_id`=t.`client`
 			where 1=1
@@ -265,10 +265,10 @@
   </select>
   <insert id="insertAll" parameterType="com.forest.entity.RechargeRecord">
   			insert into recharge_record ( member_id, recharge_money, 
-      		present_integral, recharge_way, 
+      		present_integral, recharge_way,present_balance, 
      		create_time, remark)
     		values ( #{memberId,jdbcType=INTEGER}, #{rechargeMoney,jdbcType=DECIMAL}, 
-     		#{presentIntegral,jdbcType=INTEGER}, #{rechargeWay,jdbcType=INTEGER}, 
+     		#{presentIntegral,jdbcType=INTEGER}, #{rechargeWay,jdbcType=INTEGER}, #{presentBalance,jdbcType=DECIMAL},
       		#{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
   </insert>
 </mapper>
