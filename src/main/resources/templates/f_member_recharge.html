@@ -327,30 +327,34 @@
 					<form class="form-inline">
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-5">
-							<label for="exampleInputName2">手机：</label>&nbsp;
-							<input type="text" class="form-control" id="exampleInputName2" placeholder="">
+							<label for="exampleInputName2">会员编号：</label>&nbsp;
+							<input type="text" class="form-control" id="memberId" placeholder="">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="exampleInputEmail2">充值金额：</label>&nbsp;
-							<input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+							<input type="email" class="form-control" id="rechargeMoney" placeholder="">
 						</div>
 						
 						<div class="form-group col-md-1"></div>
 						<div class="form-group col-md-11">
 							<label for="exampleInputName2">支付方式：</label>&nbsp;
-							<select class="form-control form-control-line" style="width: 202px;">
+							<select class="form-control form-control-line" style="width: 202px;" id="rechargeWay">
 								<option>请选择支付方式</option>
-                                <option>现金</option>
-                                <option>支付宝</option>
-                                <option>微信</option>
-                                <option>刷卡</option>
+                                <option value="0">现金</option>
+                                <option value="1">支付宝</option>
+                                <option value="2">微信</option>
+                                <option value="3">刷卡</option>
                             </select>
 						</div>
-						
+						<div class="form-group col-md-1"></div>
+						<div class="form-group col-md-10">
+							<label for="exampleInputEmail2">备注：</label>&nbsp;
+							<input type="email" class="form-control" id="remark" placeholder="" style="width: 550px">
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-primary" @click="xz">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -393,7 +397,9 @@
 				el:"#etc",
 				data(){
 					return {
-						
+						PageList:{
+							list:[]
+						}
 					}
 				},
 				methods:{
@@ -411,8 +417,78 @@
 					},
 					toCredits:function(){
 						location.href="http://localhost:8080/MemberManage/toCredits";
-					}
-				}
+					},
+					xz:function(pageNum){
+						var $memberId=$("#memberId").val();
+						var $rechargeMoney=$("#rechargeMoney").val();
+						var $rechargeWay=$("#rechargeWay").val();
+						var $remark=$("#remark").val();
+						
+						if($memberId!=""&&$rechargeMoney!=""&&$rechargeWay!="请选择支付方式"&&$remark!=""){
+							var createtime =new Date();
+							var year=createtime.getFullYear();
+							var month=createtime.getMonth()+1;
+							var date=createtime.getDate();
+							var hours=createtime.getHours();
+							var minutes=createtime.getMinutes();
+							var seconds=createtime.getSeconds();
+							var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
+							var obj={
+									memberId:$memberId,
+									rechargeMoney:$rechargeMoney,
+									presentIntegral:$rechargeMoney,
+									rechargeWay:$rechargeWay,
+									remark:$remark,
+									createTime:create
+							}
+							var _this=this;
+							$.ajax({
+								url:"[[@{/RechargeRecord/insertAll}]]",
+								type:"post",
+								data:JSON.stringify(obj),
+								dataType:"json",
+								contentType:"application/json",
+								"success":function(res){
+									alert(res.msg);
+									location.href="http://localhost:8080/MemberManage/toRecharge";
+								}
+							});
+						}
+						
+					},
+					goPage:function(pageNum){
+						var _this=this;
+						$.ajax({
+							url:"[[@{/RechargeRecord/queryAll}]]",
+							type:"get",
+							data:{
+								pageNum:pageNum
+							},
+							dataType:"json",
+							"success":function(res){
+								_this.PageList=res;
+							}
+						});
+					},
+					prePage:function(){
+						if(this.PageList.prePage>=1){
+	 							this.goPage(this.PageList.prePage);
+						}
+	 				},
+	 				nextPage:function(){
+	 					if(this.PageList.nextPage<=this.PageList.pages&&this.PageList.nextPage!=0){
+	 							this.goPage(this.PageList.nextPage);
+	 					}
+	 				},
+	 				sPage:function(){
+	 					this.goPage(1);
+	 				},
+	 				wPage:function(){
+	 					this.goPage(this.PageList.pages);
+	 				}
+				},created:function(){
+	 				this.goPage(1);
+	 			}
 			});
 	</script>
 </body>

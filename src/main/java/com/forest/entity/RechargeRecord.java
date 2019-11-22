@@ -19,8 +19,58 @@ public class RechargeRecord {
     private Date createTime;
 
     private String remark;
+    
+    private String wechatNum;
+    
+    private String memberName;
+    
+    private Integer phoen;
+    
+    private BigDecimal balance;
+    
+    private float ye;
 
-    public Integer getRrId() {
+    public String getWechatNum() {
+		return wechatNum;
+	}
+
+	public void setWechatNum(String wechatNum) {
+		this.wechatNum = wechatNum;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+
+	public Integer getPhoen() {
+		return phoen;
+	}
+
+	public void setPhoen(Integer phoen) {
+		this.phoen = phoen;
+	}
+
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public float getYe() {
+		return ye;
+	}
+
+	public void setYe(float ye) {
+		this.ye = ye;
+	}
+
+	public Integer getRrId() {
         return rrId;
     }
 
