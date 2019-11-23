@@ -7,9 +7,11 @@
 		<script type="text/javascript" th:src="@{/js/jquery-1.7.1.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/main.js}"></script>
 		<script type="text/javascript" th:src="@{/js/jquery.json-2.3.js}"></script>
+		<script type="text/javascript" th:src="@{/js/jquery.jqzoom.min.js}"></script>
 		<script type="text/javascript" th:src="@{/js/jquery.form.js}"></script>
-		<script type="text/javascript" charset="utf-8" th:src="@{/js/ueditor.config.js}"></script>
-		<script type="text/javascript" charset="utf-8" th:src="@{/js/ueditor.all.min.js}"></script>
+		
+		<!-- <script type="text/javascript" charset="utf-8" th:src="@{/js/ueditor.config.js}"></script>		原页面的富文本编辑器
+		<script type="text/javascript" charset="utf-8" th:src="@{/js/ueditor.all.min.js}"></script> 		用不上了		-->
 		
 		<link rel="stylesheet" th:href="@{/uploading.css}" />	
 		<script type="text/javascript" charset="utf-8" th:src="@{/uploading.js}"></script>
@@ -65,9 +67,9 @@
 											<li>
 												<a comboxval="" default="请选择类别" href="javascript:void(0);">请选择类别</a>
 											</li>
-											<li>
-												<a comboxval="" default="1" href="javascript:void(0);">衬衫</a>
-											</li>
+											<!-- <li>
+												<a comboxval="" default="衬衫" href="javascript:void(0);">衬衫</a>
+											</li> -->
 										</ul>
 									</div>
 								</span>
@@ -288,20 +290,12 @@
 								
 								<div id="productsSizeList" class="fdColor clearfix">
 									<ul>
-										<li class="" title="M">
-											<a href="javascript:void(0);">M</a><i></i></li>
-										<li class="" title="S">
-											<a href="javascript:void(0);">S</a><i></i></li>
-										<li class="" title="29">
-											<a href="javascript:void(0);">29</a><i></i></li>
-										<li class="" title="30">
-											<a href="javascript:void(0);">30</a><i></i></li>
-										<li class="" title="XXL">
-											<a href="javascript:void(0);">XXL</a><i></i></li>
-										<li class="" title="XML">
-											<a href="javascript:void(0);">XML</a><i></i></li>
+										<!-- <li class="" title="M">
+											<a href="javascript:void(0);">M</a><i></i>
+										</li>
 										<li class="" title="-">
-											<a href="javascript:void(0);">-</a><i></i></li>
+											<a href="javascript:void(0);">-</a><i></i>
+										</li> -->
 									</ul>
 									<a class="editSizeBtn" href="javascript:void(0);">编辑尺码</a>
 								</div>
@@ -354,7 +348,8 @@
 						<div id="magnifier">
 							<div class="tb-booth tb-pic tb-s310">
 								<a href="javascript:void(0);">
-									<img src="/picture/uploadimg150_150.jpg" alt="" rel="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" class="jqzoom">
+									<img src="/picture/uploadimg150_150.jpg" alt="" class="jqzoom" rel="/picture/uploadimg150_150.jpg">
+									<!--  rel="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" -->
 								</a>
 							</div>
 						</div>
@@ -365,22 +360,24 @@
 							<div id="tabImageSmall" class="v_content clearfix">
 								<div class="v_content_list">
 									<ul class="tb-thumb productImgList" id="thumblist">
-										<!--<li class="">
+										<!-- <li class="">
 											<a href="javascript:void(0);" class="imgD">
-												<img big="http://img01.buyinchina.com/product/33734161724750798496/33734161724750798496-0.jpg" mid="http://img01.buyinchina.com/product/33734161724750798496/33734161724750798496-0_464_464.jpg" src="/picture/33734161724750798496-0_66_66.jpg">
+												<img big="/picture/HeadPortrait.jpg" mid="/picture/HeadPortrait.jpg" src="/picture/HeadPortrait.jpg">
 											</a>
 											<div class="controlDiv">
 												<a class="leftBtn" href="javascript:void(0);">向左</a>
 												<a class="rightBtn" href="javascript:void(0);">向右</a>
 												<a class="delBtn" href="javascript:void(0);">删除</a>
 											</div>
-										</li>-->
+										</li> -->
 
 										<li class="addBtn" id="addProductPicBtn">
 											<label for="uploadImgFile" class="uploadImgFileLabel">&nbsp;</label>
-											<input type="file" name="file" class="file uploadImgFile" id="uploadImgFile" />
+											<form name="form" enctype="multipart/form-data">
+												<input type="file" name="file" class="file uploadImgFile" id="uploadImgFile" />
+											</form>
 											<a href="javascript:void(0);" class="imgD">
-												<img alt="" big="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" mid="http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg" src="/picture/add_ico.png">
+												<img alt="上传图片" src="/picture/add_ico.png" big="/picture/uploadimg150_150.jpg" mid="/picture/uploadimg150_150.jpg">
 											</a>
 										</li>
 									</ul>
@@ -415,16 +412,67 @@
 		<!-- E containerArea -->
 		
 		<script type="text/javascript">
+			//创建JS商品对象
+			var commodityMain = {
+					cmId : 0,
+					articleNo : "",
+					brand : "",
+					cmName : "",
+					salePrice : "",
+					costPrice : "",
+					ctId : "",
+					imgPath : "",
+					information : "",
+					shopId : "",
+					commodityDetails : [
+						{
+							cdId : 0,
+							cmId : 0,
+							sizeId : "",
+							color : "",
+							quantity : 0,
+							barCode : ""
+						},{
+							cdId : 0,
+							cmId : 0,
+							sizeId : "",
+							color : "",
+							quantity : 0,
+							barCode : ""
+						}
+					]
+			};
+			var typeListC = window.parent.typeList;	//父页面查询类别列表
+			var SizeListC = window.parent.sizeList;	//父页面查询尺码列表
+			
 			$(function(){
-				
-				
-				//2.
-				alert("uploading_main.html - 工厂函数");
+				bindTypeList();	//1.绑定商品类别
+				bindSizeList();	//2.绑定商品尺码
 				
 			});
+			
+			//1.绑定商品类别
+			function bindTypeList(){
+				for(var i = 0; i < typeListC.length; i++){
+					var $li = $("<li>" +
+									"<a comboxval='" + typeListC[i].ctId + "' default='" + typeListC[i].ctName + "' href='javascript:void(0);'>" + typeListC[i].ctName + "</a>" +
+								"</li>");
+					$(".directoryList").append($li);
+				}
+			}
+			
+			//2.绑定商品尺码
+			function bindSizeList(){
+				for(var i = 0; i < SizeListC.length; i++){
+					var $li = $("<li class='' title='" + SizeListC[i].sizeName + "'>" +
+									"<a href='javascript:void(0);' value='" + SizeListC[i].sizeId + "'>" + SizeListC[i].sizeName + "</a><i></i>" +
+								"</li>");
+					$("#productsSizeList>ul").append($li);
+				}
+			}
 		</script>
 		<script type="text/javascript">
-			//实例化编辑器
+			//0.实例化编辑器
 		    var um = UM.getEditor('myEditor');
 		    um.addListener('blur',function(){
 		        $('#focush2').html('编辑器失去焦点了');

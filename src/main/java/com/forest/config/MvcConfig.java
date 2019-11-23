@@ -27,9 +27,12 @@ public class MvcConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/**")
-		.addResourceLocations("classpath:/static/")
-		.addResourceLocations("file:/D:/Git/images/");
+        //和页面有关的静态目录都放在项目的static目录下
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+		//上传的头像图片在D盘>Git>HeadPortraitImages目录下，head表示访问的前缀，以下是真实路径
+		registry.addResourceHandler("/head/**").addResourceLocations("file:/D:/Git/HeadPortraitImages/");
+		//上传的商品图片在D盘>Git>CommodityMainImages目录下，commodity表示访问的前缀，以下是真实路径
+		registry.addResourceHandler("/commodity/**").addResourceLocations("file:/D:/Git/CommodityMainImages/");
 		
 		//super.addResourceHandlers(registry);	改为实现WebMvcConfigurer接口后必须 注释/删除 这一句
 	}
@@ -51,6 +54,8 @@ public class MvcConfig implements WebMvcConfigurer {
     	
     	pathPattern.add("/images/**");
     	pathPattern.add("/picture/**");
+    	pathPattern.add("/head/**");
+    	pathPattern.add("/commodity/**");
     	
 		registry.addInterceptor(loginI).addPathPatterns("/**").excludePathPatterns(pathPattern);
     	WebMvcConfigurer.super.addInterceptors(registry);

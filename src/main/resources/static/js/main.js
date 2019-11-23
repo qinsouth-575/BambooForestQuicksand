@@ -8,13 +8,15 @@
 /* *
  * 获取版本号
  */
-var WC_version = "1.0";
+var WC_version = "2.3";
 function getVersion(){
-	$.get("http://www.poso2o.com/ECSHOP/js/version.js",function(data,status){
+	/*$.get("http://www.poso2o.com/ECSHOP/js/version.js",function(data,status){
 		WC_version = data;
-	});
+	});*/
+	//项目前中期				1.0
+	//2019-11-23 08:19 		2.3
 }
-getVersion();
+//getVersion();
 
 try{
 var WC = {
@@ -356,14 +358,14 @@ $(document).bind('mousedown',function(event){
 })
 /* *
  * 退出登录
- */
+
 $("#logout").live("click",function(){
 	WC.delCookie("WC_UserInfo");
 	WC.setCookie("WC_loginUrl",window.location.href);
 	window.location.href="http://www.poso2o.com/index.html?a=ECSHOP";
 	//window.location.href="http://www.poso2o.com/WeChat/user/login.html";
 	return false;
-})
+}) */
 /* *
  * 公众号 - 设置默认
  */
@@ -407,7 +409,7 @@ if(userInfo){
 }
 /* *
  * 公众号 - 获取信息
- */
+
 function getAppidList(){
 	var jsonData = new Object();
 		jsonData.sessionUid = userInfo.uid;
@@ -440,10 +442,10 @@ function getAppidList(){
 			}
 		})
 	})
-}
+} */
 /* *
  * 公众号 - 选择列表
- */
+
 $('.appidDialog .authorizer_list').live('click',function(){
 	$(".appidDialog").slideUp(200);
 	$(".appidDiv .textDiv").removeClass("authorDiv_active");
@@ -475,7 +477,7 @@ $('.appidDialog .authorizer_list').live('click',function(){
 		}
 	}).always(function(){})
 	return false;
-})
+}) */
 /* *
  * 警告提示 - 打开
  */
