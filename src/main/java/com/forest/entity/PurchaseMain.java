@@ -18,8 +18,58 @@ public class PurchaseMain {
     private Date createTime;
 
     private String remark;
+    
+    private int count;
+    
+    private Date endTime;
+    
+    private Date start;
+    
+    private double je;
+    
+    private String shopName;
+    
+    public String getShopName() {
+		return shopName;
+	}
 
-    public Integer getPmId() {
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public double getJe() {
+		return je;
+	}
+
+	public void setJe(double je) {
+		this.je = je;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public void setStart(Date start) {
+		this.start = start;
+	}
+
+	public Integer getPmId() {
         return pmId;
     }
 
