@@ -27,4 +27,6 @@ public interface PurchaseMainMapper {
     int updateByPrimaryKeySelective(PurchaseMain record);
 
     int updateByPrimaryKey(PurchaseMain record);
+    
+    List<PurchaseMainMapper> queryAll();
 }

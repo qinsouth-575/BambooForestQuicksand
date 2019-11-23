@@ -200,7 +200,7 @@
                         </div>
                         
                         <!-- Button trigger modal -->
-                        <a href="d_commodity_po_insert.html" class="btn hidden-sm-down btn-info">新建采购单</a>
+                        <a th:href="@{/po,,,/toCommodityMDInsert}" class="btn hidden-sm-down btn-info">新建采购单</a>
                         <!--data-toggle="modal" data-target=".bs-example-modal-lg"-->
                     </div>
                 </div>
@@ -221,27 +221,37 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>选择</th>
                                                 <th>序号</th>
-                                                <th>类别</th>
-                                                <th>品名</th>
-                                                <th>货号/条码</th>
-                                                <th>规格</th>
-                                                <th>库存</th>
-                                                <th>销售价</th>
-                                                <th>成本价</th>
-                                                <th>网店同步</th>
+                                                <th>审核</th>
+                                                <th>采购单号</th>
+                                                <th>交货期</th>
+                                                <th>供应商</th>
+                                                <th>数量</th>
+                                                <th>金额</th>
+                                                <th>金额</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
                                                 <td>1</td>
                                                 <td>Deshmukh</td>
                                                 <td>Gaylord</td>
                                                 <td>@Ritesh</td>
+												<td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
+                                                <td>@Ritesh</td>
+                                                <td>
+                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
+                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td>2</td>
+                                                <td>Deshmukh</td>
+                                                <td>Gaylord</td>
+                                                <td>@Ritesh</td>
                                                 <td>Deshmukh</td>
                                                 <td>Gaylord</td>
                                                 <td>@Ritesh</td>
@@ -252,28 +262,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
                                                 <td>3</td>
                                                 <td>Deshmukh</td>
                                                 <td>Gaylord</td>
                                                 <td>@Ritesh</td>
-                                                <td>2</td>
                                                 <td>Deshmukh</td>
                                                 <td>Gaylord</td>
                                                 <td>@Ritesh</td>
@@ -284,12 +276,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
                                                 <td>4</td>
                                                 <td>Deshmukh</td>
                                                 <td>Gaylord</td>
                                                 <td>@Ritesh</td>
-                                                <td>2</td>
                                                 <td>Deshmukh</td>
                                                 <td>Gaylord</td>
                                                 <td>@Ritesh</td>
@@ -300,12 +290,10 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
                                                 <td>5</td>
                                                 <td>Deshmukh</td>
                                                 <td>Gaylord</td>
                                                 <td>@Ritesh</td>
-                                                <td>2</td>
                                                 <td>Deshmukh</td>
                                                 <td>Gaylord</td>
                                                 <td>@Ritesh</td>
