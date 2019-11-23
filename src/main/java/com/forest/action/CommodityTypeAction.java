@@ -22,13 +22,15 @@ public class CommodityTypeAction {
 	
 	@Autowired
 	private CommodityTypeBiz ctb;
-	
+
+	//跳转 商品类别页面
 	@RequestMapping(value = "toPage", method = RequestMethod.GET)
 	public String toD_Commodity() {
 		log.debug("BambooForestQuicksand - CommodityTypeAction - toD_Commodity");
 		return "d_commodity";
 	}
 	
+	//商品类别 - 查询全部
 	@RequestMapping(value = "ct", method = RequestMethod.GET)
 	@ResponseBody
 	public List<CommodityType> queryAll(){

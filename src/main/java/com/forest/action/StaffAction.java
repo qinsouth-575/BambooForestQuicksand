@@ -171,13 +171,13 @@ public class StaffAction {
 	@ResponseBody
 	public String upload(HttpSession session, MultipartFile file, int id){
 		System.out.println(file + "\t" + id);
-		File directory = new File("/D:/Git/images");
+		File directory = new File("/D:/Git/HeadPortraitImages");
 		if(!directory.exists()) {
 			directory.mkdirs();
 		}
 		
 		try {
-			String url = "/D:/Git/images/";
+			String url = "/D:/Git/HeadPortraitImages/";
 			url = url+"/"+file.getOriginalFilename();
 			File f = new File(url);
 			file.transferTo(f);
@@ -194,7 +194,7 @@ public class StaffAction {
 			 session.setAttribute("user", user);
 			 
 			 System.out.println("修改后：" + user);
-			 return "/" + file.getOriginalFilename();
+			 return "/head/" + file.getOriginalFilename();
 		}else {
 			 return "break";
 		}

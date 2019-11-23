@@ -4,7 +4,6 @@
 	min-height: 450px;
 	position: relative;
 	/*border: 1px solid #e7e7eb;*/
-	padding: 1px;
 	margin-bottom: 20px;
 }
 
@@ -47,7 +46,7 @@
 
 .rightArea {
 	float: right;
-	width: 928px;
+	width: 1040px;
 }
 
 @media screen and (min-width: 1px) and (max-width: 1260px) {
@@ -57,7 +56,7 @@
 }
 
 .main_area {
-	width: 100%;
+	width: 98%;
 	margin: 0 auto;
 }
 
@@ -334,7 +333,7 @@
 	float: right;
 	line-height: 26px;
 	padding-right: 8px;
-	color: blue;
+	color: #44b549;
 }
 
 .fdColor {
@@ -435,6 +434,86 @@
 	background: url(images/productscolor.gif) repeat 0 0;
 }
 
+.editColor {
+	float: right;
+	width: 436px;
+	margin-top: -36px;
+}
+
+.editColor ul {
+	float: left;
+	width: 100%;
+}
+
+.editColor li {
+	position: relative;
+	float: left;
+	width: 102px;
+	margin-left: 6px;
+	margin-bottom: 6px;
+	background-color: #FFF;
+}
+
+.editColor li input {
+	border: 1px solid #e2e1e3;
+	text-align: center;
+	line-height: 32px;
+	height: 32px;
+	width: 74px;
+	padding: 2px 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.editColor li input:hover,
+.editColor li input:focus {
+	border: 1px solid #44b549;
+}
+
+.editColor .addBtn {
+	display: block;
+	border: 1px solid #e2e1e3;
+	text-align: center;
+	line-height: 32px;
+	height: 32px;
+	width: 74px;
+	padding: 2px 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.editColor .addBtn:hover {
+	border: 1px solid #44b549;
+}
+
+.editColor .delBtn {
+	position: absolute;
+	top: 10px;
+	right: 0px;
+	background: #FFF url("images/base_z2b638f.png") no-repeat 0 -388px;
+	display: block;
+	height: 16px;
+	width: 16px;
+}
+
+.editColor .delBtn:hover {
+	background-position: 0 -412px;
+}
+
+.editColor .cancelBtn,
+.editColor .submitBtn {
+	float: right;
+	line-height: 26px;
+	padding-right: 8px;
+	color: #44b549;
+}
+
+.editColor .cancelBtn {
+	color: #5e5e5e;
+}
+
 .productNumList .colorText,
 .productNumList .barcodeText {
 	width: 156px;
@@ -471,9 +550,9 @@
 	float: right;
 	margin-bottom: 30px;
 	margin-top: 20px;
-	display: block;    
+	display: block;
 	position: relative;
-    top: 10px;
+	top: 11px;
 }
 
 .BtnXDiv .btn {
@@ -497,8 +576,8 @@
 }
 
 .BtnXDiv .submitBnt {
-	background-color: #0064CC;
-	border-color: #0064CC;
+	background-color: #44b549;
+	border-color: #44b549;
 	color: #fff;
 }
 

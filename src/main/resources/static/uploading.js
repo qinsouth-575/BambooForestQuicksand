@@ -98,14 +98,16 @@ $(function() {
 
 	})
 
-	$(function() {
+	/*$(function() {
 		//上传封面图
 		$("#uploadImgFile").toUploadImgFile();
-	})
+	})*/
 
 	var uploadProductId = 0;
+	
+	
 	$.fn.toUploadImgFile = function() {
-
+		alert("#thumblist li.size：" + $("#thumblist li").size());
 		if($("#thumblist li").size() > 12) {
 			("最多只能上传12张图片", 'error');
 			return false;
@@ -140,7 +142,7 @@ $(function() {
 				if($(".productPicShow .tb-thumb li.current").attr("class").indexOf("addBtn") != -1) {
 					var HTML = '<li class="">';
 					HTML += '<a href="javascript:void(0);" class="imgD">';
-					HTML += '<img id="' + newBannerId + '" src="picture/loading.gif" mid="http://www.poso2o.com/WeChat/style/img/loading.gif" big="http://www.poso2o.com/WeChat/style/img/loading.gif" pic222_222="">';
+					HTML += '<img id="' + newBannerId + '" src="/picture/loading.gif" mid="/picture/loading.gif" big="/picture/loading.gif" pic222_222="/picture/loading.gif">';
 					HTML += '</a>';
 					HTML += '<div class="controlDiv">';
 					HTML += '<a class="leftBtn" href="javascript:void(0);">向左</a>';
@@ -151,14 +153,15 @@ $(function() {
 					$('#productPicShow .tb-thumb li.addBtn').before(HTML);
 				} else {
 					$("#productPicShow .tb-thumb li.current img").attr("id", newBannerId);
-					$("#productPicShow .tb-thumb li.current img").attr("src", "http://www.poso2o.com/WeChat/style/img/loading.gif");
-					$("#productPicShow .tb-thumb li.current img").attr("mid", "http://www.poso2o.com/WeChat/style/img/loading.gif");
-					$("#productPicShow .tb-thumb li.current img").attr("big", "http://www.poso2o.com/WeChat/style/img/loading.gif");
+					$("#productPicShow .tb-thumb li.current img").attr("src", "/picture/loading.gif");
+					$("#productPicShow .tb-thumb li.current img").attr("mid", "/picture/loading.gif");
+					$("#productPicShow .tb-thumb li.current img").attr("big", "/picture/loading.gif");
 				}
 				uploadProductId++;
 				cur.wrap('<form enctype="multipart/form-data"/>');
+				// alert(newBannerId);	id正常		alert(uploadProductId);	自增序号标号正常
 				var options = {
-					url: "/productImageService.htm?Act=upload" + "&sessionUid=" + userInfo.uid + "&sessionKey=" + userInfo.password, // 路径写全
+					url: "/uploadImg", 
 					type: "post",
 					success: function(r) {
 						// 取消form包裹
@@ -166,7 +169,11 @@ $(function() {
 						// 此处data可以返回文件ID，然后根据ID查询并返回文件即可
 						//cur.after(data);
 						var datas = eval("(" + r + ")");
-						if(datas.code.indexOf("success") != -1) {
+						
+						alert(JSON.stringify(r));
+						alert(JSON.stringify(datas));
+						
+						/*if(datas.code.indexOf("success") != -1) {
 							$("#" + newBannerId).attr("src", datas.data.pic); //pic
 							$("#" + newBannerId).attr("mid", datas.data.pic);
 							$("#" + newBannerId).attr("big", datas.data.pic);
@@ -177,7 +184,7 @@ $(function() {
 						} else {
 							//fntopmessagebox(datas.data,'error');
 							alert(datas.data);
-						}
+						}*/
 					},
 					error: function(XMLHttpRequest, textStatus, errorThrown) {
 						alert(textStatus + "," + errorThrown);
@@ -185,12 +192,13 @@ $(function() {
 						//$(".loading_div .img_div").removeClass("loading_img");
 					}
 				};
-				cur.parent("form").ajaxSubmit(options); // 异步提交
+				cur.parent("form").ajaxSubmit(options); // 异步提交		*/
 			}
 		})
 	}
 
-})
+});
+//uploading.js - 工厂函数结束
 
 /* *
  * 上传商品 - 同步至微商城

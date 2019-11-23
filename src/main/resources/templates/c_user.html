@@ -184,10 +184,10 @@
                     <!-- Column -->
                     <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
-                          <form class="form-horizontal" name="form" method="post" enctype="multipart/form-data">
+                          	<form class="form-horizontal" name="form" method="post" enctype="multipart/form-data">
 								<center class="m-t-30"> 
 									<div class="card-block">
-										<img src class="img-circle" width="150"  />
+										<img src class="img-circle" width="150" />
 									</div>
 									
 									<a href="#" style="background: none repeat scroll 0 0 #FFFFFF; color: #9e9e9e; 
@@ -197,7 +197,7 @@
 									<input type="file" name="file" style="display: block; width: 156px; height: 150px; 
 									 opacity: 0; position: absolute; top: 50px; left: 90px; cursor: pointer;" id="ajaxfile"/>
 								</center>
-						 </form>
+						 	</form>
                         </div>
                     </div>
                     <!-- Column -->
@@ -338,8 +338,8 @@
 						success:function(res){
 							this_.session=res;
 							//alert(JSON.stringify(this_.session));
-							$(".img-circle").attr("src", "/" + this_.session.headPortraitPath);
-							$(".profile-pic").attr("src", "/" + this_.session.headPortraitPath);
+							$(".img-circle").attr("src", "/head/" + this_.session.headPortraitPath);
+							$(".profile-pic").attr("src", "/head/" + this_.session.headPortraitPath);
 						}
 					});
 				},
@@ -347,7 +347,7 @@
 					//alert(1);
 					var this_=this;
 					var obj=this_.session;
-					alert(JSON.stringify(obj));
+					//alert(JSON.stringify(obj));
 					$.ajax({
 						url:"[[@{/updateUser}]]",
 						type:"post",

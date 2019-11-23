@@ -231,65 +231,60 @@
     
     <script th:src="@{/js/vue.js}"></script>
 	<script type="text/javascript">
-		var commodityMain = {
-				cmId : 0,
-				articleNo : "",
-				brand : "",
-				cmName : "",
-				salePrice : "",
-				costPrice : "",
-				ctId : "",
-				imgPath : "",
-				information : "",
-				shopId : "",
-				commodityDetails : [
-					{
-						cdId : 0,
-						cmId : 0,
-						sizeId : "",
-						color : "",
-						quantity : 0,
-						barCode : ""
-					},{
-						cdId : 0,
-						cmId : 0,
-						sizeId : "",
-						color : "",
-						quantity : 0,
-						barCode : ""
-					}
-				]
-		};
 		var typeList = [];
+		var sizeList = [];
 		
 		$(function() {
-			//1.获取session中保存的登录用户的信息，更新头像
+			queryUserOrStaff();
+			queryTypeList();
+			querySizeList();
+
+			//alert("d_commodity_uploading.html - 工厂函数");
+		});
+		
+		//1.获取session中保存的登录用户的信息，更新头像
+		function queryUserOrStaff(){
 			$.ajax({
 				url:"[[@{/session}]]",
 				type:"get",
 				dataType : "json",
 				success:function(res){
 					//alert(JSON.stringify(res));		看console控制台
-					$(".profile-pic").attr("src", "/" + res.headPortraitPath);
-					
-					$.ajax({
-						url:"[[@{/commoditytypes/ct}]]",
-						type:"get",
-						dataType : "json",
-						success:function(res){
-							typeList = res;//JSON.parse(res);
-							alert(JSON.stringify(typeList));	//
-						}
-					});
-					//Ajax代码结束
+					$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
 				}
 			});
 			//Ajax代码结束
-			
-			//2.
-			alert("d_commodity_uploading.html - 工厂函数");
-		});
+		}
+		
+		//2.获取商品类别列表
+		function queryTypeList(){
+			$.ajax({
+				url:"[[@{/commoditytypes/ct}]]",
+				type:"get",
+				dataType : "json",
+				success:function(res){
+					typeList = res;	//JSON.parse(res);
+					//alert(JSON.stringify(typeList));	//数据正常
+				}
+			});
+			//Ajax代码结束
+		}
+		
+		//3.获取商品尺码列表
+		function querySizeList(){
+			$.ajax({
+				url:"[[@{/commodityManager/querySizeList}]]",
+				type:"get",
+				dataType : "json",
+				success:function(res){
+					sizeList = res;	//JSON.parse(res);
+					//alert(JSON.stringify(sizeList));	//数据正常
+				}
+			});
+			//Ajax代码结束
+		}
 
+		//0.动态修改父页面iframe高度
 		function reinitIframe() {
 			var iframe = document.getElementById("test");
 			try {

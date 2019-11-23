@@ -370,7 +370,7 @@
 						dataType : "json",
 						success:function(res){
 							//alert(JSON.stringify(res));	session中保存的用户信息
-							$(".profile-pic").attr("src", "/" + res.headPortraitPath);
+							$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
 						}
 					});
 				},
