@@ -14,8 +14,9 @@
     <result column="cashier" property="cashier" jdbcType="VARCHAR" />
     <result column="shop_assistant" property="shopAssistant" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="TINYINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="member_name" property="memberNname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -350,4 +351,11 @@
       remark = #{remark,jdbcType=VARCHAR}
     where trm_id = #{trmId,jdbcType=INTEGER}
   </update>
+  <select id="queryAll" resultMap="BaseResultMap">	
+		SELECT m.`trm_id`,m.`order_number`,me.`member_name`,me.`phoen`,SUM(d.`quantity`) AS sl,me.balance,m.paymount,m.create_time FROM `transaction_record_main` AS m
+		LEFT JOIN `transaction_record_details` AS d ON d.`order_number`=m.`order_number`
+		LEFT JOIN `member` AS me ON me.`member_id`=m.`client`
+		WHERE m.`client` > 0
+		GROUP BY m.`order_number`
+  </select>
 </mapper>

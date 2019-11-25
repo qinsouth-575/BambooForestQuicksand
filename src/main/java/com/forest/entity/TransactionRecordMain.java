@@ -28,11 +28,52 @@ public class TransactionRecordMain {
 
     private Byte state;
 
-    private Date createTime;
+    private String createTime;
 
     private String remark;
+    
+    private String memberNname;
+    
+    private Integer phoen;
+    
+    private Integer sl;
+    
+    private float balance;
+    
 
-    public Integer getTrmId() {
+    public String getMemberNname() {
+		return memberNname;
+	}
+
+	public void setMemberNname(String memberNname) {
+		this.memberNname = memberNname;
+	}
+
+	public Integer getPhoen() {
+		return phoen;
+	}
+
+	public void setPhoen(Integer phoen) {
+		this.phoen = phoen;
+	}
+
+	public Integer getSl() {
+		return sl;
+	}
+
+	public void setSl(Integer sl) {
+		this.sl = sl;
+	}
+
+	public float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(float balance) {
+		this.balance = balance;
+	}
+
+	public Integer getTrmId() {
         return trmId;
     }
 
@@ -128,11 +169,11 @@ public class TransactionRecordMain {
         this.state = state;
     }
 
-    public Date getCreateTime() {
+    public String getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(String createTime) {
         this.createTime = createTime;
     }
 
