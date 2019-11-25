@@ -42,7 +42,7 @@ public class CommodityMDBiz {
     }
     
     /**
-     * - 商品管理 - 商品上传 - 2.商品图片上传 - 新增图片信息到数据库
+     * - 商品管理 - 2.商品上传 - 2.商品图片上传 - 新增图片信息到数据库
      * @param image
      * @return
      */
@@ -55,7 +55,7 @@ public class CommodityMDBiz {
     }
     
     /**
-     * - 商品管理 - 商品上传 - 2.商品图片上传 - 查看新增图片信息
+     * - 商品管理 - 2.商品上传 - 2.商品图片上传 - 查看新增图片信息
      * @param image
      * @return
      */
@@ -66,7 +66,6 @@ public class CommodityMDBiz {
     }
     
     //商品管理 - 商品上传 - 3.颜色管理 - ColorBiz - 一套增删改查
-    
     
     
 }

@@ -303,9 +303,18 @@
 								</div>
 
 								<div id="editProductsSizeList" class="editColor clearfix" style="display: none;">
-									<ul></ul>
-									<a class="submitBtn toBatchUpdateSize" href="javascript:void(0);" id="toBatchUpdateSize">保存</a>
-									<a class="cancelBtn" href="javascript:void(0);">取消</a>
+									<ul>
+										<!-- <li>
+											<input type="text" name="product_size" idvalue="1" value="S" maxlength="8">
+											<a href="javascript:void(0);" class="delBtn"></a>
+										</li>
+										<li>
+											<input type="text" name="product_size" idvalue="2" value="M" maxlength="8">
+											<a href="javascript:void(0);" class="delBtn"></a>
+										</li> -->
+									</ul>
+									<!-- <a class="submitBtn toBatchUpdateSize" href="javascript:void(0);" id="toBatchUpdateSize">保存</a> -->
+									<a class="cancelBtn" href="javascript:void(0);">确定</a>
 								</div>
 								<i class="jsonDiv"></i>
 							</div>
@@ -472,6 +481,8 @@
 								"</li>");
 					$("#productsSizeList>ul").append($li);
 				}
+				
+				productSizeBlur();	//绑定失去焦点事件
 			}
 		</script>
 		<script type="text/javascript">

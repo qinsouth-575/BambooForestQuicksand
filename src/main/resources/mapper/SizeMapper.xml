@@ -161,4 +161,10 @@
     set size_name = #{sizeName,jdbcType=VARCHAR}
     where size_id = #{sizeId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectSizeIdCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	SELECT COUNT(*)
+	FROM `commodity_details`
+	WHERE `size_id` = #{sizeId};
+  </select>
 </mapper>

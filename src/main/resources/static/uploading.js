@@ -257,7 +257,6 @@ $(".uploadProductArea .productsColorList .Delete").live("click", function() {
 function addColorHTML(colorid, colorName, url) {
 	console.log(colorid + " - " + colorName + " - " + url);
 	var n = $("#productsColorList tbody tr").size();
-	console.log("当前颜色数量：" + n);
 	if(n >= 20) {
 		alert("error: 颜色数量不能超过20个!");
 		return false;
@@ -305,7 +304,7 @@ function delColorHTML(colorid, colorName) {
 		success:function(res){
 			if(res.colorId != "500"){
 				for (var i = 0; i < colorList.length; i++) {
-		        	if (colorList[i].colorId == colorId) {
+		        	if (colorList[i].colorId == colorid) {
 		            	colorList.splice(i, 1);	//从颜色列表中删除，后会push新的
 		           	}
 		      	}
@@ -504,38 +503,87 @@ var hadChoiceSize = "";
 $("#productsSizeList .editSizeBtn").live("click", function() {
 	var HTML = '';
 	$(".fdColor li a").each(function() {
-		HTML += '<li><input type="text" name="product_size" value="' + $(this).html() + '" maxlength="8"><a href="javascript:void(0);" class="delBtn"></a></li>';
-	})
-	HTML += '<li class="add_li"><a href="javascript:void(0);" class="addBtn">添加尺码</a></li>';
+		HTML += '<li>' + 
+					'<input type="text" name="product_size" idvalue="' + $(this).attr("value") + '" value="' + $(this).html() + '" maxlength="8">' + 
+					'<a href="javascript:void(0);" class="delBtn"></a>' + 
+				'</li>';
+	});
+	HTML += '<li class="add_li">' + 
+				'<a href="javascript:void(0);" class="addBtn">添加尺码</a>' + 
+			'</li>';
 	$("#editProductsSizeList ul").html(HTML);
+	
 	$("#productsSizeList").hide();
 	$("#editProductsSizeList").show();
+	
 	$("#productsSizeList .selected").each(function() {
 		if(hadChoiceSize == "") {
 			hadChoiceSize += $(this).attr("title");
 		} else {
 			hadChoiceSize += "," + $(this).attr("title");
 		}
-	})
-})
+	});
+});
 //取消编辑尺码
 $("#editProductsSizeList .cancelBtn").live("click", function() {
 	$("#productsSizeList").show();
 	$("#editProductsSizeList").hide();
-})
+});
 //选中输入尺码
 $("input[name='product_size']").live("focus", function() {
 	$(this).select();
-})
+});
 //删除尺码
 $(".editColor .delBtn").live("click", function() {
 	if($("input[name='product_size']").size() == 1) {
 		alert("error: 至少保留一个尺码!");
 		return false;
 	}
-	$(this).parents("li").remove();
+	
+	var this_ = this;
+	var sizeId = $(this).prev().attr("idvalue");
+	alert(sizeId);
+	$.ajax({
+		url:"deleteSize",
+		type:"DELETE",
+		data : {
+			sizeId : sizeId
+		},
+		dataType : "json",
+		success:function(res){
+			//alert(JSON.stringify(res));	正常
+			if(res.sizerId != "500"){
+				$(this_).parents("li").remove();	//删除 #editProductsSizeList中的尺码
+				
+				//重新查询并绑定
+				$.ajax({
+					url:"querySizeList",
+					type:"get",
+					dataType : "json",
+					success:function(res){
+						sizeList = res;	//JSON.parse(res);
+						
+						$("#productsSizeList>ul").html('');
+						for(var i = 0; i < sizeListC.length; i++){
+							var $li = $("<li class='' title='" + sizeListC[i].sizeName + "'>" +
+											"<a href='javascript:void(0);' value='" + sizeListC[i].sizeId + "'>" + sizeListC[i].sizeName + "</a><i></i>" +
+										"</li>");
+							$("#productsSizeList>ul").append($li);
+						}
+						
+						productSizeBlur();	//绑定失去焦点事件
+					}
+				});
+				//Ajax代码结束
+			} else {
+				alert(res.colorName);
+			}
+			//alert(JSON.stringify(sizeList));	//数据正常
+		}
+	});
+	//Ajax代码结束
 })
-//增加尺码
+//增加尺码 - 按钮事件
 $(".editColor .addBtn").live("click", function() {
 	var n = $("input[name='product_size']").size();
 	if(n >= 20) {
@@ -561,9 +609,55 @@ $(".editColor .addBtn").live("click", function() {
 		alert("error: 尺码名称已存在!");
 		return false;
 	}
-	$(".editColor .add_li").before('<li><input type="text" maxlength="8" value="" name="product_size"><a class="delBtn" href="javascript:void(0);"></a></li>');
+	
+	$(".editColor .add_li").before('<li>' +
+									'<input type="text" idvalue="" value="" name="product_size">' +
+									'<a class="delBtn" href="javascript:void(0);"></a>' +
+								'</li>');
 	$("input[name='product_size']:last").focus();
+	
+	productSizeBlur();
 })
+
+//编辑框失去焦点事件
+function productSizeBlur(){
+	$("input[name='product_size']").on("blur", function(){
+		var size = {
+				sizeId : $(this).attr("idvalue"),
+				sizeName : $(this).val()
+		};
+		if(size.sizeId == null || size.sizeId == ""){
+			size.sizeId = 0;
+		}
+		console.log(JSON.stringify(size));
+		$.ajax({
+			url:"insertOrUpdateSize",
+			type:"POST",
+			data : JSON.stringify(size),
+			contentType : "application/json;charset=utf-8",
+			dataType : "json",
+			success:function(res){
+				//alert(JSON.stringify(res));	正常
+				if(res.sizerId != "500"){
+					var $li = $("<li class='' title='" + res.sizeName + "'>" +
+									"<a href='javascript:void(0);' value='" + res.sizeId + "'>" + res.sizeName + "</a><i></i>" +
+								"</li>");
+					$("#productsSizeList>ul").append($li);
+				} else {
+					alert(res.colorName);
+				}
+				//alert(JSON.stringify(sizeList));	//数据正常
+			}
+		});
+		//Ajax代码结束
+	});
+}
+
+
+
+
+
+
 //生成选择尺码列表
 function choiceSizeHTML(datas) {
 	var data = datas.split(",");

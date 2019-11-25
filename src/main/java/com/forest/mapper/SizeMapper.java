@@ -27,4 +27,6 @@ public interface SizeMapper {
     int updateByPrimaryKeySelective(Size record);
 
     int updateByPrimaryKey(Size record);
+    
+    int selectSizeIdCount(Integer sizeId);
 }

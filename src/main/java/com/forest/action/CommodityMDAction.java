@@ -140,9 +140,15 @@ public class CommodityMDAction {
 			return new Color(500, "颜色名不能为空！");
 		
 		//新增		id为0						空名字查询结果集合的长度为0
-		if(color.getColorId() == 0 && cb.queryColors(color.getColorName()).size() <= 0) {
-			if (cb.insertColor(color))
-				return cb.queryColors(color.getColorName()).get(0);
+		if(color.getColorId() == 0) {
+			List<Color> colorList = cb.queryColors(color.getColorName());
+			log.info(colorList + " \n集合长度为： " + colorList.size());
+			if(colorList.size() >= 1) {
+				return colorList.get(0);
+			} else {
+				if (cb.insertColor(color)) 
+					return cb.queryColors(color.getColorName()).get(0);
+			}
 		} else {	//修改
 			if (cb.updateColorName(color))
 				return cb.queryColorById(color.getColorId());
@@ -199,15 +205,54 @@ public class CommodityMDAction {
 		return new Color(500, "删除失败！");
 	}
 	
-	//商品管理 - 2.商品上传 - 4.查询全部商品尺码
+	/////////////////////////////////////////////////////////////////////
+	
+	//商品管理 - 2.商品上传 - 4.尺码管理 - 1.查询全部商品尺码
 	@RequestMapping(value = "querySizeList", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Size> querySizeAll(){
-		log.debug("BambooForestQuicksand - CommodityMDAction - querySizeAll - 商品管理 - 2.商品上传 - 2.查询全部商品尺码");
+		log.debug("BambooForestQuicksand - CommodityMDAction - querySizeAll - 商品管理 - 2.商品上传 - 4.尺码管理 - 1.查询全部商品尺码");
 		return sb.querySizeAll();
 	}
 
-	
+	//商品管理 - 2.商品上传 - 4.尺码管理 - 2.新增尺码 or 3.修改尺码
+	@RequestMapping(value = "insertOrUpdateSize", method = RequestMethod.POST)
+	@ResponseBody
+	public Size insertOrUpdateSize(@RequestBody Size size) {
+		log.debug("BambooForestQuicksand - CommodityMDAction - insertSize - 商品管理 - 2.商品上传 - 4.尺码管理 - 2.新增尺码 or 3.修改尺码");
+		log.info("尺码对象数据：" + size);
+
+		if(size.getSizeName().equals(""))
+			return new Size(500, "尺码名不能为空！");
+		
+		//新增		id为0						空名字查询结果集合的长度为0
+		if(size.getSizeId() == 0) {
+			List<Size> sizeList = sb.querySizeBySizeName(size.getSizeName());
+			log.info(sizeList + "\t集合长度为： " + sizeList.size());
+			if(sizeList.size() >= 1) {
+				return sizeList.get(0);
+			} else {
+				if (sb.insertSize(size)) 
+					return sb.querySizeBySizeName(size.getSizeName()).get(0);
+			}
+		} else {	//修改
+			if (sb.updateSize(size))
+				return sb.querySizeById(size.getSizeId());
+		}
+		return new Size(500, " 新增/修改 失败！");
+	}
+
+	//商品管理 - 2.商品上传 - 4.尺码管理 - 4.删除尺码
+	@RequestMapping(value = "deleteSize", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Size deleteSize(Integer sizeId) {
+		log.debug("BambooForestQuicksand - CommodityMDAction - deleteSize - 商品管理 - 2.商品上传 - 4.尺码管理 - 4.删除尺码");
+		log.info("尺码编号数据：" + sizeId);
+		if(sb.deleteSize(sizeId)) {
+			return new Size(200, "删除成功！");
+		}
+		return new Size(500, "该尺码已被引用，删除失败！");
+	}
 	
 	
 	
