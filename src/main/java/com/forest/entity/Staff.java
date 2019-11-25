@@ -26,6 +26,11 @@ public class Staff {
 		super();
 	}
 
+	public Staff(Integer staffId) {
+		super();
+		this.staffId = staffId;
+	}
+
 	public Staff(Integer staffId, String headPortraitPath) {
 		super();
 		this.staffId = staffId;

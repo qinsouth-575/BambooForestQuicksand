@@ -33,6 +33,8 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/head/**").addResourceLocations("file:/D:/Git/HeadPortraitImages/");
 		//上传的商品图片在D盘>Git>CommodityMainImages目录下，commodity表示访问的前缀，以下是真实路径
 		registry.addResourceHandler("/commodity/**").addResourceLocations("file:/D:/Git/CommodityMainImages/");
+		//上传的商品图片在D盘>Git>ColorImages目录下，color表示访问的前缀，以下是真实路径
+		registry.addResourceHandler("/color/**").addResourceLocations("file:/D:/Git/ColorImages/");
 		
 		//super.addResourceHandlers(registry);	改为实现WebMvcConfigurer接口后必须 注释/删除 这一句
 	}
@@ -56,6 +58,8 @@ public class MvcConfig implements WebMvcConfigurer {
     	pathPattern.add("/picture/**");
     	pathPattern.add("/head/**");
     	pathPattern.add("/commodity/**");
+    	
+    	pathPattern.add("/error");		//这些个error，有点烦
     	
 		registry.addInterceptor(loginI).addPathPatterns("/**").excludePathPatterns(pathPattern);
     	WebMvcConfigurer.super.addInterceptors(registry);

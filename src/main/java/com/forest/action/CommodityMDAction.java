@@ -13,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.forest.biz.ColorBiz;
 import com.forest.biz.CommodityMDBiz;
+import com.forest.biz.SizeBiz;
+import com.forest.entity.Color;
 import com.forest.entity.CommodityMD;
 import com.forest.entity.Images;
 import com.forest.entity.Size;
@@ -33,6 +36,12 @@ public class CommodityMDAction {
 	
 	@Autowired
 	private CommodityMDBiz cmdb;
+	
+	@Autowired
+	private ColorBiz cb;
+	
+	@Autowired
+	private SizeBiz sb;
 	
 	//商品管理 - 跳转 商品管理页面
 	@RequestMapping(value = "toPage", method = RequestMethod.GET)
@@ -66,11 +75,11 @@ public class CommodityMDAction {
 		return page;
 	}
 	
-	//商品管理 - 2.商品上传 - 1.图片上传
-	@RequestMapping(value = "/uploadImg", method = RequestMethod.POST)
+	//商品管理 - 2.商品上传 - 1.商品图片上传
+	@RequestMapping(value = "/uploadingCommodityImg", method = RequestMethod.POST)
 	@ResponseBody
-	public Images uploadImg(MultipartFile file){
-		log.debug("BambooForestQuicksand - CommodityMDAction - uploadImg - 商品管理 - 2.商品上传 - 1.图片上传");
+	public Images uploadingCommodityImg(MultipartFile file){
+		log.debug("BambooForestQuicksand - CommodityMDAction - uploadingCommodityImg - 商品管理 - 2.商品上传 - 1.商品图片上传");
 		log.info("上传图片：" + file);
 		File directory = new File("/D:/Git/CommodityMainImages");
 		if(!directory.exists()) {
@@ -98,16 +107,126 @@ public class CommodityMDAction {
 		}
 	}
 	
-	//商品管理 - 2.商品上传 - 2.查询全部商品尺码
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	//商品管理 - 2.商品上传 - 2.查询全部商品类别
+	
+	//商品管理 - 2.商品上传 - 3.颜色管理 - 1.新增颜色信息到数据库 OR 2.修改颜色名称
+	@RequestMapping(value = "insertOrUpdateColorName", method = RequestMethod.POST)
+	@ResponseBody
+	public Color insertOrUpdateColorName(@RequestBody Color color){
+		log.debug("BambooForestQuicksand - CommodityMDAction - insertOrUpdateColorName - 商品管理 - 2.商品上传 - 3.颜色管理 - 1.新增颜色信息到数据库 OR 2.修改颜色名称");
+		log.info("颜色信息：" + color);
+		//点击颜色列表或新增颜色，都会获得焦点，则必然触发本事件
+		//空 新名字 颜色列表有 		修改的新名字
+		
+		if(color.getColorName().equals(""))
+			return new Color(500, "颜色名不能为空！");
+		
+		//新增		id为0						空名字查询结果集合的长度为0
+		if(color.getColorId() == 0 && cb.queryColors(color.getColorName()).size() <= 0) {
+			if (cb.insertColor(color))
+				return cb.queryColors(color.getColorName()).get(0);
+		} else {	//修改
+			if (cb.updateColorName(color))
+				return cb.queryColorById(color.getColorId());
+		}
+		
+		return new Color(500, " 新增/修改 失败！");
+	}
+
+	//商品管理 - 2.商品上传 - 3.颜色管理 - 3.修改颜色图片路径
+	@RequestMapping(value = "/uploadingColorImg", method = RequestMethod.POST)
+	@ResponseBody
+	public Color uploadingColorImg(MultipartFile file, Integer colorId){
+		log.debug("BambooForestQuicksand - CommodityMDAction - uploadingColorImg - 商品管理 - 2.商品上传 - 3.颜色管理 - 3.修改颜色图片路径");
+		log.info("上传颜色图片：" + file + "\t" + colorId);
+		File directory = new File("/D:/Git/ColorImages");
+		if(!directory.exists()) {
+			directory.mkdirs();
+		}
+		
+		try {
+			String url = "/D:/Git/ColorImages/";
+			url = url+"/"+file.getOriginalFilename();
+			File f = new File(url);
+			file.transferTo(f);
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+			return new Color(500, "修改失败！");
+		}
+		
+		Color color = new Color(colorId);
+		color.setColorPrcture(file.getOriginalFilename());
+		log.info("修改颜色图片路径前：" + color);
+		if(cb.updateColorImgPath(color)) {
+			color = cb.queryColorById(colorId);
+			log.info("修改颜色图片路径后：" + color);	// "/" + file.getOriginalFilename()
+			return color;
+		}else {
+			return new Color(500, "修改失败！");
+		}
+	}
+	
+	//商品管理 - 2.商品上传 - 3.颜色管理 - 4.删除颜色
+	@RequestMapping(value = "/deleteColor", method = RequestMethod.POST)
+	@ResponseBody
+	public Color deleteColor(Integer colorId) {
+		log.debug("BambooForestQuicksand - CommodityMDAction - deleteColor - 商品管理 - 2.商品上传 - 3.颜色管理 - 4.删除颜色");
+		log.info("删除颜色编号：" + colorId);
+		if(colorId <= 32)
+			return new Color(200, "成功，because不必删除！");
+		
+		if(cb.deleteColor(colorId)) {
+			return new Color(200, "删除成功！");
+		}
+		return new Color(500, "删除失败！");
+	}
+	
+	//商品管理 - 2.商品上传 - 4.查询全部商品尺码
 	@RequestMapping(value = "querySizeList", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Size> querySizeAll(){
 		log.debug("BambooForestQuicksand - CommodityMDAction - querySizeAll - 商品管理 - 2.商品上传 - 2.查询全部商品尺码");
-		return cmdb.querySizeAll();
+		return sb.querySizeAll();
 	}
+
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//商品管理 - 3.修改商品 - 2.查看自定义新增的颜色列表
 	
 	
 	

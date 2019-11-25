@@ -98,6 +98,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  
   <insert id="insert" parameterType="com.forest.entity.Color" >
     insert into color (color_id, color_name, parent_gc_id, 
       color_prcture)
@@ -135,6 +136,7 @@
       </if>
     </trim>
   </insert>
+  
   <select id="countByExample" parameterType="com.forest.entity.ColorExample" resultType="java.lang.Integer" >
     select count(*) from color
     <if test="_parameter != null" >
