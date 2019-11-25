@@ -18,6 +18,7 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
+    <div id="poinsert">
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
@@ -298,7 +299,6 @@
                                         <button class="btn btn-success">提交</button>
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -347,16 +347,16 @@
                                         		<th colspan="6">
 						                    		<button class="btn btn-success">全部</button>
 						                    		<span id="list_type">
-						                    			<button class="btn btn-default">羽绒服</button>
-							                    		<button class="btn btn-default">双面羊绒大衣</button>
-							                    		<button class="btn btn-default">打底</button>
-							                    		<button class="btn btn-default">衬衣</button>
-							                    		<button class="btn btn-default">毛衣</button>
-							                    		<button class="btn btn-default">卫衣</button>
-							                    		<button class="btn btn-default">背带</button>
-							                    		<button class="btn btn-default">短裤</button>
-							                    		<button class="btn btn-default">饰品</button>
-							                    		<button class="btn btn-default">半身裙</button>
+						                    			<button class="btn btn-default ctName" @click="cli">羽绒服</button>
+							                    		<button class="btn btn-default ctName" @click="cli">双面羊绒大衣</button>
+							                    		<button class="btn btn-default ctName" @click="cli">打底</button>
+							                    		<button class="btn btn-default ctName" @click="cli">衬衣</button>
+							                    		<button class="btn btn-default ctName" @click="cli">毛衣</button>
+							                    		<button class="btn btn-default ctName" @click="cli">卫衣</button>
+							                    		<button class="btn btn-default ctName" @click="cli">背带</button>
+							                    		<button class="btn btn-default ctName" @click="cli">短裤</button>
+							                    		<button class="btn btn-default ctName" @click="cli">饰品</button>
+							                    		<button class="btn btn-default ctName" @click="cli">半身裙</button>
 						                    		</span>
                                         		</th>
                                         	</tr>
@@ -370,37 +370,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                            </tr>
-                                            <tr>
+                                            <tr v-for="item in poinsert.list">
                                                 <td><input type="checkbox" class="checkbox"></td>
                                                 <td>2</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
-                                                <td>3</td>
-                                                <td>Deshmukh</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                            </tr>
-                                            <tr>
-                                                <td><input type="checkbox" class="checkbox"></td>
-                                                <td>4</td>
-                                                <td>Deshmukh</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
+                                                <td>{{item.articleNo}}/{{item.barCode}}</td>
+                                                <td>{{item.cmName}}</td>
+                                                <td>{{item.color}}-{{item.sizeName}}</td>
+                                                <td>{{item.salePrice}}</td>
+                                                <td>{{item.quantity}}</td>
+                                               
                                             </tr>
                                         </tbody>
                                         <tfoot>
@@ -409,10 +387,10 @@
                                         			<input type="checkbox" />全选
                                         		</td>
                                         		<td colspan="5" class="text-right">
-							                        <a href="#" class="btn hidden-sm-down btn-info">首页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">上一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">下一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">尾页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goFirstPage">首页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goPrePage">上一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goNextPage">下一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goLastPage">尾页</a>
                                         		</td>
                                         	</tr>
                                         </tfoot>
@@ -425,6 +403,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
     <!-- ============================================================== -->
     <!-- End Modal -->
@@ -444,13 +423,61 @@
     <script th:src="@{/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js}"></script>
     <script th:src="@{/js/flot-data.js}"></script>
     <script th:src="@{/assets/plugins/styleswitcher/jQuery.style.switcher.js}"></script>
-    
     <script th:src="@{/js/vue.js}"></script>
     <script type="text/javascript">
-    	$(function(){
-    		
+    	var vue=new Vue({
+    		el:"#poinsert",
+    		data(){
+    			return {
+    				poinsert:[]
+    			}
+    		},methods:{
+    			goPage:function(dqy){
+    				var that=this;
+    				var obj={
+    						pageNum:dqy,
+    						cmName:""
+    				};
+    				alert(JSON.stringify(obj));
+    				$.ajax({
+						url:"[[@{/po/queryCommodityMain}]]",
+						type:"post",
+						data:JSON.stringify(obj),
+						contentType:"application/json;charset=utf-8",
+						dataType:"json",
+						success:function(res){
+							that.poinsert=res;
+							alert(JSON.stringify(that.poinsert));
+						}
+						
+					});
+    			},
+    			cli:function(){
+    				let cmName=$(".ctName").val();
+    				alert(cmName);
+    				
+    			},
+    			goPrePage:function(){
+    				if(this.poinsert.hasPreviousPage){
+        				this.goPage(this.poinsert.prePage)
+        				//alert(this.po.hasPreviousPage + " - " + this.po.prePage);
+    				}
+    			},
+    			goNextPage:function(){
+    				if(this.poinsert.hasNextPage){
+        				this.goPage(this.poinsert.nextPage);
+    				}
+    			},
+    			goFirstPage:function(){
+    				this.goPage(1);
+    			},
+    			goLastPage:function(){
+    				this.goPage(this.poinsert.pages);
+    			},
+    		},created:function(){
+    			this.goPage(1);
+    		}
     	});
-    	
     </script>
 </body>
 
