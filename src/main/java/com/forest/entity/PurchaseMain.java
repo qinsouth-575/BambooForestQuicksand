@@ -2,11 +2,14 @@ package com.forest.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class PurchaseMain {
     private Integer pmId;
 
     private String pmOdd;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date deliveryTime;
 
     private Integer supId;
@@ -23,26 +26,88 @@ public class PurchaseMain {
     
     private Date endTime;
     
-    private Date start;
+    private Date startTime;
     
     private double je;
     
     private String shopName;
     
-    public String getShopName() {
-		return shopName;
+    private String supName;
+    
+    private int pageNum;
+    
+    private String statu;
+
+	public String getStatu() {
+		return statu;
 	}
 
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
+	public void setStatu(String statu) {
+		this.statu = statu;
 	}
 
-	public double getJe() {
-		return je;
+	public Integer getPmId() {
+		return pmId;
 	}
 
-	public void setJe(double je) {
-		this.je = je;
+	public void setPmId(Integer pmId) {
+		this.pmId = pmId;
+	}
+
+	public String getPmOdd() {
+		return pmOdd;
+	}
+
+	public void setPmOdd(String pmOdd) {
+		this.pmOdd = pmOdd;
+	}
+
+	public Date getDeliveryTime() {
+		return deliveryTime;
+	}
+
+	public void setDeliveryTime(Date deliveryTime) {
+		this.deliveryTime = deliveryTime;
+	}
+
+	public Integer getSupId() {
+		return supId;
+	}
+
+	public void setSupId(Integer supId) {
+		this.supId = supId;
+	}
+
+	public String getLister() {
+		return lister;
+	}
+
+	public void setLister(String lister) {
+		this.lister = lister;
+	}
+
+	public Integer getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(Integer shopId) {
+		this.shopId = shopId;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public int getCount() {
@@ -61,75 +126,45 @@ public class PurchaseMain {
 		this.endTime = endTime;
 	}
 
-	public Date getStart() {
-		return start;
+	public Date getStartTime() {
+		return startTime;
 	}
 
-	public void setStart(Date start) {
-		this.start = start;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
-	public Integer getPmId() {
-        return pmId;
-    }
+	public double getJe() {
+		return je;
+	}
 
-    public void setPmId(Integer pmId) {
-        this.pmId = pmId;
-    }
+	public void setJe(double je) {
+		this.je = je;
+	}
 
-    public String getPmOdd() {
-        return pmOdd;
-    }
+	public String getShopName() {
+		return shopName;
+	}
 
-    public void setPmOdd(String pmOdd) {
-        this.pmOdd = pmOdd;
-    }
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 
-    public Date getDeliveryTime() {
-        return deliveryTime;
-    }
+	public String getSupName() {
+		return supName;
+	}
 
-    public void setDeliveryTime(Date deliveryTime) {
-        this.deliveryTime = deliveryTime;
-    }
+	public void setSupName(String supName) {
+		this.supName = supName;
+	}
 
-    public Integer getSupId() {
-        return supId;
-    }
+	public int getPageNum() {
+		return pageNum;
+	}
 
-    public void setSupId(Integer supId) {
-        this.supId = supId;
-    }
-
-    public String getLister() {
-        return lister;
-    }
-
-    public void setLister(String lister) {
-        this.lister = lister;
-    }
-
-    public Integer getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(Integer shopId) {
-        this.shopId = shopId;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+    
+ 
 }

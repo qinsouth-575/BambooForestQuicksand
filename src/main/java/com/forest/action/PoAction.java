@@ -1,14 +1,20 @@
 package com.forest.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.forest.biz.PoBiz;
 import com.forest.entity.CommodityMD;
+import com.forest.entity.PurchaseMain;
+import com.forest.entity.Shop;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/po")
@@ -29,9 +35,41 @@ public class PoAction {
 	public String toCommodityMDInsert() {
 		return "d_commodity_po_insert";
 	}
-	@RequestMapping
+	/**
+	 * 查询可添加商品
+	 */
+	@RequestMapping("queryCommodityMain")
 	@ResponseBody
-	public List<CommodityMD> queryCommodityMD(CommodityMD cmd){
+	public PageInfo<CommodityMD> queryCommodityMD(@RequestBody CommodityMD cmd){
 		return pb.queryCommodityMD(cmd);
+	}
+	/**
+	 * 查询所有采购单
+	 */
+	@RequestMapping("queryPurchaseMain")
+	@ResponseBody
+	public PageInfo<PurchaseMain> queryPurchaseMain(@RequestBody PurchaseMain pm){
+		System.out.println(pb.queryPurchaseMain(pm).getSize());
+		return pb.queryPurchaseMain(pm);
+	}
+	/**
+	 * 查询所有店铺
+	 */
+	@RequestMapping("queryShop")
+	@ResponseBody
+	public List<Shop> queryShop(){
+		return pb.queryShop();
+	}
+	/**
+	 * 查询单号
+	 */
+	@RequestMapping("queryCountBill")
+	@ResponseBody
+	public Map<String,String> queryCountBill(String pmOdd){
+		System.out.println(pmOdd);
+		Map<String,String> map=new HashMap<String,String>();
+		String no=pb.queryCountBill(pmOdd);
+		map.put("no", no);
+		return map;
 	}
 }

@@ -9,7 +9,9 @@
     <result column="lister" property="lister" jdbcType="VARCHAR" />
     <result column="shop_id" property="shopId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="start" property="start" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -256,16 +258,27 @@
     where pm_id = #{pmId,jdbcType=INTEGER}
   </update>
   <!--  -->
-  <select id="queryAll" resultMap="BaseResultMap">
-  	SELECT pm.*,sp.`company_name`,pd.* FROM purchase_main pm,purchase_details pd,supplier sp WHERE pm.`pm_id`=pd.`pm_id` AND sp.`sup_id`=pm.`sup_id`
-  	<if test="deliveryTime !=null and deliveryTime!=''">
-  		and	deliveryTime BETWEEN #{startTime} AND #{endTime}
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="com.forest.entity.PurchaseMain">
+  	SELECT pm.*,sp.`company_name` as supName,s.`shop_name`,pd.`tital_decimal` AS je,pd.`quantity` AS count FROM purchase_main pm,purchase_details pd,supplier sp,shop s 
+  	WHERE pm.`pm_id`=pd.`pm_id` 
+  	AND sp.`sup_id`=pm.`sup_id` AND pm.`shop_id`=s.`shop_id`
+  	<if test="startTime !=null and startTime !=''">
+  		and	pm.delivery_time &lt;= #{startTime} AND #{endTime}
+  	</if>
+  	<if test="endTime !=null and endTime !=''">
+  		and	pm.delivery_time &gt;= #{startTime} AND #{endTime}
+  	</if>
+  	<if test="endTime !=null and endTime !='' and startTime !=null and startTime !=''">
+  		and	pm.delivery_time BETWEEN #{startTime} AND #{endTime}
   	</if>
   	<if test="shopName !=null and shopName !=''">
-  		and	shopName = #{shopName}
+  		and	s.shop_name = #{shopName}
   	</if>
-  	<if test="pm_odd !=null and pm_odd !=''">
-  		and pm_odd =#{pmOdd}
+  	<if test="pmOdd !=null and pmOdd !=''">
+  		and  pm.pm_odd '%${pmOdd}%'
   	</if>
+  </select>
+  <select id="queryCountBill" resultType="int" parameterType="String">
+ 	  	select count(*) from purchase_main where pm_odd  like #{0}
   </select>
 </mapper>

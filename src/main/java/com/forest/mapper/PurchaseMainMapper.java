@@ -28,5 +28,9 @@ public interface PurchaseMainMapper {
 
     int updateByPrimaryKey(PurchaseMain record);
     
-    List<PurchaseMainMapper> queryAll();
+    //查询所有供应商
+    List<PurchaseMain> queryAll(PurchaseMain pm);
+    
+    //查询单号
+    int queryCountBill(String pmOdd);
 }
