@@ -10,6 +10,8 @@
     <result column="discount" property="discount" jdbcType="REAL" />
     <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
     <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="cm_name" property="cmName" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -255,5 +257,12 @@
       total_price = #{totalPrice,jdbcType=DECIMAL},
       state = #{state,jdbcType=TINYINT}
     where trd_id = #{trdId,jdbcType=INTEGER}
-  </update>
+  </update>                
+  <select id="queryAll" resultMap="BaseResultMap">
+  			SELECT d.`trd_id`,c.`cm_name`,d.`quantity`,d.`total_price`,m.`create_time` FROM `transaction_record_details` AS d
+			LEFT JOIN `commodity_main` AS c ON d.`article_no`=c.`article_no`
+			LEFT JOIN `transaction_record_main` AS m ON m.`order_number`=d.`order_number`
+			WHERE m.`client`>0
+			GROUP BY d.`trd_id`
+  </select>
 </mapper>

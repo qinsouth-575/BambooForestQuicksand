@@ -18,8 +18,29 @@ public class TransactionRecordDetails {
     private BigDecimal totalPrice;
 
     private Byte state;
+    
+    private String createTime;
+    
+    private String cmName;
+    
 
-    public Integer getTrdId() {
+    public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getCmName() {
+		return cmName;
+	}
+
+	public void setCmName(String cmName) {
+		this.cmName = cmName;
+	}
+
+	public Integer getTrdId() {
         return trdId;
     }
 
