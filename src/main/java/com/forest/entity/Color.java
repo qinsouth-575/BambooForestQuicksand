@@ -9,7 +9,22 @@ public class Color {
 
     private String colorPrcture;
 
-    public Integer getColorId() {
+    public Color() {
+		super();
+	}
+
+	public Color(Integer colorId) {
+		super();
+		this.colorId = colorId;
+	}
+
+	public Color(Integer colorId, String colorName) {
+		super();
+		this.colorId = colorId;
+		this.colorName = colorName;
+	}
+
+	public Integer getColorId() {
         return colorId;
     }
 
@@ -40,4 +55,11 @@ public class Color {
     public void setColorPrcture(String colorPrcture) {
         this.colorPrcture = colorPrcture;
     }
+
+	@Override
+	public String toString() {
+		return "Color [colorId=" + colorId + ", colorName=" + colorName + ", parentGcId=" + parentGcId
+				+ ", colorPrcture=" + colorPrcture + "]";
+	}
+    
 }

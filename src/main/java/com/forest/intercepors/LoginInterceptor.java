@@ -18,8 +18,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
-		log.debug("LoginInterceptor - preHandle");
-		
+		log.debug("LoginInterceptor -    preHandle    - 当前拦截地址为：" + request.getRequestURI());
 		
 		//每一个项目对于登陆的实现逻辑都有所区别，我这里使用最简单的Session提取User来验证登陆。
 		/*HttpSession session = request.getSession();
@@ -34,7 +33,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;    //如果session里有user，表示该用户已经登陆，放行，用户即可继续调用自己需要的接口
         }
 		*/
-		log.info("当前拦截地址为：" + request.getRequestURI());
 		
 		boolean flag = HandlerInterceptor.super.preHandle(request, response, handler);
 		//log.info("拦截结果：" + flag);
@@ -45,7 +43,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		log.debug("LoginInterceptor - postHandle");
+		log.debug("LoginInterceptor -    postHandle   - 当前拦截地址为：" + request.getRequestURI());
 		
 		HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
 	}
@@ -54,7 +52,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-		log.debug("LoginInterceptor - afterCompletion");
+		log.debug("LoginInterceptor - afterCompletion - 当前拦截地址为：" + request.getRequestURI());
 		
 		HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
 	}

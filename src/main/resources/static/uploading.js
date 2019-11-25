@@ -78,154 +78,129 @@ $(function() {
 		}
 	});
 	$('.productPicShow .controlDiv .delBtn').die().live('click', function() {
-		$(this).parents("li").remove();
+		var imgId = $(this).attr("value");
+		//console.log(imgId);	获取图片id正常
+		for (var i = 0; i < imgList.length; i++) {
+        	if (imgList[i].imgId == imgId) {
+            	imgList.splice(i, 1);	//从图片列表中删除
+           	}
+      	}
+		console.log(JSON.stringify(imgList));	//删除后打印图片列表的信息 - 正常
+		$(this).parents("li").remove();		//删除父级》父级 li标签
+		
 		if($(".productPicShow .tb-thumb li").size() == 1) {
-			$(".jqzoom").attr('src', "http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg");
-			$(".jqzoom").attr('rel', "http://www.poso2o.com/ECSHOP/style/img/uploadImg150_150.jpg");
+			$(".jqzoom").attr('src', "/picture/uploadimg150_150.jpg");
+			$(".jqzoom").attr('rel', "/picture/uploadimg150_150.jpg");
 		}
 	});
 
-	/*
-	 * 上传图片
-	 */
+	//点击上传图片
 	$("#addProductPicBtn").live('click', function() {
-
-		if($("#thumblist li").size() > 12) {
-			("最多只能上传12张图片", 'error');
-			return false;
-		}
-		$("#uploadImgFile").trigger("click"); //处理事件
-
-	})
-
-	/*$(function() {
-		//上传封面图
-		$("#uploadImgFile").toUploadImgFile();
-	})*/
+		if($("#thumblist li").size() > 12)
+			alert("error: 最多只能上传12张图片");
+	});
 
 	var uploadProductId = 0;
-	
-	
-	$.fn.toUploadImgFile = function() {
-		alert("#thumblist li.size：" + $("#thumblist li").size());
-		if($("#thumblist li").size() > 12) {
-			("最多只能上传12张图片", 'error');
-			return false;
+	//点击事件，打开文件选择框的同时判断一次已上传照片是否大于十二张
+	$("#uploadImgFile").on("click", function(){
+		console.log("#uploadImgFile - click - Start - #thumblist li.size：" + $("#thumblist li").size());
+		
+		if($("#thumblist li").size() >= 12) {
+			alert("error: 最多只能上传12张图片");
 		}
-
-		var cur = this;
-		this.change(function() {
-			var v = cur.val();
-			var ext = v.substring(v.lastIndexOf("."));
-			if(ext != ".jpg" && ext != ".png" && ext != ".gif" && ext != ".jpeg" && ext != ".JPG" && ext != ".PNG" && ext != ".GIF" && ext != ".JPEG") { //检查文件格式
-				alert("请选择图片，支持的图片格式有：JPEG, PNG, GIF !");
-				cur.val("");
-				return false;
+	});
+	//值变更事件，上传图片
+	$("#uploadImgFile").on("change", function(){
+		console.log("#uploadImgFile - change - Start");
+		var cur = $("#uploadImgFile");		//file文件域
+		var v = cur.val();	//上传文件的名字
+		var ext = v.substring(v.lastIndexOf("."));
+		var fileName = v.substring(v.lastIndexOf("\\")+1); 
+		
+		for (var i = 0; i < imgList.length; i++) {
+        	if (imgList[i].imgPath.indexOf(fileName, 0) != -1) {
+            	alert("此文件已上传，不可重复操作！");
+ 				return false;
+           	}
+      	}
+		
+		if(ext != ".jpg" && ext != ".png" && ext != ".gif" && ext != ".jpeg" && ext != ".JPG" && ext != ".PNG" && ext != ".GIF" && ext != ".JPEG") { //检查文件格式
+			alert("请选择图片，支持的图片格式有：JPG, PNG, GIF, JPEG !");
+			cur.val("");
+		} else {
+			var fileSize = 0;	//文件大小
+			var target = document.getElementById("uploadImgFile");
+			if(isIE && !target.files) {
+				var filePath = target.value;				//FileSystemObject 简称 FSO，文件系统组件。
+				var fileSystem = new ActiveXObject("Scripting.FileSystemObject");	//功能太强，在客户端无权限
+				var file = fileSystem.GetFile(filePath);
+				fileSize = file.Size;
 			} else {
-				var fileSize = 0;
-				var target = document.getElementById("uploadImgFile");
-				if(isIE && !target.files) {
-					var filePath = target.value;
-					var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
-					var file = fileSystem.GetFile(filePath);
-					fileSize = file.Size;
-				} else {
-					fileSize = target.files[0].size;
-				}
-				var size = fileSize / 1024;
-				if(size > 2000) {
-					alert("上传的图片大小不能超出2M");
-					target.value = "";
-					return
-				}
-				var newBannerId = "product" + WC.version_time + uploadProductId;
-				if($(".productPicShow .tb-thumb li.current").attr("class").indexOf("addBtn") != -1) {
-					var HTML = '<li class="">';
-					HTML += '<a href="javascript:void(0);" class="imgD">';
-					HTML += '<img id="' + newBannerId + '" src="/picture/loading.gif" mid="/picture/loading.gif" big="/picture/loading.gif" pic222_222="/picture/loading.gif">';
-					HTML += '</a>';
-					HTML += '<div class="controlDiv">';
-					HTML += '<a class="leftBtn" href="javascript:void(0);">向左</a>';
-					HTML += '<a class="rightBtn" href="javascript:void(0);">向右</a>';
-					HTML += '<a class="delBtn" href="javascript:void(0);">删除</a>';
-					HTML += '</div>';
-					HTML += '</li>';
-					$('#productPicShow .tb-thumb li.addBtn').before(HTML);
-				} else {
-					$("#productPicShow .tb-thumb li.current img").attr("id", newBannerId);
-					$("#productPicShow .tb-thumb li.current img").attr("src", "/picture/loading.gif");
-					$("#productPicShow .tb-thumb li.current img").attr("mid", "/picture/loading.gif");
-					$("#productPicShow .tb-thumb li.current img").attr("big", "/picture/loading.gif");
-				}
-				uploadProductId++;
-				cur.wrap('<form enctype="multipart/form-data"/>');
-				// alert(newBannerId);	id正常		alert(uploadProductId);	自增序号标号正常
-				var options = {
-					url: "/uploadImg", 
-					type: "post",
-					success: function(r) {
-						// 取消form包裹
-						cur.unwrap();
-						// 此处data可以返回文件ID，然后根据ID查询并返回文件即可
-						//cur.after(data);
-						var datas = eval("(" + r + ")");
-						
-						alert(JSON.stringify(r));
-						alert(JSON.stringify(datas));
-						
-						/*if(datas.code.indexOf("success") != -1) {
-							$("#" + newBannerId).attr("src", datas.data.pic); //pic
-							$("#" + newBannerId).attr("mid", datas.data.pic);
-							$("#" + newBannerId).attr("big", datas.data.pic);
-							$("#" + newBannerId).attr("pic222_222", datas.data.pic);
-							$(".jqzoom").attr('src', datas.data.pic);
-							$(".jqzoom").attr('rel', datas.data.pic);
-							$("#" + newBannerId).parents("li").find(".imgsData").html($.toJSON(datas));
-						} else {
-							//fntopmessagebox(datas.data,'error');
-							alert(datas.data);
-						}*/
-					},
-					error: function(XMLHttpRequest, textStatus, errorThrown) {
-						alert(textStatus + "," + errorThrown);
-						//$(".loading_div").show();
-						//$(".loading_div .img_div").removeClass("loading_img");
-					}
-				};
-				cur.parent("form").ajaxSubmit(options); // 异步提交		*/
+				fileSize = target.files[0].size;
 			}
-		})
-	}
-
+			
+			var size = fileSize / 1024;
+			if(size > 2000) {
+				alert("上传的图片大小不能超出2M");
+				target.value = "";
+				return false;
+			}
+			
+			var newBannerId = "product" + WC.version_time + uploadProductId;
+			if($(".productPicShow .tb-thumb li.current").attr("class").indexOf("addBtn") != -1) {
+				var HTML = '<li class="">';
+						HTML += '<a href="javascript:void(0);" class="imgD">';
+							HTML += '<img id="' + newBannerId + '" src="/picture/loading.gif" mid="/picture/loading.gif" big="/picture/loading.gif" pic222_222="/picture/loading.gif">';
+						HTML += '</a>';
+						HTML += '<div class="controlDiv">';
+							HTML += '<a class="leftBtn" href="javascript:void(0);">向左</a>';
+							HTML += '<a class="rightBtn" href="javascript:void(0);">向右</a>';
+							HTML += '<a class="delBtn" href="javascript:void(0);">删除</a>';
+						HTML += '</div>';
+					HTML += '</li>';
+				$('#productPicShow .tb-thumb li.addBtn').before(HTML);
+			} else {
+				$("#productPicShow .tb-thumb li.current img").attr("id", newBannerId);
+				$("#productPicShow .tb-thumb li.current img").attr("src", "/picture/loading.gif");
+				$("#productPicShow .tb-thumb li.current img").attr("mid", "/picture/loading.gif");
+				$("#productPicShow .tb-thumb li.current img").attr("big", "/picture/loading.gif");
+			}
+			// alert(newBannerId);	id正常		alert(uploadProductId);	自增序号标号正常
+			uploadProductId++;	//序号自增
+			
+			var formData = new FormData($("[name=form1]")[0]);
+			$.ajax({
+				url:"uploadingCommodityImg",
+				type:"post",
+				data:formData,
+				mimeType:"multipart/form-data",
+				processData:false,
+				contentType:false,
+				dataType:"json",
+				success:function(res){
+					//console.log(res);		返回数据正常
+					
+					if (res.imgPath != "break") {
+						$("#" + newBannerId).attr("src", "/commodity/" + res.imgPath);	//pic
+						$("#" + newBannerId).attr("mid", "/commodity/" + res.imgPath);
+						$("#" + newBannerId).attr("big", "/commodity/" + res.imgPath);
+						$("#" + newBannerId).attr("pic222_222", "/commodity/" + res.imgPath);
+						$("#" + newBannerId).parent().next().find("a:last").attr("value", res.imgId);
+						
+						imgList.push(res);
+						console.log(JSON.stringify(imgList));	//添加后打印图片列表的信息 - 正常
+					} else {
+						alert("新增失败，请重试！");
+					}
+				}
+			});
+			//Ajax代码结束
+		}
+	});
+	//文件域change事件结束
 });
 //uploading.js - 工厂函数结束
 
-/* *
- * 上传商品 - 同步至微商城
- */
-$('.synchroListDiv .frm_checkbox_label').live('click', function() {
-	if($(this).attr("class").indexOf("selected") != -1) {
-		$(this).removeClass("selected");
-	} else {
-		$(this).addClass("selected");
-	}
-});
-/* *
- * 上传商品 -  运费设置 按件数
- */
-$('.templetXDiv .frm_checkbox_label').live('click', function() {
-	$('.templetXDiv .frm_checkbox_label').removeClass("selected");
-	if($(this).attr("class").indexOf("selected") != -1) {
-		$(this).removeClass("selected");
-	} else {
-		$(this).addClass("selected");
-	}
-	if($(this).index() == 2) {
-		window.location.href = "http://www.poso2o.com/EntityStore/goods/add.jsp";
-	} else {
-		window.location.href = "http://www.poso2o.com/EntityStore/goods/setMeal.jsp";
-	}
-});
 $(".directoryBox .comboxText").val("请选择类别");
 $(".factoryBox .comboxText").val("请选择供应商");
 
@@ -240,9 +215,7 @@ if(factoryX.split(",")[0]) {
 } else {
 	$(".factoryBox .comboxText").attr("comboxval", "自主供应").val("自主供应");
 }
-/* *
- * 供应商列表 - dropDownBox事件
- */
+//供应商列表 - dropDownBox事件
 $(".dropDownBox").live("mouseover", function() {
 	$(".dropDownBox_hover").removeClass("dropDownBox_hover");
 	$(this).addClass("dropDownBox_hover");
@@ -250,122 +223,124 @@ $(".dropDownBox").live("mouseover", function() {
 $(".dropDownBox").live("mouseleave", function() {
 	$(".dropDownBox_hover").removeClass("dropDownBox_hover");
 })
-/* *
- * 选择商品类别
- */
+//选择商品类别
 $(".directoryBox .pannel a").live("click", function() {
 	WC.setCookie(userInfo.uid + "shop_add_directory", $(this).attr("comboxval") + "," + $(this).attr("default"), !1);
 })
-/* *
- * 选择供应商 
- */
+//选择供应商
 $(".factoryBox .pannel a").live("click", function() {
 	WC.setCookie("shop_add_factory", $(this).attr("comboxval") + "," + $(this).attr("default"), !1);
 })
-/* *
- *  商品信息 - 类别列表
- */
-$(".directoryBox").live('click', function() {
-	if($(".directoryList li").size() == 2) {
-		getTypeList();
-	}
-})
-//获取类别列表信息
-function getTypeList() {
-	var paramObject = new Object();
-	paramObject.sessionUid = userInfo.uid;
-	paramObject.sessionKey = userInfo.password;
-	var paramJson = jQuery.param(paramObject);
-	$.ajax({
-		type: "POST",
-		dataType: "json",
-		cache: false,
-		url: "/directory.htm?Act=list",
-		data: paramJson,
-		timeout: 20000,
-		success: function(datas) {
-			if(datas.code.indexOf("success") != -1) {
-				var datas = datas.data;
-				var HTML = '<li><a comboxval="" default="请选择类别" href="javascript:void(0);">请选择类别</a></li>';
-				for(var i = 0; i < datas.length; i++) {
-					if(datas[i].fid != "TC") HTML += '<li><a href="javascript:void(0);" default="' + datas[i].directory + '" comboxval="' + datas[i].fid + '">' + datas[i].directory + '</a></li>';
-				}
-				$(".directoryList").html(HTML);
-			} else {
-				fntopmessagebox(datas.data, 'error');
-			}
-		},
-		error: function() {
-			fntopmessagebox("服务器繁忙，稍后再试试.", 'error');
-		}
-	}).always(function() {})
-}
-//getTypeList();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// - Start - color 增删改查  - ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //添加颜色
 $(".productsColorObject .addColorBtn").live("click", function() {
-	addColorHTML("", "");
+	addColorHTML(0, "", "");
 })
 $("input[name='checkColor']").live('click', function() {
 	if($(this).attr("checked")) {
-		addColorHTML($(this).val(), $(this).attr("imageurl"));
+		addColorHTML($(this).attr("idvalue"), $(this).val(), $(this).attr("imageurl"));
 	} else {
-		delColorHTML($(this).val());
+		delColorHTML($(this).attr("idvalue"), $(this).val());
 	}
 });
 
 //删除颜色
 $(".uploadProductArea .productsColorList .Delete").live("click", function() {
-	delColorHTML($(this).parents("tr").find(".colorInputText").val());
+	delColorHTML($(this).parents("tr").find(".colorInputText").attr("idvalue"), $(this).parents("tr").find(".colorInputText").val());
 })
 
 //添加颜色
-function addColorHTML(colorid, url) {
+function addColorHTML(colorid, colorName, url) {
+	console.log(colorid + " - " + colorName + " - " + url);
 	var n = $("#productsColorList tbody tr").size();
+	console.log("当前颜色数量：" + n);
 	if(n >= 20) {
-		fntopmessagebox('尺码数量不能超过20个。', 'error');
+		alert("error: 颜色数量不能超过20个!");
 		return false;
 	}
-	$("#productsColorList").append('<tr pic66_66="" pic464_464="" pic="" pic222_222=""><td><span class="Num">0</span><span class="NumPoint">.</span><span class="ColorImg ' + url + '"> </span><input type="text" placeholder="请输入颜色" viewimageurl="" imageurl="" value="' + colorid + '" name="" maxlength="15" class="colorInputText"><a rel="删除" href="javascript:void(0);" class="Delete">删除</a></td><td><div class="uploadTd"><input type="text" class="imageInputText" value="" disabled="disabled" style="background-color:#FAFAFA;"><label for="uploadImgFileX" class="btn">上传图片</label></div></td></tr>');
-	$('#productsColorList .colorInputText:last').focus();
+	$("#productsColorList").append('<tr pic66_66="" pic464_464="" pic="" pic222_222="">' +
+										'<td>' +
+											'<span class="Num">0</span>' +
+											'<span class="NumPoint">.</span>' +
+											'<span class="ColorImg ' + url + '"> </span>' +
+											'<input type="text" placeholder="颜色名不能为空" viewimageurl="" imageurl="" idvalue="' + colorid + '" value="' + colorName + '" name="" maxlength="15" class="colorInputText">' +
+											'<a rel="删除" href="javascript:void(0);" class="Delete">删除</a>' +
+										'</td>' +
+										'<td>' +
+											'<div class="uploadTd">' +
+												'<input type="text" class="imageInputText" value="" disabled="disabled" style="background-color:#FAFAFA;">' +
+												'<label for="uploadImgFileX" class="btn">上传图片</label>' +
+											'</div>' +
+										'</td>' +
+									'</tr>');
+	$('#productsColorList .colorInputText:last').focus();	//将新添加的tr获得焦点
 	if($(".productsColorList tbody tr").size() > 0) {
 		$(".productsColorList").show();
 	}
 	//生成数量列表
 	setProductNumList();
+	
+	//颜色文本框离开焦点事件
+	$(".colorInputText").on("blur", function(){
+		if($(this).val() == "" || $(this).val() == null || $(this).val() == undefined){
+			$(this).focus();
+		}
+	});
 }
 
 //删除颜色
-function delColorHTML(colorid) {
-
-	//取消已选颜色
-	$(".chosenColorArea input[name='checkColor']").each(function() {
-		if($(this).val() === colorid) {
-			$(this).removeAttr("checked");
+function delColorHTML(colorid, colorName) {
+	console.log("要删除的颜色id为：" + colorid + "，要删除的颜色名称为：" + colorName);
+	$.ajax({
+		url:"deleteColor",
+		type:"POST",
+		data : {
+			colorId : colorid
+		},
+		dataType : "json",
+		success:function(res){
+			if(res.colorId != "500"){
+				for (var i = 0; i < colorList.length; i++) {
+		        	if (colorList[i].colorId == colorId) {
+		            	colorList.splice(i, 1);	//从颜色列表中删除，后会push新的
+		           	}
+		      	}
+				console.log(JSON.stringify(colorList));	//删除后打印颜色列表的信息 - 正常
+				
+				//取消已选颜色
+				$(".chosenColorArea input[name='checkColor']").each(function() {
+					if($(this).val() === colorName) {
+						$(this).removeAttr("checked");
+					}
+				})
+				//颜色输入框
+				$("#productsColorList tbody .colorInputText").each(function() {
+					if($(this).val() == colorName) {
+						$(this).parents("tr").remove();
+					}
+				})
+				//数量输入框
+				$("#productNumList tbody .colorText").each(function() {
+					if($(this).attr("colorid") == colorName) {
+						$(this).parents("tr").remove();
+					}
+				})
+				//生成数量列表
+				setProductNumList();
+				//
+				if($(".productsColorList tbody tr").size() == 0) {
+					$(".productsColorList").hide();
+				}
+			} else {
+				alert(res.colorName);
+			}
 		}
-	})
-
-	//颜色输入框
-	$("#productsColorList tbody .colorInputText").each(function() {
-		if($(this).val() == colorid) {
-			$(this).parents("tr").remove();
-		}
-	})
-
-	//数量输入框
-	$("#productNumList tbody .colorText").each(function() {
-		if($(this).attr("colorid") == colorid) {
-			$(this).parents("tr").remove();
-		}
-	})
-
-	//生成数量列表
-	setProductNumList();
-
-	//
-	if($(".productsColorList tbody tr").size() == 0) {
-		$(".productsColorList").hide();
-	}
+	});
+	//Ajax代码结束
 }
 
 //设置列表数量
@@ -375,17 +350,145 @@ function productsColorListNum() {
 	})
 }
 
-/* *
- * 修改颜色
- */
+//修改颜色
 $("#productsColorList .colorInputText").live('keyup', function() {
-	//生成数量列表
+	var this_ = this;
+	var color = {
+		colorId : $(this).attr("idvalue"),
+		colorName : $(this).val()
+	};
+	//alert(JSON.stringify(color));		正常
+	
+	$.ajax({
+		url:"insertOrUpdateColorName",
+		type:"POST",
+		data : JSON.stringify(color),
+		contentType : "application/json;charset=utf-8",
+		dataType : "json",
+		success:function(res){
+			//alert(JSON.stringify(res));	正常
+			if(res.colorId != "500"){
+				$(this_).attr("idvalue", res.colorId);
+				
+				for (var i = 0; i < colorList.length; i++) {
+		        	if (colorList[i].colorId == res.colorId) {
+		            	colorList.splice(i, 1);	//从颜色列表中删除，后会push新的
+		           	}
+		      	}
+				
+				colorList.push(res);
+				console.log(JSON.stringify(colorList));	//添加后打印颜色列表的信息 - 正常
+			} else {
+				console.log(res.colorName);
+			}
+			//alert(JSON.stringify(sizeList));	//数据正常
+		}
+	});
+	//Ajax代码结束
+	
+	//生成数量列表	
 	setProductNumList();
+});
+//上传颜色图片 
+$(".uploadProductArea .productsColorList .uploadTd").live("click", function() {
+	$(".colorTableTr").removeClass("colorTableTr");	//删除所有此class
+	$(this).parents("tr").addClass("colorTableTr");	//给当前点击上传图片的tr添加colorTableTr类名
+});
+/*$(".uploadProductArea .colorTable tbody tr").live("mouseover",function(){ 
+	$(".colorTableTr").removeClass("colorTableTr");
+	$(this).addClass("colorTableTr");
 })
+$(".uploadProductArea .colorTable tbody tr").live("mouseleave",function(){
+	$(".colorTableTr").removeClass("colorTableTr");
+})*/
 
-/* *
- * 选择尺码
- */
+var isIE = /msie/i.test(navigator.userAgent) && !window.opera;	//是否IE浏览器
+var uploadImgIdX = 1;
+$(function() {
+	//点击事件，打开文件选择框的同时判断一次已上传照片是否大于十二张
+	$("#uploadImgFileX").on("click", function(){
+		console.log("#uploadImgFileX - click - Start");
+		
+	});
+	
+	//值变更事件，上传图片
+	$("#uploadImgFileX").on("change", function(){
+		console.log("#uploadImgFileX - change - Start");
+		var cur = $("#uploadImgFileX");		//file文件域
+		var v = cur.val();	//上传文件的名字
+		var ext = v.substring(v.lastIndexOf("."));
+		//var fileName = v.substring(v.lastIndexOf("\\")+1); 
+		console.log(v + " - " + ext)
+		
+		if(ext != ".jpg" && ext != ".png" && ext != ".gif" && ext != ".jpeg" && ext != ".JPG" && ext != ".PNG" && ext != ".GIF" && ext != ".JPEG") { //检查文件格式
+			alert("请选择图片，支持的图片格式有：JPEG, PNG, GIF !");
+			cur.val("");
+			return false;
+		} else {
+			var fileSize = 0;
+			var target = document.getElementById("uploadImgFileX");
+			if(isIE && !target.files) {	//IE浏览器且~~ 则进入
+				var filePath = target.value;
+				var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
+				var file = fileSystem.GetFile(filePath);
+				fileSize = file.Size;
+			} else {
+				fileSize = target.files[0].size;
+			}
+			var size = fileSize / 1024;
+			if(size > 2000) {
+				alert("上传的图片大小不能超出2M");
+				target.value = "";
+				return
+			}
+			var newBannerId = "colorTableTr" + WC.version_time + uploadImgIdX;
+			$(".colorTableTr .uploadTd").append('<img class="loadingImg" src="/picture/loadingdian.gif">').parents("tr").addClass(newBannerId);
+			uploadImgIdX++;
+			
+			var formData = new FormData($("[name=form2]")[0]);
+			var colorId = $(".colorTableTr .colorInputText").attr("idvalue");
+			formData.append("colorId", colorId);
+			
+			$(".colorTableTr").removeClass("colorTableTr");
+			$.ajax({
+				url:"uploadingColorImg",
+				type:"post",
+				data:formData,
+				mimeType:"multipart/form-data",
+				processData:false,
+				contentType:false,
+				dataType:"json",
+				success:function(res){
+					console.log(res);		//返回数据正常
+					
+					if (res.colorId != "500") {
+						for (var i = 0; i < colorList.length; i++) {
+				        	if (colorList[i].colorId == res.colorId) {
+				            	colorList.splice(i, 1);	//从颜色列表中删除，后会push新的
+				           	}
+				      	}
+						
+						$("." + newBannerId).find(".imageInputText").val("localhost:8080/color/" + res.colorPrcture);
+						$("." + newBannerId).find(".loadingImg").remove();
+						
+						colorList.push(res);
+						console.log(JSON.stringify(colorList));	//添加后打印颜色列表的信息 - 正常
+					} else {
+						alert(res.colorName);
+					}
+				}
+			});
+			//Ajax代码结束
+		}
+	});
+});
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// - End - color 增删改查  - ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// - Start - size 增删改查  - ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//选择尺码
 $(".fdColor li").live('click', function() {
 	var CN = $(this).attr("class");
 	if($(this).attr("class") == "selected") {
@@ -396,9 +499,7 @@ $(".fdColor li").live('click', function() {
 	//生成数量列表
 	setProductNumList();
 })
-/* *
- * 发布商品 - 编辑尺码事件
- */
+//发布商品 - 编辑尺码事件
 var hadChoiceSize = "";
 $("#productsSizeList .editSizeBtn").live("click", function() {
 	var HTML = '';
@@ -429,7 +530,7 @@ $("input[name='product_size']").live("focus", function() {
 //删除尺码
 $(".editColor .delBtn").live("click", function() {
 	if($("input[name='product_size']").size() == 1) {
-		fntopmessagebox('至少保留一个尺码。', 'error');
+		alert("error: 至少保留一个尺码!");
 		return false;
 	}
 	$(this).parents("li").remove();
@@ -438,14 +539,14 @@ $(".editColor .delBtn").live("click", function() {
 $(".editColor .addBtn").live("click", function() {
 	var n = $("input[name='product_size']").size();
 	if(n >= 20) {
-		fntopmessagebox('尺码数量不能超过20个。', 'error');
+		alert("error: 尺码数量不能超过20个!");
 		return false;
 	}
 	//判断是否存在空
 	var $thisVal = $("input[name='product_size']:last").val().replace(/\s/g, "");
 	if($thisVal == "") {
 		$("input[name='product_size']:last").val("").focus();
-		fntopmessagebox('请输入尺码名称。', 'error');
+		alert("error: 请输入尺码名称!");
 		return false;
 	}
 	//是否存在尺码
@@ -457,7 +558,7 @@ $(".editColor .addBtn").live("click", function() {
 	})
 	if(flag_size > 1) {
 		$("input[name='product_size']:last").select();
-		fntopmessagebox('尺码名称已存在', 'error');
+		alert("error: 尺码名称已存在!");
 		return false;
 	}
 	$(".editColor .add_li").before('<li><input type="text" maxlength="8" value="" name="product_size"><a class="delBtn" href="javascript:void(0);"></a></li>');
@@ -483,7 +584,7 @@ function choiceSizeHTML(datas) {
 //提交尺码
 $("#toBatchUpdateSize").live("click", function() {
 	if($("input[name='product_size']").size() == 0) {
-		fntopmessagebox('至少保存一个尺码。', 'error');
+		alert("error: 至少保存一个尺码!");
 		return false;
 	}
 	var paramObject = new Object();
@@ -495,7 +596,7 @@ $("#toBatchUpdateSize").live("click", function() {
 		if($(this).val().replace(/\s/g, "") == "") {
 			null_flag++;
 			$(this).focus();
-			fntopmessagebox('请输入尺码名称。', 'error');
+			alert("error: 请输入尺码名称!");
 			return false;
 		}
 		if(datas == "") {
@@ -509,6 +610,7 @@ $("#toBatchUpdateSize").live("click", function() {
 	$(".toBatchUpdateSize").attr("id", "").html("正在保存");
 	var paramJson = jQuery.param(paramObject);
 	WC.setLoadingBar();
+	
 	$.ajax({
 		type: "POST",
 		dataType: "json",
@@ -518,7 +620,7 @@ $("#toBatchUpdateSize").live("click", function() {
 		timeout: 20000,
 		success: function(datas) {
 			if(datas == null || datas == "") {
-				fntopmessagebox("服务器出错啦。", 'error');
+				alert("error: 服务器出错啦!");
 				return false;
 			}
 			if(datas.code.indexOf("success") != -1) {
@@ -541,49 +643,16 @@ $("#toBatchUpdateSize").live("click", function() {
 		setTimeout(function() {
 			$(".loadingBar").remove();
 		}, 600);
-	})
-})
-//获取尺码信息
-function getSizeInfo() {
-	var paramObject = new Object();
-	paramObject.sessionUid = userInfo.uid;
-	paramObject.sessionKey = userInfo.password;
-	paramObject.wx = "1";
-	var paramJson = jQuery.param(paramObject);
-	/*$.ajax({
-		type: "POST",
-		dataType: "json",
-		cache: false,
-		url: "/sizeTemplate.htm?Act=list",
-		data: paramJson,
-		timeout: 20000,
-		success: function(datas) {
-			if(datas == null || datas == "") {
-				fntopmessagebox("服务器出错啦。", 'error');
-				return false;
-			}
-			if(datas.code.indexOf("success") != -1) {
-				//{"data":"[\"S\",\"M\",\"L\"]","code":"success"}
-				var data = datas.data;
-				if(data.charAt(0) == "[") {
-					data = data.replace("[", "");
-					data = data.replace("]", "");
-					data = data.replace(/\"/g, "");
-				}
-				choiceSizeHTML(data);
-			} else {
-				fntopmessagebox(datas.data, 'error');
-			}
-		},
-		error: function() {
-			fntopmessagebox('获取信息失效.', 'error');
-		}
-	}).always(function() {})*/
-}
+	});
+	
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////// - End - size 增删改查  - ///////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //生成数量列表
 function setProductNumList() {
-
 	//存在尺码
 	var sizeIsEmpty = true;
 	$("#productsSizeList .selected").each(function() {
@@ -735,6 +804,7 @@ function setProductsTotalNum() {
 	})
 	$("input[name='num_total']").val(num);
 }
+
 //设置原来数量、条形码
 function setNumBarcode() {
 	var r = $(".productsSizeObject .jsonDiv").html();
@@ -758,7 +828,8 @@ $("input[name='productnum']").live("focus", function() {
 	}
 	//设置库存总数
 	//setProductsTotalNum();
-})
+});
+
 $("input[name='productnum']").live('keyup', function(e) {
 	$(this).val($(this).val().replace(/[^0-9]/g, ''));
 	if($(this).val() < 0 || isNaN($(this).val())) {
@@ -769,23 +840,24 @@ $("input[name='productnum']").live('keyup', function(e) {
 }).bind("paste", function() { //CTR+V事件处理    
 	$(this).val($(this).val().replace(/[^0-9]/g, ''));
 }).css("ime-mode", "disabled"); //CSS设置输入法不可用
+
 $("input[name='productnum']").live("blur", function() {
 	if($(this).val() == "" || $(this).val() < 0 || isNaN($(this).val())) {
 		$(this).val("0");
 	}
 	//设置库存总数
 	setProductsTotalNum();
-})
+});
 
 /* *
  * 数量
  */
 $("input[name='num']").live("click", function() {
 	$(this).select();
-})
+});
 $("input[name='num']").live("focus", function() {
 
-})
+});
 $("input[name='num']").live('keyup', function(e) {
 	var myreg = /^[+]?(([0-9]\d*[.]?)|(0.))(\d{0,2})?$/;
 	if($(this).val() < 0 || isNaN($(this).val())) {
@@ -798,7 +870,7 @@ $("input[name='num']").live("blur", function() {
 	if($(this).val() == "" || $(this).val() < 0 || isNaN($(this).val())) {
 		$(this).val("");
 	}
-})
+});
 /* *
  * 吊牌价格、成本价格
  */
@@ -824,8 +896,8 @@ $("input[name='price'], input[name='fprice']").live('keyup', function(event) {
 	};
 }).css("ime-mode", "disabled"); //CSS设置输入法不可用
 
-//条形码输入框
-/*$(".uploadProductArea .productNumList .barcodeText").live("focus",function(){
+/*/条形码输入框	
+$(".uploadProductArea .productNumList .barcodeText").live("focus",function(){
 	if($(this).val()==0){
 		$(this).val("");
 	}
@@ -836,11 +908,8 @@ $(".uploadProductArea .productNumList .barcodeText").live("blur",function(){
 	}
 })*/
 
-/* *
- * 自动生成条形码barcode
- */
+//自动生成条形码barcode
 var timeText = 0;
-
 function createBarcode() {
 	var d = new Date;
 	var releaseYear = d.getFullYear();
@@ -861,87 +930,6 @@ function createBarcode() {
 		if($(this).val() == "") {
 			$(this).val(time + timeText);
 			timeText++;
-		}
-	})
-}
-/* *
- * 上传颜色图片
- */
-$(".uploadProductArea .productsColorList .uploadTd").live("click", function() {
-	$(".colorTableTr").removeClass("colorTableTr");
-	$(this).parents("tr").addClass("colorTableTr");
-})
-/*$(".uploadProductArea .colorTable tbody tr").live("mouseover",function(){ 
-	$(".colorTableTr").removeClass("colorTableTr");
-	$(this).addClass("colorTableTr");
-})
-$(".uploadProductArea .colorTable tbody tr").live("mouseleave",function(){
-	$(".colorTableTr").removeClass("colorTableTr");
-})*/
-$(function() {
-	$("#uploadImgFileX").toUploadImgFileX();
-})
-var isIE = /msie/i.test(navigator.userAgent) && !window.opera;
-var uploadImgIdX = 1;
-$.fn.toUploadImgFileX = function() {
-	var cur = this;
-	this.change(function() {
-		var v = cur.val();
-		var ext = v.substring(v.lastIndexOf("."));
-		if(ext != ".jpg" && ext != ".png" && ext != ".gif" && ext != ".jpeg" && ext != ".JPG" && ext != ".PNG" && ext != ".GIF" && ext != ".JPEG") { //检查文件格式
-			alert("请选择图片，支持的图片格式有：JPEG, PNG, GIF !");
-			cur.val("");
-			return false;
-		} else {
-			var fileSize = 0;
-			var target = document.getElementById("uploadImgFileX");
-			if(isIE && !target.files) {
-				var filePath = target.value;
-				var fileSystem = new ActiveXObject("Scripting.FileSystemObject");
-				var file = fileSystem.GetFile(filePath);
-				fileSize = file.Size;
-			} else {
-				fileSize = target.files[0].size;
-			}
-			var size = fileSize / 1024;
-			if(size > 2000) {
-				alert("上传的图片大小不能超出2M");
-				target.value = "";
-				return
-			}
-			var newBannerId = "colorTableTr" + WC.version_time + uploadImgIdX;
-			$(".colorTableTr .uploadTd").append('<img class="loadingImg" src="picture/loadingdian.gif">').parents("tr").addClass(newBannerId);
-			uploadImgIdX++;
-			$(".colorTableTr").removeClass("colorTableTr");
-			cur.wrap('<form enctype="multipart/form-data"/>');
-			var options = {
-				url: "/productImageService.htm?Act=upload" + "&sessionUid=" + userInfo.uid + "&sessionKey=" + userInfo.password, // 路径写全
-				type: "post",
-				success: function(r) {
-					// 取消form包裹
-					cur.unwrap();
-					// 此处data可以返回文件ID，然后根据ID查询并返回文件即可
-					//cur.after(data);
-					var datas = eval("(" + r + ")");
-					if(datas.code.indexOf("success") != -1) {
-						$("#" + newBannerId).attr("src", datas.data.pic); //pic66_66
-						$("#" + newBannerId).attr("mid", datas.data.pic);
-						$("#" + newBannerId).attr("big", datas.data.pic);
-						$("#" + newBannerId).attr("pic222_222", datas.data.pic);
-						$("." + newBannerId).find(".imageInputText").val(datas.data.pic);
-						$("." + newBannerId).find(".loadingImg").remove();
-					} else {
-						//fntopmessagebox(datas.data,'error');
-						alert(datas.data);
-					}
-				},
-				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(textStatus + "," + errorThrown);
-					//$(".loading_div").show();
-					//$(".loading_div .img_div").removeClass("loading_img");
-				}
-			};
-			cur.parent("form").ajaxSubmit(options); // 异步提交
 		}
 	})
 }

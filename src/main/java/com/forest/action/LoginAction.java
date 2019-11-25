@@ -90,6 +90,22 @@ public class LoginAction {
 		return map;
 	}
 	
+	//安全退出
+	@RequestMapping(value = "loginOut", method = RequestMethod.GET)
+	@ResponseBody
+	public Staff loginOut(HttpSession session) {
+		log.debug("BambooForestQuicksand - LoginAction - loginOut - 退出登录");
+		session.invalidate();
+		
+		return new Staff(0);
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

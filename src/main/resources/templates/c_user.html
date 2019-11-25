@@ -233,8 +233,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
-                                        	<input type="button" class="btn btn-success" @click="updateUser" value="更新账户信息">
-                                          <!--   <button class="btn btn-success" @click="updateUser">更新账户信息</button> -->
+                                        	<input type="button" class="btn btn-success" @click="updateUser" value="更新账户信息">&nbsp;&nbsp;&nbsp;
+                                        	<input type="button" class="btn btn-danger" @click="loginOut" value="退出登录">
                                         </div>
                                     </div>
                                 </form>
@@ -359,6 +359,14 @@
 							this_.querySession();
 						}
 					});
+				},
+				loginOut : function(){
+					$.get("[[@{/loginOut}]]",{},function(res){
+						if(res.staffId == "0"){
+							//alert("退出登录成功，将跳转页面");
+							location.href="/find";
+						}
+					}, "json");
 				}
 			},
 			created:function(){
