@@ -259,9 +259,11 @@
   </update>
   <!--  -->
   <select id="queryAll" resultMap="BaseResultMap" parameterType="com.forest.entity.PurchaseMain">
-  	SELECT pm.*,sp.`company_name` as supName,s.`shop_name`,pd.`tital_decimal` AS je,pd.`quantity` AS count FROM purchase_main pm,purchase_details pd,supplier sp,shop s 
-  	WHERE pm.`pm_id`=pd.`pm_id` 
-  	AND sp.`sup_id`=pm.`sup_id` AND pm.`shop_id`=s.`shop_id`
+  	
+	SELECT pm.*,sp.`company_name` AS supName,s.`shop_name`,pd.`tital_decimal` AS je,pd.`quantity` AS `count`  FROM 
+  	purchase_main pm ,purchase_details pd,supplier sp,shop s 
+	WHERE pm.`pm_id`=pd.`pm_id` AND sp.`sup_id`=pm.`sup_id`
+	AND s.`shop_id`=pm.`shop_id`
   	<if test="startTime !=null and startTime !=''">
   		and	pm.delivery_time &lt;= #{startTime} AND #{endTime}
   	</if>
@@ -277,8 +279,9 @@
   	<if test="pmOdd !=null and pmOdd !=''">
   		and  pm.pm_odd '%${pmOdd}%'
   	</if>
+  	GROUP BY pm.`pm_id`
   </select>
-  <select id="queryCountBill" resultType="int" parameterType="String">
- 	  	select count(*) from purchase_main where pm_odd  like #{0}
-  </select>
+   <select id="queryCountBill" resultType="int" parameterType="String">
+ 	  	select count(*) from purchase_main where pm_odd like #{0}
+   </select>
 </mapper>

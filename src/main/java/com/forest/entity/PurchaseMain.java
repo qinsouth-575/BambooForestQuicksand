@@ -1,6 +1,7 @@
 package com.forest.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -37,6 +38,16 @@ public class PurchaseMain {
     private int pageNum;
     
     private String statu;
+    
+    private List<PurchaseDetails> list;
+
+	public List<PurchaseDetails> getList() {
+		return list;
+	}
+
+	public void setList(List<PurchaseDetails> list) {
+		this.list = list;
+	}
 
 	public String getStatu() {
 		return statu;
