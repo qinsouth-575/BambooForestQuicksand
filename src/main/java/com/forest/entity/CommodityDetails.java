@@ -7,7 +7,7 @@ public class CommodityDetails {
 
     private Integer sizeId;
 
-    private String color;
+    private Integer colorId;
 
     private Integer quantity;
 
@@ -37,12 +37,12 @@ public class CommodityDetails {
         this.sizeId = sizeId;
     }
 
-    public String getColor() {
-        return color;
+    public Integer getColorId() {
+        return colorId;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setColorId(Integer colorId) {
+        this.colorId = colorId;
     }
 
     public Integer getQuantity() {

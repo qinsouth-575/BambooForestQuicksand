@@ -284,73 +284,63 @@ public class CommodityDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andColorIsNull() {
-            addCriterion("color is null");
+        public Criteria andColorIdIsNull() {
+            addCriterion("color_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andColorIsNotNull() {
-            addCriterion("color is not null");
+        public Criteria andColorIdIsNotNull() {
+            addCriterion("color_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andColorEqualTo(String value) {
-            addCriterion("color =", value, "color");
+        public Criteria andColorIdEqualTo(Integer value) {
+            addCriterion("color_id =", value, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorNotEqualTo(String value) {
-            addCriterion("color <>", value, "color");
+        public Criteria andColorIdNotEqualTo(Integer value) {
+            addCriterion("color_id <>", value, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorGreaterThan(String value) {
-            addCriterion("color >", value, "color");
+        public Criteria andColorIdGreaterThan(Integer value) {
+            addCriterion("color_id >", value, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorGreaterThanOrEqualTo(String value) {
-            addCriterion("color >=", value, "color");
+        public Criteria andColorIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("color_id >=", value, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorLessThan(String value) {
-            addCriterion("color <", value, "color");
+        public Criteria andColorIdLessThan(Integer value) {
+            addCriterion("color_id <", value, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorLessThanOrEqualTo(String value) {
-            addCriterion("color <=", value, "color");
+        public Criteria andColorIdLessThanOrEqualTo(Integer value) {
+            addCriterion("color_id <=", value, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorLike(String value) {
-            addCriterion("color like", value, "color");
+        public Criteria andColorIdIn(List<Integer> values) {
+            addCriterion("color_id in", values, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorNotLike(String value) {
-            addCriterion("color not like", value, "color");
+        public Criteria andColorIdNotIn(List<Integer> values) {
+            addCriterion("color_id not in", values, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorIn(List<String> values) {
-            addCriterion("color in", values, "color");
+        public Criteria andColorIdBetween(Integer value1, Integer value2) {
+            addCriterion("color_id between", value1, value2, "colorId");
             return (Criteria) this;
         }
 
-        public Criteria andColorNotIn(List<String> values) {
-            addCriterion("color not in", values, "color");
-            return (Criteria) this;
-        }
-
-        public Criteria andColorBetween(String value1, String value2) {
-            addCriterion("color between", value1, value2, "color");
-            return (Criteria) this;
-        }
-
-        public Criteria andColorNotBetween(String value1, String value2) {
-            addCriterion("color not between", value1, value2, "color");
+        public Criteria andColorIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("color_id not between", value1, value2, "colorId");
             return (Criteria) this;
         }
 
