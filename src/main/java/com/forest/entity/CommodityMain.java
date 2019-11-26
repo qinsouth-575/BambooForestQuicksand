@@ -5,26 +5,16 @@ import java.util.List;
 
 public class CommodityMain {
     private Integer cmId;
-
-    private String articleNo;
-
-    private String brand;
-
-    private String cmName;
-
-    private BigDecimal salePrice;
-
-    private BigDecimal costPrice;
-
-    private Integer ctId;
-
-    private String imgPath;
-
-    private String information;
-
-    private Short shopId;
+    private String articleNo;		//商品货号
+    private String brand;			//商品品牌
+    private String cmName;			//商品名称
+    private BigDecimal salePrice;	//吊牌价格
+    private BigDecimal costPrice;	//成本价格
+    private Integer ctId;			//商品类别编号
+    private String information;		//商品信息
+    private Short shopId;			//店铺编号（外键）
     
-    private List<CommodityDetails> cdList;
+    private List<CommodityDetails> cdList;	//详表数据
 
     public Integer getCmId() {
         return cmId;
@@ -82,14 +72,6 @@ public class CommodityMain {
         this.ctId = ctId;
     }
 
-    public String getImgPath() {
-        return imgPath;
-    }
-
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
-    }
-
     public String getInformation() {
         return information;
     }
@@ -117,8 +99,8 @@ public class CommodityMain {
 	@Override
 	public String toString() {
 		return "CommodityMain [cmId=" + cmId + ", articleNo=" + articleNo + ", brand=" + brand + ", cmName=" + cmName
-				+ ", salePrice=" + salePrice + ", costPrice=" + costPrice + ", ctId=" + ctId + ", imgPath=" + imgPath
-				+ ", information=" + information + ", shopId=" + shopId + ", cdList=" + cdList + "]";
+				+ ", salePrice=" + salePrice + ", costPrice=" + costPrice + ", ctId=" + ctId + ", information="
+				+ information + ", shopId=" + shopId + ", cdList=" + cdList + "]";
 	}
     
 }

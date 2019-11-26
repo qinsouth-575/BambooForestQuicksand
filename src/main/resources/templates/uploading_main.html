@@ -293,10 +293,10 @@
 								<div id="productsSizeList" class="fdColor clearfix">
 									<ul>
 										<!-- <li class="" title="M">
-											<a href="javascript:void(0);">M</a><i></i>
+											<a href="javascript:void(0);" value="1">M</a><i></i>
 										</li>
 										<li class="" title="-">
-											<a href="javascript:void(0);">-</a><i></i>
+											<a href="javascript:void(0);" value="8">-</a><i></i>
 										</li> -->
 									</ul>
 									<a class="editSizeBtn" href="javascript:void(0);">编辑尺码</a>
@@ -452,12 +452,16 @@
 						}
 					]
 			};
-			var typeListC = window.parent.typeList;	//父页面查询类别列表
-			var sizeListC = window.parent.sizeList;	//父页面查询尺码列表
-			var imgList = [];
-			var colorList = [];
+			var typeListC = [];	//父页面查询类别列表
+			var sizeListC = [];	//父页面查询尺码列表
+			var imgListX = [];
+			var colorListX = [];
+			var sizeListX = [];
 			
 			$(function(){
+				typeListC = window.parent.typeList;	//父页面查询类别列表
+				sizeListC = window.parent.sizeList;	//父页面查询尺码列表
+				
 				bindTypeList();	//1.绑定商品类别
 				bindSizeList();	//2.绑定商品尺码
 				
