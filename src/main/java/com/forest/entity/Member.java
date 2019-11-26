@@ -1,7 +1,6 @@
 package com.forest.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Member {
     private Integer memberId;
@@ -36,7 +35,17 @@ public class Member {
     
     private String ml_name;//会员等级名称
     
-    public String getMl_name() {
+    private Integer pageNum;//当前页
+    
+    public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public String getMl_name() {
 		return ml_name;
 	}
 

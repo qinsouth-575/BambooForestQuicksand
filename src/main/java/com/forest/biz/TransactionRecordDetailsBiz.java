@@ -23,9 +23,9 @@ public class TransactionRecordDetailsBiz {
 				 * @param pageNum
 				 * @return
 				 */
-				public PageInfo<TransactionRecordDetails> queryAll(Integer pageNum){
-					PageHelper.startPage(pageNum,6);
-					List<TransactionRecordDetails> list=transactionRecordDetailsMapper.queryAll();
+				public PageInfo<TransactionRecordDetails> queryAll(TransactionRecordDetails d){
+					PageHelper.startPage(d.getPageNum(),6);
+					List<TransactionRecordDetails> list=transactionRecordDetailsMapper.queryAll(d);
 					PageInfo<TransactionRecordDetails> page=new PageInfo<TransactionRecordDetails>(list);
 					return page;
 				}

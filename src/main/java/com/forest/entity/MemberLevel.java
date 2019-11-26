@@ -14,8 +14,18 @@ public class MemberLevel {
     private Integer validity;
 
     private BigDecimal upgradeRule;
+    
+    private Integer status;
 
-    public Short getMlId() {
+    public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public Short getMlId() {
         return mlId;
     }
 

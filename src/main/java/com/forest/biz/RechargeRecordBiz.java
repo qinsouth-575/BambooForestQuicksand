@@ -22,9 +22,9 @@ public class RechargeRecordBiz {
 				 * @param pageNum
 				 * @return
 				 */
-				public PageInfo<RechargeRecord> queryAll(Integer pageNum){
-					PageHelper.startPage(pageNum,6);
-					List<RechargeRecord> list=rechargeRecordMapper.queryAll();
+				public PageInfo<RechargeRecord> queryAll(RechargeRecord r){
+					PageHelper.startPage(r.getPageNum(),6);
+					List<RechargeRecord> list=rechargeRecordMapper.queryAll(r);
 					PageInfo<RechargeRecord> page=new PageInfo<RechargeRecord>(list);
 					return page;
 				}

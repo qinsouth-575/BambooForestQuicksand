@@ -28,7 +28,7 @@ public interface RechargeRecordMapper {
 
     int updateByPrimaryKey(RechargeRecord record);
     
-    List<RechargeRecord> queryAll();
+    List<RechargeRecord> queryAll(RechargeRecord r);
     
     int insertAll(RechargeRecord r);
 }

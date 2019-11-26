@@ -22,9 +22,9 @@ public class MemberBiz {
 				 * @param pageNum
 				 * @return
 				 */
-				public PageInfo<Member> queryAllByPage(Integer pageNum){
-						PageHelper.startPage(pageNum, 6);
-						List<Member> list=memberMapper.queryAllByPage();
+				public PageInfo<Member> queryAllByPage(Member m){
+						PageHelper.startPage(m.getPageNum(), 6);
+						List<Member> list=memberMapper.queryAllByPage(m);
 						PageInfo<Member> page=new PageInfo<Member>(list);
 						return page;
 				}

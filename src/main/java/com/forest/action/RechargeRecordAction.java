@@ -27,8 +27,8 @@ public class RechargeRecordAction {
 				 */
 				@RequestMapping("/queryAll")
 				@ResponseBody
-				public PageInfo<RechargeRecord> queryAll(Integer pageNum){
-					return rechargeRecordBiz.queryAll(pageNum);
+				public PageInfo<RechargeRecord> queryAll(@RequestBody RechargeRecord r){
+					return rechargeRecordBiz.queryAll(r);
 				}
 				
 				/**

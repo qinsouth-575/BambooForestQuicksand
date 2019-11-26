@@ -25,7 +25,7 @@
 	<![endif]-->
 </head>
 
-<body class="fix-header fix-sidebar card-no-border" onload="jz()">
+<body class="fix-header fix-sidebar card-no-border">
 <div id="etc">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
@@ -189,15 +189,15 @@
                         <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">成交记录</h3>
                     </div>
                     <div class="col-md-7 col-4 align-self-center" style="padding-left: 60px;">
-                    		<input type="radio" name="rn" id="" value="1" checked="checked" onchange="gh()"/>按订单
-                    		<input type="radio" name="rn" id="" value="2" onchange="gh()"/>按商品
+                    		<input type="radio" name="rn" id="" value="1" checked="checked" @change="gh()"/>按订单
+                    		<input type="radio" name="rn" id="" value="2" @change="gh()"/>按商品
                         <div class="form-control form-control-line f_input" style="width: 200px;">
-                            <input type="date" name="" id="" value="" />
+                            <input type="date" name="" id="createTime" @change="gbsj"/>
                         </div>
                         
                         <div class="f_input" style="position: relative;">
-                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
-							<a href="javascript:;" class="list_search"></a>
+                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;" id="orderNumber">
+							<a href="javascript:;" class="list_search" @click="djcx"></a>
                         </div>
                         
                     </div>
@@ -399,103 +399,151 @@
 					},
 					toCredits:function(){
 						location.href="http://localhost:8080/MemberManage/toCredits";
+					},
+					goPage:function(pageNum){
+						var $orderNumber=$("#orderNumber").val();
+						var $createTime=$("#createTime").val();
+						var obj={
+								orderNumber:$orderNumber,
+								createTime:$createTime,
+								pageNum:pageNum
+						}
+						$.ajax({
+							url:"[[@{/TransactionRecordMain/queryAll}]]",
+							type:"post",
+							data:JSON.stringify(obj),
+							dataType:"json",
+							contentType:"application/json",
+							"success":function(res){
+								if(res.list!=null){
+									$("thead").html("");
+									$("tbody").html("");
+									$("tfoot").html("");
+									var $td="<tr><th>序号</th><th>订单号</th><th>姓名</th><th>手机</th><th>数量</th><th>余额</th><th>支付方式</th><th>日期</th></tr>";
+									$("thead").append($td);
+									var $fo="<tr>"+
+		                                    "<td colspan='10' class='text-right'>"+
+									        "<a href='#' class='btn hidden-sm-down btn-info' id='sPage'>首页</a>"+
+									                        "<a href='#' class='btn hidden-sm-down btn-info' id='prePage'>上一页</a>"+
+									                        "<a href='#' class='btn hidden-sm-down btn-info' id='nextPage'>下一页</a>"+
+									                        "<a href='#' class='btn hidden-sm-down btn-info' id='wPage'>尾页</a>"+
+		                                        		"</td>"+
+		                                        	"</tr>";
+		                            $("tfoot").append($fo);
+									$.each(res.list,function(i,obj){
+										var $tt="<tr>"+
+		                                "<td>"+obj.trmId+"</td>"+
+		                                "<td>"+obj.orderNumber+"</td>"+
+		                                "<td>"+obj.memberNname+"</td>"+
+		                                "<td>"+obj.phoen+"</td>"+
+		                                "<td>"+obj.sl+"</td>"+
+		                                "<td>"+obj.balance+"</td>"+
+		                                "<td>"+obj.paymount+"</td>"+
+		                                "<td>"+obj.createTime+"</td>"+
+										"</tr>";
+										$("tbody").append($tt);
+									});
+									$("#sPage").attr("onclick","goPage(1)");
+									if(res.prePage>=1){
+									$("#prePage").attr("onclick","goPage("+res.prePage+")");
+									}
+									if(res.nextPage<=res.pages&&res.nextPage!=0){
+									$("#nextPage").attr("onclick","goPage("+(res.nextPage)+")");
+									}
+									$("#wPage").attr("onclick","goPage("+res.pages+")");
+								}
+							}
+						});
+					},
+					goPage2:function(pageNum){
+						var $orderNumber=$("#orderNumber").val();
+						var $createTime=$("#createTime").val();
+						var obj={
+								orderNumber:$orderNumber,
+								createTime:$createTime,
+								pageNum:pageNum
+						}
+						$.ajax({
+							url:"[[@{/TransactionRecordDetails/queryAll}]]",
+							type:"post",
+							data:JSON.stringify(obj),
+							dataType:"json",
+							contentType:"application/json",
+							"success":function(res){
+								if(res.list!=null){
+									$("thead").html("");
+									$("tbody").html("");
+									$("tfoot").html("");
+									var $td="<tr><th>序号</th><th>商品</th><th>数量</th><th>金额</th><th>日期</th></tr>";
+									$("thead").append($td);
+									var $fo="<tr>"+
+		                            "<td colspan='10' class='text-right'>"+
+							        "<a href='#' class='btn hidden-sm-down btn-info' id='ssPage'>首页</a>"+
+							                        "<a href='#' class='btn hidden-sm-down btn-info' id='preePage'>上一页</a>"+
+							                        "<a href='#' class='btn hidden-sm-down btn-info' id='nexttPage'>下一页</a>"+
+							                        "<a href='#' class='btn hidden-sm-down btn-info' id='wwPage'>尾页</a>"+
+		                                		"</td>"+
+		                                	"</tr>";
+		                    		$("tfoot").append($fo);
+									$.each(res.list,function(i,obj){
+										var $tt="<tr>"+
+		                                "<td>"+obj.trdId+"</td>"+
+		                                "<td>"+obj.cmName+"</td>"+
+		                                "<td>"+obj.quantity+"</td>"+
+		                                "<td>"+obj.totalPrice+"</td>"+
+		                                "<td>"+obj.createTime+"</td>"+
+										"</tr>";
+										$("tbody").append($tt);
+									});
+									$("#ssPage").attr("onclick","goPage2(1)");
+									if(res.prePage>=1){
+									$("#preePage").attr("onclick","goPage2("+res.prePage+")");
+									}
+									if(res.nextPage<=res.pages&&res.nextPage!=0){
+									$("#nexttPage").attr("onclick","goPage2("+res.nextPage+")");
+									}
+									$("#wwPage").attr("onclick","goPage2("+res.pages+")");
+								}
+							}
+						});
+					},
+					gh:function(){
+						var xz=$("input[name='rn']:checked").val();
+						if(xz==2){
+							$("#createTime").val("");
+							$("#orderNumber").val("");
+							this.goPage2(1);
+						}else if(xz==1){
+							$("#createTime").val("");
+							$("#orderNumber").val("");
+							this.goPage(1);
+						}
+					},
+					gbsj:function(){
+						var xz=$("input[name='rn']:checked").val();
+						if(xz==2){
+							this.goPage2(1);
+						}else if(xz==1){
+							this.goPage(1);
+						}
+					},
+					djcx:function(){
+						var xz=$("input[name='rn']:checked").val();
+						if(xz==2){
+							this.goPage2(1);
+						}else if(xz==1){
+							this.goPage(1);
+						}
 					}
-				}
+					
+				},
+				created:function(){
+	 				this.goPage(1);
+	 			}
 			});
 			
 			
 			
-			function goPage(pageNum){
-				$.ajax({
-					url:"[[@{/TransactionRecordMain/queryAll}]]",
-					type:"get",
-					data:{
-						pageNum:pageNum
-					},
-					dataType:"json",
-					"success":function(res){
-						if(res.list!=null){
-							$("thead").html("");
-							$("tbody").html("");
-							var $td="<tr><th>序号</th><th>订单号</th><th>姓名</th><th>手机</th><th>数量</th><th>余额</th><th>支付方式</th><th>日期</th></tr>";
-							$("thead").append($td);
-							$.each(res.list,function(i,obj){
-								var $tt="<tr>"+
-                                "<td>"+obj.trmId+"</td>"+
-                                "<td>"+obj.orderNumber+"</td>"+
-                                "<td>"+obj.memberNname+"</td>"+
-                                "<td>"+obj.phoen+"</td>"+
-                                "<td>"+obj.sl+"</td>"+
-                                "<td>"+obj.balance+"</td>"+
-                                "<td>"+obj.paymount+"</td>"+
-                                "<td>"+obj.createTime+"</td>"+
-								"</tr>";
-								$("tbody").append($tt);
-							});
-							$("#sPage").attr("onclick","goPage(1)");
-							if(res.prePage>=1){
-							$("#prePage").attr("onclick","goPage("+res.prePage+")");
-							}
-							if(res.nextPage<=res.pages){
-							$("#nextPage").attr("onclick","goPage("+res.nextPage+")");
-							}
-							$("#wPage").attr("onclick","goPage("+res.pages+")");
-						}
-					}
-				});
-			}
-			
-			function gh(){
-				var xz=$("input[name='rn']:checked").val();
-				if(xz==2){
-					goPage2(1);
-				}else if(xz==1){
-					goPage(1);
-				}
-			}
-			
-			function jz(){
-				goPage(1);
-			}
-			
-			
-			
-			function goPage2(pageNum){
-				$.ajax({
-					url:"[[@{/TransactionRecordDetails/queryAll}]]",
-					type:"get",
-					data:{
-						pageNum:pageNum
-					},
-					dataType:"json",
-					"success":function(res){
-						if(res.list!=null){
-							$("thead").html("");
-							$("tbody").html("");
-							var $td="<tr><th>序号</th><th>商品</th><th>数量</th><th>金额</th><th>日期</th></tr>";
-							$("thead").append($td);
-							$.each(res.list,function(i,obj){
-								var $tt="<tr>"+
-                                "<td>"+obj.trdId+"</td>"+
-                                "<td>"+obj.cmName+"</td>"+
-                                "<td>"+obj.quantity+"</td>"+
-                                "<td>"+obj.totalPrice+"</td>"+
-                                "<td>"+obj.createTime+"</td>"+
-								"</tr>";
-								$("tbody").append($tt);
-							});
-							$("#sPage").attr("onclick","goPage2(1)");
-							if(res.prePage>=1){
-							$("#prePage").attr("onclick","goPage2("+res.prePage+")");
-							}
-							if(res.nextPage<=res.pages){
-							$("#nextPage").attr("onclick","goPage2("+res.nextPage+")");
-							}
-							$("#wPage").attr("onclick","goPage2("+res.pages+")");
-						}
-					}
-				});
-			}
 	</script>
 </body>
 

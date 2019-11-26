@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.annotation.RequestScope;
 
 import com.forest.biz.MemberBiz;
 import com.forest.entity.Member;
@@ -71,9 +70,9 @@ public class MemberManageAction {
 				 */
 				@RequestMapping("/queryAllByPage")
 				@ResponseBody
-				public PageInfo<Member> queryAllByPage(Integer pageNum){
-					System.out.println("当前页数----"+pageNum);
-					return memberBiz.queryAllByPage(pageNum);
+				public PageInfo<Member> queryAllByPage(@RequestBody Member m){
+					System.out.println("当前页数----"+m.getPageNum());
+					return memberBiz.queryAllByPage(m);
 				}
 				/**
 				 * 执行会员新增

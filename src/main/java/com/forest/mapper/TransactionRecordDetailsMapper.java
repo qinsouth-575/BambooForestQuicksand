@@ -28,5 +28,5 @@ public interface TransactionRecordDetailsMapper {
 
     int updateByPrimaryKey(TransactionRecordDetails record);
     
-    List<TransactionRecordDetails> queryAll();
+    List<TransactionRecordDetails> queryAll(TransactionRecordDetails d);
 }

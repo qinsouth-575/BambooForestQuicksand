@@ -23,8 +23,18 @@ public class TransactionRecordDetails {
     
     private String cmName;
     
+    private Integer pageNum;
+    
 
-    public String getCreateTime() {
+    public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public String getCreateTime() {
 		return createTime;
 	}
 

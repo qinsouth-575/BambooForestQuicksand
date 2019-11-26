@@ -40,8 +40,18 @@ public class TransactionRecordMain {
     
     private float balance;
     
+    private Integer pageNum;//当前页数
+    
 
-    public String getMemberNname() {
+    public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public String getMemberNname() {
 		return memberNname;
 	}
 

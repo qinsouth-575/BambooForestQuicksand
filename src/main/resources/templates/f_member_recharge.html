@@ -186,12 +186,12 @@
                     </div>
                     <div class="col-md-7 col-4 align-self-center" style="padding-left: 60px;">
                         <div class="form-control form-control-line f_input" style="width: 200px;">
-                            <input type="date" name="" id="" value="" />
+                            <input type="date" name="" id="sj" @change="gb"/>
                         </div>
                         
                         <div class="f_input" style="position: relative;">
-                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
-							<a href="javascript:;" class="list_search"></a>
+                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;" id="mz">
+							<a href="javascript:;" class="list_search" @click="dj"></a>
                         </div>
                         
                         
@@ -484,13 +484,19 @@
 					},
 					goPage:function(pageNum){
 						var _this=this;
+						var $sj =$("#sj").val();
+						var $mz =$("#mz").val();
+						var boj={
+								pageNum:pageNum,
+								createTime:$sj,
+								memberName:$mz
+						}
 						$.ajax({
 							url:"[[@{/RechargeRecord/queryAll}]]",
-							type:"get",
-							data:{
-								pageNum:pageNum
-							},
+							type:"post",
+							data:JSON.stringify(boj),
 							dataType:"json",
+							contentType:"application/json",
 							"success":function(res){
 								_this.PageList=res;
 							}
@@ -511,6 +517,12 @@
 	 				},
 	 				wPage:function(){
 	 					this.goPage(this.PageList.pages);
+	 				},
+	 				gb:function(){
+	 					this.goPage(1);
+	 				},
+	 				dj:function(){
+	 					this.goPage(1);
 	 				}
 				},created:function(){
 	 				this.goPage(1);

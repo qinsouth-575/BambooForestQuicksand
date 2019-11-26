@@ -189,13 +189,13 @@
                         <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">会员信息</h3>
                     </div>
                     <div class="col-md-7 col-4 align-self-center" style="padding-left: 60px;">
-                        <select class="form-control form-control-line f_input" style="width: 120px;" id="xlk">
+                        <select class="form-control form-control-line f_input" style="width: 120px;" id="qbdj" @change="xldj">
                             <option>全部等级</option>
                             <option v-for="itr,index in LevelList" :value="itr.mlId">{{itr.mlName}}</option>
                         </select>
                         
                         <div class="f_input" style="position: relative;">
-                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;" id="mz">
+                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;" id="memberName" @change="ss">
 							<a href="javascript:;" class="list_search"></a>
                         </div>
                         
@@ -474,15 +474,26 @@
 	 				},
 					goPage:function(pageNum){
 						var _this=this;
+						var $qbdj=$("#qbdj").val();
+						var $memberName=$("#memberName").val();
+						if($qbdj=="全部等级"){
+							$qbdj="";
+						}
+						var m={
+								memberName:$memberName,
+								mlId:$qbdj,
+								pageNum:pageNum
+						}
+						alert(JSON.stringify(m));
 						$.ajax({
 							url:"[[@{/MemberManage/queryAllByPage}]]",
-							type:"get",
-							data:{
-								pageNum:pageNum
-							},
+							type:"post",
+							data:JSON.stringify(m),
 							dataType:"json",
+							contentType:"application/json;charset=utf-8",
 							"success":function(res){
-								_this.PageList=res;
+									_this.PageList=res;
+								
 							}
 						});
 					},
@@ -584,6 +595,12 @@
 								location.href="http://localhost:8080/MemberManage/toMember";
 							}
 						});
+					},
+					xldj:function(){
+						this.goPage(1);
+					},
+					ss:function(){
+						this.goPage(1);
 					}
 				},created:function(){
 	 				this.goPage(1);

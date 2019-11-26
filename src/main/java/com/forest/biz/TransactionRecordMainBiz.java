@@ -23,10 +23,25 @@ public class TransactionRecordMainBiz {
 				 * @param pageSize
 				 * @return
 				 */
-				public PageInfo<TransactionRecordMain> queryAll(Integer pageNum){
-						PageHelper.startPage(pageNum,1);
-						List<TransactionRecordMain> list=transactionRecordMainMapper.queryAll();
+				public PageInfo<TransactionRecordMain> queryAll(TransactionRecordMain t){
+						PageHelper.startPage(t.getPageNum(),6);
+						List<TransactionRecordMain> list=transactionRecordMainMapper.queryAll(t);
 						PageInfo<TransactionRecordMain> page=new PageInfo<TransactionRecordMain>(list);
 						return page;
 				}
+				
+				
+				/**
+				 * 成交记录分页查询
+				 * @param pageNum
+				 * @param pageSize
+				 * @return
+				 */
+				public PageInfo<TransactionRecordMain> queryByPage(Integer pageNum){
+						PageHelper.startPage(pageNum,6);
+						List<TransactionRecordMain> list=transactionRecordMainMapper.queryByPage();
+						PageInfo<TransactionRecordMain> page=new PageInfo<TransactionRecordMain>(list);
+						return page;
+				}
+				
 }

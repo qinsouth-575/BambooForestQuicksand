@@ -28,7 +28,7 @@ public interface MemberMapper {
 
     int updateByPrimaryKey(Member record);
     
-    List <Member> queryAllByPage();
+    List <Member> queryAllByPage(Member m);
     
     int insertMember(Member m);
     

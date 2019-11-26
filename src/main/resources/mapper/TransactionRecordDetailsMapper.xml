@@ -262,7 +262,13 @@
   			SELECT d.`trd_id`,c.`cm_name`,d.`quantity`,d.`total_price`,m.`create_time` FROM `transaction_record_details` AS d
 			LEFT JOIN `commodity_main` AS c ON d.`article_no`=c.`article_no`
 			LEFT JOIN `transaction_record_main` AS m ON m.`order_number`=d.`order_number`
-			WHERE m.`client`>0
+			WHERE m.`client`>0 AND d.`state`=0 AND m.`state`=0
+			<if test="orderNumber != null" >
+		       and d.order_number like '%${orderNumber}%'
+		    </if>
+		    <if test="createTime != null" >
+		       and m.create_time like '${createTime}%'
+		    </if>
 			GROUP BY d.`trd_id`
   </select>
 </mapper>

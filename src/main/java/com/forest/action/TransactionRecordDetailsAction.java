@@ -2,6 +2,7 @@ package com.forest.action;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,7 +23,7 @@ public class TransactionRecordDetailsAction {
 				 */
 				@RequestMapping("queryAll")
 				@ResponseBody
-				public PageInfo<TransactionRecordDetails> queryAll(Integer pageNum){
-					return transactionRecordDetailsBiz.queryAll(pageNum);
+				public PageInfo<TransactionRecordDetails> queryAll(@RequestBody TransactionRecordDetails d){
+					return transactionRecordDetailsBiz.queryAll(d);
 				}
 }

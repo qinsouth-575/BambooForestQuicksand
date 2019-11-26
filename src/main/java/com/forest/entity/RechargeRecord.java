@@ -29,8 +29,18 @@ public class RechargeRecord {
     private BigDecimal balance;
     
     private float xf;
+    
+    private Integer pageNum;//当前页数
 
-    public String getWechatNum() {
+    public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public String getWechatNum() {
 		return wechatNum;
 	}
 

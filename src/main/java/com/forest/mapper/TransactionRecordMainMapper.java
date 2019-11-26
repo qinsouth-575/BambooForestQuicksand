@@ -28,5 +28,7 @@ public interface TransactionRecordMainMapper {
 
     int updateByPrimaryKey(TransactionRecordMain record);
     
-    List<TransactionRecordMain> queryAll();
+    List<TransactionRecordMain> queryAll(TransactionRecordMain t);
+    
+    List<TransactionRecordMain> queryByPage();
 }

@@ -335,10 +335,18 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where member_id = #{memberId,jdbcType=INTEGER}
   </update>
-  <select id="queryAllByPage" resultMap="BaseResultMap">
+  <select id="queryAllByPage" resultMap="BaseResultMap" parameterType="com.forest.entity.Member">
   		SELECT m.`member_id`,m.member_name,m.`phoen`,l.`ml_name`,COUNT(t.client) AS cs,SUM(t.actual_income) AS je,m.balance,m.integral FROM `member` AS m
 		LEFT JOIN `member_level` AS l ON m.`ml_id`=l.`ml_id`
 		LEFT JOIN `transaction_record_main` AS t ON m.`member_id`=t.`client`
+		<where>
+      	<if test="mlId != null" >
+        and m.ml_id = #{mlId,jdbcType=SMALLINT}
+      	</if>
+      	<if test="memberName != null" >
+        and m.member_name like '%${memberName}%'
+      	</if>
+      	</where>
 		GROUP BY m.`member_id`
   </select>
   <insert id="insertMember" parameterType="com.forest.entity.Member" >
