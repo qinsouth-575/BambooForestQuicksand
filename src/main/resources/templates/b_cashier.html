@@ -26,6 +26,7 @@
     <link th:href="@{/css/style_b_cashier.css}" id="theme" rel="stylesheet">
 </head>
 <body class="fix-header fix-sidebar card-no-border">
+	<div id="etc">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -237,16 +238,7 @@
                                     			<th colspan="5">
 						                    		<button class="btn btn-success">全部</button>
 						                    		<span id="list_type">
-						                    			<button class="btn btn-default">羽绒服</button>
-							                    		<button class="btn btn-default">双面羊绒大衣</button>
-							                    		<button class="btn btn-default">打底</button>
-							                    		<button class="btn btn-default">衬衣</button>
-							                    		<button class="btn btn-default">毛衣</button>
-							                    		<button class="btn btn-default">卫衣</button>
-							                    		<button class="btn btn-default">背带</button>
-							                    		<button class="btn btn-default">短裤</button>
-							                    		<button class="btn btn-default">饰品</button>
-							                    		<button class="btn btn-default">半身裙</button>
+						                    			<button class="btn btn-default" v-for="item,index in splbList" value="item.ctId" @click="splbcx(item.ctId)">{{item.ctName}}</button>
 						                    		</span>
 						                    		
 						                    		<button class="btn btn-info pull-right" style="margin-left: 5px;">下一页</button>
@@ -518,6 +510,7 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
+    </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -562,7 +555,35 @@
     	 * 然后页面标签自然用三个 v-for
     	 * 
     	 * */
+    	 
+    	 var vus=new Vue({
+    		 el:"#etc",
+    		 data(){
+    			 return {
+    				 splbList:[]
+    			 }
+    		 },
+    		 methods:{
+    			 queryBySy:function(){
+    				 var _this=this;
+    				 $.ajax({
+    					url:"[[@{/Bcashier/queryBySy}]]",
+    					type:"get",
+    					data:{},
+    					dataType:"json",
+    					"success":function(res){
+    						_this.splbList=res;
+    					}
+    				 });
+    			 },
+    			 splbcx:function(id){
+    				 alert(id);
+    			 }
+    		 },
+    		 created:function(){
+    			 this.queryBySy();
+	 		}
+    	 });
     </script>
 </body>
-
 </html>

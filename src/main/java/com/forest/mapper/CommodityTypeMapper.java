@@ -27,4 +27,6 @@ public interface CommodityTypeMapper {
     int updateByPrimaryKeySelective(CommodityType record);
 
     int updateByPrimaryKey(CommodityType record);
+    
+    List<CommodityType> queryBySy();
 }

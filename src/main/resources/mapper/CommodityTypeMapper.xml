@@ -161,4 +161,7 @@
     set ct_name = #{ctName,jdbcType=VARCHAR}
     where ct_id = #{ctId,jdbcType=SMALLINT}
   </update>
+  <select id="queryBySy" resultMap="BaseResultMap">
+  	select * from commodity_type LIMIT 10
+  </select>
 </mapper>
