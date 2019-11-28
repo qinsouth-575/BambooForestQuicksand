@@ -16,15 +16,18 @@
     <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
     <result column="shop_id" property="shopId" jdbcType="SMALLINT" />
     <result column="ct_id" property="ctId" jdbcType="SMALLINT" />
+    <result column="img_path" property="imgPath" jdbcType="VARCHAR" />
   </resultMap>
   
   <select id="queryMDAllByManager" parameterType="com.forest.entity.CommodityMD" resultMap="BaseResultMap">
-  	SELECT d.`cd_id`,m.`cm_id`,t.`ct_name`,m.`cm_name`,m.`article_no`,d.`bar_code`,c.`color_name`,s.`size_name`,d.`quantity`,m.`sale_price`,m.`cost_price`,m.`shop_id`,t.`ct_id`
+  	SELECT d.`cd_id`,m.`cm_id`,t.`ct_name`,m.`cm_name`,m.`article_no`,d.`bar_code`,c.`color_name`,s.`size_name`,d.`quantity`,m.`sale_price`,m.`cost_price`,m.`shop_id`,t.`ct_id`,i.`img_path`
 	FROM `commodity_main` AS m
 	LEFT JOIN `commodity_details` AS d ON m.`cm_id` = d.`cm_id`
 	LEFT JOIN `commodity_type` AS t ON m.`ct_id` = t.`ct_id`
 	LEFT JOIN `size` AS s ON d.`size_id` = s.`size_id`
 	LEFT JOIN `color` AS c ON d.`color_id` = c.`color_id`
+	LEFT JOIN `cm_img_relation` AS cir ON d.`cm_id` = cir.`cm_id`
+	LEFT JOIN `images` AS i ON i.`img_id` = cir.`img_id`
 	<where>
 		<if test="shopId != null and shopId != ''">
 			AND m.`shop_id` = #{shopId}

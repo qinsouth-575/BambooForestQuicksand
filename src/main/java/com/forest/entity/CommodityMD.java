@@ -23,6 +23,7 @@ public class CommodityMD {
     private BigDecimal costPrice;	//成本价
     private Integer shopId;			//店铺编号
     private Integer ctId;			//类别编号
+    private String imgPath;			//图片地址
     
     private Integer pageNum;		//当前页
 	public Integer getPageNum() {
@@ -68,10 +69,10 @@ public class CommodityMD {
 	public void setBarCode(String barCode) {
 		this.barCode = barCode;
 	}
-	public String getColor() {
+	public String getColorName() {
 		return colorName;
 	}
-	public void setColor(String colorName) {
+	public void setColorName(String colorName) {
 		this.colorName =colorName;
 	}
     public String getSizeName() {
@@ -110,13 +111,19 @@ public class CommodityMD {
 	public void setCtId(Integer ctId) {
 		this.ctId = ctId;
 	}
+	public String getImgPath() {
+		return imgPath;
+	}
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
 	
 	@Override
 	public String toString() {
 		return "CommodityMD [cdId=" + cdId + ", cmId=" + cmId + ", ctName=" + ctName + ", cmName=" + cmName
-				+ ", articleNo=" + articleNo + ", barCode=" + barCode + ", colorName=" + colorName + ", sizeName=" + sizeName
-				+ ", quantity=" + quantity + ", salePrice=" + salePrice + ", costPrice=" + costPrice + ", shopId="
-				+ shopId + ", ctId=" + ctId + ", pageNum=" + pageNum + "]";
+				+ ", articleNo=" + articleNo + ", barCode=" + barCode + ", colorName=" + colorName + ", sizeName="
+				+ sizeName + ", quantity=" + quantity + ", salePrice=" + salePrice + ", costPrice=" + costPrice
+				+ ", shopId=" + shopId + ", ctId=" + ctId + ", imgPath=" + imgPath + ", pageNum=" + pageNum + "]";
 	}
 	
 }

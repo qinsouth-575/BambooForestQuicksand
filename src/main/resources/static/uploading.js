@@ -985,7 +985,7 @@ $(function(){
 		//成本价格
 		paramObject.costPrice = $("input[name='fprice']:visible").val();
 		if(paramObject.costPrice == "") {
-			alert("error：请输入成本价格！");	
+			alert("error：请输入成本价格！");
 			return false;
 		}
 	
