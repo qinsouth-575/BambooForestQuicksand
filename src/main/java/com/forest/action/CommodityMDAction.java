@@ -70,6 +70,7 @@ public class CommodityMDAction {
 	public PageInfo<CommodityMD> queryPage(@RequestBody CommodityMD cmd){
 		log.debug("BambooForestQuicksand - CommodityMDAction - queryPage - 商品管理 - 1.商品多条件查询");
 		log.info("多条件+分页查询 - 参数信息：" + cmd);
+		cmd.setPageSize(4);
 		PageInfo<CommodityMD> page = cmdb.queryMDAllByManager(cmd);
 		log.info("查询结果分页类信息：" + page);
 		return page;

@@ -35,7 +35,7 @@ public class CommodityMDBiz {
 	 * @return
 	 */
     public PageInfo<CommodityMD> queryMDAllByManager(CommodityMD cmd){
-    	PageHelper.startPage(cmd.getPageNum(), 4);
+    	PageHelper.startPage(cmd.getPageNum(), cmd.getPageSize());
     	List<CommodityMD> comList = cmdDAO.queryMDAllByManager(cmd);
     	PageInfo<CommodityMD> page = new PageInfo<CommodityMD>(comList); 
     	return page;

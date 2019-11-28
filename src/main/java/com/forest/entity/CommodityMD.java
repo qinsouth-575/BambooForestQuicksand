@@ -26,13 +26,8 @@ public class CommodityMD {
     private String imgPath;			//图片地址
     
     private Integer pageNum;		//当前页
-	public Integer getPageNum() {
-		return pageNum;
-	}
-	public void setPageNum(Integer pageNum) {
-		this.pageNum = pageNum;
-	}
-	
+    private Integer pageSize;		//每页显示条数
+    
 	public Integer getCdId() {
 		return cdId;
 	}
@@ -118,12 +113,27 @@ public class CommodityMD {
 		this.imgPath = imgPath;
 	}
 	
+	
+	public Integer getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+	
 	@Override
 	public String toString() {
 		return "CommodityMD [cdId=" + cdId + ", cmId=" + cmId + ", ctName=" + ctName + ", cmName=" + cmName
 				+ ", articleNo=" + articleNo + ", barCode=" + barCode + ", colorName=" + colorName + ", sizeName="
 				+ sizeName + ", quantity=" + quantity + ", salePrice=" + salePrice + ", costPrice=" + costPrice
-				+ ", shopId=" + shopId + ", ctId=" + ctId + ", imgPath=" + imgPath + ", pageNum=" + pageNum + "]";
+				+ ", shopId=" + shopId + ", ctId=" + ctId + ", imgPath=" + imgPath + ", pageNum=" + pageNum
+				+ ", pageSize=" + pageSize + "]";
 	}
 	
 }
