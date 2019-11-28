@@ -29,7 +29,7 @@
 		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources" />
 		<!-- mapper接口生成 -->
 		<javaClientGenerator targetPackage="com.forest.mapper" targetProject="src/main/java" type="XMLMAPPER" />
-			<table schema="Region" tableName="Region"></table>
+			<table schema="CommodityDetails" tableName="commodity_details"></table>
 			
 			<!-- <table schema="Account" tableName="account"></table>
 			<table schema="Shop" tableName="shop"></table>

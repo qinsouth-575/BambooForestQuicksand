@@ -18,6 +18,7 @@
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
+    <div id="po">
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> 
@@ -186,21 +187,18 @@
 							</div>
                         </div>
                         
-                        <select class="form-control form-control-line f_input" style="width: 120px;">
-                            <option>全部店铺</option>
-                            <option>India</option>
-                            <option>Usa</option>
-                            <option>Canada</option>
-                            <option>Thailand</option>
+                        <select class="form-control form-control-line f_input shop" style="width: 120px;">
+                            <option >全部店铺</option>
+                            <option v-for="item in shop">{{item.shopName}}</option>
                         </select>
                         
                         <div class="f_input" style="position: relative;">
-                        	<input type="text" placeholder="查找" class="form-control form-control-line f_input" style="width: 170px;">
-							<a href="javascript:;" class="list_search"></a>
+                        	<input type="text" id="podd" placeholder="查找"  class="form-control form-control-line f_input" style="width: 170px;">
+							<a href="javascript:;" class="list_search" @click="queryPurchaseMain"></a>
                         </div>
                         
                         <!-- Button trigger modal -->
-                        <a th:href="@{/po,,,/toCommodityMDInsert}" class="btn hidden-sm-down btn-info">新建采购单</a>
+                        <a th:href="@{/po/toCommodityMDInsert}" class="btn hidden-sm-down btn-info">新建采购单</a>
                         <!--data-toggle="modal" data-target=".bs-example-modal-lg"-->
                     </div>
                 </div>
@@ -228,76 +226,20 @@
                                                 <th>供应商</th>
                                                 <th>数量</th>
                                                 <th>金额</th>
-                                                <th>金额</th>
+                                                <th>备注</th>
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-												<td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
+                                            <tr v-for="item in po.list">
+                                                <td>{{item.pmId}}</td>
+                                                <td>{{item.statu}}</td>
+                                                <td>{{item.pmOdd}}</td>
+                                                <td>{{item.deliveryTime}}</td>
+												<td>{{item.supName}}</td>
+                                                <td>{{item.count}}</td>
+                                                <td>{{item.je}}</td>
+                                                <td>{{item.remark}}</td>
                                                 <td>
                                                 	<a class="btn delBtn" href="javascript:void(0);">删除</a>
                                                 	<a class="btn editBtn" href="javascript:void(0);">修改</a>
@@ -306,11 +248,11 @@
                                         </tbody>
                                         <tfoot>
                                         	<tr>
-                                        		<td colspan="11" class="text-right">
-							                        <a href="#" class="btn hidden-sm-down btn-info">首页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">上一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">下一页</a>
-							                        <a href="#" class="btn hidden-sm-down btn-info">尾页</a>
+                                        		<td colspan="10" class="text-right">
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goFirstPage">首页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goPrePage">上一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goNextPage">下一页</a>
+							                        <a href="#" class="btn hidden-sm-down btn-info" @click="goLastPage">尾页</a>
                                         		</td>
                                         	</tr>
                                         </tfoot>
@@ -439,6 +381,7 @@
     <div id="acquireDatetime">
     	<input type="date" />
     </div>
+    </div>
     <!-- ============================================================== -->
     <!-- End Datetime -->
     <!-- ============================================================== -->
@@ -460,7 +403,76 @@
     
     <script th:src="@{/js/vue.js}"></script>
     <script type="text/javascript">
-    	
+    		var vue =new Vue({
+    			el:"#po",
+    			data(){
+    				return {
+    					po:[],
+    					shop:[]
+    				}
+    			},methods:{
+    				goPage:function(pageNum){
+    					var sp=$(".shop").val();
+    					if(sp=="全部店铺"){
+    						sp="";
+    					}
+    					var that=this;
+    					var obj={
+    							pageNum:pageNum,
+    							startTime:$("[name='start_date']").val(),
+    							endTime:$("[name='end_date']").val(),
+    							shopName:sp,
+    							pmOdd:$("#podd").val()
+    					};
+    					//alert(JSON.stringify(obj));
+    					$.ajax({
+    						url:"[[@{/po/queryPurchaseMain}]]",
+    						type:"post",
+    						data:JSON.stringify(obj),
+    						contentType:"application/json;charset=utf-8",
+    						dataType:"json",
+    						success:function(res){
+    							that.po=res;
+    							alert(JSON.stringify(that.po));
+    						}
+    						
+    					});
+    				},
+    				queryPurchaseMain:function(){
+    					this.goPage(1);
+    				},
+    				goPrePage:function(){
+        				if(this.po.hasPreviousPage){
+            				this.goPage(this.po.prePage)
+            				//alert(this.po.hasPreviousPage + " - " + this.po.prePage);
+        				}
+        			},
+        			goNextPage:function(){
+        				if(this.po.hasNextPage){
+            				this.goPage(this.po.nextPage);
+        				}
+        			},
+        			goFirstPage:function(){
+        				this.goPage(1);
+        			},
+        			goLastPage:function(){
+        				this.goPage(this.po.pages);
+        			},
+    				queryShop:function(){
+    					var tath=this;
+    					$.ajax({
+    						url:"[[@{/po/queryShop}]]",
+    						type:"get",
+    						success:function(res){
+    							tath.shop=res;
+    						}
+    					});
+    				}
+    			},created:function(){
+    				this.goPage(1);
+    				this.queryShop();
+    			}
+    		});
     	
     	
     	

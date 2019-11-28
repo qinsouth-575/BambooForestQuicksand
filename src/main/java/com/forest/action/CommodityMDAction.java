@@ -222,7 +222,7 @@ public class CommodityMDAction {
 		log.debug("BambooForestQuicksand - CommodityMDAction - insertSize - 商品管理 - 2.商品上传 - 4.尺码管理 - 2.新增尺码 or 3.修改尺码");
 		log.info("尺码对象数据：" + size);
 
-		if(size.getSizeName().equals(""))
+		if("".equals(size.getSizeName()))
 			return new Size(500, "尺码名不能为空！");
 		
 		//新增		id为0						空名字查询结果集合的长度为0
@@ -230,7 +230,7 @@ public class CommodityMDAction {
 			List<Size> sizeList = sb.querySizeBySizeName(size.getSizeName());
 			log.info(sizeList + "\t集合长度为： " + sizeList.size());
 			if(sizeList.size() >= 1) {
-				return sizeList.get(0);
+				return new Size(501, "尺码已存在，新增失败！");
 			} else {
 				if (sb.insertSize(size)) 
 					return sb.querySizeBySizeName(size.getSizeName()).get(0);
