@@ -9,7 +9,7 @@
     <result column="cm_name" property="cmName" jdbcType="VARCHAR" />
     <result column="article_no" property="articleNo" jdbcType="VARCHAR" />
     <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
-    <result column="color" property="color" jdbcType="VARCHAR" />
+    <result column="color_name" property="colorName" jdbcType="VARCHAR" />
   	<result column="size_name" property="sizeName" jdbcType="VARCHAR" />
   	<result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
@@ -19,11 +19,12 @@
   </resultMap>
   
   <select id="queryMDAllByManager" parameterType="com.forest.entity.CommodityMD" resultMap="BaseResultMap">
-  	SELECT d.`cd_id`,m.`cm_id`,t.`ct_name`,m.`cm_name`,m.`article_no`,d.`bar_code`,d.`color`,s.`size_name`,d.`quantity`,m.`sale_price`,m.`cost_price`,m.`shop_id`,t.`ct_id`
+  	SELECT d.`cd_id`,m.`cm_id`,t.`ct_name`,m.`cm_name`,m.`article_no`,d.`bar_code`,c.`color_name`,s.`size_name`,d.`quantity`,m.`sale_price`,m.`cost_price`,m.`shop_id`,t.`ct_id`
 	FROM `commodity_main` AS m
 	LEFT JOIN `commodity_details` AS d ON m.`cm_id` = d.`cm_id`
 	LEFT JOIN `commodity_type` AS t ON m.`ct_id` = t.`ct_id`
 	LEFT JOIN `size` AS s ON d.`size_id` = s.`size_id`
+	LEFT JOIN `color` AS c ON d.`color_id` = c.`color_id`
 	<where>
 		<if test="shopId != null and shopId != ''">
 			AND m.`shop_id` = #{shopId}

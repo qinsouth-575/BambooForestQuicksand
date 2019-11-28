@@ -183,7 +183,7 @@
                         </select>
                         
                         <select class="form-control form-control-line f_input typeList" style="width: 147px;">
-                            <option value="">所有职位</option>
+                            <option value="">所有类别</option>
                             <option v-for="item in typeList" :value="item.ctId">{{item.ctName}}</option>
                         </select>
                         
@@ -236,7 +236,7 @@
                                                 <td>{{cmd.ctName}}</td>
                                                 <td>{{cmd.cmName}}</td>
                                                 <td>{{cmd.articleNo}}<br/>{{cmd.barCode}}</td>
-                                                <td>{{cmd.color}}<br/>{{cmd.sizeName}}</td>
+                                                <td>{{cmd.colorName}}<br/>{{cmd.sizeName}}</td>
                                                 <td>{{cmd.quantity}}</td>
                                                 <td>{{cmd.salePrice}}</td>
                                                 <td>{{cmd.costPrice}}</td>

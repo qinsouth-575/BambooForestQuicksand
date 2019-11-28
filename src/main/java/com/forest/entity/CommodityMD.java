@@ -16,7 +16,7 @@ public class CommodityMD {
     private String cmName;			//商品名
     private String articleNo;		//货号
     private String barCode;			//条码
-    private String color;			//颜色
+    private String colorName;		//颜色
     private String sizeName;		//尺码
     private Integer quantity;		//数量
     private BigDecimal salePrice;	//吊牌价
@@ -69,10 +69,10 @@ public class CommodityMD {
 		this.barCode = barCode;
 	}
 	public String getColor() {
-		return color;
+		return colorName;
 	}
-	public void setColor(String color) {
-		this.color = color;
+	public void setColor(String colorName) {
+		this.colorName =colorName;
 	}
     public String getSizeName() {
         return sizeName;
@@ -114,7 +114,7 @@ public class CommodityMD {
 	@Override
 	public String toString() {
 		return "CommodityMD [cdId=" + cdId + ", cmId=" + cmId + ", ctName=" + ctName + ", cmName=" + cmName
-				+ ", articleNo=" + articleNo + ", barCode=" + barCode + ", color=" + color + ", sizeName=" + sizeName
+				+ ", articleNo=" + articleNo + ", barCode=" + barCode + ", colorName=" + colorName + ", sizeName=" + sizeName
 				+ ", quantity=" + quantity + ", salePrice=" + salePrice + ", costPrice=" + costPrice + ", shopId="
 				+ shopId + ", ctId=" + ctId + ", pageNum=" + pageNum + "]";
 	}
