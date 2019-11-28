@@ -8,6 +8,7 @@
     <result column="upgrade" property="upgrade" jdbcType="INTEGER" />
     <result column="validity" property="validity" jdbcType="INTEGER" />
     <result column="upgrade_rule" property="upgradeRule" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -226,10 +227,10 @@
     where ml_id = #{mlId,jdbcType=SMALLINT}
   </update>
   <select id="queryAll" resultMap="BaseResultMap">
-  		select * from member_level
+  		select * from member_level where status=0
   </select>
   <insert id="insertAll" parameterType="com.forest.entity.MemberLevel">
-  		 insert into member_level ( ml_name, discount, 
+  	insert into member_level ( ml_name, discount, 
       upgrade, validity, upgrade_rule
       )
     values ( #{mlName,jdbcType=VARCHAR}, #{discount,jdbcType=REAL}, 
