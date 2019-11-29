@@ -60,4 +60,11 @@ public class CommodityDetails {
     public void setBarCode(String barCode) {
         this.barCode = barCode;
     }
+
+	@Override
+	public String toString() {
+		return "CommodityDetails [cdId=" + cdId + ", cmId=" + cmId + ", sizeId=" + sizeId + ", colorId=" + colorId
+				+ ", quantity=" + quantity + ", barCode=" + barCode + "]";
+	}
+    
 }

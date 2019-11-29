@@ -163,4 +163,11 @@
     set img_path = #{imgPath,jdbcType=VARCHAR}
     where img_id = #{imgId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectImagesList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	SELECT i.`img_id`,`img_path`
+	FROM `images` AS i
+	LEFT JOIN `cm_img_relation` AS cir ON i.`img_id` = cir.`img_id`
+	WHERE cir.`cm_id` = #{cmId}
+  </select>
 </mapper>

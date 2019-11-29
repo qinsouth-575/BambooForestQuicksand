@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/commodityManager/toUploadingPage}" class="waves-effect active">
+                            <a th:href="@{/commodityManager/toUploadingPage}+'?cmId=0'" class="waves-effect active">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
@@ -212,6 +212,8 @@
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
+			
+		<input type="hidden" id="commodityMainId" th:value="${cmId}">
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -231,13 +233,16 @@
     
     <script th:src="@{/js/vue.js}"></script>
 	<script type="text/javascript">
+		var staff_shopId = 0;
 		var typeList = [];
 		var sizeList = [];
+		var commodityMainId = 0;
 		
 		$(function() {
 			queryUserOrStaff();
 			queryTypeList();
 			querySizeList();
+			judgeInsertOrUpdate();
 
 			//alert("d_commodity_uploading.html - 工厂函数");
 		});
@@ -251,6 +256,7 @@
 				success:function(res){
 					//alert(JSON.stringify(res));		看console控制台
 					$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+					staff_shopId = res.shopId;
 				}
 			});
 			//Ajax代码结束
@@ -282,6 +288,13 @@
 				}
 			});
 			//Ajax代码结束
+		}
+		
+		//4.判断新增/修改操作
+		function judgeInsertOrUpdate(){
+			//alert("商品主表编号：" + $("#commodityMainId").val());	正常
+			
+			commodityMainId = $("#commodityMainId").val();
 		}
 
 		//0.动态修改父页面iframe高度

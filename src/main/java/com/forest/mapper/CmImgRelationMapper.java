@@ -27,4 +27,6 @@ public interface CmImgRelationMapper {
     int updateByPrimaryKeySelective(CmImgRelation record);
 
     int updateByPrimaryKey(CmImgRelation record);
+    
+    int deleteCmImgRelationByCmId(Integer cmId);
 }

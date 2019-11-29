@@ -283,6 +283,66 @@ public class CmImgRelationExample {
             addCriterion("img_id not between", value1, value2, "imgId");
             return (Criteria) this;
         }
+
+        public Criteria andIsMainIsNull() {
+            addCriterion("is_main is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainIsNotNull() {
+            addCriterion("is_main is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainEqualTo(Integer value) {
+            addCriterion("is_main =", value, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainNotEqualTo(Integer value) {
+            addCriterion("is_main <>", value, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainGreaterThan(Integer value) {
+            addCriterion("is_main >", value, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_main >=", value, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainLessThan(Integer value) {
+            addCriterion("is_main <", value, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainLessThanOrEqualTo(Integer value) {
+            addCriterion("is_main <=", value, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainIn(List<Integer> values) {
+            addCriterion("is_main in", values, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainNotIn(List<Integer> values) {
+            addCriterion("is_main not in", values, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainBetween(Integer value1, Integer value2) {
+            addCriterion("is_main between", value1, value2, "isMain");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsMainNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_main not between", value1, value2, "isMain");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

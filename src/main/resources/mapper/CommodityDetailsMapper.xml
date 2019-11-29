@@ -225,4 +225,21 @@
       bar_code = #{barCode,jdbcType=VARCHAR}
     where cd_id = #{cdId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectCommodityDetailsList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	SELECT `cd_id`,`cm_id`,`size_id`,`color_id`,`quantity`,`bar_code`
+	FROM `commodity_details`
+	WHERE `cm_id` = #{cmId}
+  </select>
+  <select id="selectCommodityMainCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	SELECT COUNT(d.`cd_id`)
+	FROM `commodity_main` AS m
+	LEFT JOIN `commodity_details` AS d ON m.`cm_id` = d.`cm_id`
+	WHERE m.`cm_id` = (
+		SELECT `cm_id`
+		FROM `commodity_details`
+		WHERE `cd_id` = #{cdId}
+	)
+	GROUP BY m.`cm_id`
+  </select>
 </mapper>

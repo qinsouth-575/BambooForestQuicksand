@@ -5,6 +5,7 @@
     <id column="cir_Id" property="cirId" jdbcType="INTEGER" />
     <result column="cm_id" property="cmId" jdbcType="INTEGER" />
     <result column="img_id" property="imgId" jdbcType="INTEGER" />
+    <result column="is_main" property="isMain" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cir_Id, cm_id, img_id
+    cir_Id, cm_id, img_id, is_main
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.CmImgRelationExample" >
     select
@@ -98,10 +99,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.forest.entity.CmImgRelation" >
-    insert into cm_img_relation (cir_Id, cm_id, img_id
-      )
-    values (#{cirId,jdbcType=INTEGER}, #{cmId,jdbcType=INTEGER}, #{imgId,jdbcType=INTEGER}
-      )
+    insert into cm_img_relation (cir_Id, cm_id, img_id, 
+      is_main)
+    values (#{cirId,jdbcType=INTEGER}, #{cmId,jdbcType=INTEGER}, #{imgId,jdbcType=INTEGER}, 
+      #{isMain,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.forest.entity.CmImgRelation" >
     insert into cm_img_relation
@@ -115,6 +116,9 @@
       <if test="imgId != null" >
         img_id,
       </if>
+      <if test="isMain != null" >
+        is_main,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="cirId != null" >
@@ -125,6 +129,9 @@
       </if>
       <if test="imgId != null" >
         #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="isMain != null" >
+        #{isMain,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -146,6 +153,9 @@
       <if test="record.imgId != null" >
         img_id = #{record.imgId,jdbcType=INTEGER},
       </if>
+      <if test="record.isMain != null" >
+        is_main = #{record.isMain,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +165,8 @@
     update cm_img_relation
     set cir_Id = #{record.cirId,jdbcType=INTEGER},
       cm_id = #{record.cmId,jdbcType=INTEGER},
-      img_id = #{record.imgId,jdbcType=INTEGER}
+      img_id = #{record.imgId,jdbcType=INTEGER},
+      is_main = #{record.isMain,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +180,22 @@
       <if test="imgId != null" >
         img_id = #{imgId,jdbcType=INTEGER},
       </if>
+      <if test="isMain != null" >
+        is_main = #{isMain,jdbcType=INTEGER},
+      </if>
     </set>
     where cir_Id = #{cirId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.forest.entity.CmImgRelation" >
     update cm_img_relation
     set cm_id = #{cmId,jdbcType=INTEGER},
-      img_id = #{imgId,jdbcType=INTEGER}
+      img_id = #{imgId,jdbcType=INTEGER},
+      is_main = #{isMain,jdbcType=INTEGER}
     where cir_Id = #{cirId,jdbcType=INTEGER}
   </update>
+  
+  <delete id="deleteCmImgRelationByCmId" parameterType="java.lang.Integer">
+  	delete `cm_img_relation`
+	where `cm_id` = #{cmId};
+  </delete>
 </mapper>

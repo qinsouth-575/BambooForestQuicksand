@@ -138,7 +138,7 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/commodityManager/toUploadingPage}" class="waves-effect">
+                            <a th:href="@{/commodityManager/toUploadingPage}+'?cmId=0'" class="waves-effect">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
@@ -196,7 +196,7 @@
                         <a href="#" class="btn hidden-sm-down btn-success">批量导入</a>
                         
                         <!-- Button trigger modal -->
-                        <a href="#" class="btn hidden-sm-down btn-info" onclick="location.href='/commodityManager/toUploadingPage'">商品上传</a>
+                        <a href="#" class="btn hidden-sm-down btn-info" onclick="location.href='/commodityManager/toUploadingPage?cmId=0'">商品上传</a>
                     </div>
                 </div>
                 <!-- ============================================================== -->
@@ -242,8 +242,8 @@
                                                 <td>{{cmd.costPrice}}</td>
                                                 <td>-</td>
                                                 <td>
-                                                	<a href="javascript:void(0);">删除</a>
-                                                	<a href="javascript:void(0);">修改</a>
+                                                	<a href="javascript:void(0);" @click="updateCmd(cmd.cmId)">修改</a>
+                                                	<a href="javascript:void(0);" @click="deleteCmd(cmd.cmId,cmd.quantity)">删除</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -413,6 +413,38 @@
 	   			},
 	   			search : function(){
 	   				this.queryPage(1);
+	   			},
+	   			updateCmd : function(cmId){
+	   				//进入修改页面
+	   				location.href = "/commodityManager/toUploadingPage?cmId=" + cmId;
+	   			},
+	   			deleteCmd : function(cmId, quantity){
+	   				if(quantity == 0){
+		   				if(!confirm("确定删除本条商品数据吗？其货品已全部售出！"))
+		   					return false;
+	   				} else {
+		   				if(!confirm("确定删除本条商品数据吗？其还有" + quantity + "件库存未售出！"))
+		   					return false;
+	   				}
+	   				
+	 				var this_ = this;
+	   				$.ajax({
+	   					url:"[[@{/commodityManager/cm}]]",
+	   					type:"DELETE",
+	   					data:{
+	   						cmId : cmId
+	   					},
+	   					dataType : "json",
+	   					success:function(res){
+	   						//alert(JSON.stringify(res));	正常
+	   						if(res.cmId != "500"){
+	   							//删除成功，查询当前页
+	   							this_.queryPage(this_.pageCmd.pageNum);
+	   						} else {
+	   							alert(res.cmName);
+	   						}
+	   					}
+	   				});
 	   			},
 			},
 			created:function(){

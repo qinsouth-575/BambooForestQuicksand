@@ -27,4 +27,6 @@ public interface CommodityMainMapper {
     int updateByPrimaryKeySelective(CommodityMain record);
 
     int updateByPrimaryKey(CommodityMain record);
+    
+    Integer selectCommodityMainMax();
 }

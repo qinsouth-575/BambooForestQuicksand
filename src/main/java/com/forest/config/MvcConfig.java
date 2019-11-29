@@ -58,6 +58,7 @@ public class MvcConfig implements WebMvcConfigurer {
     	pathPattern.add("/picture/**");
     	pathPattern.add("/head/**");
     	pathPattern.add("/commodity/**");
+    	pathPattern.add("/color/**");
     	
     	pathPattern.add("/error");		//这些个error，有点烦
     	

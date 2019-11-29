@@ -27,4 +27,6 @@ public interface ImagesMapper {
     int updateByPrimaryKeySelective(Images record);
 
     int updateByPrimaryKey(Images record);
+    
+    List<Images> selectImagesList(Integer cmId);
 }

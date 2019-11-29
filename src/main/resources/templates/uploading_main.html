@@ -340,12 +340,10 @@
 									</thead>
 									
 									<tbody>
-										<!--<tr colorid="黑色" class="黑色">
-											<td>尺码</td>
-											<td>
-												<label>黑色</label>
-												<input type="text" name="productnum" sizeid="XXS" colorid="黑色" class="colorText" value="0">
-											</td>
+										<!--<tr class="XXXXL军绿色">
+											<td>XXXXL/军绿色</td>
+											<td><input type="text" name="productnum" sizeid="XXXXL" colorid="军绿色" class="colorText" value="0" sizeidx="7" coloridx="24"></td>
+											<td><input type="text" name="barcode" class="barcodeText" value="" maxlength="20"></td>
 										</tr>-->
 									</tbody>
 								</table>
@@ -370,7 +368,7 @@
 							<div id="tabImageSmall" class="v_content clearfix">
 								<div class="v_content_list">
 									<ul class="tb-thumb productImgList" id="thumblist">
-										<!-- <li class="">
+										<!-- <li class="" value="">
 											<a href="javascript:void(0);" class="imgD">
 												<img big="/picture/HeadPortrait.jpg" mid="/picture/HeadPortrait.jpg" src="/picture/HeadPortrait.jpg">
 											</a>
@@ -431,32 +429,31 @@
 					salePrice : "",
 					costPrice : "",
 					ctId : "",
-					imgPath : "",
 					information : "",
-					shopId : "",
-					commodityDetails : [
-						{
+					shopId : window.parent.staff_shopId,
+					cdList : [
+						/*{
 							cdId : 0,
 							cmId : 0,
 							sizeId : "",
-							color : "",
+							colorId : "",
 							quantity : 0,
 							barCode : ""
 						},{
 							cdId : 0,
 							cmId : 0,
 							sizeId : "",
-							color : "",
+							colorId : "",
 							quantity : 0,
 							barCode : ""
-						}
-					]
+						}*/
+					],
+					imgList : []
 			};
 			var typeListC = [];	//父页面查询类别列表
 			var sizeListC = [];	//父页面查询尺码列表
-			var imgListX = [];
-			var colorListX = [];
-			var sizeListX = [];
+			//var colorListX = [];
+			//var sizeListX = [];
 			
 			$(function(){
 				typeListC = window.parent.typeList;	//父页面查询类别列表
@@ -465,6 +462,7 @@
 				bindTypeList();	//1.绑定商品类别
 				bindSizeList();	//2.绑定商品尺码
 				
+				queryCommodityMainById();	//查询修改对象数据
 			});
 			
 			//1.绑定商品类别
@@ -487,6 +485,52 @@
 				}
 				
 				productSizeBlur();	//绑定失去焦点事件
+			}
+			
+			//3.若为修改操作，查询对应商品信息
+			function queryCommodityMainById(){
+				var cmId = window.parent.commodityMainId;
+				if(cmId == 0){
+					return false;
+				}
+				
+				$.ajax({
+					url:"[[@{/commodityManager/queryCommodityMainById}]]",
+					type:"get",
+					data : {
+						cmId : cmId
+					},
+					dataType : "json",
+					success:function(res){
+						commodityMain = res;
+						//alert(JSON.stringify(commodityMain));	正常
+						
+						//商品货号
+						if(commodityMain.articleNo) $("input[name='bh']").val(commodityMain.articleNo);
+						//商品品牌
+						if(commodityMain.brand) $("input[name='brand']").val(commodityMain.brand);
+						//商品名称
+						if(commodityMain.cmName) $("input[name='name']").val(commodityMain.cmName);
+						//吊牌价格
+						if(commodityMain.salePrice) $("input[name='price']").val(commodityMain.salePrice);
+						//成本价格
+						if(commodityMain.costPrice) $("input[name='fprice']").val(commodityMain.costPrice);
+						//商品类别
+						var cmTypeName = "";
+						for(var i = 0; i < typeListC.length; i++){
+							if(typeListC[i].ctId == commodityMain.ctId){
+								cmTypeName = typeListC[i].ctName;
+							}
+						}
+						if(commodityMain.ctId) $(".directoryBox .comboxText").attr({
+							"comboxval": commodityMain.ctId
+						}).val(cmTypeName);
+						if(cmTypeName) $(".directoryBox .comboxText").attr({
+							"default": cmTypeName
+						}).val(cmTypeName);
+					}
+				});
+				//Ajax代码结束
 			}
 		</script>
 		<script type="text/javascript">

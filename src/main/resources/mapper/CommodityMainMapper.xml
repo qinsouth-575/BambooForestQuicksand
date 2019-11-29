@@ -270,4 +270,9 @@
       shop_id = #{shopId,jdbcType=SMALLINT}
     where cm_id = #{cmId,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectCommodityMainMax" resultType="java.lang.Integer">
+  	SELECT MAX(`cm_id`)
+	FROM `commodity_main`
+  </select>
 </mapper>

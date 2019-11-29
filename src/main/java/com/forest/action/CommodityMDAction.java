@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +19,7 @@ import com.forest.biz.CommodityMDBiz;
 import com.forest.biz.SizeBiz;
 import com.forest.entity.Color;
 import com.forest.entity.CommodityMD;
+import com.forest.entity.CommodityMain;
 import com.forest.entity.Images;
 import com.forest.entity.Size;
 import com.github.pagehelper.PageInfo;
@@ -52,8 +54,9 @@ public class CommodityMDAction {
 	
 	//商品管理 - 跳转 商品上传页面
 	@RequestMapping(value = "toUploadingPage", method = RequestMethod.GET)
-	public String toCommodityUploadingPage() {
+	public String toCommodityUploadingPage(Integer cmId, Model model) {
 		log.debug("BambooForestQuicksand - CommodityMDAction - toCommodityUploadingPage - 商品管理 - 跳转 商品上传页面");
+		model.addAttribute("cmId", cmId);
 		return "d_commodity_uploading";
 	}
 	
@@ -64,11 +67,11 @@ public class CommodityMDAction {
 		return "uploading_main";
 	}
 	
-	//商品管理 - 1.商品多条件查询
+	//商品管理 - 1.分页查询商品列表
 	@RequestMapping(value = "cm", method = RequestMethod.POST)
 	@ResponseBody
 	public PageInfo<CommodityMD> queryPage(@RequestBody CommodityMD cmd){
-		log.debug("BambooForestQuicksand - CommodityMDAction - queryPage - 商品管理 - 1.商品多条件查询");
+		log.debug("BambooForestQuicksand - CommodityMDAction - queryPage - 商品管理 - 1.分页查询商品列表");
 		log.info("多条件+分页查询 - 参数信息：" + cmd);
 		cmd.setPageSize(4);
 		PageInfo<CommodityMD> page = cmdb.queryMDAllByManager(cmd);
@@ -76,11 +79,11 @@ public class CommodityMDAction {
 		return page;
 	}
 	
-	//商品管理 - 2.商品上传 - 1.商品图片上传
+	//商品管理 - 2.商品上传 - 1.商品图片上传 - 新增图片信息到数据库、2.查看新增图片信息
 	@RequestMapping(value = "/uploadingCommodityImg", method = RequestMethod.POST)
 	@ResponseBody
 	public Images uploadingCommodityImg(MultipartFile file){
-		log.debug("BambooForestQuicksand - CommodityMDAction - uploadingCommodityImg - 商品管理 - 2.商品上传 - 1.商品图片上传");
+		log.debug("BambooForestQuicksand - CommodityMDAction - uploadingCommodityImg - 商品管理 - 2.商品上传 - 1.商品图片上传、2.查看新增图片信息");
 		log.info("上传图片：" + file);
 		File directory = new File("/D:/Git/CommodityMainImages");
 		if(!directory.exists()) {
@@ -108,23 +111,74 @@ public class CommodityMDAction {
 		}
 	}
 	
+	//商品管理 - 2.商品上传 - 2.商品上传
+	@RequestMapping(value = "insertCommodityMainAndDetail", method = RequestMethod.POST)
+	@ResponseBody
+	public CommodityMain insertCommodityMainAndDetail(@RequestBody CommodityMain commodityMain){
+		log.debug("BambooForestQuicksand - CommodityMDAction - insertCommodityMainAndDetail - 商品管理 - 2.商品上传 - 2.商品上传");
+		log.info("商品信息：" + commodityMain);
+		
+		if(cmdb.insertCommodityMainAndDetail(commodityMain)) {
+			return new CommodityMain(200, "商品上传成功！");
+		}
+		return new CommodityMain(500, "商品上传失败！");
+	}
 	
+	//商品管理 - 3.1商品修改 查询商品
+	@RequestMapping(value = "queryCommodityMainById", method = RequestMethod.GET)
+	@ResponseBody
+	public CommodityMain queryCommodityMainById(Integer cmId){
+		log.debug("BambooForestQuicksand - CommodityMDAction - queryCommodityMainById - 商品管理 - 3.1商品修改 查询商品");
+		CommodityMain cm = cmdb.queryCommodityMainById(cmId);
+		log.info("商品信息：" + cm);
+		return cm;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//商品管理 - 3.2商品修改 修改商品
+	@RequestMapping(value = "cm", method = RequestMethod.PUT)
+	@ResponseBody
+	public CommodityMain updateCommodityMainAndDetail(@RequestBody CommodityMain commodityMain){
+		log.debug("BambooForestQuicksand - CommodityMDAction - updateCommodityMainAndDetail - 商品管理 - 3.2商品修改 修改商品");
+		log.info("商品信息：" + commodityMain);
 
+		if(cmdb.updateCommodityMainAndDetail(commodityMain)) {
+			return new CommodityMain(200, "商品修改成功！");
+		}
+		return new CommodityMain(500, "商品修改失败！");
+	}
+	
+	//商品管理 - 4.删除商品（商品详表）
+	@RequestMapping(value = "cm", method = RequestMethod.DELETE)
+	@ResponseBody
+	public CommodityMain deleteCommodityMainAndDetail(Integer cdId){
+		log.debug("BambooForestQuicksand - CommodityMDAction - deleteCommodityMainAndDetail - 商品管理 - 4.删除商品");
+		if(cmdb.deleteCommodityMainAndDetail(cdId)) {
+			return new CommodityMain(200, "商品删除成功！");
+		}
+		return new CommodityMain(500, "商品删除失败！");
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//商品管理 - 2.商品上传 - 2.查询全部商品类别
 	

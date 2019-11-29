@@ -15,8 +15,36 @@ public class CommodityMain {
     private Short shopId;			//店铺编号（外键）
     
     private List<CommodityDetails> cdList;	//详表数据
+    private List<Images> imgList;	//图片集合
 
-    public Integer getCmId() {
+    public CommodityMain() {
+		super();
+	}
+
+	public CommodityMain(Integer cmId, String cmName) {
+		super();
+		this.cmId = cmId;
+		this.cmName = cmName;
+	}
+
+	public CommodityMain(Integer cmId, String articleNo, String brand, String cmName, BigDecimal salePrice,
+			BigDecimal costPrice, Integer ctId, String information, Short shopId, List<CommodityDetails> cdList,
+			List<Images> imgList) {
+		super();
+		this.cmId = cmId;
+		this.articleNo = articleNo;
+		this.brand = brand;
+		this.cmName = cmName;
+		this.salePrice = salePrice;
+		this.costPrice = costPrice;
+		this.ctId = ctId;
+		this.information = information;
+		this.shopId = shopId;
+		this.cdList = cdList;
+		this.imgList = imgList;
+	}
+
+	public Integer getCmId() {
         return cmId;
     }
 
@@ -96,11 +124,19 @@ public class CommodityMain {
 		this.cdList = cdList;
 	}
 
+	public List<Images> getImgList() {
+		return imgList;
+	}
+
+	public void setImgList(List<Images> imgList) {
+		this.imgList = imgList;
+	}
+
 	@Override
 	public String toString() {
 		return "CommodityMain [cmId=" + cmId + ", articleNo=" + articleNo + ", brand=" + brand + ", cmName=" + cmName
 				+ ", salePrice=" + salePrice + ", costPrice=" + costPrice + ", ctId=" + ctId + ", information="
-				+ information + ", shopId=" + shopId + ", cdList=" + cdList + "]";
+				+ information + ", shopId=" + shopId + ", cdList=" + cdList + ", imgList=" + imgList + "]";
 	}
     
 }

@@ -7,7 +7,28 @@ public class CmImgRelation {
 
     private Integer imgId;
 
-    public Integer getCirId() {
+    private Integer isMain;
+
+    public CmImgRelation() {
+		super();
+	}
+
+	public CmImgRelation(Integer cmId, Integer imgId, Integer isMain) {
+		super();
+		this.cmId = cmId;
+		this.imgId = imgId;
+		this.isMain = isMain;
+	}
+
+	public CmImgRelation(Integer cirId, Integer cmId, Integer imgId, Integer isMain) {
+		super();
+		this.cirId = cirId;
+		this.cmId = cmId;
+		this.imgId = imgId;
+		this.isMain = isMain;
+	}
+
+	public Integer getCirId() {
         return cirId;
     }
 
@@ -29,5 +50,13 @@ public class CmImgRelation {
 
     public void setImgId(Integer imgId) {
         this.imgId = imgId;
+    }
+
+    public Integer getIsMain() {
+        return isMain;
+    }
+
+    public void setIsMain(Integer isMain) {
+        this.isMain = isMain;
     }
 }
