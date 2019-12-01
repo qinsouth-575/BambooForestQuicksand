@@ -503,7 +503,7 @@
 					dataType : "json",
 					success:function(res){
 						commodityMain = res;
-						//alert(JSON.stringify(commodityMain));	正常
+						alert(JSON.stringify(commodityMain));	//正常 - 做完前，每次都弹吧
 						
 						//商品货号
 						if(commodityMain.articleNo) $("input[name='bh']").val(commodityMain.articleNo);
@@ -528,6 +528,7 @@
 						if(cmTypeName) $(".directoryBox .comboxText").attr({
 							"default": cmTypeName
 						}).val(cmTypeName);
+						//
 					}
 				});
 				//Ajax代码结束

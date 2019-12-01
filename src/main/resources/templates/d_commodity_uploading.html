@@ -295,6 +295,10 @@
 			//alert("商品主表编号：" + $("#commodityMainId").val());	正常
 			
 			commodityMainId = $("#commodityMainId").val();
+			
+			if(commodityMainId != 0){
+				$(".page-wrapper .page-titles h3").text("编辑商品");
+			}
 		}
 
 		//0.动态修改父页面iframe高度

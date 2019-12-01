@@ -2,6 +2,7 @@ package com.forest.biz;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,8 @@ import com.github.pagehelper.PageInfo;
 @Service
 @Transactional
 public class CommodityMDBiz {
+	
+	private static Logger log = Logger.getLogger(CommodityMDBiz.class); 
 	
 	@Autowired
 	private CommodityMDMapper cmdDAO;
@@ -186,10 +189,26 @@ public class CommodityMDBiz {
      * @return
      */
     public boolean deleteCommodityMainAndDetail (Integer cdId) {
+		/*				经典教材  - 先删除后查，顺序错误！				*
 		Integer cmId = cdDAO.selectByPrimaryKey(cdId).getCmId();
+		log.info("本次需删除的商品--详表编号为：" + cdId);
     	
     	if(cdDAO.deleteByPrimaryKey(cdId) > 0) {
-    		if(cdDAO.selectCommodityMainCount(cdId) <= 0) {
+    		Integer count = cdDAO.selectCommodityMainCount(cdId);
+    		log.info("对应商品主表编号为：" + cmId + "，其剩余详表数据为：" + count + "条。");
+    		if(count <= 0) {
+    			//当删除商品的主表数据没有详表数据时，才能将主表的数据删除！
+    			cmDAO.deleteByPrimaryKey(cmId);
+    		}
+    	}									//						*/
+    	
+		Integer count = cdDAO.selectCommodityMainCount(cdId);		//先查还有多少条，删除成功再-1
+    	Integer cmId = cdDAO.selectByPrimaryKey(cdId).getCmId();
+    	
+    	if(cdDAO.deleteByPrimaryKey(cdId) > 0) {	//删除成功
+    		log.info("本次需删除的商品--详表编号为：" + cdId + "；"
+    			+ "对应商品主表编号为：" + cmId + "；其剩余详表数据为：" + (--count) + "条。");
+    		if(count <= 0) {
     			//当删除商品的主表数据没有详表数据时，才能将主表的数据删除！
     			cmDAO.deleteByPrimaryKey(cmId);
     		}

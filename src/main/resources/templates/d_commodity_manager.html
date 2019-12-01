@@ -216,7 +216,7 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">选择<input type="checkbox" @click="checkAll" v-model="checked"></th>
+                                                <th class="text-center">选择</th>
                                                 <th class="text-center">序号</th>
                                                 <th class="text-center">类别</th>
                                                 <th class="text-center">品名</th>
@@ -225,7 +225,6 @@
                                                 <th class="text-center">库存</th>
                                                 <th class="text-center">销售价</th>
                                                 <th class="text-center">成本价</th>
-                                                <th class="text-center">网店同步</th>
                                                 <th class="text-center">操作</th>
                                             </tr>
                                         </thead>
@@ -234,22 +233,29 @@
                                                 <td><input type="checkbox" v-model="checkList" :value="cmd.cdId"></td>
                                                 <td>{{cmd.cdId}}</td>
                                                 <td>{{cmd.ctName}}</td>
-                                                <td>{{cmd.cmName}}</td>
+                                                <td v-bind:title="cmd.cmName">
+                                                	<img v-bind:alt="cmd.cmName" v-bind:src="'/commodity/'+cmd.imgPath" width="30px">&nbsp;&nbsp;{{cmd.cmName}}
+                                                </td>
                                                 <td>{{cmd.articleNo}}<br/>{{cmd.barCode}}</td>
                                                 <td>{{cmd.colorName}}<br/>{{cmd.sizeName}}</td>
                                                 <td>{{cmd.quantity}}</td>
                                                 <td>{{cmd.salePrice}}</td>
                                                 <td>{{cmd.costPrice}}</td>
-                                                <td>-</td>
                                                 <td>
                                                 	<a href="javascript:void(0);" @click="updateCmd(cmd.cmId)">修改</a>
-                                                	<a href="javascript:void(0);" @click="deleteCmd(cmd.cmId,cmd.quantity)">删除</a>
+                                                	<a href="javascript:void(0);" @click="deleteCmd(cmd.cdId,cmd.quantity)">删除</a>
                                                 </td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
                                         	<tr>
-                                        		<td colspan="11" class="text-right">
+                                        		<td>
+                                        			全选&nbsp;<input type="checkbox" @click="checkAll" v-model="checked">
+                                        		</td>
+                                        		<td colspan="4" class="text-left">
+													<label>第<span id="pageNum" v-text="pageCmd.pageNum">1</span>页/共<span id="lastPage" v-text="pageCmd.lastPage">2</span>页（共<span id="total" v-text="pageCmd.total">9</span>条记录）</label>
+                                        		</td>
+                                        		<td colspan="5" class="text-right">
 							                        <a href="javascript:void(0);" class="btn hidden-sm-down btn-info" @click="goFirstPage">首页</a>
 							                        <a href="javascript:void(0);" class="btn hidden-sm-down btn-info" @click="goPrePage">上一页</a>
 							                        <a href="javascript:void(0);" class="btn hidden-sm-down btn-info" @click="goNextPage">下一页</a>
@@ -418,7 +424,7 @@
 	   				//进入修改页面
 	   				location.href = "/commodityManager/toUploadingPage?cmId=" + cmId;
 	   			},
-	   			deleteCmd : function(cmId, quantity){
+	   			deleteCmd : function(cdId, quantity){
 	   				if(quantity == 0){
 		   				if(!confirm("确定删除本条商品数据吗？其货品已全部售出！"))
 		   					return false;
@@ -432,7 +438,7 @@
 	   					url:"[[@{/commodityManager/cm}]]",
 	   					type:"DELETE",
 	   					data:{
-	   						cmId : cmId
+	   						cdId : cdId
 	   					},
 	   					dataType : "json",
 	   					success:function(res){

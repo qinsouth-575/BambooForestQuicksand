@@ -90,6 +90,7 @@
     from commodity_details
     where cd_id = #{cdId,jdbcType=INTEGER}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from commodity_details
     where cd_id = #{cdId,jdbcType=INTEGER}
@@ -100,6 +101,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  
   <insert id="insert" parameterType="com.forest.entity.CommodityDetails" >
     insert into commodity_details (cd_id, cm_id, size_id, 
       color_id, quantity, bar_code
