@@ -71,14 +71,14 @@ $(function() {
 	});
 	//删除功能
 	$('.productPicShow .controlDiv .delBtn').die().live('click', function() {
-		/*var imgId = $(this).attr("value");
+		var imgId = $(this).attr("value");
 		//console.log(imgId);	获取图片id正常
 		for (var i = 0; i < imgListX.length; i++) {
         	if (imgListX[i].imgId == imgId) {
             	imgListX.splice(i, 1);	//从图片列表中删除
            	}
-      	}			这里的代码不能用了 
-		console.log("图片列表" + JSON.stringify(imgListX));*/	//删除后打印图片列表的信息 - 正常
+      	}			//这里的代码不能用了 
+		console.log("删-图片列表" + JSON.stringify(imgListX));	//删除后打印图片列表的信息 - 正常
 		$(this).parents("li").remove();		//删除父级》父级 li标签
 		
 		if($(".productPicShow .tb-thumb li").size() == 1) {
@@ -92,7 +92,7 @@ $(function() {
 			alert("error: 最多只能上传12张图片");
 	});
 	
-	var uploadProductId = 0;
+	var uploadProductId = 13;
 	//点击事件，打开文件选择框的同时判断一次已上传照片是否大于十二张
 	$("#uploadImgFile").on("click", function(){
 		console.log("#uploadImgFile - click - Start - #thumblist li.size：" + $("#thumblist li").size());
@@ -102,7 +102,7 @@ $(function() {
 		}
 	});
 	
-	var imgListX = [];
+	//var imgListX = [];
 	//值变更事件，上传图片
 	$("#uploadImgFile").on("change", function(){
 		console.log("#uploadImgFile - change - Start");
@@ -111,6 +111,7 @@ $(function() {
 		var ext = v.substring(v.lastIndexOf("."));
 		var fileName = v.substring(v.lastIndexOf("\\")+1); 
 		
+		//alert(JSON.stringify(imgListX));
 		for (var i = 0; i < imgListX.length; i++) {
         	if (imgListX[i].imgPath.indexOf(fileName, 0) != -1) {
             	alert("此文件已上传，不可重复操作！");
@@ -182,6 +183,7 @@ $(function() {
 						$("#" + newBannerId).parents("li").attr("value", res.imgId);
 						
 						imgListX.push(res);
+						console.log("赠-图片列表" + JSON.stringify(imgListX));
 					} else {
 						alert("新增失败，请重试！");
 					}
@@ -724,14 +726,14 @@ function setProductNumList() {
 		$("#productNumList thead th:eq(0)").html("尺码/颜色");
 
 	} else if(!sizeIsEmpty) { //仅存在尺码
-
+		
 		var HTML = '';
 		$("#productsSizeList .selected").each(function() {
 			var sizeid = $(this).attr("title");
 			if(sizeid) {
 				sizeid = clearClassName(sizeid);
 				if($("#productNumList tbody ." + sizeid).size() == 0) {
-					sizeIdX = $(this_).find("a").attr("value");
+					sizeIdX = $(this).find("a").attr("value");
 					colorIdX = "";
 					
 					HTML += '<tr class="' + sizeid + '">' + 
@@ -1050,14 +1052,17 @@ $(function(){
 			var commodityDetail = {
 					cdId : 0,
 					cmId : 0,
-					sizeId : $(this).attr("sizeIdX"),
-					colorId : $(this).attr("colorIdX"),
+					sizeId : $(this).attr("sizeIdX")!=0?$(this).attr("sizeIdX"):0,
+					sizeName : $(this).attr("sizeid"),
+					colorId : $(this).attr("colorIdX")!=0?$(this).attr("colorIdX"):0,
+					colorName : $(this).attr("colorid"),
 					quantity : Number($(this).val()),
 					barCode : $(this).parent().next().find("input").val()
 			}
 			commodityMain.cdList.push(commodityDetail);
 		})
 		
+		commodityMain.imgList = [];
 		//处理商品图片集合
 		$("#thumblist li").each(function() {
 			if($(this).attr("class").indexOf("addBtn") != -1) {
@@ -1072,9 +1077,19 @@ $(function(){
 		
 		//alert(JSON.stringify(commodityMain));
 		
+		var url = "";
+		var typeUrl = "";
+		if(window.parent.commodityMainId == 0){
+			url = "insertCommodityMainAndDetail";
+			typeUrl = "post";
+		} else {
+			url = "cm";
+			typeUrl = "put";
+		}
+		
 		$.ajax({
-			url:"insertCommodityMainAndDetail",
-			type:"POST",
+			url:url,
+			type:typeUrl,
 			data : JSON.stringify(commodityMain),
 			contentType : "application/json;charset=utf-8",
 			dataType : "json",

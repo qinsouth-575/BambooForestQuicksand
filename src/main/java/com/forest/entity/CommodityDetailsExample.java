@@ -284,6 +284,76 @@ public class CommodityDetailsExample {
             return (Criteria) this;
         }
 
+        public Criteria andSizeNameIsNull() {
+            addCriterion("size_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameIsNotNull() {
+            addCriterion("size_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameEqualTo(String value) {
+            addCriterion("size_name =", value, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameNotEqualTo(String value) {
+            addCriterion("size_name <>", value, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameGreaterThan(String value) {
+            addCriterion("size_name >", value, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameGreaterThanOrEqualTo(String value) {
+            addCriterion("size_name >=", value, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameLessThan(String value) {
+            addCriterion("size_name <", value, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameLessThanOrEqualTo(String value) {
+            addCriterion("size_name <=", value, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameLike(String value) {
+            addCriterion("size_name like", value, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameNotLike(String value) {
+            addCriterion("size_name not like", value, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameIn(List<String> values) {
+            addCriterion("size_name in", values, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameNotIn(List<String> values) {
+            addCriterion("size_name not in", values, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameBetween(String value1, String value2) {
+            addCriterion("size_name between", value1, value2, "sizeName");
+            return (Criteria) this;
+        }
+
+        public Criteria andSizeNameNotBetween(String value1, String value2) {
+            addCriterion("size_name not between", value1, value2, "sizeName");
+            return (Criteria) this;
+        }
+
         public Criteria andColorIdIsNull() {
             addCriterion("color_id is null");
             return (Criteria) this;
@@ -341,6 +411,76 @@ public class CommodityDetailsExample {
 
         public Criteria andColorIdNotBetween(Integer value1, Integer value2) {
             addCriterion("color_id not between", value1, value2, "colorId");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameIsNull() {
+            addCriterion("color_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameIsNotNull() {
+            addCriterion("color_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameEqualTo(String value) {
+            addCriterion("color_name =", value, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameNotEqualTo(String value) {
+            addCriterion("color_name <>", value, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameGreaterThan(String value) {
+            addCriterion("color_name >", value, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameGreaterThanOrEqualTo(String value) {
+            addCriterion("color_name >=", value, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameLessThan(String value) {
+            addCriterion("color_name <", value, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameLessThanOrEqualTo(String value) {
+            addCriterion("color_name <=", value, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameLike(String value) {
+            addCriterion("color_name like", value, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameNotLike(String value) {
+            addCriterion("color_name not like", value, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameIn(List<String> values) {
+            addCriterion("color_name in", values, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameNotIn(List<String> values) {
+            addCriterion("color_name not in", values, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameBetween(String value1, String value2) {
+            addCriterion("color_name between", value1, value2, "colorName");
+            return (Criteria) this;
+        }
+
+        public Criteria andColorNameNotBetween(String value1, String value2) {
+            addCriterion("color_name not between", value1, value2, "colorName");
             return (Criteria) this;
         }
 

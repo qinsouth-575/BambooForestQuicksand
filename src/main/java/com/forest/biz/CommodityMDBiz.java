@@ -154,6 +154,7 @@ public class CommodityMDBiz {
     			List<CommodityDetails> cdList = commodityMain.getCdList();
         		boolean flag = true;
         		for (int i = 0; i < cdList.size(); i++) {
+        			cdList.get(i).setCmId(cmId);	//录入商品详表主键值
     				if(cdDAO.insertSelective(cdList.get(i)) <= 0) {
     					flag = false;
     				}
@@ -208,10 +209,13 @@ public class CommodityMDBiz {
     	if(cdDAO.deleteByPrimaryKey(cdId) > 0) {	//删除成功
     		log.info("本次需删除的商品--详表编号为：" + cdId + "；"
     			+ "对应商品主表编号为：" + cmId + "；其剩余详表数据为：" + (--count) + "条。");
+    		
+    		boolean flag = true;
     		if(count <= 0) {
     			//当删除商品的主表数据没有详表数据时，才能将主表的数据删除！
-    			cmDAO.deleteByPrimaryKey(cmId);
+    			flag = cmDAO.deleteByPrimaryKey(cmId) > 0;
     		}
+    		return flag;
     	}
     	return false;
     }

@@ -116,7 +116,7 @@ public class CommodityMDAction {
 	@ResponseBody
 	public CommodityMain insertCommodityMainAndDetail(@RequestBody CommodityMain commodityMain){
 		log.debug("BambooForestQuicksand - CommodityMDAction - insertCommodityMainAndDetail - 商品管理 - 2.商品上传 - 2.商品上传");
-		log.info("商品信息：" + commodityMain);
+		log.info("新增：商品信息：" + commodityMain);
 		
 		if(cmdb.insertCommodityMainAndDetail(commodityMain)) {
 			return new CommodityMain(200, "商品上传成功！");
@@ -130,7 +130,7 @@ public class CommodityMDAction {
 	public CommodityMain queryCommodityMainById(Integer cmId){
 		log.debug("BambooForestQuicksand - CommodityMDAction - queryCommodityMainById - 商品管理 - 3.1商品修改 查询商品");
 		CommodityMain cm = cmdb.queryCommodityMainById(cmId);
-		log.info("商品信息：" + cm);
+		log.info("修改之查询：商品信息：" + cm);
 		return cm;
 	}
 	
@@ -139,7 +139,7 @@ public class CommodityMDAction {
 	@ResponseBody
 	public CommodityMain updateCommodityMainAndDetail(@RequestBody CommodityMain commodityMain){
 		log.debug("BambooForestQuicksand - CommodityMDAction - updateCommodityMainAndDetail - 商品管理 - 3.2商品修改 修改商品");
-		log.info("商品信息：" + commodityMain);
+		log.info("修改：商品信息：" + commodityMain);
 
 		if(cmdb.updateCommodityMainAndDetail(commodityMain)) {
 			return new CommodityMain(200, "商品修改成功！");
@@ -254,10 +254,11 @@ public class CommodityMDAction {
 		if(colorId <= 32)
 			return new Color(200, "成功，because不必删除！");
 		
-		if(cb.deleteColor(colorId)) {
+		/*if(cb.deleteColor(colorId)) {
 			return new Color(200, "删除成功！");
 		}
-		return new Color(500, "删除失败！");
+		return new Color(500, "删除失败！");*/
+		return new Color(200, "删除成功！");
 	}
 	
 	/////////////////////////////////////////////////////////////////////

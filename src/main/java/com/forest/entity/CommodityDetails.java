@@ -7,7 +7,13 @@ public class CommodityDetails {
 
     private Integer sizeId;
 
+    private String sizeName;
+
     private Integer colorId;
+
+    private String colorName;
+
+    private String colorPrcture;
 
     private Integer quantity;
 
@@ -37,12 +43,36 @@ public class CommodityDetails {
         this.sizeId = sizeId;
     }
 
+    public String getSizeName() {
+        return sizeName;
+    }
+
+    public void setSizeName(String sizeName) {
+        this.sizeName = sizeName;
+    }
+
     public Integer getColorId() {
         return colorId;
     }
 
     public void setColorId(Integer colorId) {
         this.colorId = colorId;
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
+    }
+    
+    public String getColorPrcture() {
+        return colorPrcture;
+    }
+
+    public void setColorPrcture(String colorPrcture) {
+        this.colorPrcture = colorPrcture;
     }
 
     public Integer getQuantity() {
@@ -63,8 +93,9 @@ public class CommodityDetails {
 
 	@Override
 	public String toString() {
-		return "CommodityDetails [cdId=" + cdId + ", cmId=" + cmId + ", sizeId=" + sizeId + ", colorId=" + colorId
-				+ ", quantity=" + quantity + ", barCode=" + barCode + "]";
+		return "CommodityDetails [cdId=" + cdId + ", cmId=" + cmId + ", sizeId=" + sizeId + ", sizeName=" + sizeName
+				+ ", colorId=" + colorId + ", colorName=" + colorName + ", colorPrcture=" + colorPrcture + ", quantity="
+				+ quantity + ", barCode=" + barCode + "]";
 	}
     
 }

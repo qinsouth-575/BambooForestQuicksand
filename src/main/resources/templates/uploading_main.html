@@ -14,7 +14,6 @@
 		<script type="text/javascript" charset="utf-8" th:src="@{/js/ueditor.all.min.js}"></script> 		用不上了		-->
 		
 		<link rel="stylesheet" th:href="@{/uploading.css}" />	
-		<script type="text/javascript" charset="utf-8" th:src="@{/uploading.js}"></script>
 		
 		<!-- 百度富文本编辑器CSS文件 -->
 	    <link th:href="@{/umeditor-1.2.3/themes/default/_css/umeditor.css}" type="text/css" rel="stylesheet">
@@ -454,15 +453,13 @@
 			var sizeListC = [];	//父页面查询尺码列表
 			//var colorListX = [];
 			//var sizeListX = [];
+			var imgListX = [];
 			
 			$(function(){
 				typeListC = window.parent.typeList;	//父页面查询类别列表
 				sizeListC = window.parent.sizeList;	//父页面查询尺码列表
 				
 				bindTypeList();	//1.绑定商品类别
-				bindSizeList();	//2.绑定商品尺码
-				
-				queryCommodityMainById();	//查询修改对象数据
 			});
 			
 			//1.绑定商品类别
@@ -473,6 +470,8 @@
 								"</li>");
 					$(".directoryList").append($li);
 				}
+				
+				bindSizeList();	//2.绑定商品尺码
 			}
 			
 			//2.绑定商品尺码
@@ -485,6 +484,8 @@
 				}
 				
 				productSizeBlur();	//绑定失去焦点事件
+				
+				queryCommodityMainById();	//3.查询修改对象数据
 			}
 			
 			//3.若为修改操作，查询对应商品信息
@@ -503,7 +504,7 @@
 					dataType : "json",
 					success:function(res){
 						commodityMain = res;
-						alert(JSON.stringify(commodityMain));	//正常 - 做完前，每次都弹吧
+						//alert(JSON.stringify(commodityMain));	//正常 - 做完前，每次都弹吧
 						
 						//商品货号
 						if(commodityMain.articleNo) $("input[name='bh']").val(commodityMain.articleNo);
@@ -528,7 +529,111 @@
 						if(cmTypeName) $(".directoryBox .comboxText").attr({
 							"default": cmTypeName
 						}).val(cmTypeName);
-						//
+						//商品信息
+						UM.getEditor('myEditor').setContent(commodityMain.information);
+						
+						//图片列表
+						var imgList = commodityMain.imgList;
+						for(var i = 0; i < imgList.length; i++){
+							//alert(JSON.stringify(imgList[i]));
+							var newBannerId = "product" + WC.version_time + i;
+							//alert(imgList.length + " - " + newBannerId);
+							var HTML = '<li class="" value="' + imgList[i].imgId + '">';
+									HTML += '<a href="javascript:void(0);" class="imgD">';
+										HTML += '<img id="' + newBannerId + '" src="/commodity/' + imgList[i].imgPath + '" mid="/commodity/' + imgList[i].imgPath + '" big="/commodity/' + imgList[i].imgPath + '" pic222_222="/commodity/' + imgList[i].imgPath + '">';
+									HTML += '</a>';
+									HTML += '<div class="controlDiv">';
+										HTML += '<a class="leftBtn" href="javascript:void(0);">向左</a>';
+										HTML += '<a class="rightBtn" href="javascript:void(0);">向右</a>';
+										HTML += '<a class="delBtn" href="javascript:void(0);">删除</a>';
+									HTML += '</div>';
+								HTML += '</li>';
+							$('#productPicShow .tb-thumb li.addBtn').before(HTML);
+							
+							imgListX.push(imgList[i]);
+							console.log("修-图片列表" + JSON.stringify(imgListX));
+						}
+						
+						var sizeListD = [];
+						var colorListD = [];
+						var colorCount = 1;
+						//商品列表
+						var cdList = commodityMain.cdList;
+						for(var l = 0; l < cdList.length; l++){
+							var HTML = '<tr class="' + cdList[l].sizeName + cdList[l].colorName + '">' + 
+											'<td>' + cdList[l].sizeName + '/' + cdList[l].colorName + '</td>' + 
+											'<td>' + 
+												'<input type="text" name="productnum" class="colorText" sizeid="' + cdList[l].sizeName + '" colorid="' + cdList[l].colorName + '" value="' + cdList[l].quantity + '" sizeIdX="' + cdList[l].sizeId + '" colorIdX = "' + cdList[l].colorId + '">' + 
+											'</td>' + 
+											'<td>' + 
+												'<input type="text" name="barcode" class="barcodeText" value="' + cdList[l].barCode + '" maxlength="20">' + 
+											'</td>' + 
+										'</tr>';
+							$("#productNumList tbody").append(HTML);
+
+							//选中尺码
+							var sizeFlag = true;
+							for(var q = 0; q < sizeListD.length; q++){
+								if(sizeListD[q] == cdList[l].sizeId){
+									sizeFlag = false;
+								}
+							}
+							if(sizeFlag && cdList[l].sizeId != 0){
+								$("#productsSizeList li").each(function() {
+									if($(this).find("a").attr("value") == cdList[l].sizeId){
+										$(this).addClass("selected");
+										sizeListD.push(cdList[l].sizeId);
+									}
+								});
+							}
+
+							//选中颜色，添加颜色列表
+							var colorFlag = true;
+							for(var j = 0; j < colorListD.length; j++){
+								if(colorListD[j] == cdList[l].colorId){
+									colorFlag = false;
+								}
+							}
+							if(colorFlag && cdList[l].colorId != 0){
+								var url = "";
+								if(9 <= cdList[l].colorId && cdList[l].colorId <= 32){
+									$("input[name='checkColor']").each(function() {
+										if($(this).attr("idvalue") == cdList[l].colorId){
+											url = $(this).attr("imageurl");
+											$(this).prop("checked", true);
+											//$().prop("disabled", false);
+										}
+									});
+								}
+								var colorPrcture = "";
+								if(cdList[l].colorPrcture != ""){
+									colorPrcture = "localhost:8080/color/" + cdList[l].colorPrcture;
+								}
+								$("#productsColorList").append('<tr pic66_66="" pic464_464="" pic="" pic222_222="">' +
+																	'<td>' +
+																		'<span class="Num">' + colorCount + '</span>' +
+																		'<span class="NumPoint">.</span>' +
+																		'<span class="ColorImg ' + url + '"> </span>' +
+																		'<input type="text" placeholder="颜色名不能为空" viewimageurl="" imageurl="" idvalue="' + cdList[l].colorId + '" value="' + cdList[l].colorName + '" name="" maxlength="15" class="colorInputText">' +
+																		'<a rel="删除" href="javascript:void(0);" class="Delete">删除</a>' +
+																	'</td>' +
+																	'<td>' +
+																		'<div class="uploadTd">' +
+																			'<input type="text" class="imageInputText" value="' + colorPrcture + '" disabled="disabled" style="background-color:#FAFAFA;">' +
+																			'<label for="uploadImgFileX" class="btn">上传图片</label>' +
+																		'</div>' +
+																	'</td>' +
+																'</tr>');
+								colorCount++;
+								colorListD.push(cdList[l].colorId);
+							}
+							
+						}
+						$("#productNumList thead th:eq(0)").html("尺码/颜色");
+						//设置库存总数
+						setProductsTotalNum();
+						
+						//修改录值到页面 - 结束
 					}
 				});
 				//Ajax代码结束
@@ -544,5 +649,6 @@
 		        $('#focush2').html('');
 		    });
 		</script>
+		<script type="text/javascript" charset="utf-8" th:src="@{/uploading.js}"></script>
 	</body>
 </html>

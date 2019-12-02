@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CommodityDetailsMapper {
-	
     int countByExample(CommodityDetailsExample example);
 
     int deleteByExample(CommodityDetailsExample example);
@@ -28,12 +27,11 @@ public interface CommodityDetailsMapper {
     int updateByPrimaryKeySelective(CommodityDetails record);
 
     int updateByPrimaryKey(CommodityDetails record);
-    
+
     
     List<CommodityDetails> selectCommodityDetailsList(Integer cmId);
     
     int deleteCommodityDetailsByCmId(Integer cmId);
     
     int selectCommodityMainCount(Integer cdId);
-    
 }

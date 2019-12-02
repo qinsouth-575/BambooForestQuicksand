@@ -88,6 +88,7 @@
     from cm_img_relation
     where cir_Id = #{cirId,jdbcType=INTEGER}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from cm_img_relation
     where cir_Id = #{cirId,jdbcType=INTEGER}
@@ -98,6 +99,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  
   <insert id="insert" parameterType="com.forest.entity.CmImgRelation" >
     insert into cm_img_relation (cir_Id, cm_id, img_id, 
       is_main)
@@ -195,7 +197,7 @@
   </update>
   
   <delete id="deleteCmImgRelationByCmId" parameterType="java.lang.Integer">
-  	delete `cm_img_relation`
+  	DELETE FROM `cm_img_relation`
 	where `cm_id` = #{cmId};
   </delete>
 </mapper>

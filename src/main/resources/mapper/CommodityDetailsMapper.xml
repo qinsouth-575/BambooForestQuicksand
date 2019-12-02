@@ -5,7 +5,10 @@
     <id column="cd_id" property="cdId" jdbcType="INTEGER" />
     <result column="cm_id" property="cmId" jdbcType="INTEGER" />
     <result column="size_id" property="sizeId" jdbcType="INTEGER" />
+    <result column="size_name" property="sizeName" jdbcType="VARCHAR" />
     <result column="color_id" property="colorId" jdbcType="INTEGER" />
+    <result column="color_name" property="colorName" jdbcType="VARCHAR" />
+    <result column="color_prcture" property="colorPrcture" jdbcType="VARCHAR" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
   </resultMap>
@@ -68,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    cd_id, cm_id, size_id, color_id, quantity, bar_code
+    cd_id, cm_id, size_id, size_name, color_id, color_name, quantity, bar_code
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.CommodityDetailsExample" >
     select
@@ -104,11 +107,11 @@
   
   <insert id="insert" parameterType="com.forest.entity.CommodityDetails" >
     insert into commodity_details (cd_id, cm_id, size_id, 
-      color_id, quantity, bar_code
-      )
+      size_name, color_id, color_name, 
+      quantity, bar_code)
     values (#{cdId,jdbcType=INTEGER}, #{cmId,jdbcType=INTEGER}, #{sizeId,jdbcType=INTEGER}, 
-      #{colorId,jdbcType=INTEGER}, #{quantity,jdbcType=INTEGER}, #{barCode,jdbcType=VARCHAR}
-      )
+      #{sizeName,jdbcType=VARCHAR}, #{colorId,jdbcType=INTEGER}, #{colorName,jdbcType=VARCHAR}, 
+      #{quantity,jdbcType=INTEGER}, #{barCode,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.forest.entity.CommodityDetails" >
     insert into commodity_details
@@ -122,8 +125,14 @@
       <if test="sizeId != null" >
         size_id,
       </if>
+      <if test="sizeName != null" >
+        size_name,
+      </if>
       <if test="colorId != null" >
         color_id,
+      </if>
+      <if test="colorName != null" >
+        color_name,
       </if>
       <if test="quantity != null" >
         quantity,
@@ -142,8 +151,14 @@
       <if test="sizeId != null" >
         #{sizeId,jdbcType=INTEGER},
       </if>
+      <if test="sizeName != null" >
+        #{sizeName,jdbcType=VARCHAR},
+      </if>
       <if test="colorId != null" >
         #{colorId,jdbcType=INTEGER},
+      </if>
+      <if test="colorName != null" >
+        #{colorName,jdbcType=VARCHAR},
       </if>
       <if test="quantity != null" >
         #{quantity,jdbcType=INTEGER},
@@ -171,8 +186,14 @@
       <if test="record.sizeId != null" >
         size_id = #{record.sizeId,jdbcType=INTEGER},
       </if>
+      <if test="record.sizeName != null" >
+        size_name = #{record.sizeName,jdbcType=VARCHAR},
+      </if>
       <if test="record.colorId != null" >
         color_id = #{record.colorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.colorName != null" >
+        color_name = #{record.colorName,jdbcType=VARCHAR},
       </if>
       <if test="record.quantity != null" >
         quantity = #{record.quantity,jdbcType=INTEGER},
@@ -190,7 +211,9 @@
     set cd_id = #{record.cdId,jdbcType=INTEGER},
       cm_id = #{record.cmId,jdbcType=INTEGER},
       size_id = #{record.sizeId,jdbcType=INTEGER},
+      size_name = #{record.sizeName,jdbcType=VARCHAR},
       color_id = #{record.colorId,jdbcType=INTEGER},
+      color_name = #{record.colorName,jdbcType=VARCHAR},
       quantity = #{record.quantity,jdbcType=INTEGER},
       bar_code = #{record.barCode,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -206,8 +229,14 @@
       <if test="sizeId != null" >
         size_id = #{sizeId,jdbcType=INTEGER},
       </if>
+      <if test="sizeName != null" >
+        size_name = #{sizeName,jdbcType=VARCHAR},
+      </if>
       <if test="colorId != null" >
         color_id = #{colorId,jdbcType=INTEGER},
+      </if>
+      <if test="colorName != null" >
+        color_name = #{colorName,jdbcType=VARCHAR},
       </if>
       <if test="quantity != null" >
         quantity = #{quantity,jdbcType=INTEGER},
@@ -222,17 +251,24 @@
     update commodity_details
     set cm_id = #{cmId,jdbcType=INTEGER},
       size_id = #{sizeId,jdbcType=INTEGER},
+      size_name = #{sizeName,jdbcType=VARCHAR},
       color_id = #{colorId,jdbcType=INTEGER},
+      color_name = #{colorName,jdbcType=VARCHAR},
       quantity = #{quantity,jdbcType=INTEGER},
       bar_code = #{barCode,jdbcType=VARCHAR}
     where cd_id = #{cdId,jdbcType=INTEGER}
   </update>
   
   <select id="selectCommodityDetailsList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-  	SELECT `cd_id`,`cm_id`,`size_id`,`color_id`,`quantity`,`bar_code`
-	FROM `commodity_details`
-	WHERE `cm_id` = #{cmId}
+	SELECT `cd_id`,`cm_id`,`size_id`,`size_name`,d.`color_id`,d.`color_name`,c.`color_prcture`,`quantity`,`bar_code`
+	FROM `commodity_details` AS d
+	LEFT JOIN `color` AS c ON d.`color_id` = c.`color_id`
+	WHERE `cm_id` = #{cmId};
   </select>
+  <delete id="deleteCommodityDetailsByCmId" parameterType="java.lang.Integer">
+  	DELETE FROM `commodity_details`
+	WHERE `cm_id` = #{cmId};
+  </delete>
   <select id="selectCommodityMainCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
   	SELECT COUNT(d.`cd_id`)
 	FROM `commodity_main` AS m
@@ -242,6 +278,6 @@
 		FROM `commodity_details`
 		WHERE `cd_id` = #{cdId}
 	)
-	GROUP BY m.`cm_id`
+	GROUP BY m.`cm_id`;
   </select>
 </mapper>

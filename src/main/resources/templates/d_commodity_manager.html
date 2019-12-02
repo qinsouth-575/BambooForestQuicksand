@@ -233,8 +233,8 @@
                                                 <td><input type="checkbox" v-model="checkList" :value="cmd.cdId"></td>
                                                 <td>{{cmd.cdId}}</td>
                                                 <td>{{cmd.ctName}}</td>
-                                                <td v-bind:title="cmd.cmName">
-                                                	<img v-bind:alt="cmd.cmName" v-bind:src="'/commodity/'+cmd.imgPath" width="30px">&nbsp;&nbsp;{{cmd.cmName}}
+                                                <td v-bind:title="cmd.cmName" class="text-left">
+                                                	<img v-bind:alt="cmd.cmName" v-bind:src="'/commodity/'+cmd.imgPath" width="43px" height="43px">&nbsp;&nbsp;{{cmd.cmName}}
                                                 </td>
                                                 <td>{{cmd.articleNo}}<br/>{{cmd.barCode}}</td>
                                                 <td>{{cmd.colorName}}<br/>{{cmd.sizeName}}</td>
