@@ -66,4 +66,10 @@ public class PoBiz {
 			return billno_;
 			
 		}
+		/**
+		 * 添加数据
+		 */
+		public CommodityMD queryId(int id) {
+			return pdmapper.queryId(id);
+		}
 }

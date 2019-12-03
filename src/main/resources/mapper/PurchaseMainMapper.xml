@@ -13,6 +13,21 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     
   </resultMap>
+   <resultMap id="BaseResultMap1" type="com.forest.entity.CommodityMD" >
+    <id column="cd_id" property="cdId" jdbcType="INTEGER" />
+    <result column="cm_id" property="cmId" jdbcType="INTEGER" />
+    <result column="ct_name" property="ctName" jdbcType="VARCHAR" />
+    <result column="cm_name" property="cmName" jdbcType="VARCHAR" />
+    <result column="article_no" property="articleNo" jdbcType="VARCHAR" />
+    <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
+    <result column="color" property="color" jdbcType="VARCHAR" />
+  	<result column="size_name" property="sizeName" jdbcType="VARCHAR" />
+  	<result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
+    <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
+    <result column="shop_id" property="shopId" jdbcType="SMALLINT" />
+    <result column="ct_id" property="ctId" jdbcType="SMALLINT" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -265,10 +280,10 @@
 	WHERE pm.`pm_id`=pd.`pm_id` AND sp.`sup_id`=pm.`sup_id`
 	AND s.`shop_id`=pm.`shop_id`
   	<if test="startTime !=null and startTime !=''">
-  		and	pm.delivery_time &lt;= #{startTime} AND #{endTime}
+  		and	pm.delivery_time &lt;= #{startTime}
   	</if>
   	<if test="endTime !=null and endTime !=''">
-  		and	pm.delivery_time &gt;= #{startTime} AND #{endTime}
+  		and	pm.delivery_time &gt;= #{endTime}
   	</if>
   	<if test="endTime !=null and endTime !='' and startTime !=null and startTime !=''">
   		and	pm.delivery_time BETWEEN #{startTime} AND #{endTime}
@@ -283,5 +298,8 @@
   </select>
    <select id="queryCountBill" resultType="int" parameterType="String">
  	  	select count(*) from purchase_main where pm_odd like #{0}
+   </select>
+   <select id="queryId"  resultMap="BaseResultMap1" parameterType="int">
+   		SELECT * FROM commodity_main cm,commodity_details cd,`size` WHERE cd.`cm_id`=cm.`cm_id` AND size.`size_id`=cd.`size_id` and cm.`cm_id`=#{0}
    </select>
 </mapper>
