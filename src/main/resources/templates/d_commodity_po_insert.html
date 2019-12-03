@@ -206,7 +206,7 @@
                                     <div class="form-group col-md-3">
                                         <label>交期：</label>
                                         <div>
-                                            <input type="date" placeholder="johnathan@admin.com" v-model="time" @change="chang" id="billdate" class="form-control form-control-line" name="example-email">
+                                            <input type="date" placeholder="johnathan@admin.com" @change="chang" id="billdate" class="form-control form-control-line" name="example-email">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3" style="padding: 0 5px;">
@@ -240,8 +240,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>货号</th>
-                                                <th>条码</th>
+                                                <th>序号</th>
+                                                <th>货号/条码</th>
                                                 <th>产品名称</th>
                                                 <th>规格</th>
                                                 <th>成本价</th>
@@ -250,21 +250,25 @@
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                 <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                </td>
+                                        <tbody id="tbody">
+                                            <tr v-for="(value,index) in fxList">
+                                            	<td>{{value.cmId}}</td>
+                                            	<td>{{value.articleNo}}-{{value.cmName}}</td>
+                                            	<td>{{value.cmName}}</td>
+                                            	<td>{{value.color}}-{{value.sizeName}}</td>
+                                            	<td>{{value.costPrice}}</td>
+                                            	<td><input v-on:input="total(index)" type="text" class="sl" value="1"></td>
+                                            	<td>{{value.salePrice}}</td>
+                                            	<td><a class='btn delBtn' href='javascript:void(0);'>删除</a></td>
                                             </tr>
                                         </tbody>
+                                        <tfoot>
+                                        	<tr style="margin-left: 500px">
+                                        		<td>总数量:<span id="zsl"></span></td>
+                                        		<td>合计:<span id="hj"></span></td>
+                                        	</tr>
+                                        
+                                        </tfoot>
                                     </table>
                                 </div>
                                 
@@ -349,7 +353,7 @@
                                         </thead>
                                         <tbody>
                                             <tr v-for="item in poinsert.list">
-                                                <td><input type="checkbox"   v-model="checkList" :value="item.cdId"></td>
+                                                <td><input type="checkbox" class="fx" v-model="checkList" :value="item.cdId"></td>
                                                 <td>{{item.articleNo}}/{{item.barCode}}</td>
                                                 <td>{{item.cmName}}</td>
                                                 <td>{{item.color}}-{{item.sizeName}}</td>
@@ -375,7 +379,7 @@
                                 </div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" @click="chec">确定</button>
+					<button type="button" class="btn btn-primary" @click="chec" data-dismiss="modal">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -409,7 +413,8 @@
     				poinsert:[],
     			　	checked : false, 		//是否全选
 			　　　　	checkList : [], 		//双向数据绑定的数组，此处用的id
-			    	time:""
+			    	time:"",
+			    	fxList : []
     			}
     		},
     		watch : {
@@ -475,6 +480,9 @@
 						
 					});
     			},
+    			total:function(index){
+    				alert(index);
+    			},
     			goPrePage:function(){
     				if(this.poinsert.hasPreviousPage){
         				this.goPage(this.poinsert.prePage)
@@ -492,11 +500,27 @@
     			goLastPage:function(){
     				this.goPage(this.poinsert.pages);
     			},
-    			chec:function(){
-    				alert(1);
+    			chec:function(){			//gtgtgt
+    				vue.fxList.splice(0);
+    				let self = this;
+    				$.each($(".fx:checked"),function(index,value){
+    					self.poinsert.list.filter(function(item){
+    						if(item && item.cmId && item.cmId == $(value).attr("value")){
+    							self.fxList.push(item);
+    						}
+    					});
+    				});
+    				
+    				for(var i = 0 ;i < vue.fxList.length;i++){
+    					//alert(vue.fxList[i].color);
+    					for(var j=0;j<vue.poinsert.list.length;j++){
+    						if(vue.poinsert.list[j].color == vue.fxList[i].color&&vue.poinsert.list[j].sizeName == vue.fxList[i].sizeName){
+    							
+        					}
+    					}
+    				}
     			},
     			chang:function(){
-    				var that=this;
     				var da=$("#billdate").val();
     				var nian=da.substring(0,4);
     				var yue=da.substring(5,7);
@@ -520,18 +544,20 @@
 				var year=now.getFullYear();
 				var month=now.getMonth()+1;
 				var date=now.getDate();
+				if(date<10){
+					date="0"+date;
+				}
 				this.time=year+"-"+month+"-"+date;
-				var obj={
-						year+month+date
-				};
+				var da= year+""+month+""+date;
 				$.ajax({
 					url:"queryCountBill",
 					type:"get",
 					data:{
-						pmOdd:obj
+						pmOdd:da
 					},
 					dataType:"json",
 					success:function(res){
+						$("#billdate").val(vue.time);
 						$("#billno").val(res.no);
 					}
 				});

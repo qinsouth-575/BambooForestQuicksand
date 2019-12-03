@@ -1,5 +1,6 @@
 package com.forest.mapper;
 
+import com.forest.entity.CommodityMD;
 import com.forest.entity.PurchaseMain;
 import com.forest.entity.PurchaseMainExample;
 import java.util.List;
@@ -33,4 +34,7 @@ public interface PurchaseMainMapper {
     
     //查询单号
     int queryCountBill(String pmOdd);
+    
+    //根据复选框选中的Id添加到采购单
+    CommodityMD queryId(int id);
 }

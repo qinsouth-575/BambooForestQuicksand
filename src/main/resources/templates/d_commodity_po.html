@@ -235,7 +235,7 @@
                                                 <td>{{item.pmId}}</td>
                                                 <td>{{item.statu}}</td>
                                                 <td>{{item.pmOdd}}</td>
-                                                <td>{{item.deliveryTime}}</td>
+                                                <td>{{item.deliveryTime|formatDate}}</td>
 												<td>{{item.supName}}</td>
                                                 <td>{{item.count}}</td>
                                                 <td>{{item.je}}</td>
@@ -424,9 +424,10 @@
     							shopName:sp,
     							pmOdd:$("#podd").val()
     					};
-    					//alert(JSON.stringify(obj));
+    					alert(JSON.stringify(obj));
     					$.ajax({
     						url:"[[@{/po/queryPurchaseMain}]]",
+    						
     						type:"post",
     						data:JSON.stringify(obj),
     						contentType:"application/json;charset=utf-8",

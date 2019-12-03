@@ -49,7 +49,10 @@ public class PoAction {
 	@RequestMapping("queryPurchaseMain")
 	@ResponseBody
 	public PageInfo<PurchaseMain> queryPurchaseMain(@RequestBody PurchaseMain pm){
-		System.out.println(pb.queryPurchaseMain(pm).getSize());
+		System.out.println(pm.getStartTime());
+		System.out.println(pm.getEndTime());
+		System.out.println(pm);
+		System.out.println(pb.queryPurchaseMain(pm));
 		return pb.queryPurchaseMain(pm);
 	}
 	/**
@@ -71,5 +74,14 @@ public class PoAction {
 		String no=pb.queryCountBill(pmOdd);
 		map.put("no", no);
 		return map;
+	}
+	/**
+	 * 根据ID查询对应的商品数据
+	 */
+	@RequestMapping("queryId")
+	@ResponseBody
+	public CommodityMD queryId(int id) {
+		System.out.println(id);
+		return pb.queryId(id);
 	}
 }
