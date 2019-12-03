@@ -1,7 +1,7 @@
 package com.forest.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
 public class TransactionRecordMain {
     private Integer trmId;
@@ -42,8 +42,18 @@ public class TransactionRecordMain {
     
     private Integer pageNum;//当前页数
     
+    private List<TransactionRecordDetails> details;//详表记录
+    
 
-    public Integer getPageNum() {
+    public List<TransactionRecordDetails> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<TransactionRecordDetails> details) {
+		this.details = details;
+	}
+
+	public Integer getPageNum() {
 		return pageNum;
 	}
 
