@@ -5,12 +5,14 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class PurchaseMain {
     private Integer pmId;
 
     private String pmOdd;
-    
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date deliveryTime;
 
     private Integer supId;
@@ -24,10 +26,10 @@ public class PurchaseMain {
     private String remark;
     
     private int count;
-    
-    private Date endTime;
-    
-    private Date startTime;
+	
+    private String endTime;
+	
+    private String startTime;
     
     private double je;
     
@@ -129,19 +131,21 @@ public class PurchaseMain {
 		this.count = count;
 	}
 
-	public Date getEndTime() {
+	
+
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 

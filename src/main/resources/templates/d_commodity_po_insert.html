@@ -59,50 +59,35 @@
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
-                    <ul class="navbar-nav mr-auto mt-md-0 ">
-                        <!-- This is  -->
-                        <li class="nav-item"> 
-                        	<a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)">
-                        		<i class="ti-menu"></i>
-                        	</a> 
-                        </li>
-                        <li class="nav-item hidden-sm-down">
-                            <form class="app-search p-l-20">
-                                <input type="text" class="form-control" placeholder="Search for..."> 
-                            	<a class="srh-btn"><i class="ti-search"></i></a>
-                            </form>
-                        </li>
-                        <li class="nav-item" style="margin-left: 30px;">
-                        	<a th:href="@{/}" class="waves-effect _account">
-                            	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
+                     <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li>
+                            <a th:href="@{/commoditytypes/toPage}" class="waves-effect">
+                            	<i class="fa fa-eercast m-r-10" aria-hidden="true"></i>商品类别
                             </a>
                         </li>
-                        <li class="nav-item">
-                        	<a th:href="@{/}" class="waves-effect _account">
-                            	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
+                        <li>
+                            <a th:href="@{/commodityManager/toPage}" class="waves-effect">
+                            	<i class="fa fa-cogs m-r-10" aria-hidden="true"></i>商品管理
                             </a>
                         </li>
-                        <li class="nav-item">
-                        	<a th:href="@{/findshop}" class="waves-effect _account">
-                            	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
+                        <li>
+                            <a th:href="@{/commodityManager/toUploadingPage}+'?cmId=0'" class="waves-effect active">
+                            	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
-                        <li class="nav-item">
-                        	<a th:href="@{/commoditytypes/toPage}" class="waves-effect _account nav_li_active">
-                            	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
+                        <li>
+                            <a th:href="@{/supplier/toSupplier}" class="waves-effect">
+                            	<i class="fa fa-smile-o m-r-10" aria-hidden="true"></i>供应商
                             </a>
                         </li>
-                        <li class="nav-item">
-                        	<a th:href="@{/}" class="waves-effect _account">
-                            	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                        	<a th:href="@{/}" class="waves-effect _account">
-                            	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
+                        <li>
+                            <a th:href="@{/po/toCommodityMD}" class="waves-effect">
+                            	<i class="fa fa-exchange m-r-10" aria-hidden="true"></i>采购单
                             </a>
                         </li>
                     </ul>
+                </nav>
                     <!-- ============================================================== -->
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
@@ -126,7 +111,7 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+               <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
                             <a th:href="@{/commoditytypes/toPage}" class="waves-effect">
@@ -139,17 +124,17 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/}" class="waves-effect">
+                            <a th:href="@{/commodityManager/toUploadingPage}" class="waves-effect">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/}" class="waves-effect">
+                            <a th:href="@{/supplier/toSupplier}" class="waves-effect">
                             	<i class="fa fa-smile-o m-r-10" aria-hidden="true"></i>供应商
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/}" class="waves-effect active">
+                            <a th:href="@{/po/toCommodityMD}" class="waves-effect active">
                             	<i class="fa fa-exchange m-r-10" aria-hidden="true"></i>采购单
                             </a>
                         </li>
@@ -177,13 +162,6 @@
                     <div class="col-md-3 col-8 align-self-center">
                         <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">新建采购单</h3>
                     </div>
-                    
-                    <div class="col-md-9 col-4 align-self-center" style="padding-left: 5px;">
-                        <div class="f_input pull-right" style="position: relative;">
-                        	<input type="text" placeholder="请输入货号或条码+回车 确认" class="form-control form-control-line f_input" style="width: 270px;">
-							<a href="javascript:;" class="list_search"></a>
-                        </div>
-                    </div>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
@@ -206,32 +184,26 @@
                                     <div class="form-group col-md-3">
                                         <label>交期：</label>
                                         <div>
-                                            <input type="date" placeholder="johnathan@admin.com" v-model="time" @change="chang" id="billdate" class="form-control form-control-line" name="example-email">
+                                            <input type="date" placeholder="johnathan@admin.com" @change="chang" id="billdate" class="form-control form-control-line" name="example-email">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3" style="padding: 0 5px;">
-                                        <label>供应商：</label>
-                                        <div>
-                                            <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
-                                        </div>
+                                      <label>供应商：</label>
+                                       <select class="form-control form-control-line f_input supplier" style="width: 120px;">
+				                            <option v-for="item in supplier" :value="item.supId">{{item.shortName}}</option>
+				                       </select>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                   <div class="form-group col-md-3" style="padding: 0 5px;">
                                         <label>制表人：</label>
                                         <div>
-                                            <select class="form-control form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
-                                            </select>
+                                            <input type="text"  placeholder="123 456 7890" class="form-control form-control-line zbr">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group col-md-12">
                                         <label>备注：</label>
                                         <div>
-                                            <input type="text" placeholder="123 456 7890" class="form-control form-control-line" style="width: 750px;">
+                                            <input type="text" placeholder="123 456 7890" class="form-control form-control-line remark" style="width: 750px;">
                                         </div>
                                     </div>
                                 </form>
@@ -240,8 +212,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>货号</th>
-                                                <th>条码</th>
+                                                <th>序号</th>
+                                                <th>货号/条码</th>
                                                 <th>产品名称</th>
                                                 <th>规格</th>
                                                 <th>成本价</th>
@@ -250,21 +222,25 @@
                                                 <th>操作</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Deshmukh</td>
-                                                <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                 <td>Gaylord</td>
-                                                <td>@Ritesh</td>
-                                                <td>@Ritesh</td>
-                                                <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                </td>
+                                        <tbody id="tbody">
+                                            <tr v-for="(value,index) in fxList">
+                                            	<td>{{value.cmId}}</td>
+                                            	<td>{{value.articleNo}}-{{value.cmName}}</td>
+                                            	<td>{{value.cmName}}</td>
+                                            	<td>{{value.color}}-{{value.sizeName}}</td>
+                                            	<td>{{value.costPrice}}</td>
+                                            	<td><input v-model="value.sum" type="text" v-on:input="total(index)" class="sl" value="1"></td>
+                                            	<td>{{value.costPrice * value.sum}}</td>
+                                            	<td><a class='btn delBtn' @click="del(index)" href='javascript:void(0);'>删除</a></td>
                                             </tr>
                                         </tbody>
+                                        <tfoot>
+                                        	<tr>
+                                        		<td>总数量:<span id="zsl"></span></td>
+                                        		<td>合计:<span id="hj"></span></td>
+                                        	</tr>
+                                        
+                                        </tfoot>
                                     </table>
                                 </div>
                                 
@@ -273,8 +249,8 @@
                         				<a href="javascript:void(0);" class="btn hidden-sm-down btn-info" data-toggle="modal" data-target=".bs-example-modal-lg">+添加商品</a>
                                     </div>
                                     <div class="col-sm-2 pull-right">
-                                        <button class="btn btn-default">清空</button>
-                                        <button class="btn btn-success">提交</button>
+                                        <button class="btn btn-default" @click="qx">清空</button>
+                                        <button class="btn btn-success" @click="insert">提交</button>
                                     </div>
                                 </div>
                             </div>
@@ -349,7 +325,7 @@
                                         </thead>
                                         <tbody>
                                             <tr v-for="item in poinsert.list">
-                                                <td><input type="checkbox"   v-model="checkList" :value="item.cdId"></td>
+                                                <td><input type="checkbox" class="fx" v-model="checkList" :value="item.cdId"></td>
                                                 <td>{{item.articleNo}}/{{item.barCode}}</td>
                                                 <td>{{item.cmName}}</td>
                                                 <td>{{item.color}}-{{item.sizeName}}</td>
@@ -375,7 +351,7 @@
                                 </div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" @click="chec">确定</button>
+					<button type="button" class="btn btn-primary" @click="chec" data-dismiss="modal">确定</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -406,10 +382,14 @@
     		el:"#poinsert",
     		data(){
     			return {
+    				je:0,
     				poinsert:[],
     			　	checked : false, 		//是否全选
 			　　　　	checkList : [], 		//双向数据绑定的数组，此处用的id
-			    	time:""
+			    	time:"",
+			    	fxList : [],
+			    	supplier:[],
+			    	supid:""
     			}
     		},
     		watch : {
@@ -419,7 +399,17 @@
 			　　　　	}else{
 			　　　　　　	this.checked = false;
 			　　　　	}
-			　　	}
+			　　	},
+    			fxList:function(val){
+    				var zsl=0;
+    	    		var zje=0;
+    				for(var i=0;i<val.length;i++){
+    					zsl+=parseInt(val[i].sum);
+    					zje+=parseInt(val[i].costPrice);
+    				}
+    				$("#zsl").text(zsl);
+    				$("#hj").text(zje);
+    			}
 			},methods:{
 				checkAll : function(){
 	   		　　		if(this.checked){
@@ -446,6 +436,9 @@
 						contentType:"application/json;charset=utf-8",
 						dataType:"json",
 						success:function(res){
+							res.list.forEach(function(value,index,array){
+								value.sum = 1;
+							})
 							that.poinsert=res;
 							//alert(JSON.stringify(that.poinsert));
 						}
@@ -462,7 +455,6 @@
     						pageNum:1,
     						cmName:ctName
     				};
-    				//alert(JSON.stringify(obj));
     				$.ajax({
 						url:"[[@{/po/queryCommodityMain}]]",
 						type:"post",
@@ -478,7 +470,6 @@
     			goPrePage:function(){
     				if(this.poinsert.hasPreviousPage){
         				this.goPage(this.poinsert.prePage)
-        				//alert(this.po.hasPreviousPage + " - " + this.po.prePage);
     				}
     			},
     			goNextPage:function(){
@@ -492,11 +483,36 @@
     			goLastPage:function(){
     				this.goPage(this.poinsert.pages);
     			},
-    			chec:function(){
-    				alert(1);
+    			chec:function(){			//gtgtgt
+    				vue.fxList.splice(0);
+    				let self = this;
+    				let i = 0;
+    				$.each($(".fx:checked"),function(index,value){
+    					self.poinsert.list.filter(function(item){
+    						i++;
+    						if(item && item.cmId && i == 5){
+    							if($(value).attr("value") == 5){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 10){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 15){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 20){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 25){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 30){
+    								self.fxList.push(item);
+    							}
+    							
+    						}else if(item && item.cmId && item.cmId == $(value).attr("value")){
+    							self.fxList.push(item);
+    						}
+    					});
+    				});
+    				
     			},
     			chang:function(){
-    				var that=this;
     				var da=$("#billdate").val();
     				var nian=da.substring(0,4);
     				var yue=da.substring(5,7);
@@ -513,6 +529,94 @@
 							$("#billno").val(res.no);
 						}
 					});
+    			},
+    			total:function(index){
+    				
+    				var sl= 0;
+    				var je= 0;
+    				for(let c = 0; c <vue.fxList.length;c++){
+    					if(vue.fxList[c].sum == 0){
+    						vue.fxList[c].sum=1;
+    					}
+    					sl += parseInt(vue.fxList[c].sum);
+    					je += parseInt(vue.fxList[c].costPrice * vue.fxList[c].sum);
+    					
+    				}
+    				
+    				$("#zsl").text(sl);
+    				$("#hj").text(je);
+    			},
+    			zbr:function(){
+    				var that=this;
+    				$.ajax({
+    					url:"[[@{/po/querySession}]]",
+    					type:"get",
+    					success:function(res){
+    						$(".zbr").val(res.staffName);
+    						//alert(res.shopId);
+    						that.supid=res.shopId;
+    					}
+    				});
+    			},
+    			gys:function(){
+    				var that=this;
+    				$.ajax({
+    					url:"[[@{/po/querySupplier}]]",
+    					type:"get",
+    					success:function(res){
+    						that.supplier=res;
+    					}
+    				});
+    			},
+    			insert:function(){
+    				
+    				var that=this;
+    				//alert(that.list.pmId=1);
+    				//alert(JSON.stringify(that.fxList));
+    				var obj={
+    						pmOdd:$("#billno").val(),
+    						deliveryTime:$("#billdate").val(),
+    						supId:$(".supplier").val(),
+    						lister:$(".zbr").val(),
+    						shopId:that.supid,
+    						statu:"待审核",
+    						remark:$(".remark").val(),
+    						list:[]
+    				}
+    				//alert(JSON.stringify(obj));
+    				for(var i=0;i<that.fxList.length;i++){
+    					var obj1={
+    							pmId:$("#billno").val(),
+    							barCode:that.fxList[i].barCode,
+    							quantity:that.fxList[i].sum,
+    							titalDecimal:0
+    					}
+    					obj1.titalDecimal=that.fxList[i].sum*that.fxList[i].costPrice;
+    					obj.list[i]=obj1;
+    					
+    				}
+    				//alert(JSON.stringify(obj1));
+    				$.ajax({
+    					url:"[[@{/po/insert}]]",
+    					type:"post",
+    					data:JSON.stringify(obj),
+    					contentType:"application/json;charset=utf-8",
+    					dataType:"json",
+    					success:function(res){
+    						alert(res.message);
+    						that.qx();
+    					}
+    				});
+    			},
+    			qx:function(){
+    				//alert(1);
+    				this.fxList=[];
+    				$("#zsl").empty();
+    				$("#hj").empty();
+    			},
+    			del:function(index){
+    				vue.fxList.splice(index,1);
+    				vue.total();
     			}
     		},created:function(){
     			this.goPage(1);
@@ -520,24 +624,28 @@
 				var year=now.getFullYear();
 				var month=now.getMonth()+1;
 				var date=now.getDate();
+				if(date<10){
+					date="0"+date;
+				}
 				this.time=year+"-"+month+"-"+date;
-				var obj={
-						year+month+date
-				};
+				var da= year+""+month+""+date;
 				$.ajax({
 					url:"queryCountBill",
 					type:"get",
 					data:{
-						pmOdd:obj
+						pmOdd:da
 					},
 					dataType:"json",
 					success:function(res){
+						$("#billdate").val(vue.time);
 						$("#billno").val(res.no);
 					}
 				});
-				
+				this.zbr();
+				this.gys();
     		}
     	});
+    	
     </script>
 </body>
 
