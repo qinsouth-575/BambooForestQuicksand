@@ -74,7 +74,7 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a href="a_index.html" class="waves-effect _account">
+                        	<a th:href="@{/find}" class="waves-effect _account">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
@@ -84,7 +84,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a th:href="@{/findshop}" class="waves-effect _account">
+                        	<a th:href="@{/findshop}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="f_member.html" class="waves-effect _account">
+                        	<a th:href=@{/MemberManage/toMember}"  class="waves-effect _account">
                             	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
                             </a>
                         </li>

@@ -69,7 +69,7 @@
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
                     <!-- ============================================================== -->
-                    <ul class="navbar-nav mr-auto mt-md-0 ">
+                     <ul class="navbar-nav mr-auto mt-md-0 ">
                         <!-- This is  -->
                         <li class="nav-item"> 
                         	<a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)">
@@ -83,32 +83,32 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a href="a_index.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="b_cashier.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a th:href="@{/findshop}" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/findshop}" class="waves-effect _account">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="d_commodity.html" class="waves-effect _account">
+                        	<a th:href="@{/commoditytypes/toPage}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="e_inventory.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="f_member.html" class="waves-effect _account">
+                        	<a th:href="@{/MemberManage/toMember}" class="waves-effect _account">
                             	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
                             </a>
                         </li>
