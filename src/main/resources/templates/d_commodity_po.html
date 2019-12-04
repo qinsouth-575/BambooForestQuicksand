@@ -241,8 +241,9 @@
                                                 <td>{{item.je}}</td>
                                                 <td>{{item.remark}}</td>
                                                 <td>
-                                                	<a class="btn delBtn" href="javascript:void(0);">删除</a>
-                                                	<a class="btn editBtn" href="javascript:void(0);">修改</a>
+                                                	<a class="btn delBtn" @click="sh(item.pmId)" href="javascript:void(0);">审核</a>
+                                                	<a class="btn delBtn" @click="del(item.pmId)" href="javascript:void(0);">删除</a>
+                                                	<a class="btn editBtn" @click="toupdate(item.pmId,item.statu)">修改</a>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -424,7 +425,7 @@
     							shopName:sp,
     							pmOdd:$("#podd").val()
     					};
-    					alert(JSON.stringify(obj));
+    					//alert(JSON.stringify(obj));
     					$.ajax({
     						url:"[[@{/po/queryPurchaseMain}]]",
     						
@@ -434,7 +435,7 @@
     						dataType:"json",
     						success:function(res){
     							that.po=res;
-    							alert(JSON.stringify(that.po));
+    							//alert(JSON.stringify(that.po));
     						}
     						
     					});
@@ -466,6 +467,42 @@
     						type:"get",
     						success:function(res){
     							tath.shop=res;
+    						}
+    					});
+    				},
+    				toupdate : function(pmId,statu){
+    					if(statu=="已审核"){
+    						alert("已经审核，不能被修改");
+    						return;
+    					}
+    					location.href="/po/toCommodityMDUpdate?pmId="+pmId;
+    					
+    				},
+    				del:function(pmOdd){
+    					$.ajax({
+    						url:"[[@{/po/delete}]]",
+    						type:"post",
+    						data:{
+    							pmOdd:pmOdd
+    						},
+    						dataType:"json",
+    						success:function(res){
+    							alert(res.message);
+    							vue.goPage(1);
+    						}
+    					});
+    				},
+    				sh:function(id){
+    					$.ajax({
+    						url:"[[@{/po/updateStatu}]]",
+    						type:"post",
+    						data:{
+    							id:id
+    						},
+    						dataType:"json",
+    						success:function(res){
+    							alert(res.message);
+    							vue.goPage(1);
     						}
     					});
     				}

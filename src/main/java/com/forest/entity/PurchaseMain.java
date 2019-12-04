@@ -11,7 +11,8 @@ public class PurchaseMain {
     private Integer pmId;
 
     private String pmOdd;
-    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date deliveryTime;
 
     private Integer supId;

@@ -277,7 +277,7 @@
   	
 	SELECT pm.*,sp.`company_name` AS supName,s.`shop_name`,pd.`tital_decimal` AS je,pd.`quantity` AS `count`  FROM 
   	purchase_main pm ,purchase_details pd,supplier sp,shop s 
-	WHERE pm.`pm_id`=pd.`pm_id` AND sp.`sup_id`=pm.`sup_id`
+	WHERE pm.`pm_odd`=pd.`pm_id` AND sp.`sup_id`=pm.`sup_id`
 	AND s.`shop_id`=pm.`shop_id`
   	<if test="startTime !=null and startTime !=''">
   		and	pm.delivery_time &lt;= #{startTime}
@@ -302,4 +302,35 @@
    <select id="queryId"  resultMap="BaseResultMap1" parameterType="int">
    		SELECT * FROM commodity_main cm,commodity_details cd,`size` WHERE cd.`cm_id`=cm.`cm_id` AND size.`size_id`=cd.`size_id` and cm.`cm_id`=#{0}
    </select>
+   <insert id="insertM"  parameterType="com.forest.entity.PurchaseMain">
+   		INSERT INTO purchase_main (pm_odd,delivery_time,sup_id,lister,shop_id,create_time,statu,remark)
+		VALUES(#{pmOdd},#{deliveryTime},#{supId},#{lister},#{shopId},#{createTime},#{statu},#{remark})
+   </insert>
+   <insert id="insertD" >
+   		INSERT INTO  purchase_details(pm_id,bar_code,quantity,tital_decimal)VALUES
+   		<foreach collection="list" item="dt" separator=",">
+   			(#{dt.pmId},#{dt.barCode},#{dt.quantity},#{dt.titalDecimal})
+   		</foreach>
+			<!-- 阿威，看到这段话，你不要想我，我去学社办公室去了，今天的事情对我意义比较重大，哈哈哈，我还没走你肯定就回来了 -->
+   </insert>
+   <update id="updateM"  parameterType="com.forest.entity.PurchaseMain">
+   		update purchase_main set pm_odd=#{pmOdd},delivery_time=#{deliveryTime},sup_id=#{supId},lister=#{lister},shop_id=#{shopId},
+   		create_time=#{createTime},statu=#{statu},remark=#{remark} where pm_id=#{pmId}
+   </update>
+   <delete id="deleteM" parameterType="int">
+   		delete from purchase_main where pm_id=#{pmId}
+   </delete>
+    <delete id="deleteMD" parameterType="int">
+   		delete from purchase_details where pm_id=#{pmId}
+   </delete>
+    <delete id="deleteD" parameterType="String">
+   		delete from purchase_details where pm_id=#{pmId}
+   </delete>
+   <select id="queryMId" resultMap="BaseResultMap" parameterType="int">
+   		SELECT * FROM `purchase_main` WHERE `pm_id` = #{0}
+   </select>
+   <update id="updateStatu" parameterType="com.forest.entity.PurchaseMain">
+   		update purchase_main set statu='已审核'
+   		where pm_id=#{pmId}
+   </update>
 </mapper>

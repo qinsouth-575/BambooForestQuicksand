@@ -177,13 +177,6 @@
                     <div class="col-md-3 col-8 align-self-center">
                         <h3 class="text-themecolor m-b-0 m-t-0" style="float: left;margin-right: 20px;">新建采购单</h3>
                     </div>
-                    
-                    <div class="col-md-9 col-4 align-self-center" style="padding-left: 5px;">
-                        <div class="f_input pull-right" style="position: relative;">
-                        	<input type="text" placeholder="请输入货号或条码+回车 确认" class="form-control form-control-line f_input" style="width: 270px;">
-							<a href="javascript:;" class="list_search"></a>
-                        </div>
-                    </div>
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Bread crumb and right sidebar toggle -->
@@ -210,28 +203,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3" style="padding: 0 5px;">
-                                        <label>供应商：</label>
-                                        <div>
-                                            <input type="text" placeholder="123 456 7890" class="form-control form-control-line">
-                                        </div>
+                                      <label>供应商：</label>
+                                       <select class="form-control form-control-line f_input supplier" style="width: 120px;">
+				                            <option v-for="item in supplier" :value="item.supId">{{item.shortName}}</option>
+				                       </select>
                                     </div>
-                                    <div class="form-group col-md-3">
+                                   <div class="form-group col-md-3" style="padding: 0 5px;">
                                         <label>制表人：</label>
                                         <div>
-                                            <select class="form-control form-control-line">
-                                                <option>London</option>
-                                                <option>India</option>
-                                                <option>Usa</option>
-                                                <option>Canada</option>
-                                                <option>Thailand</option>
-                                            </select>
+                                            <input type="text"  placeholder="123 456 7890" class="form-control form-control-line zbr">
                                         </div>
                                     </div>
                                     
                                     <div class="form-group col-md-12">
                                         <label>备注：</label>
                                         <div>
-                                            <input type="text" placeholder="123 456 7890" class="form-control form-control-line" style="width: 750px;">
+                                            <input type="text" placeholder="123 456 7890" class="form-control form-control-line remark" style="width: 750px;">
                                         </div>
                                     </div>
                                 </form>
@@ -257,13 +244,13 @@
                                             	<td>{{value.cmName}}</td>
                                             	<td>{{value.color}}-{{value.sizeName}}</td>
                                             	<td>{{value.costPrice}}</td>
-                                            	<td><input v-on:input="total(index)" type="text" class="sl" value="1"></td>
-                                            	<td>{{value.salePrice}}</td>
-                                            	<td><a class='btn delBtn' href='javascript:void(0);'>删除</a></td>
+                                            	<td><input v-model="value.sum" type="text" v-on:input="total(index)" class="sl" value="1"></td>
+                                            	<td>{{value.costPrice * value.sum}}</td>
+                                            	<td><a class='btn delBtn' @click="del(index)" href='javascript:void(0);'>删除</a></td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
-                                        	<tr style="margin-left: 500px">
+                                        	<tr>
                                         		<td>总数量:<span id="zsl"></span></td>
                                         		<td>合计:<span id="hj"></span></td>
                                         	</tr>
@@ -277,8 +264,8 @@
                         				<a href="javascript:void(0);" class="btn hidden-sm-down btn-info" data-toggle="modal" data-target=".bs-example-modal-lg">+添加商品</a>
                                     </div>
                                     <div class="col-sm-2 pull-right">
-                                        <button class="btn btn-default">清空</button>
-                                        <button class="btn btn-success">提交</button>
+                                        <button class="btn btn-default" @click="qx">清空</button>
+                                        <button class="btn btn-success" @click="insert">提交</button>
                                     </div>
                                 </div>
                             </div>
@@ -410,11 +397,14 @@
     		el:"#poinsert",
     		data(){
     			return {
+    				je:0,
     				poinsert:[],
     			　	checked : false, 		//是否全选
 			　　　　	checkList : [], 		//双向数据绑定的数组，此处用的id
 			    	time:"",
-			    	fxList : []
+			    	fxList : [],
+			    	supplier:[],
+			    	supid:""
     			}
     		},
     		watch : {
@@ -424,7 +414,17 @@
 			　　　　	}else{
 			　　　　　　	this.checked = false;
 			　　　　	}
-			　　	}
+			　　	},
+    			fxList:function(val){
+    				var zsl=0;
+    	    		var zje=0;
+    				for(var i=0;i<val.length;i++){
+    					zsl+=parseInt(val[i].sum);
+    					zje+=parseInt(val[i].costPrice);
+    				}
+    				$("#zsl").text(zsl);
+    				$("#hj").text(zje);
+    			}
 			},methods:{
 				checkAll : function(){
 	   		　　		if(this.checked){
@@ -451,6 +451,9 @@
 						contentType:"application/json;charset=utf-8",
 						dataType:"json",
 						success:function(res){
+							res.list.forEach(function(value,index,array){
+								value.sum = 1;
+							})
 							that.poinsert=res;
 							//alert(JSON.stringify(that.poinsert));
 						}
@@ -467,7 +470,6 @@
     						pageNum:1,
     						cmName:ctName
     				};
-    				//alert(JSON.stringify(obj));
     				$.ajax({
 						url:"[[@{/po/queryCommodityMain}]]",
 						type:"post",
@@ -480,13 +482,9 @@
 						
 					});
     			},
-    			total:function(index){
-    				alert(index);
-    			},
     			goPrePage:function(){
     				if(this.poinsert.hasPreviousPage){
         				this.goPage(this.poinsert.prePage)
-        				//alert(this.po.hasPreviousPage + " - " + this.po.prePage);
     				}
     			},
     			goNextPage:function(){
@@ -503,22 +501,31 @@
     			chec:function(){			//gtgtgt
     				vue.fxList.splice(0);
     				let self = this;
+    				let i = 0;
     				$.each($(".fx:checked"),function(index,value){
     					self.poinsert.list.filter(function(item){
-    						if(item && item.cmId && item.cmId == $(value).attr("value")){
+    						i++;
+    						if(item && item.cmId && i == 5){
+    							if($(value).attr("value") == 5){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 10){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 15){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 20){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 25){
+    								self.fxList.push(item);
+    							}else if($(value).attr("value") == 30){
+    								self.fxList.push(item);
+    							}
+    							
+    						}else if(item && item.cmId && item.cmId == $(value).attr("value")){
     							self.fxList.push(item);
     						}
     					});
     				});
     				
-    				for(var i = 0 ;i < vue.fxList.length;i++){
-    					//alert(vue.fxList[i].color);
-    					for(var j=0;j<vue.poinsert.list.length;j++){
-    						if(vue.poinsert.list[j].color == vue.fxList[i].color&&vue.poinsert.list[j].sizeName == vue.fxList[i].sizeName){
-    							
-        					}
-    					}
-    				}
     			},
     			chang:function(){
     				var da=$("#billdate").val();
@@ -537,6 +544,94 @@
 							$("#billno").val(res.no);
 						}
 					});
+    			},
+    			total:function(index){
+    				
+    				var sl= 0;
+    				var je= 0;
+    				for(let c = 0; c <vue.fxList.length;c++){
+    					if(vue.fxList[c].sum == 0){
+    						vue.fxList[c].sum=1;
+    					}
+    					sl += parseInt(vue.fxList[c].sum);
+    					je += parseInt(vue.fxList[c].costPrice * vue.fxList[c].sum);
+    					
+    				}
+    				
+    				$("#zsl").text(sl);
+    				$("#hj").text(je);
+    			},
+    			zbr:function(){
+    				var that=this;
+    				$.ajax({
+    					url:"[[@{/po/querySession}]]",
+    					type:"get",
+    					success:function(res){
+    						$(".zbr").val(res.staffName);
+    						alert(res.shopId);
+    						that.supid=res.shopId;
+    					}
+    				});
+    			},
+    			gys:function(){
+    				var that=this;
+    				$.ajax({
+    					url:"[[@{/po/querySupplier}]]",
+    					type:"get",
+    					success:function(res){
+    						that.supplier=res;
+    					}
+    				});
+    			},
+    			insert:function(){
+    				
+    				var that=this;
+    				//alert(that.list.pmId=1);
+    				//alert(JSON.stringify(that.fxList));
+    				var obj={
+    						pmOdd:$("#billno").val(),
+    						deliveryTime:$("#billdate").val(),
+    						supId:$(".supplier").val(),
+    						lister:$(".zbr").val(),
+    						shopId:that.supid,
+    						statu:"待审核",
+    						remark:$(".remark").val(),
+    						list:[]
+    				}
+    				//alert(JSON.stringify(obj));
+    				for(var i=0;i<that.fxList.length;i++){
+    					var obj1={
+    							pmId:$("#billno").val(),
+    							barCode:that.fxList[i].barCode,
+    							quantity:that.fxList[i].sum,
+    							titalDecimal:0
+    					}
+    					obj1.titalDecimal=that.fxList[i].sum*that.fxList[i].costPrice;
+    					obj.list[i]=obj1;
+    					
+    				}
+    				//alert(JSON.stringify(obj1));
+    				$.ajax({
+    					url:"[[@{/po/insert}]]",
+    					type:"post",
+    					data:JSON.stringify(obj),
+    					contentType:"application/json;charset=utf-8",
+    					dataType:"json",
+    					success:function(res){
+    						alert(res.message);
+    						that.qx();
+    					}
+    				});
+    			},
+    			qx:function(){
+    				alert(1);
+    				this.fxList=[];
+    				$("#zsl").empty();
+    				$("#hj").empty();
+    			},
+    			del:function(index){
+    				vue.fxList.splice(index,1);
+    				vue.total();
     			}
     		},created:function(){
     			this.goPage(1);
@@ -561,9 +656,11 @@
 						$("#billno").val(res.no);
 					}
 				});
-				
+				this.zbr();
+				this.gys();
     		}
     	});
+    	
     </script>
 </body>
 

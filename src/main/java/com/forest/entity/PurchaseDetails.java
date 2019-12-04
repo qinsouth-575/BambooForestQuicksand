@@ -5,11 +5,29 @@ import java.math.BigDecimal;
 public class PurchaseDetails {
     private Integer pdId;
 
-    private Integer pmId;
+    private String pmId;
 
-    private Integer articleNo;
+ 
 
-    private Integer quantity;
+	public String getPmId() {
+		return pmId;
+	}
+
+	public void setPmId(String pmId) {
+		this.pmId = pmId;
+	}
+
+	private String barCode;
+
+    public String getBarCode() {
+		return barCode;
+	}
+
+	public void setBarCode(String barCode) {
+		this.barCode = barCode;
+	}
+
+	private Integer quantity;
 
     private BigDecimal titalDecimal;
 
@@ -20,24 +38,7 @@ public class PurchaseDetails {
     public void setPdId(Integer pdId) {
         this.pdId = pdId;
     }
-
-    public Integer getPmId() {
-        return pmId;
-    }
-
-    public void setPmId(Integer pmId) {
-        this.pmId = pmId;
-    }
-
-    public Integer getArticleNo() {
-        return articleNo;
-    }
-
-    public void setArticleNo(Integer articleNo) {
-        this.articleNo = articleNo;
-    }
-
-    public Integer getQuantity() {
+	public Integer getQuantity() {
         return quantity;
     }
 
