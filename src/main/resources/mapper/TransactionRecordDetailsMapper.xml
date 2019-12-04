@@ -271,4 +271,19 @@
 		    </if>
 			GROUP BY d.`trd_id`
   </select>
+  
+  <insert id="insertByDetails">
+  			insert into transaction_record_details(order_number,article_no,quantity,raw_total_price,discount,total_price,state) values
+		    <foreach collection="details" item="dt" separator=",">
+      		(#{dt.orderNumber},#{dt.articleNo},#{dt.quantity},#{dt.rawTotalPrice},#{dt.discount},#{dt.totalPrice},#{dt.state})
+      		</foreach>;
+  </insert>
+  
+  <delete id="deleteById" parameterType="String">
+  			 delete from transaction_record_details where order_number=#{0}
+  </delete>
+  
+  <select id="queryById" parameterType="String" resultMap="BaseResultMap">
+  			select * from transaction_record_details where order_number=#{0}
+  </select>
 </mapper>

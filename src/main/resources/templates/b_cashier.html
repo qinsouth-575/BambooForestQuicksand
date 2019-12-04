@@ -84,32 +84,32 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a href="a_index.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="b_cashier.html" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="c_shop.html" class="waves-effect _account">
+                        	<a th:href="@{/findshop}" class="waves-effect _account">
                             	<i class="fa fa-globe m-r-10" aria-hidden="true"></i>店铺
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="d_commodity.html" class="waves-effect _account">
+                        	<a th:href="@{/commoditytypes/toPage}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="e_inventory.html" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account">
                             	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a href="f_member.html" class="waves-effect _account">
+                        	<a th:href="@{/MemberManage/toMember}" class="waves-effect _account">
                             	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
                             </a>
                         </li>
@@ -152,7 +152,7 @@
                 				</div>
                 				
                 				<div class="pull-right">
-	                    			<button class="btn btn-default" style="margin: 6px 6px 6px 0;" data-toggle="modal" data-target=".bs-ee">挂</button>
+	                    			<button class="btn btn-default" style="margin: 6px 6px 6px 0;" data-toggle="modal" data-target=".bs-ee" @click="cksygd">挂</button>
                 				</div>
                 			</th>
                 		</tr>
@@ -283,12 +283,23 @@
 				</div>
 				<div class="modal-body">
 					<table>
+					<colgroup>
+						<col width="50%">
+						<col width="35%">
+						<col width="14%">
+					</colgroup>
+					<tbody>
 						<tr>
-							<td>订单</td>
+							<th>订单</th>
+							<th>总和</th>
+							<th>操作</th>
 						</tr>
-						<tr>
-							<td>2018915455445</td>
+						<tr v-for="(item,index) in gdList">
+							<td>{{item.orderNumber}}</td>
+							<td>{{item.actualIncome}}</td>
+							<td><a @click="ddxz(item.orderNumber)">选择</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a @click="ddsc(item.orderNumber,index)">删除</a></td>
 						</tr>
+					</tbody>
 					</table>
 				</div>
 				<div class="modal-footer">
@@ -352,7 +363,8 @@
     		 data(){
     			 return {
     				 splbList:[],
-    				 PageList:{}
+    				 PageList:{},
+    				 gdList:[]
     			 }
     		 },
     		 methods:{
@@ -684,8 +696,60 @@
     					}
     				 });
     				 
+    			 },
+    			 cksygd:function(){
+    				 var _this=this;
+    				 $.ajax({
+    		    			url:"[[@{/TransactionRecordMain/queryByDd}]]",
+    		    			type:"get",
+    		    			data:{},
+    		    			dataType:"json",
+    		    			"success":function(res){
+    		    				_this.gdList=res;
+    		    			}
+    		    		});
+    			 },
+    			 ddxz:function(id){
+    				 $.ajax({
+    					url:"[[@{/TransactionRecordMain/queryById}]]",
+    					type:"get",
+    					data:{
+    						orderNumber:id
+    					},
+    					dataType:"json",
+    					"success":function(res){
+    						this.spq=res.details
+    						alert(JSON.stringify(this.spq));
+    						$.each(this.spq,function(i,obj){
+    							var $sda="<tr>"+
+    		        			"<td class='ellipsis-type' value='"+obj.articleNo+"'>"+obj.name+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
+    		        			"<td>"+obj.quantity+"</td>"+
+    		        			"<td>"+obj.totalPrice+"</td>"+
+    		        			"</tr>";
+    		        			$("#gwcl").append($sda);
+    						});
+    					}
+    				 });
+    			 },
+    			 ddsc:function(id,index){
+    				 var _this=this;
+    				 //挂单删除
+    				 $.ajax({
+    					 url:"[[@{/TransactionRecordMain/deleteById}]]",
+    					 type:"delete",
+    					 data:{
+    						 orderNumber:id
+    					 },
+    					 dataType:"json",
+    					 "success":function(res){
+    						 if(res.msg=="删除成功"){
+    							 _this.gdList.splice(index,1);
+    						 }else{
+    							 alert(res.msg);
+    						 }
+    					 }
+    				 });
     			 }
-    			 
     		 },
     		 created:function(){
     			 this.queryBySy();
@@ -703,7 +767,9 @@
 					rawTotalPrice:sd,//商品原价
 					articleNo:id,//商品条形码
 					quantity:1,//商品数量
-					totalPrice:sd//商品金额
+					totalPrice:sd,//商品金额
+					orderNumber:"",//订单号
+					state:0//成交状态
 				};
 				zsl3+=sfg.quantity;
 				zjg+=parseInt(sfg.rawTotalPrice);
@@ -773,15 +839,64 @@
     	 
     	 //挂起操作
     	 function gq(){
-    		 
     		 var random_no = "";//订单号
              for (var i = 0; i < 2; i++) //j位随机数，用以加在时间戳后面。
              {
                  random_no += Math.floor(Math.random() * 10);
              }
-             random_no = new Date().getTime() + random_no;
-             ddh=random_no;
+             ddh = new Date().getTime() + random_no;
              alert(ddh);
+             //获取当前时间
+             	var createtime =new Date();
+				var year=createtime.getFullYear();
+				var month=createtime.getMonth()+1;
+				var date=createtime.getDate();
+				var hours=createtime.getHours();
+				var minutes=createtime.getMinutes();
+				var seconds=createtime.getSeconds();
+				var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
+				alert(JSON.stringify(spq));
+				for(var i=0;i<spq.length;i++){
+					alert(i);
+					spq[i].orderNumber=ddh;
+					spq[i].state=1;
+				}
+             //成交记录主表
+             var rtm={
+            		 orderNumber:ddh,//订单号
+            		 client:0,//客户编号
+            		 totalSum:zjg,//总额
+            		 discount:0.00,//折扣
+            		 actualIncome:zjg,//实收
+            		 notIncome:0,//未收
+            		 paymount:0,//支付方式
+            		 shopId:1,//店铺编号
+            		 cashier:"阿关",//收营员
+            		 shopAssistant:"阿威",//营业员
+            		 state:1,//成交状态
+            		 createTime:create,//下单时间
+            		 remark:"备注",//备注
+            		 details:spq//成交详表记录
+             }
+             alert(JSON.stringify(rtm));
+             if(spq.length!=0){
+              $.ajax({
+            	url:"[[@{/TransactionRecordMain/insertAllGd}]]",
+            	type:"post",
+            	data:JSON.stringify(rtm),
+            	dataType:"json",
+            	contentType:"application/json",
+            	"success":function(res){
+            		alert("挂单成功！");
+            		if(res.msg=="挂单成功"){
+            			spq.length = 0;
+            			$("#gwcl").html("");
+            		}
+            	}
+             });
+             }else{
+            	 alert("你还没选择商品");
+             }
     	 }
     </script>
 </body>

@@ -44,4 +44,37 @@ public class TransactionRecordMainBiz {
 						return page;
 				}
 				
+				/**
+				 * 新增挂单
+				 * @param tm
+				 * @return
+				 */
+				public boolean insertAllGd(TransactionRecordMain tm) {
+						return transactionRecordMainMapper.insertAllGd(tm)>0;
+				}
+				
+				/**
+				 * 查询所有挂单
+				 * @return
+				 */
+				public List<TransactionRecordMain> queryByDd(){
+						return transactionRecordMainMapper.queryByDd();
+				}
+				
+				
+				/**
+				 * 根据订单号删除
+				 * @param orderNumber
+				 * @return
+				 */
+				public boolean deleteById(String orderNumber) {
+						return transactionRecordMainMapper.deleteById(orderNumber)>0;
+				}
+				
+				/**
+				 * 根据订单号查询
+				 */
+				public TransactionRecordMain queryById(String orderNumber) {
+						return transactionRecordMainMapper.queryById(orderNumber);
+				}
 }

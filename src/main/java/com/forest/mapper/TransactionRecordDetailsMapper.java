@@ -2,6 +2,8 @@ package com.forest.mapper;
 
 import com.forest.entity.TransactionRecordDetails;
 import com.forest.entity.TransactionRecordDetailsExample;
+import com.forest.entity.TransactionRecordMain;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,4 +31,10 @@ public interface TransactionRecordDetailsMapper {
     int updateByPrimaryKey(TransactionRecordDetails record);
     
     List<TransactionRecordDetails> queryAll(TransactionRecordDetails d);
+    
+    int insertByDetails(@Param("details") List<TransactionRecordDetails> details);
+    
+    int deleteById(String orderNumber);
+    
+    List<TransactionRecordDetails> queryById(String orderNumber);
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.forest.entity.TransactionRecordDetails;
+import com.forest.entity.TransactionRecordMain;
 import com.forest.mapper.TransactionRecordDetailsMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -29,4 +30,31 @@ public class TransactionRecordDetailsBiz {
 					PageInfo<TransactionRecordDetails> page=new PageInfo<TransactionRecordDetails>(list);
 					return page;
 				}
+				
+				/**
+				 * 新增成交记录详表
+				 * @param details
+				 * @return
+				 */
+				public boolean insertByDetails(List<TransactionRecordDetails> details) {
+					return transactionRecordDetailsMapper.insertByDetails(details)>0;
+				}
+				
+				
+				/**
+				 * 根据订单号删除
+				 * @param orderNumber
+				 * @return
+				 */
+				public boolean deleteById(String orderNumber) {
+						return transactionRecordDetailsMapper.deleteById(orderNumber)>0;
+				}
+				
+				
+				/**
+				 * 根据订单号查询
+				 */
+				public List<TransactionRecordDetails> queryById(String orderNumber) {
+						return transactionRecordDetailsMapper.queryById(orderNumber);
+				}                                                                                                               
 }

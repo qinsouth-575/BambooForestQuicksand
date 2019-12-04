@@ -365,20 +365,27 @@
 		group by m.`order_number`
   </select>
   
-  <insert id="insertAllGd">
-  			insert into transaction_record_main (trm_id, order_number, client, 
+  <insert id="insertAllGd" parameterType="com.forest.entity.TransactionRecordMain">
+  			insert into transaction_record_main (order_number, client, 
       		total_sum, discount, actual_income, 
       		not_income, paymount, shop_id, 
 		    cashier, shop_assistant, state, 
 		    create_time, remark)
-		    values (#{trmId,jdbcType=INTEGER}, #{orderNumber,jdbcType=VARCHAR}, #{client,jdbcType=INTEGER}, 
+		    values ( #{orderNumber,jdbcType=VARCHAR}, #{client,jdbcType=INTEGER}, 
 		    #{totalSum,jdbcType=DECIMAL}, #{discount,jdbcType=REAL}, #{actualIncome,jdbcType=DECIMAL}, 
 		    #{notIncome,jdbcType=DECIMAL}, #{paymount,jdbcType=SMALLINT}, #{shopId,jdbcType=SMALLINT}, 
 		    #{cashier,jdbcType=VARCHAR}, #{shopAssistant,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, 
-		    #{createTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR});
-		    insert into transaction_record_details values
-		    <foreach collection="details" item="dt" separator=",">
-      		(#{dt.billno},#{dt.lineid},#{dt.goodsname},#{dt.goodsnum},#{dt.goodsprice},#{dt.goodsmoneyamt},#{dt.ispresent })
-      	</foreach>;
+		    #{createTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR});
   </insert>
+  <select id="queryByDd" resultMap="BaseResultMap">
+  			SELECT * FROM `transaction_record_main` WHERE `state`=1 GROUP BY `order_number`
+  </select>
+  
+  <delete id="deleteById" parameterType="String">
+  			 delete from transaction_record_main where order_number=#{0}
+  </delete>
+  
+  <select id="queryById" parameterType="String" resultMap="BaseResultMap">
+  			select * from transaction_record_main where order_number=#{0}
+  </select>
 </mapper>

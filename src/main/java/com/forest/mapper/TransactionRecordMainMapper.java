@@ -31,4 +31,12 @@ public interface TransactionRecordMainMapper {
     List<TransactionRecordMain> queryAll(TransactionRecordMain t);
     
     List<TransactionRecordMain> queryByPage();
+    
+    int insertAllGd(TransactionRecordMain tm);
+    
+    List<TransactionRecordMain> queryByDd();
+    
+    int deleteById(String orderNumber);
+    
+    TransactionRecordMain queryById(String orderNumber);
 }
