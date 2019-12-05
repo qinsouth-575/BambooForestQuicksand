@@ -33,13 +33,22 @@ public class TransactionRecordDetailsAction {
 					return transactionRecordDetailsBiz.queryAll(d);
 				}
 				
-				
+				/**
+				 * 根据订单号删除
+				 * @param orderNumber
+				 * @return
+				 */
 				@RequestMapping(value="deleteById",method = RequestMethod.DELETE)
 				@ResponseBody
 				public boolean deleteById(String orderNumber) {
 					return transactionRecordDetailsBiz.deleteById(orderNumber);
 				}
 				
+				/**
+				 * 新增成交记录详表
+				 * @param trm
+				 * @return
+				 */
 				@RequestMapping(value = "insertByDetails",method = RequestMethod.POST)
 				@ResponseBody
 				public boolean insertByDetails(@RequestBody TransactionRecordMain trm) {

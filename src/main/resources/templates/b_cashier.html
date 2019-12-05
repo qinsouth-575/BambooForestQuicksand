@@ -785,14 +785,49 @@
     	 //挂起操作
     	 function gq(){
     		var bl=false;
-    		
     			if(ddh==""||ddh==null){
     				bl=false;
     			}else{
     				bl=true;
     			}
     		if(bl){
-    			
+    			//成交记录主表
+                var rtm={
+               		 orderNumber:ddh,//订单号
+               		details:spq//成交详表记录
+                }
+                $.ajax({
+                   	url:"[[@{/TransactionRecordDetails/deleteById}]]",
+                   	type:"delete",
+                   	data:{
+                   		orderNumber:ddh
+                   	},
+                   	dataType:"json",
+                   	"success":function(res){
+                   		if(res){
+                   			alert("删除挂单成功!");
+                   		 		$.ajax({
+                            	url:"[[@{/TransactionRecordDetails/insertByDetails}]]",
+                            	type:"post",
+                            	data:JSON.stringify(rtm),
+                            	dataType:"json",
+                            	contentType:"application/json",
+                            	"success":function(res){
+                            		if(res){
+                            			alert("新增挂单成功！");
+                            			spq.length = 0;
+                            			ddh="";//清空订单号
+                            			$("#gwcl").html("");
+                            			$("#zsl").text("0");
+                        				$("#zje").text("0");
+                            		}
+                            	}
+                             });
+                   		}else{
+                   			alert("删除挂单失败!");
+                   		}
+                   	}
+                    });
     			alert("已存在订单");
     		}else{
     			var random_no = "";//订单号
@@ -861,7 +896,8 @@
     	
     	//选择挂单
 		 function ddxz(id){
-			 
+			 $("#gwcl").html("");
+			 spq.length=0;
 			 $.ajax({
 				url:"[[@{/TransactionRecordMain/queryById}]]",
 				type:"get",
@@ -893,7 +929,7 @@
 	        			"<td class='ellipsis-type' value='"+obj.articleNo+"'>"+obj.cmName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
 	        			"<td>"+obj.quantity+"</td>"+
 	        			"<td>"+obj.totalPrice+"</td>"+
-	        			"</tr>";
+	        			"</tr>"; 
 	        			$("#gwcl").append($sda);
 	        			zjzsl+=obj.quantity;//增加总数量
 						zjzje+=parseInt(obj.totalPrice);//增加总金额
@@ -913,6 +949,7 @@
 	    			data:{},
 	    			dataType:"json",
 	    			"success":function(res){
+	    				$("#sygd").html("");
 	    				if(res!=null){
 	    					$.each(res,function(o,obj){
 	    						var $tr="<tr>"+
