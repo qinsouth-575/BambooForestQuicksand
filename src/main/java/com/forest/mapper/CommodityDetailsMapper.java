@@ -29,6 +29,8 @@ public interface CommodityDetailsMapper {
     int updateByPrimaryKey(CommodityDetails record);
 
     
+    int selectCommodityDetailsNewMax();
+    
     List<CommodityDetails> selectCommodityDetailsList(Integer cmId);
     
     int deleteCommodityDetailsByCmId(Integer cmId);

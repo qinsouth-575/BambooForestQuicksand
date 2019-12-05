@@ -94,7 +94,8 @@ public class CommodityMDBiz {
     		List<CommodityDetails> cdList = commodityMain.getCdList();
     		boolean flag = true;
     		for (int i = 0; i < cdList.size(); i++) {
-    			cdList.get(i).setCmId(cmId);	//录入商品详表主键值
+    			cdList.get(i).setCdId(cdDAO.selectCommodityDetailsNewMax());	//录入商品详表主键值
+    			cdList.get(i).setCmId(cmId);									//录入商品主表主键值
 				if(cdDAO.insertSelective(cdList.get(i)) <= 0) {
 					flag = false;
 				}
@@ -149,12 +150,13 @@ public class CommodityMDBiz {
     public boolean updateCommodityMainAndDetail (CommodityMain commodityMain) {
     	if(cmImgRelationDAO.deleteCmImgRelationByCmId(commodityMain.getCmId()) > 0 && cdDAO.deleteCommodityDetailsByCmId(commodityMain.getCmId()) > 0) {
     		if(cmDAO.updateByPrimaryKeySelective(commodityMain) > 0) {
-    			Integer cmId = cmDAO.selectCommodityMainMax();
+    			Integer cmId = commodityMain.getCmId();
     			
     			List<CommodityDetails> cdList = commodityMain.getCdList();
         		boolean flag = true;
         		for (int i = 0; i < cdList.size(); i++) {
-        			cdList.get(i).setCmId(cmId);	//录入商品详表主键值
+        			cdList.get(i).setCdId(cdDAO.selectCommodityDetailsNewMax());	//录入商品详表主键值
+        			cdList.get(i).setCmId(cmId);									//录入商品主表主键值
     				if(cdDAO.insertSelective(cdList.get(i)) <= 0) {
     					flag = false;
     				}

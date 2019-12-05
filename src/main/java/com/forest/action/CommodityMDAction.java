@@ -131,6 +131,11 @@ public class CommodityMDAction {
 		log.debug("BambooForestQuicksand - CommodityMDAction - queryCommodityMainById - 商品管理 - 3.1商品修改 查询商品");
 		CommodityMain cm = cmdb.queryCommodityMainById(cmId);
 		log.info("修改之查询：商品信息：" + cm);
+		/*List<Integer> cdIdList = new ArrayList<Integer>();
+		for (CommodityDetails cd : cm.getCdList()) {
+			cdIdList.add(cd.getCdId());
+		}
+		session.setAttribute("cdIdList", cdIdList);*/
 		return cm;
 	}
 	

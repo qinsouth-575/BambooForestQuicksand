@@ -37,7 +37,7 @@
                 <!-- Logo -->
                 <!-- ============================================================== -->
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" th:href="@{/statistics/toPage}">
                         <!-- Logo icon -->
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -73,12 +73,12 @@
                             </form>
                         </li>
                         <li class="nav-item" style="margin-left: 30px;">
-                        	<a th:href="@{/}" class="waves-effect _account">
+                        	<a th:href="@{/statistics/toPage}" class="waves-effect _account">
                             	<i class="fa fa-area-chart m-r-10" aria-hidden="true"></i>统计报表
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a th:href="@{/}" class="waves-effect _account">
+                        	<a th:href="@{/Bcashier/toBcashier}" class="waves-effect _account">
                             	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
                             </a>
                         </li>
@@ -93,12 +93,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a th:href="@{/}" class="waves-effect _account">
+                        	<a th:href="@{/inventory/toPage}" class="waves-effect _account">
                             	<i class="fa fa-cube m-r-10" aria-hidden="true"></i>库存
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a th:href="@{/MemberManage/toMember}" class="waves-effect _account">
+                        	<a th:href="@{/MemberManage/toMember}"  class="waves-effect _account">
                             	<i class="fa fa-address-book m-r-10" aria-hidden="true"></i>会员
                             </a>
                         </li>
@@ -139,12 +139,12 @@
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/commodityManager/toUploadingPage}+'?cmId=0'" class="waves-effect active">
+                            <a th:href="@{/commodityManager/toUploadingPage}+'?cmId=0'" class="waves-effect">
                             	<i class="fa fa-sign-in m-r-10" aria-hidden="true"></i>商品上传
                             </a>
                         </li>
                         <li>
-                            <a th:href="@{/supplier/toSupplier}" class="waves-effect">
+                            <a th:href="@{/supplier/toSupplier}" class="waves-effect active">
                             	<i class="fa fa-smile-o m-r-10" aria-hidden="true"></i>供应商
                             </a>
                         </li>

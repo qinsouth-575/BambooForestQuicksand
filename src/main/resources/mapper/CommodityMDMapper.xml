@@ -37,7 +37,7 @@
 			AND m.`cm_name` LIKE '%${cmName}%'
 		</if>
 	</where>
-	GROUP BY d.`cd_id`
+	GROUP BY d.`cd_id` DESC
   </select>
   
 </mapper>
