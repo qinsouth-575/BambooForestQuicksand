@@ -222,6 +222,15 @@ public class CommodityMDBiz {
     	return false;
     }
     
+    /**
+     * - 商品管理 - 5.查询导出商品信息
+     * @param cmd
+     * @return
+     */
+    public List<CommodityMD> queryMDListByDuo(CommodityMD cmd){
+    	return cmdDAO.queryMDAllByManager(cmd);
+    }
+    
     //尚未继续开发
     
 }

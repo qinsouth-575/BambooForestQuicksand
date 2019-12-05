@@ -12,14 +12,19 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.forest.biz.CommodityMDBiz;
+import com.forest.entity.CommodityMD;
 
 /**
  * - 控制层 - Excel文件操作类
@@ -33,15 +38,19 @@ public class CommodityAndMemberExcelAction {
 	
 	private static Logger log = Logger.getLogger(CommodityAndMemberExcelAction.class); 
 	
+	@Autowired
+	private CommodityMDBiz cmdb;
+	
 	@RequestMapping("/download")
 	@ResponseBody
 	public ResponseEntity<byte []> download(){
+		log.debug("BambooForestQuicksand - CommodityAndMemberExcelAction - download - 商品管理 - 下载范本");
 		try {
-			FileInputStream is = new FileInputStream("/D:/Git/Files/template.xlsx");
+			FileInputStream is = new FileInputStream("/D:/Git/Files/poso2o_batch_upload.xlsx");
 			byte[] bytes = new byte[is.available()];
 			is.read(bytes);
 			HttpHeaders headers = new HttpHeaders();
-			headers.setContentDispositionFormData("attachment", new String("学生导入模版.xlsx".getBytes("utf-8"),"iso-8859-1"));
+			headers.setContentDispositionFormData("attachment", new String("商品导入模版.xlsx".getBytes("utf-8"),"iso-8859-1"));
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 			return new ResponseEntity<byte[]>(bytes, headers, HttpStatus.OK);
 		} catch (Exception e) {
@@ -52,6 +61,7 @@ public class CommodityAndMemberExcelAction {
 	
 	@RequestMapping("/excelUpload")
 	public String excelUpload(MultipartFile file) {
+		log.debug("BambooForestQuicksand - CommodityAndMemberExcelAction - excelUpload - 商品管理 - 导入商品信息");
 		try {
 			//将传入的文件转换成excel
 			Workbook wb = new XSSFWorkbook(file.getInputStream());
@@ -80,27 +90,36 @@ public class CommodityAndMemberExcelAction {
 					service.add(stu);*/
 				}
 			}
+			
+			return "success";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/file/toPage";
+		return "no";
 	}
 	
-	/*@RequestMapping("/exportExcel")
-	public ResponseEntity<byte []> exportExcel(Student stu){
-		//查询出需要导出的学生
-		List<Student> list = service.find(stu);
-		//导出学生信息为excel
+	@RequestMapping("/exportExcel")
+	public ResponseEntity<byte []> exportExcel(@RequestBody CommodityMD cmd){
+		log.debug("BambooForestQuicksand - CommodityAndMemberExcelAction - exportExcel - 商品管理 - 导出商品信息");
+		//查询出需要导出的商品
+		List<CommodityMD> commodityList = cmdb.queryMDListByDuo(cmd);
+		//导出商品信息为excel
 		Workbook wb = new XSSFWorkbook();
 		Sheet sheet = wb.createSheet();
 		
 		Row titleRow = sheet.createRow(0);
-		titleRow.createCell(0).setCellValue("学生姓名");
-		titleRow.createCell(1).setCellValue("学生年龄");
-		titleRow.createCell(2).setCellValue("学生生日");
-		SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-		for(int i=0;i<list.size();i++) {
+		titleRow.createCell(0).setCellValue("类别");
+		titleRow.createCell(1).setCellValue("商品编码（条码）");
+		titleRow.createCell(2).setCellValue("商品名称");
+		titleRow.createCell(3).setCellValue("款号/型号");
+		titleRow.createCell(4).setCellValue("颜色");
+		titleRow.createCell(5).setCellValue("尺码");
+		titleRow.createCell(6).setCellValue("销售价");
+		titleRow.createCell(7).setCellValue("数量");
+		titleRow.createCell(8).setCellValue("进货成本");
+		//SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+		/*for(int i=0;i<list.size();i++) {
 			Row row = sheet.createRow(i+1);
 			Cell nameCell = row.createCell(0);
 			nameCell.setCellValue(list.get(i).getName());
@@ -111,7 +130,7 @@ public class CommodityAndMemberExcelAction {
 				birtydayCell.setCellValue(f.format(list.get(i).getBirthday()));
 			}
 			
-		}
+		}*/
 		HttpHeaders headers = new HttpHeaders();
 		ByteArrayOutputStream bot = new ByteArrayOutputStream();
 		try {
@@ -123,6 +142,6 @@ public class CommodityAndMemberExcelAction {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<byte[]>(bot.toByteArray(), headers, HttpStatus.OK);
-	}*/
+	}
 	
 }
