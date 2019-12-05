@@ -241,7 +241,7 @@
                                                 <td>{{item.je}}</td>
                                                 <td>{{item.remark}}</td>
                                                 <td>
-                                                	<a class="btn delBtn" @click="sh(item.pmId)" href="javascript:void(0);">审核</a>
+                                                	<a class="btn delBtn" @click="sh(item.pmId,item.statu)" href="javascript:void(0);">审核</a>
                                                 	<a class="btn delBtn" @click="del(item.pmId)" href="javascript:void(0);">删除</a>
                                                 	<a class="btn editBtn" @click="toupdate(item.pmId,item.statu)">修改</a>
                                                 </td>
@@ -492,7 +492,11 @@
     						}
     					});
     				},
-    				sh:function(id){
+    				sh:function(id,zt){
+    					if(zt=="已审核"){
+    						alert("已经审核过了，不需要在审核");
+    						return;
+    					}
     					$.ajax({
     						url:"[[@{/po/updateStatu}]]",
     						type:"post",

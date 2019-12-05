@@ -505,22 +505,7 @@
     				$.each($(".fx:checked"),function(index,value){
     					self.poinsert.list.filter(function(item){
     						i++;
-    						if(item && item.cmId && i == 5){
-    							if($(value).attr("value") == 5){
-    								self.fxList.push(item);
-    							}else if($(value).attr("value") == 10){
-    								self.fxList.push(item);
-    							}else if($(value).attr("value") == 15){
-    								self.fxList.push(item);
-    							}else if($(value).attr("value") == 20){
-    								self.fxList.push(item);
-    							}else if($(value).attr("value") == 25){
-    								self.fxList.push(item);
-    							}else if($(value).attr("value") == 30){
-    								self.fxList.push(item);
-    							}
-    							
-    						}else if(item && item.cmId && item.cmId == $(value).attr("value")){
+    						if(item && item.cdId && item.cdId == $(value).attr("value")){
     							self.fxList.push(item);
     						}
     					});

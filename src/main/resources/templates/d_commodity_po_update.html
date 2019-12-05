@@ -516,7 +516,7 @@
     				let self = this;
     				$.each($(".fx:checked"),function(index,value){
     					self.poinsert.list.filter(function(item){
-    						if(item && item.cmId && item.cmId == $(value).attr("value")){
+    						if(item && item.cdId && item.cdId == $(value).attr("value")){
     							self.fxList.push(item);
     						}
     					});
@@ -566,6 +566,7 @@
     					success:function(res){
     						$(".zbr").val(res.staffName);
     						that.supid=res.shopId;
+    						//alert(that.supid);
     					}
     				});
     			},
