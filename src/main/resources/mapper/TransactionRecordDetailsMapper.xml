@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.forest.entity.TransactionRecordDetails" >
     <id column="trd_id" property="trdId" jdbcType="INTEGER" />
     <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
-    <result column="article_no" property="articleNo" jdbcType="INTEGER" />
+    <result column="article_no" property="articleNo" jdbcType="VARCHAR" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="raw_total_price" property="rawTotalPrice" jdbcType="DECIMAL" />
     <result column="discount" property="discount" jdbcType="REAL" />
@@ -283,7 +283,11 @@
   			 delete from transaction_record_details where order_number=#{0}
   </delete>
   
-  <select id="queryById" parameterType="String" resultMap="BaseResultMap">
-  			select * from transaction_record_details where order_number=#{0}
+  <select id="queryById" parameterType="String" resultMap="BaseResultMap">	
+		SELECT *,cm.`cm_name` as cmName FROM `transaction_record_details` AS trd
+		LEFT JOIN `commodity_details` AS cd ON trd.`article_no`=cd.`bar_code`
+		LEFT JOIN `commodity_main` AS cm ON cd.`cm_id`=cm.`cm_id`
+		WHERE trd.`order_number`=#{0}
+		GROUP BY trd.`article_no`
   </select>
 </mapper>
