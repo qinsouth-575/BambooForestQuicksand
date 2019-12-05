@@ -192,7 +192,7 @@
 							<a href="javascript:;" class="list_search" @click="search"></a>
                         </div>
                         
-                        <a href="javascript:;" class="btn hidden-sm-down btn-success">导出商品</a>
+                        <a href="javascript:;" class="btn hidden-sm-down btn-success" @click="exportExcel">导出商品</a>
                         <a href="javascript:;" class="btn hidden-sm-down btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">批量导入</a>
                         
                         <!-- Button trigger modal -->
@@ -298,13 +298,15 @@
 	    		<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">批量导入</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
 					<div class="modal-body">
 						<form class="form-inline">
 							<div class="form-group" style="position: relative;">
 								<label for="exampleInputName2">选择店铺：</label>&nbsp;
-								<select class="form-control form-control-line f_input shopList" style="width: 129px;">
+								<select class="form-control form-control-line f_input exportExcel" style="width: 129px;">
 		                            <option value="">所有店铺</option>
 		                            <option v-for="item in shopList" :value="item.shopId">{{item.shopName}}</option>
 		                        </select>
@@ -313,7 +315,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary">Excel导入</button>
-						<button type="button" class="btn btn-primary">下载范本</button>
+						<a th:href="@{/excelFiles/download}" class="btn btn-primary">下载范本</a>
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 					</div>
 				</div>
@@ -482,6 +484,27 @@
 	   					}
 	   				});
 	   			},
+	   			download : function(){
+	   				
+	   			},
+	   			exportExcel : function(){
+	   				var cmd = {
+							shopId : $(".exportExcel").val()
+					}
+	   				
+	   				$.ajax({
+	 					url : "localhost:8080/excelFiles/exportExcel",
+	 					type : "post",
+	 					data : JSON.stringify(cmd),
+	 					contentType : "application/json;charset=utf-8",
+	 					dataType : "json",
+	 					success : function(result){
+	 						this_.pageCmd = result;
+	 						
+	 						this_.checked = false;
+	 					}
+	 				});
+	   			}
 			},
 			created:function(){
 				this.queryShopList();		//1.调用查询店铺列表的方法

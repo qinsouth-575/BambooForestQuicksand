@@ -152,7 +152,7 @@
                 				</div>
                 				
                 				<div class="pull-right">
-	                    			<button class="btn btn-default" style="margin: 6px 6px 6px 0;" data-toggle="modal" data-target=".bs-ee" @click="cksygd">挂</button>
+	                    			<button class="btn btn-default" style="margin: 6px 6px 6px 0;" data-toggle="modal" data-target=".bs-ee" onclick="cksygd()">挂</button>
                 				</div>
                 			</th>
                 		</tr>
@@ -274,7 +274,7 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
-    <div class="modal fade bs-ee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade bs-ee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="bs-ee">
   		<div class="modal-dialog modal-lg">
     		<div class="modal-content">
 				<div class="modal-header">
@@ -288,17 +288,14 @@
 						<col width="35%">
 						<col width="14%">
 					</colgroup>
-					<tbody>
+					
 						<tr>
 							<th>订单</th>
 							<th>总和</th>
 							<th>操作</th>
 						</tr>
-						<tr v-for="(item,index) in gdList">
-							<td>{{item.orderNumber}}</td>
-							<td>{{item.actualIncome}}</td>
-							<td><a @click="ddxz(item.orderNumber)">选择</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a @click="ddsc(item.orderNumber,index)">删除</a></td>
-						</tr>
+						<tbody id="sygd">
+						
 					</tbody>
 					</table>
 				</div>
@@ -357,6 +354,10 @@
     	 * 然后页面标签自然用三个 v-for
     	 * 
     	 * */
+    	 
+    	 var spq=[];
+     	var zsl3=0;//总数量
+     	var zjg=0;//总金额
     	 
     	 var vus=new Vue({
     		 el:"#etc",
@@ -696,70 +697,16 @@
     					}
     				 });
     				 
-    			 },
-    			 cksygd:function(){
-    				 var _this=this;
-    				 $.ajax({
-    		    			url:"[[@{/TransactionRecordMain/queryByDd}]]",
-    		    			type:"get",
-    		    			data:{},
-    		    			dataType:"json",
-    		    			"success":function(res){
-    		    				_this.gdList=res;
-    		    			}
-    		    		});
-    			 },
-    			 ddxz:function(id){
-    				 $.ajax({
-    					url:"[[@{/TransactionRecordMain/queryById}]]",
-    					type:"get",
-    					data:{
-    						orderNumber:id
-    					},
-    					dataType:"json",
-    					"success":function(res){
-    						this.spq=res.details
-    						alert(JSON.stringify(this.spq));
-    						$.each(this.spq,function(i,obj){
-    							var $sda="<tr>"+
-    		        			"<td class='ellipsis-type' value='"+obj.articleNo+"'>"+obj.name+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
-    		        			"<td>"+obj.quantity+"</td>"+
-    		        			"<td>"+obj.totalPrice+"</td>"+
-    		        			"</tr>";
-    		        			$("#gwcl").append($sda);
-    						});
-    					}
-    				 });
-    			 },
-    			 ddsc:function(id,index){
-    				 var _this=this;
-    				 //挂单删除
-    				 $.ajax({
-    					 url:"[[@{/TransactionRecordMain/deleteById}]]",
-    					 type:"delete",
-    					 data:{
-    						 orderNumber:id
-    					 },
-    					 dataType:"json",
-    					 "success":function(res){
-    						 if(res.msg=="删除成功"){
-    							 _this.gdList.splice(index,1);
-    						 }else{
-    							 alert(res.msg);
-    						 }
-    					 }
-    				 });
     			 }
-    		 },
+    			 },
     		 created:function(){
     			 this.queryBySy();
     			 this.queryBySpPage(1);
 	 		}
     	 });
-    	var spq=[];
-    	var zsl3=0;
-    	var zjg=0;
+    	
     	 function hqys(s,id){
+    		 alert(JSON.stringify(this.spq));
 				var sd=$(s).find(".info_money").text();
 				var sw=$(s).find(".info_name").text();
 				var sfg={
@@ -768,11 +715,10 @@
 					articleNo:id,//商品条形码
 					quantity:1,//商品数量
 					totalPrice:sd,//商品金额
-					orderNumber:"",//订单号
+					orderNumber:ddh,//订单号
 					state:0//成交状态
 				};
-				zsl3+=sfg.quantity;
-				zjg+=parseInt(sfg.rawTotalPrice);
+				
 				var pd=false;
 				if(this.spq.length!=0){
 				for(i=0;i<this.spq.length;i++){
@@ -785,15 +731,12 @@
 						this.spq[i].quantity+=1;
 						$("#gwcl>tr").each(function(){
 							if($(this).find("td:first").attr("value")==spq[i].articleNo){
-								var sad=parseInt($(this).find("td:first").next().text());
-								var $fhjf=sad+1;
-								$(this).find("td:first").next().text($fhjf);
-								var $jg=parseInt($(this).find("td:last").text());
+								var sad=parseInt($(this).find("td:first").next().text());//获取商品数量
+								var $fhjf=sad+1;//商品数量+1
+								$(this).find("td:first").next().text($fhjf);//给这个商品的数量赋值
 								var $xj=sd*$fhjf;//商品价格(数量和单价相乘)
-								spq[i].totalPrice=$xj;
-								$(this).find("td:last").text($xj);
-								var $zsl=parseInt($(this).find("td:first").next().text());
-								alert("数量显示:"+$zsl);
+								spq[i].totalPrice=$xj;//赋值给我商品总金额
+								$(this).find("td:last").text($xj);//页面的价格变
 							}
 						});
 						i=this.spq.length;//跳出循环
@@ -809,10 +752,6 @@
         			"<td>"+sfg.totalPrice+"</td>"+
         			"</tr>";
         			$("#gwcl").append($sda);
-        			$("#gwcl>tr").each(function(){
-						var $zsl=parseInt($(this).find("td:first").next().text());
-						alert("数量显示:"+$zsl);
-						});
 				}
 				
 				}else{
@@ -824,11 +763,17 @@
         			"<td>"+sfg.totalPrice+"</td>"+
         			"</tr>";
         			$("#gwcl").append($sda);
-        			$("#gwcl>tr").each(function(){
-						var $zsl=parseInt($(this).find("td:first").next().text());
-						alert("数量显示:"+$zsl);
-						});
 				}
+				var zjzsl=0;
+				var zjzje=0;
+				$.each(this.spq,function(o,obj){
+					alert("数据相加"+obj.quantity);
+					alert(obj.totalPrice);
+					zjzsl+=obj.quantity;//增加总数量
+					zjzje+=parseInt(obj.totalPrice);//增加总金额
+				});
+				zsl3=zjzsl;
+				zjg=zjzje;
 				alert("总数量:"+zsl3);
 				$("#zsl").text(zsl3);
 				$("#zje").text(zjg);
@@ -839,65 +784,168 @@
     	 
     	 //挂起操作
     	 function gq(){
-    		 var random_no = "";//订单号
-             for (var i = 0; i < 2; i++) //j位随机数，用以加在时间戳后面。
-             {
-                 random_no += Math.floor(Math.random() * 10);
-             }
-             ddh = new Date().getTime() + random_no;
-             alert(ddh);
-             //获取当前时间
-             	var createtime =new Date();
-				var year=createtime.getFullYear();
-				var month=createtime.getMonth()+1;
-				var date=createtime.getDate();
-				var hours=createtime.getHours();
-				var minutes=createtime.getMinutes();
-				var seconds=createtime.getSeconds();
-				var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
-				alert(JSON.stringify(spq));
-				for(var i=0;i<spq.length;i++){
-					alert(i);
-					spq[i].orderNumber=ddh;
-					spq[i].state=1;
-				}
-             //成交记录主表
-             var rtm={
-            		 orderNumber:ddh,//订单号
-            		 client:0,//客户编号
-            		 totalSum:zjg,//总额
-            		 discount:0.00,//折扣
-            		 actualIncome:zjg,//实收
-            		 notIncome:0,//未收
-            		 paymount:0,//支付方式
-            		 shopId:1,//店铺编号
-            		 cashier:"阿关",//收营员
-            		 shopAssistant:"阿威",//营业员
-            		 state:1,//成交状态
-            		 createTime:create,//下单时间
-            		 remark:"备注",//备注
-            		 details:spq//成交详表记录
-             }
-             alert(JSON.stringify(rtm));
-             if(spq.length!=0){
-              $.ajax({
-            	url:"[[@{/TransactionRecordMain/insertAllGd}]]",
-            	type:"post",
-            	data:JSON.stringify(rtm),
-            	dataType:"json",
-            	contentType:"application/json",
-            	"success":function(res){
-            		alert("挂单成功！");
-            		if(res.msg=="挂单成功"){
-            			spq.length = 0;
-            			$("#gwcl").html("");
-            		}
-            	}
-             });
-             }else{
-            	 alert("你还没选择商品");
-             }
+    		var bl=false;
+    		
+    			if(ddh==""||ddh==null){
+    				bl=false;
+    			}else{
+    				bl=true;
+    			}
+    		if(bl){
+    			
+    			alert("已存在订单");
+    		}else{
+    			var random_no = "";//订单号
+                for (var i = 0; i < 2; i++) //j位随机数，用以加在时间戳后面。
+                {
+                    random_no += Math.floor(Math.random() * 10);
+                }
+                ddh = new Date().getTime() + random_no;
+                alert(ddh);
+                //获取当前时间
+                	var createtime =new Date();
+   				var year=createtime.getFullYear();
+   				var month=createtime.getMonth()+1;
+   				var date=createtime.getDate();
+   				var hours=createtime.getHours();
+   				var minutes=createtime.getMinutes();
+   				var seconds=createtime.getSeconds();
+   				var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
+   				alert(JSON.stringify(spq));
+   				for(var i=0;i<spq.length;i++){
+   					alert(i);
+   					spq[i].orderNumber=ddh;
+   					spq[i].state=1;
+   				}
+                //成交记录主表
+                var rtm={
+               		 orderNumber:ddh,//订单号
+               		 client:0,//客户编号
+               		 totalSum:zjg,//总额
+               		 discount:0.00,//折扣
+               		 actualIncome:zjg,//实收
+               		 notIncome:0,//未收
+               		 paymount:0,//支付方式
+               		 shopId:1,//店铺编号
+               		 cashier:"阿关",//收营员
+               		 shopAssistant:"阿威",//营业员
+               		 state:1,//成交状态
+               		 createTime:create,//下单时间
+               		 remark:"备注",//备注
+               		 details:spq//成交详表记录
+                }
+                alert(JSON.stringify(rtm));
+                if(spq.length!=0){
+                 $.ajax({
+               	url:"[[@{/TransactionRecordMain/insertAllGd}]]",
+               	type:"post",
+               	data:JSON.stringify(rtm),
+               	dataType:"json",
+               	contentType:"application/json",
+               	"success":function(res){
+               		alert("挂单成功！");
+               		if(res.msg=="挂单成功"){
+               			spq.length = 0;
+               			$("#gwcl").html("");
+               			$("#zsl").text("0");
+           				$("#zje").text("0");
+               		}
+               	}
+                });
+                }else{
+               	 alert("你还没选择商品");
+                }
+    		}
+    		 
     	 }
+    	
+    	//选择挂单
+		 function ddxz(id){
+			 
+			 $.ajax({
+				url:"[[@{/TransactionRecordMain/queryById}]]",
+				type:"get",
+				data:{
+					orderNumber:id
+				},
+				dataType:"json",
+				"success":function(res){
+					$.each(res.details,function(i,obj){
+						var sda={
+								rawTotalPrice:obj.rawTotalPrice,//商品原价
+								articleNo:obj.articleNo,//商品条形码
+								quantity:obj.quantity,//商品数量
+								totalPrice:obj.totalPrice,//商品金额
+								orderNumber:obj.orderNumber,//订单号
+								state:obj.state,//成交状态
+								cmName:obj.cmName
+						}
+						ddh=obj.orderNumber;
+						spq.push(sda);
+					});
+					/* this.spq=res.details; */
+					alert(JSON.stringify(spq));
+					$('#bs-ee').modal('hide');
+					var zjzsl=0;
+					var zjzje=0;
+					$.each(spq,function(i,obj){
+						var $sda="<tr>"+
+	        			"<td class='ellipsis-type' value='"+obj.articleNo+"'>"+obj.cmName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
+	        			"<td>"+obj.quantity+"</td>"+
+	        			"<td>"+obj.totalPrice+"</td>"+
+	        			"</tr>";
+	        			$("#gwcl").append($sda);
+	        			zjzsl+=obj.quantity;//增加总数量
+						zjzje+=parseInt(obj.totalPrice);//增加总金额
+					});
+					this.zsl3=zjzsl;//给总数量赋值
+					this.zjg=zjzje;//给总价格赋值
+					$("#zsl").text(this.zsl3);
+    				$("#zje").text(this.zjg);
+				}
+			 });
+		 }
+    	
+		 function cksygd(){
+			 $.ajax({
+	    			url:"[[@{/TransactionRecordMain/queryByDd}]]",
+	    			type:"get",
+	    			data:{},
+	    			dataType:"json",
+	    			"success":function(res){
+	    				if(res!=null){
+	    					$.each(res,function(o,obj){
+	    						var $tr="<tr>"+
+						"<td>"+obj.orderNumber+"</td>"+
+						"<td>"+obj.actualIncome+"</td>"+
+						"<td><a onclick='ddxz("+obj.orderNumber+")''>选择</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick='ddsc("+obj.orderNumber+",this)''>删除</a></td>"+
+						"</tr>";
+						$("#sygd").append($tr);
+	    					});
+	    				}
+	    			}
+	    		});
+		 }
+
+		 function ddsc(id,s){
+			 //挂单删除
+			 $.ajax({
+				 url:"[[@{/TransactionRecordMain/deleteById}]]",
+				 type:"delete",
+				 data:{
+					 orderNumber:id
+				 },
+				 dataType:"json",
+				 "success":function(res){
+					 if(res.msg=="删除成功"){
+						 $(s).parent().parent().remove();
+					 }else{
+						 alert(res.msg);
+					 }
+				 }
+			 });
+		 }
+	 
     </script>
 </body>
 </html>
