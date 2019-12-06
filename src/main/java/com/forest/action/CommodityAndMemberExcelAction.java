@@ -3,7 +3,8 @@ package com.forest.action;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -18,13 +19,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.forest.biz.ColorBiz;
 import com.forest.biz.CommodityMDBiz;
+import com.forest.biz.CommodityTypeBiz;
+import com.forest.biz.SizeBiz;
+import com.forest.entity.Color;
+import com.forest.entity.CommodityDetails;
 import com.forest.entity.CommodityMD;
+import com.forest.entity.CommodityMain;
+import com.forest.entity.CommodityType;
+import com.forest.entity.Images;
+import com.forest.entity.Size;
 
 /**
  * - 控制层 - Excel文件操作类
@@ -40,6 +49,15 @@ public class CommodityAndMemberExcelAction {
 	
 	@Autowired
 	private CommodityMDBiz cmdb;
+	
+	@Autowired
+	private CommodityTypeBiz ctb;
+	
+	@Autowired
+	private ColorBiz cb;
+	
+	@Autowired
+	private SizeBiz sb;
 	
 	@RequestMapping("/download")
 	@ResponseBody
@@ -60,7 +78,7 @@ public class CommodityAndMemberExcelAction {
 	}
 	
 	@RequestMapping("/excelUpload")
-	public String excelUpload(MultipartFile file) {
+	public String excelUpload(MultipartFile file, int shopId) {
 		log.debug("BambooForestQuicksand - CommodityAndMemberExcelAction - excelUpload - 商品管理 - 导入商品信息");
 		try {
 			//将传入的文件转换成excel
@@ -72,22 +90,50 @@ public class CommodityAndMemberExcelAction {
 				Sheet sheet = wb.getSheetAt(i);
 				//获取当前sheet页的行数
 				int rows = sheet.getPhysicalNumberOfRows();
-				for(int j=1;j<rows;j++) {
+				for(int j = 1; j < rows; j++) {
 					//根据下标获取行
 					Row row = sheet.getRow(j);
-					Cell nameCell = row.getCell(0);
-					Cell ageCell = row.getCell(1);
-					Cell birthdayCell = row.getCell(2);
+
+					Cell ctNameCell = row.getCell(0);		//类别		- main
+					Cell barCodeCell = row.getCell(1);		//条码
+					Cell cmNameCell = row.getCell(2);		//商品名称	- main
+					Cell articleNoCell = row.getCell(3);	//货号		- main
+					Cell colorNameCell = row.getCell(4);	//颜色
+					Cell sizeNameCell = row.getCell(5);		//尺码
+					Cell salePriceCell = row.getCell(6);	//销售价	- main
+					Cell quantityCell = row.getCell(7);		//数量
+					Cell costPriceCell = row.getCell(8);	//进货成本	- main
 					
-					System.out.println(nameCell + "\t" + ageCell + "\t" + birthdayCell);
-					System.out.println(nameCell.getStringCellValue() + "\t" + ageCell.getNumericCellValue() + "\t" + birthdayCell.getDateCellValue());
+					log.info(ctNameCell.getStringCellValue() + " - " + 
+							barCodeCell.getStringCellValue() + " - " +  
+							cmNameCell.getStringCellValue() +  " - " + 
+							articleNoCell.getStringCellValue() +  " - " + 
+							colorNameCell.getStringCellValue() +  " - " + 
+							sizeNameCell.getStringCellValue() +  " - " + 
+							salePriceCell.getStringCellValue() +  " - " + 
+							quantityCell.getStringCellValue() +  " - " + 
+							costPriceCell.getStringCellValue());
+
+					Size size = sb.querySizeBySizeName(sizeNameCell.getStringCellValue()).get(0);
+					Color color = cb.queryColors(colorNameCell.getStringCellValue()).get(0);
+					Integer quantity = quantityCell.getColumnIndex();
+					//详表单个信息
+					CommodityDetails cd = new CommodityDetails(size.getSizeId(), size.getSizeName(), color.getColorId(), color.getColorName(), quantity, barCodeCell.getStringCellValue());
+					List<CommodityDetails> cdList = new ArrayList<CommodityDetails>();
+					cdList.add(cd);
+					//图片
+					Images image = new Images(12);
+					List<Images> imgList = new ArrayList<Images>();
+					imgList.add(image);
+					//主商品
+					CommodityType ct = ctb.querytImages(ctNameCell.getStringCellValue());
+					BigDecimal salePrice = new BigDecimal(salePriceCell.getStringCellValue());
+					BigDecimal costPrice = new BigDecimal(costPriceCell.getStringCellValue());
+					CommodityMain cmd = new CommodityMain(articleNoCell.getStringCellValue(), cmNameCell.getStringCellValue(), salePrice, costPrice, ct.getCtId(), shopId, cdList, imgList);
 					
-					/*Student stu = new Student();
-					stu.setName(nameCell.getStringCellValue());
-					Double age = ageCell.getNumericCellValue();
-					stu.setAge(age.intValue());
-					stu.setBirthday(birthdayCell.getDateCellValue());
-					service.add(stu);*/
+					log.info("批量导入商品：" + cmd);
+					
+					cmdb.insertCommodityMainAndDetail(cmd);
 				}
 			}
 			
@@ -100,42 +146,63 @@ public class CommodityAndMemberExcelAction {
 	}
 	
 	@RequestMapping("/exportExcel")
-	public ResponseEntity<byte []> exportExcel(@RequestBody CommodityMD cmd){
+	public ResponseEntity<byte []> exportExcel(Integer shopId, Integer ctId, String ctName){
 		log.debug("BambooForestQuicksand - CommodityAndMemberExcelAction - exportExcel - 商品管理 - 导出商品信息");
+		log.info(shopId + " - " + ctId + " - " + ctName);
+		CommodityMD cmd = new CommodityMD(ctName, shopId, ctId);
+		log.info("主详类信息：" + cmd);
 		//查询出需要导出的商品
 		List<CommodityMD> commodityList = cmdb.queryMDListByDuo(cmd);
+		log.info("主详类集合信息：" + commodityList);
 		//导出商品信息为excel
 		Workbook wb = new XSSFWorkbook();
 		Sheet sheet = wb.createSheet();
 		
 		Row titleRow = sheet.createRow(0);
-		titleRow.createCell(0).setCellValue("类别");
-		titleRow.createCell(1).setCellValue("商品编码（条码）");
-		titleRow.createCell(2).setCellValue("商品名称");
-		titleRow.createCell(3).setCellValue("款号/型号");
-		titleRow.createCell(4).setCellValue("颜色");
-		titleRow.createCell(5).setCellValue("尺码");
-		titleRow.createCell(6).setCellValue("销售价");
-		titleRow.createCell(7).setCellValue("数量");
-		titleRow.createCell(8).setCellValue("进货成本");
-		//SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
-		/*for(int i=0;i<list.size();i++) {
+		titleRow.createCell(0).setCellValue("类别");				//ctName	String
+		titleRow.createCell(1).setCellValue("商品编码（条码）");	//barCode	String
+		titleRow.createCell(2).setCellValue("商品名称");			//cmName	String
+		titleRow.createCell(3).setCellValue("货号");				//articleNo	String
+		titleRow.createCell(4).setCellValue("颜色");				//colorName	String
+		titleRow.createCell(5).setCellValue("尺码");				//sizeName	String
+		titleRow.createCell(6).setCellValue("销售价");			//salePrice
+		titleRow.createCell(7).setCellValue("数量");				//quantity
+		titleRow.createCell(8).setCellValue("进货成本");			//costPrice
+		//SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");	
+		for(int i=0;i<commodityList.size();i++) {
 			Row row = sheet.createRow(i+1);
-			Cell nameCell = row.createCell(0);
-			nameCell.setCellValue(list.get(i).getName());
-			Cell ageCell = row.createCell(1);
-			ageCell.setCellValue(list.get(i).getAge());
-			Cell birtydayCell = row.createCell(2);
-			if(list.get(i).getBirthday()!=null) {
-				birtydayCell.setCellValue(f.format(list.get(i).getBirthday()));
-			}
+			Cell ctNameCell = row.createCell(0);
+			ctNameCell.setCellValue(commodityList.get(i).getCtName());
 			
-		}*/
+			Cell barCodeCell = row.createCell(1);
+			barCodeCell.setCellValue(commodityList.get(i).getBarCode());
+			
+			Cell cmNameCell = row.createCell(2);
+			cmNameCell.setCellValue(commodityList.get(i).getCmName());
+			
+			Cell articleNoCell = row.createCell(3);
+			articleNoCell.setCellValue(commodityList.get(i).getArticleNo());
+			
+			Cell colorNameCell = row.createCell(4);
+			colorNameCell.setCellValue(commodityList.get(i).getColorName());
+			
+			Cell sizeNameCell = row.createCell(5);
+			sizeNameCell.setCellValue(commodityList.get(i).getSizeName());
+			
+			Cell salePriceCell = row.createCell(6);
+			salePriceCell.setCellValue(commodityList.get(i).getSalePrice() + "");
+			
+			Cell quantityCell = row.createCell(7);
+			quantityCell.setCellValue(commodityList.get(i).getQuantity() + "");
+			
+			Cell costPriceCell = row.createCell(8);
+			costPriceCell.setCellValue(commodityList.get(i).getCostPrice() + "");
+		}
 		HttpHeaders headers = new HttpHeaders();
 		ByteArrayOutputStream bot = new ByteArrayOutputStream();
 		try {
 			wb.write(bot);
-			headers.setContentDispositionFormData("attachment", new String("导出的学生信息.xlsx".getBytes("utf-8"),"iso-8859-1"));
+			headers.setContentDispositionFormData("attachment", new String("导出的商品信息.xlsx".getBytes("utf-8"),"iso-8859-1"));
 			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

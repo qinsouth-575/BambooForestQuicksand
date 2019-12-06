@@ -28,6 +28,39 @@ public class CommodityMD {
     private Integer pageNum;		//当前页
     private Integer pageSize;		//每页显示条数
     
+	public CommodityMD() {
+		super();
+	}
+	
+	public CommodityMD(String ctName, Integer shopId, Integer ctId) {
+		super();
+		this.ctName = ctName;
+		this.shopId = shopId;
+		this.ctId = ctId;
+	}
+
+	public CommodityMD(Integer cdId, Integer cmId, String ctName, String cmName, String articleNo, String barCode,
+			String colorName, String sizeName, Integer quantity, BigDecimal salePrice, BigDecimal costPrice,
+			Integer shopId, Integer ctId, String imgPath, Integer pageNum, Integer pageSize) {
+		super();
+		this.cdId = cdId;
+		this.cmId = cmId;
+		this.ctName = ctName;
+		this.cmName = cmName;
+		this.articleNo = articleNo;
+		this.barCode = barCode;
+		this.colorName = colorName;
+		this.sizeName = sizeName;
+		this.quantity = quantity;
+		this.salePrice = salePrice;
+		this.costPrice = costPrice;
+		this.shopId = shopId;
+		this.ctId = ctId;
+		this.imgPath = imgPath;
+		this.pageNum = pageNum;
+		this.pageSize = pageSize;
+	}
+
 	public Integer getCdId() {
 		return cdId;
 	}

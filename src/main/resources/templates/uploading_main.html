@@ -435,14 +435,18 @@
 							cdId : 0,
 							cmId : 0,
 							sizeId : "",
+							sizeName : "",
 							colorId : "",
+							colorName : "",
 							quantity : 0,
 							barCode : ""
 						},{
 							cdId : 0,
 							cmId : 0,
 							sizeId : "",
+							sizeName : "",
 							colorId : "",
+							colorName : "",
 							quantity : 0,
 							barCode : ""
 						}*/
@@ -530,6 +534,9 @@
 							"default": cmTypeName
 						}).val(cmTypeName);
 						//商品信息
+						if(commodityMain.information == "" || commodityMain.information == null){
+							commodityMain.information = "";
+						}
 						UM.getEditor('myEditor').setContent(commodityMain.information);
 						
 						//图片列表

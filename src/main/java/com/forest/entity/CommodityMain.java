@@ -12,7 +12,7 @@ public class CommodityMain {
     private BigDecimal costPrice;	//成本价格
     private Integer ctId;			//商品类别编号
     private String information;		//商品信息
-    private Short shopId;			//店铺编号（外键）
+    private Integer shopId;			//店铺编号（外键）
     
     private List<CommodityDetails> cdList;	//详表数据
     private List<Images> imgList;	//图片集合
@@ -27,8 +27,21 @@ public class CommodityMain {
 		this.cmName = cmName;
 	}
 
+	public CommodityMain(String articleNo, String cmName, BigDecimal salePrice, BigDecimal costPrice, Integer ctId,
+			Integer shopId, List<CommodityDetails> cdList, List<Images> imgList) {
+		super();
+		this.articleNo = articleNo;
+		this.cmName = cmName;
+		this.salePrice = salePrice;
+		this.costPrice = costPrice;
+		this.ctId = ctId;
+		this.shopId = shopId;
+		this.cdList = cdList;
+		this.imgList = imgList;
+	}
+
 	public CommodityMain(Integer cmId, String articleNo, String brand, String cmName, BigDecimal salePrice,
-			BigDecimal costPrice, Integer ctId, String information, Short shopId, List<CommodityDetails> cdList,
+			BigDecimal costPrice, Integer ctId, String information, Integer shopId, List<CommodityDetails> cdList,
 			List<Images> imgList) {
 		super();
 		this.cmId = cmId;
@@ -108,11 +121,11 @@ public class CommodityMain {
         this.information = information;
     }
 
-    public Short getShopId() {
+    public Integer getShopId() {
         return shopId;
     }
 
-    public void setShopId(Short shopId) {
+    public void setShopId(Integer shopId) {
         this.shopId = shopId;
     }
 

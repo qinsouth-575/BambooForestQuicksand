@@ -210,8 +210,6 @@
                     <div class="col-sm-12">
                         <div class="card" style="height: 420px;overflow: hidden;">
                             <div class="card-block">
-                                <!--<h4 class="card-title">Basic Table</h4>
-                                <h6 class="card-subtitle">Add class <code>.table</code></h6>-->
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -307,14 +305,17 @@
 							<div class="form-group" style="position: relative;">
 								<label for="exampleInputName2">选择店铺：</label>&nbsp;
 								<select class="form-control form-control-line f_input exportExcel" style="width: 129px;">
-		                            <option value="">所有店铺</option>
 		                            <option v-for="item in shopList" :value="item.shopId">{{item.shopName}}</option>
 		                        </select>
 							</div>
 						</form>
+						
+						<form method="post" id="form111" enctype="multipart/form-data" style="display: none">
+							<input name="file" type="file">
+						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">Excel导入</button>
+						<button type="button" class="btn btn-primary" @click="excelUpload">Excel导入</button>
 						<a th:href="@{/excelFiles/download}" class="btn btn-primary">下载范本</a>
 						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 					</div>
@@ -488,22 +489,10 @@
 	   				
 	   			},
 	   			exportExcel : function(){
-	   				var cmd = {
-							shopId : $(".exportExcel").val()
-					}
-	   				
-	   				$.ajax({
-	 					url : "localhost:8080/excelFiles/exportExcel",
-	 					type : "post",
-	 					data : JSON.stringify(cmd),
-	 					contentType : "application/json;charset=utf-8",
-	 					dataType : "json",
-	 					success : function(result){
-	 						this_.pageCmd = result;
-	 						
-	 						this_.checked = false;
-	 					}
-	 				});
+ 					window.location.href="[[@{/excelFiles/exportExcel}]]?shopId=" + $(".shopList").val() + "&ctId=" + $(".typeList").val() + "&ctName=" + $(".ctName").val();
+	   			},
+	   			excelUpload : function(){
+	   				$("#form111>input").click();
 	   			}
 			},
 			created:function(){
@@ -512,6 +501,27 @@
 			}
 		});
     	
+	  	$(function(){
+	  		//商品批量导入
+	  		$("#form111>input").on("change", function(){
+	  			var formData = new FormData($("#form111")[0]);
+				formData.append("shopId", $(".exportExcel").val());
+				$.ajax({
+					url:"[[@{/excelFiles/excelUpload}]]",
+					data:formData,
+					type:"post",
+					processData:false,
+					contentType:false,
+					success:function(result){
+						if(result == "success"){
+							//
+						} else {
+							alert(result);
+						}
+					}
+				});
+	  		});
+	  	});
 	</script>
 </body>
 

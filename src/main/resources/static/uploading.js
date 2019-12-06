@@ -1075,6 +1075,12 @@ $(function(){
 			}
 		});
 		
+		if(commodityMain.imgList == []){
+			var image = new Object();
+			image.imgId = 12;
+			commodityMain.imgList.push(image);
+		}
+		
 		//alert(JSON.stringify(commodityMain));
 		
 		var url = "";

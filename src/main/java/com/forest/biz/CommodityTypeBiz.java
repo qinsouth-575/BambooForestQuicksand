@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.forest.entity.CommodityType;
+import com.forest.entity.CommodityTypeExample;
 import com.forest.mapper.CommodityTypeMapper;
 
 @Service
@@ -60,4 +61,15 @@ public class CommodityTypeBiz {
 		return ctMapper.updateByPrimaryKey(ct) > 0;
 	}
 	
+	/**
+     * - 5.按类别名查询
+     * @param image
+     * @return
+     */
+    public CommodityType querytImages(String ctName) {
+    	CommodityTypeExample example = new CommodityTypeExample();
+    	example.createCriteria().andCtNameLike(ctName);
+    	return ctMapper.selectByExample(example).get(0);
+    }
+    
 }

@@ -1,6 +1,7 @@
 package com.forest.entity;
 
 public class CommodityDetails {
+	
     private Integer cdId;
 
     private Integer cmId;
@@ -19,7 +20,36 @@ public class CommodityDetails {
 
     private String barCode;
 
-    public Integer getCdId() {
+    public CommodityDetails() {
+		super();
+	}
+
+	public CommodityDetails(Integer sizeId, String sizeName, Integer colorId, String colorName, Integer quantity,
+			String barCode) {
+		super();
+		this.sizeId = sizeId;
+		this.sizeName = sizeName;
+		this.colorId = colorId;
+		this.colorName = colorName;
+		this.quantity = quantity;
+		this.barCode = barCode;
+	}
+
+	public CommodityDetails(Integer cdId, Integer cmId, Integer sizeId, String sizeName, Integer colorId,
+			String colorName, String colorPrcture, Integer quantity, String barCode) {
+		super();
+		this.cdId = cdId;
+		this.cmId = cmId;
+		this.sizeId = sizeId;
+		this.sizeName = sizeName;
+		this.colorId = colorId;
+		this.colorName = colorName;
+		this.colorPrcture = colorPrcture;
+		this.quantity = quantity;
+		this.barCode = barCode;
+	}
+
+	public Integer getCdId() {
         return cdId;
     }
 
