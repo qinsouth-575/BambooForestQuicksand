@@ -39,4 +39,6 @@ public interface TransactionRecordMainMapper {
     int deleteById(String orderNumber);
     
     TransactionRecordMain queryById(String orderNumber);
+    
+    int updateByAll(TransactionRecordMain trm);
 }

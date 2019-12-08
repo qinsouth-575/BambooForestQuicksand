@@ -49,14 +49,14 @@
 }
 
 
-/*会员-商品按钮*/
+/*浼氬憳-鍟嗗搧鎸夐挳*/
 
 .align-self-center>a {
 	padding: 7px 39px;
 }
 
 
-/*商品列表样式*/
+/*鍟嗗搧鍒楄〃鏍峰紡*/
 
 .commodity {
 	width: 174px;
@@ -84,12 +84,26 @@
 	height: 77px;
 }
 
+.commodity_img1 {
+	padding: 7px 2px 2px 2px;
+}
+
+.commodity_img1>img {
+	width: 66px;
+	height: 66px;
+}
+
 .commodity_info>p {
 	margin: 6px;
 }
 
 .info_name {
 	font-weight: bold;
+	font-size: 13px;
+}
+
+.info_i {
+	font-size: 12px;
 }
 
 .info_money {
@@ -98,13 +112,13 @@
 
 .ellipsis-type {
 	max-width: 65px;
-	/*显示宽度*/
+	/*鏄剧ず瀹藉害*/
 	white-space: nowrap;
-	/*文本不换行*/
+	/*鏂囨湰涓嶆崲琛�*/
 	overflow: hidden;
-	/*超过部分隐藏*/
+	/*瓒呰繃閮ㄥ垎闅愯棌*/
 	text-overflow: ellipsis;
-	/*超过部分用...代替*/
+	/*瓒呰繃閮ㄥ垎鐢�...浠ｆ浛*/
 	cursor: pointer;
-	/*鼠标设置(不是必须)*/
+	/*榧犳爣璁剧疆(涓嶆槸蹇呴』)*/
 }

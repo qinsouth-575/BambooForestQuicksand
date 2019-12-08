@@ -37,7 +37,39 @@ public class Member {
     
     private Integer pageNum;//当前页
     
-    public Integer getPageNum() {
+    private Float discount;//会员折扣
+    
+    private BigDecimal upgradeRule;//会员升级条件
+    
+    private Integer upgrade;//是否自动升级
+    
+    
+    
+    public Float getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Float discount) {
+		this.discount = discount;
+	}
+
+	public BigDecimal getUpgradeRule() {
+		return upgradeRule;
+	}
+
+	public void setUpgradeRule(BigDecimal upgradeRule) {
+		this.upgradeRule = upgradeRule;
+	}
+
+	public Integer getUpgrade() {
+		return upgrade;
+	}
+
+	public void setUpgrade(Integer upgrade) {
+		this.upgrade = upgrade;
+	}
+
+	public Integer getPageNum() {
 		return pageNum;
 	}
 

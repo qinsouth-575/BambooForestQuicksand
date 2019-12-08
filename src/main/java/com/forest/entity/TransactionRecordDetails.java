@@ -7,8 +7,6 @@ public class TransactionRecordDetails {
 
     private String orderNumber;
 
-    private Integer articleNo;
-
     private Integer quantity;
 
     private BigDecimal rawTotalPrice;
@@ -25,8 +23,48 @@ public class TransactionRecordDetails {
     
     private Integer pageNum;
     
+    private String commodityName;
+    
+    private String commodityNorms;
+    
+    private String commodityColor;
+    
+    private String articleNo;
+    
+    
+    public String getArticleNo() {
+		return articleNo;
+	}
 
-    public Integer getPageNum() {
+	public void setArticleNo(String articleNo) {
+		this.articleNo = articleNo;
+	}
+
+	public String getCommodityName() {
+		return commodityName;
+	}
+
+	public void setCommodityName(String commodityName) {
+		this.commodityName = commodityName;
+	}
+
+	public String getCommodityNorms() {
+		return commodityNorms;
+	}
+
+	public void setCommodityNorms(String commodityNorms) {
+		this.commodityNorms = commodityNorms;
+	}
+
+	public String getCommodityColor() {
+		return commodityColor;
+	}
+
+	public void setCommodityColor(String commodityColor) {
+		this.commodityColor = commodityColor;
+	}
+
+	public Integer getPageNum() {
 		return pageNum;
 	}
 
@@ -64,14 +102,6 @@ public class TransactionRecordDetails {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
-    }
-
-    public Integer getArticleNo() {
-        return articleNo;
-    }
-
-    public void setArticleNo(Integer articleNo) {
-        this.articleNo = articleNo;
     }
 
     public Integer getQuantity() {

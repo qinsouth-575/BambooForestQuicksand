@@ -89,7 +89,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a th:href="@{/}" class="waves-effect _account">
+                        	<a th:href="@{/}" class="waves-effect _account nav_li_active">
                             	<i class="fa fa-diamond m-r-10" aria-hidden="true"></i>收银
                             </a>
                         </li>
@@ -99,7 +99,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                        	<a th:href="@{/commoditytypes/toPage}" class="waves-effect _account nav_li_active">
+                        	<a th:href="@{/commoditytypes/toPage}" class="waves-effect _account ">
                             	<i class="fa fa-calendar m-r-10" aria-hidden="true"></i>商品
                             </a>
                         </li>
@@ -139,9 +139,9 @@
                 <!-- Sidebar navigation-->
                 <table class="sidebarnav">
                 	<colgroup>
-						<col width="50%">
-						<col width="22%">
-						<col width="22%">
+						<col width="160px">
+						<col width="30px">
+						<col width="60px">
 					</colgroup>
 					
                 	<thead>
@@ -159,7 +159,7 @@
                 	</thead>
                 	
                 	<tbody id="gwcl">
-                		
+                	
                 	</tbody>
                 	<tfoot>
                 		<tr>
@@ -171,7 +171,7 @@
                 			<td colspan="3">
                     			<i class="fa fa-archive m-r-20" aria-hidden="true"></i>
                     			<button class="btn btn-default" onclick="gq()">挂起</button>
-                    			<button class="btn btn-danger">收款</button>
+                    			<button class="btn btn-danger" data-toggle="modal" data-target=".bs-sk">收款</button>
                 			</td>
                 		</tr>
                 	</tfoot>
@@ -196,8 +196,8 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-6 col-8 align-self-center">
-                    	<a href="#" class="btn pull-left hidden-sm-down btn-primary">&nbsp;会&nbsp;员&nbsp;</a>&nbsp;	
-                    	<a href="#" class="btn hidden-sm-down btn-info">&nbsp;商&nbsp;品&nbsp;</a>
+                    	<a href="#" class="btn pull-left hidden-sm-down btn-primary" onclick="cxhy()">&nbsp;会&nbsp;员&nbsp;</a>&nbsp;	
+                    	<a href="#" class="btn hidden-sm-down btn-info" onclick="cxsp()">&nbsp;商&nbsp;品&nbsp;</a>
                     </div>
                     <div class="col-md-6 col-4 align-self-center">
                         <div class="f_input pull-right" style="position: relative;">
@@ -212,19 +212,26 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
-                <div class="row">
+                <div class="row" style="display: block;" id="spxs">
                     <!-- column -->
                     <div class="col-sm-12">
                         <div class="card" style="height: 422px;overflow: hidden;">
                             <div class="card-block" style="padding-top: 0px;">
                                 <div class="table-responsive">
                                     <table class="table table-condensed">
-                                    	<thead>
+					                	<colgroup>
+											<col width="20%">
+											<col width="20%">
+											<col width="20%">
+											<col width="20%">
+											<col width="20%">
+										</colgroup>
+                                    	<thead id="thead">
                                     		<tr>
                                     			<th colspan="5">
-						                    		<button class="btn btn-success" @click="cxqb">全部</button>
+						                    		<button class="btn btn-success" onclick="cxqb()">全部</button>
 						                    		<span id="list_type">
-						                    			<button class="btn btn-default" v-for="item,index in splbList" value="item.ctId" @click="splbcx(item.ctId)">{{item.ctName}}</button>
+						                    			
 						                    		</span>
 						                    		
 						                    		<button class="btn btn-info pull-right" style="margin-left: 5px;" @click="nextPage">下一页</button>
@@ -232,7 +239,7 @@
                                     			</th>
                                     		</tr>
                                     	</thead>
-                                        <tbody>
+                                        <tbody id="tbody">
                                             <tr id="xssj1">
                                                 
                                             </tr>
@@ -246,6 +253,107 @@
                                             </tr>
                                         </tbody>
                                     </table>
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+                
+                <div class="row" style="display: none;" id="hyxs">
+                    <!-- column -->
+                    <div class="col-sm-12">
+                        <div class="card" style="height: 422px;overflow: hidden;">
+                            <div class="card-block" style="padding-top: 0px;">
+                                <div class="table-responsive">
+                                    <table class="table table-condensed">
+					                	<colgroup>
+											<col width="20%">
+											<col width="20%">
+											<col width="20%">
+											<col width="20%">
+											<col width="20%">
+										</colgroup>
+                                        <tbody>
+                                            <tr>
+                                            <td>
+		                                    	<div class='commodity'>
+				                            		<div class='commodity_img1'>
+				                            			<img src='/commodity/dasd'/>
+				                            		</div>
+				                            		<div class='commodity_info'>
+				                            			<p class='info_name ellipsis-type' title=''>姓名(123456)</p>
+				                            			<p class='info_i ellipsis-type'>
+				                            				等级:<span>会员</span>
+				                            			</p>
+				                            			<p class='info_i '>余额:<span>120000.00</span></p>
+				                            		</div>
+		                            			</div>
+                            					</td>
+                                            
+                                                <td>
+		                                    	<div class='commodity'>
+				                            		<div class='commodity_img1'>
+				                            			<img src='/commodity/dasd'/>
+				                            		</div>
+				                            		<div class='commodity_info'>
+				                            			<p class='info_name ellipsis-type' title=''>姓名(123456)</p>
+				                            			<p class='info_i ellipsis-type'>
+				                            				等级:<span>会员</span>
+				                            			</p>
+				                            			<p class='info_i '>余额:<span>120000.00</span></p>
+				                            		</div>
+		                            			</div>
+                            					</td>
+                            					
+                            					<td>
+		                                    	<div class='commodity'>
+				                            		<div class='commodity_img1'>
+				                            			<img src='/commodity/dasd'/>
+				                            		</div>
+				                            		<div class='commodity_info'>
+				                            			<p class='info_name ellipsis-type' title=''>姓名(123456)</p>
+				                            			<p class='info_i ellipsis-type'>
+				                            				等级:<span>会员</span>
+				                            			</p>
+				                            			<p class='info_i '>余额:<span>120000.00</span></p>
+				                            		</div>
+		                            			</div>
+                            					</td>
+                            					<td>
+		                                    	<div class='commodity'>
+				                            		<div class='commodity_img1'>
+				                            			<img src='/commodity/dasd'/>
+				                            		</div>
+				                            		<div class='commodity_info'>
+				                            			<p class='info_name ellipsis-type' title=''>姓名(123456)</p>
+				                            			<p class='info_i ellipsis-type'>
+				                            				等级:<span>会员</span>
+				                            			</p>
+				                            			<p class='info_i '>余额:<span>120000.00</span></p>
+				                            		</div>
+		                            			</div>
+                            					</td>
+                            					
+                                            </tr>
+                                            
+                                            <tr>
+                                                
+                                            </tr>
+                                            
+                                            <tr>
+                                               
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
@@ -301,6 +409,42 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary">确定</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	    <div class="modal fade bs-sk" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="bs-ee">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">结算中心</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<table>
+					<tr>
+						<td>总额:<span>1000.00</span></td>
+					</tr>
+					<tr>
+						<td>折扣:<span>1000.00</span></td>
+					</tr>
+					<tr>
+						<td>实收:<input type="text" value="1000.00"></td>
+					</tr>
+					<tr>
+						<td>未收:<span>0.00</span></td>
+					</tr>
+					<tr>
+						<td><p>结算方式</p></td>
+					</tr>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">结算</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -363,7 +507,6 @@
     		 el:"#etc",
     		 data(){
     			 return {
-    				 splbList:[],
     				 PageList:{},
     				 gdList:[]
     			 }
@@ -377,87 +520,12 @@
     					data:{},
     					dataType:"json",
     					"success":function(res){
-    						_this.splbList=res;
-    					}
-    				 });
-    			 },
-    			 splbcx:function(id){
-    				 $("#xssj1").html("");
-    				 $("#xssj2").html("");
-    				 $("#xssj3").html("");
-    				 alert(id);
-    				 var $spname=$("#spname").val();
-    				 var _this=this;
-    				 var obj={
-    						 pageNum:1,
-    						 ctId:id,
-    						 cmName:$spname
-    				 }
-    				 $.ajax({
-    					url:"[[@{/Bcashier/queryBySpPage}]]",
-    					type:"post",
-    					data:JSON.stringify(obj),
-    					dataType:"json",
-    					contentType:"application/json",
-    					"success":function(res){
-    						_this.PageList=res;
-    						$.each(res.list,function(i,obj){
-    							if(i>=0&&i<=4){
-    								var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
-                                    	"<div class='commodity'>"+
-                            		"<div class='commodity_img'>"+
-                            			"<img src='/commodity/"+obj.imgPath+"'/>"+
-                            		"</div>"+
-                            		"<div class='commodity_info'>"+
-                            			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-                            			"<p class='info_i'>"+
-                            				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-                            			"</p>"+
-                            			"<p class='info_money'>"+obj.salePrice+"</p>"+
-                            		"</div>"+
-                            	"</div>"+
-                            "</td>";
-    							}
-    							$("#xssj1").append($td);
-    							if(i>=5&&i<=9){
-		    								var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
-		                                	"<div class='commodity'>"+
-		                        		"<div class='commodity_img'>"+
-		                        			"<img src='/commodity/"+obj.imgPath+"'/>"+
-		                        		"</div>"+
-		                        		"<div class='commodity_info'>"+
-		                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-		                        			"<p class='info_i'>"+
-		                        				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-		                        			"</p>"+
-		                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
-		                        		"</div>"+
-		                        	"</div>"+
-		                        	"</td>";
-									$("#xssj2").append($td);
-    							}
-    							if(i>=10&&i<=14){
-    								var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
-                                	"<div class='commodity'>"+
-                        		"<div class='commodity_img'>"+
-                        			"<img src='/commodity/"+obj.imgPath+"'/>"+
-                        		"</div>"+
-                        		"<div class='commodity_info'>"+
-                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-                        			"<p class='info_i'>"+
-                        				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-                        			"</p>"+
-                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
-                        		"</div>"+
-                        	"</div>"+
-                        	"</td>";
-							$("#xssj3").append($td);
-    							}
+    						$.each(res,function(i,obj){
+    						var $td="<button class='btn btn-default' value='"+obj.ctId+"' onclick='splbcx("+obj.ctId+")' style='margin-right:5px;'>"+obj.ctName+"</button>";
+    						$("#list_type").append($td);
     						});
-    						
     					}
     				 });
-    				 
     			 },
     			 anamecx:function(){
     				 $("#xssj1").html("");
@@ -486,10 +554,10 @@
                             			"<img src='/commodity/"+obj.imgPath+"'/>"+
                             		"</div>"+
                             		"<div class='commodity_info'>"+
+                            			"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+                            			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                             			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-                            			"<p class='info_i'>"+
-                            				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-                            			"</p>"+
+                            			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
                             			"<p class='info_money'>"+obj.salePrice+"</p>"+
                             		"</div>"+
                             	"</div>"+
@@ -503,10 +571,10 @@
 		                        			"<img src='/commodity/"+obj.imgPath+"'/>"+
 		                        		"</div>"+
 		                        		"<div class='commodity_info'>"+
+			                        		"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+	                            			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
 		                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-		                        			"<p class='info_i'>"+
-		                        				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-		                        			"</p>"+
+		                        			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
 		                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
 		                        		"</div>"+
 		                        	"</div>"+
@@ -520,86 +588,10 @@
                         			"<img src='/commodity/"+obj.imgPath+"'/>"+
                         		"</div>"+
                         		"<div class='commodity_info'>"+
+	                        		"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+	                    			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                         			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-                        			"<p class='info_i'>"+
-                        				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-                        			"</p>"+
-                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
-                        		"</div>"+
-                        	"</div>"+
-                        	"</td>";
-							$("#xssj3").append($td);
-    							}
-    						});
-    						
-    					}
-    				 });
-    			 },
-    			 cxqb:function(){
-    				 $("#xssj1").html("");
-    				 $("#xssj2").html("");
-    				 $("#xssj3").html("");
-    				 var $spname=$("#spname").val();
-    				 var _this=this;
-    				 var obj={
-    						 pageNum:1,
-    						 ctId:"",
-    						 cmName:$spname
-    				 }
-    				 $.ajax({
-    					url:"[[@{/Bcashier/queryBySpPage}]]",
-    					type:"post",
-    					data:JSON.stringify(obj),
-    					dataType:"json",
-    					contentType:"application/json",
-    					"success":function(res){
-    						_this.PageList=res;
-    						$.each(res.list,function(i,obj){
-    							if(i>=0&&i<=4){
-    								var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
-                                    	"<div class='commodity'>"+
-                            		"<div class='commodity_img'>"+
-                            			"<img src='/commodity/"+obj.imgPath+"'/>"+
-                            		"</div>"+
-                            		"<div class='commodity_info'>"+
-                            			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-                            			"<p class='info_i'>"+
-                            				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-                            			"</p>"+
-                            			"<p class='info_money'>"+obj.salePrice+"</p>"+
-                            		"</div>"+
-                            	"</div>"+
-                            "</td>";
-    							}
-    							$("#xssj1").append($td);
-    							if(i>=5&&i<=9){
-		    								var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
-		                                	"<div class='commodity'>"+
-		                        		"<div class='commodity_img'>"+
-		                        			"<img src='/commodity/"+obj.imgPath+"'/>"+
-		                        		"</div>"+
-		                        		"<div class='commodity_info'>"+
-		                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-		                        			"<p class='info_i'>"+
-		                        				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-		                        			"</p>"+
-		                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
-		                        		"</div>"+
-		                        	"</div>"+
-		                        	"</td>";
-									$("#xssj2").append($td);
-    							}
-    							if(i>=10&&i<=14){
-    								var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
-                                	"<div class='commodity'>"+
-                        		"<div class='commodity_img'>"+
-                        			"<img src='/commodity/"+obj.imgPath+"'/>"+
-                        		"</div>"+
-                        		"<div class='commodity_info'>"+
-                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-                        			"<p class='info_i'>"+
-                        				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-                        			"</p>"+
+                        			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
                         			"<p class='info_money'>"+obj.salePrice+"</p>"+
                         		"</div>"+
                         	"</div>"+
@@ -648,10 +640,10 @@
                             			"<img src='/commodity/"+obj.imgPath+"'/>"+
                             		"</div>"+
                             		"<div class='commodity_info'>"+
+                            			"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+                            			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                             			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-                            			"<p class='info_i'>"+
-                            				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-                            			"</p>"+
+                            			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
                             			"<p class='info_money'>"+obj.salePrice+"</p>"+
                             		"</div>"+
                             	"</div>"+
@@ -665,10 +657,10 @@
 		                        			"<img src='/commodity/"+obj.imgPath+"'/>"+
 		                        		"</div>"+
 		                        		"<div class='commodity_info'>"+
+			                        		"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+	                            			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
 		                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-		                        			"<p class='info_i'>"+
-		                        				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-		                        			"</p>"+
+		                        			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
 		                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
 		                        		"</div>"+
 		                        	"</div>"+
@@ -682,10 +674,10 @@
                         			"<img src='/commodity/"+obj.imgPath+"'/>"+
                         		"</div>"+
                         		"<div class='commodity_info'>"+
+	                        		"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+	                    			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                         			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
-                        			"<p class='info_i'>"+
-                        				"<i class='fa fa-code m-r-10' aria-hidden='true'></i>"+
-                        			"</p>"+
+                        			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
                         			"<p class='info_money'>"+obj.salePrice+"</p>"+
                         		"</div>"+
                         	"</div>"+
@@ -696,7 +688,7 @@
     						
     					}
     				 });
-    				 
+    				 		
     			 }
     			 },
     		 created:function(){
@@ -709,14 +701,18 @@
     		 alert(JSON.stringify(this.spq));
 				var sd=$(s).find(".info_money").text();
 				var sw=$(s).find(".info_name").text();
+				var ys=$(s).find(".info_color").text();
+				var gg=$(s).find(".info_size").text();
 				var sfg={
-					name:sw,//商品名字
+					commodityName:sw,//商品名字
 					rawTotalPrice:sd,//商品原价
+					commodityColor:ys,//商品颜色
+					commodityNorms:gg,//商品规格
 					articleNo:id,//商品条形码
 					quantity:1,//商品数量
 					totalPrice:sd,//商品金额
 					orderNumber:ddh,//订单号
-					state:0//成交状态
+					state:1//成交状态
 				};
 				
 				var pd=false;
@@ -745,9 +741,9 @@
 				}
 				
 				if(pd==true){
-					this.spq.push(sfg);
+					spq.push(sfg);
 					var $sda="<tr>"+
-        			"<td class='ellipsis-type' value='"+sfg.articleNo+"'>"+sfg.name+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
+        			"<td class='ellipsis-type' value='"+sfg.articleNo+"'>"+sfg.commodityName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
         			"<td>"+sfg.quantity+"</td>"+
         			"<td>"+sfg.totalPrice+"</td>"+
         			"</tr>";
@@ -756,9 +752,8 @@
 				
 				}else{
 					this.spq.push(sfg);
-					alert("商品名字:"+sfg.name);
 					var $sda="<tr>"+
-        			"<td class='ellipsis-type' value='"+sfg.articleNo+"'>"+sfg.name+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
+        			"<td class='ellipsis-type' value='"+sfg.articleNo+"'>"+sfg.commodityName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
         			"<td>"+sfg.quantity+"</td>"+
         			"<td>"+sfg.totalPrice+"</td>"+
         			"</tr>";
@@ -785,6 +780,7 @@
     	 //挂起操作
     	 function gq(){
     		var bl=false;
+    		alert(ddh);
     			if(ddh==""||ddh==null){
     				bl=false;
     			}else{
@@ -792,9 +788,29 @@
     			}
     		if(bl){
     			//成交记录主表
+    			var createtime =new Date();
+   				var year=createtime.getFullYear();
+   				var month=createtime.getMonth()+1;
+   				var date=createtime.getDate();
+   				var hours=createtime.getHours();
+   				var minutes=createtime.getMinutes();
+   				var seconds=createtime.getSeconds();
+   				var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
                 var rtm={
                		 orderNumber:ddh,//订单号
-               		details:spq//成交详表记录
+               		 client:0,//客户编号
+               		 totalSum:zjg,//总额
+               		 discount:0.00,//折扣
+               		 actualIncome:zjg,//实收
+               		 notIncome:0,//未收
+               		 paymount:0,//支付方式
+               		 shopId:1,//店铺编号
+               		 cashier:"阿关",//收营员
+               		 shopAssistant:"阿威",//营业员
+               		 state:1,//成交状态
+               		 createTime:create,//下单时间
+               		 remark:"备注",//备注
+               		 details:spq//成交详表记录
                 }
                 $.ajax({
                    	url:"[[@{/TransactionRecordDetails/deleteById}]]",
@@ -806,6 +822,7 @@
                    	"success":function(res){
                    		if(res){
                    			alert("删除挂单成功!");
+                   			alert(JSON.stringify(rtm.spq));
                    		 		$.ajax({
                             	url:"[[@{/TransactionRecordDetails/insertByDetails}]]",
                             	type:"post",
@@ -830,6 +847,7 @@
                     });
     			alert("已存在订单");
     		}else{
+    			 if(spq.length!=0){
     			var random_no = "";//订单号
                 for (var i = 0; i < 2; i++) //j位随机数，用以加在时间戳后面。
                 {
@@ -838,7 +856,7 @@
                 ddh = new Date().getTime() + random_no;
                 alert(ddh);
                 //获取当前时间
-                	var createtime =new Date();
+                var createtime =new Date();
    				var year=createtime.getFullYear();
    				var month=createtime.getMonth()+1;
    				var date=createtime.getDate();
@@ -870,7 +888,7 @@
                		 details:spq//成交详表记录
                 }
                 alert(JSON.stringify(rtm));
-                if(spq.length!=0){
+               
                  $.ajax({
                	url:"[[@{/TransactionRecordMain/insertAllGd}]]",
                	type:"post",
@@ -908,13 +926,15 @@
 				"success":function(res){
 					$.each(res.details,function(i,obj){
 						var sda={
+								commodityName:obj.commodityName,//商品名字
 								rawTotalPrice:obj.rawTotalPrice,//商品原价
+								commodityColor:obj.commodityColor,//商品颜色
+								commodityNorms:obj.commodityNorms,//商品规格
 								articleNo:obj.articleNo,//商品条形码
 								quantity:obj.quantity,//商品数量
 								totalPrice:obj.totalPrice,//商品金额
 								orderNumber:obj.orderNumber,//订单号
-								state:obj.state,//成交状态
-								cmName:obj.cmName
+								state:obj.state//成交状态
 						}
 						ddh=obj.orderNumber;
 						spq.push(sda);
@@ -926,10 +946,10 @@
 					var zjzje=0;
 					$.each(spq,function(i,obj){
 						var $sda="<tr>"+
-	        			"<td class='ellipsis-type' value='"+obj.articleNo+"'>"+obj.cmName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
+	        			"<td class='ellipsis-type' value='"+obj.articleNo+"'>"+obj.commodityName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
 	        			"<td>"+obj.quantity+"</td>"+
 	        			"<td>"+obj.totalPrice+"</td>"+
-	        			"</tr>"; 
+	        			"</tr>";
 	        			$("#gwcl").append($sda);
 	        			zjzsl+=obj.quantity;//增加总数量
 						zjzje+=parseInt(obj.totalPrice);//增加总金额
@@ -954,7 +974,7 @@
 	    					$.each(res,function(o,obj){
 	    						var $tr="<tr>"+
 						"<td>"+obj.orderNumber+"</td>"+
-						"<td>"+obj.actualIncome+"</td>"+
+						"<td>"+obj.totalSum+"</td>"+
 						"<td><a onclick='ddxz("+obj.orderNumber+")''>选择</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick='ddsc("+obj.orderNumber+",this)''>删除</a></td>"+
 						"</tr>";
 						$("#sygd").append($tr);
@@ -976,13 +996,224 @@
 				 "success":function(res){
 					 if(res.msg=="删除成功"){
 						 $(s).parent().parent().remove();
+						 if(spq.length!=0){
+							 for(var i=0;i<spq.length;i++){
+								 if(spq[i].orderNumber==id){
+									 $("#gwcl").html("");
+									 spq.length=0;
+									 i=spq.length;
+								 }
+							 }
+						 }
 					 }else{
 						 alert(res.msg);
 					 }
 				 }
 			 });
 		 }
-	 
+	 	
+		 function cxhy(){
+			 $("#hyxs").attr("style","display: block;");
+			 $("#spxs").attr("style","display: none;");
+			 /* $.ajax({
+				url:"[[@{/MemberManage/queryAllByPage}]]",
+				type:"get",
+				data:{},
+				dataType:"json",
+				"success":function(){
+					
+				}
+				
+				
+			 }); */
+		 }
+		 
+		 function cxsp(){
+			 $("#hyxs").attr("style","display: none;");
+			 $("#spxs").attr("style","display: block;");
+			 /* $("#thead").html("");
+			 $("#tbody").html("");
+			 var $tr="<tr>"+
+		 			"<th colspan='5'>"+
+      		"<button class='btn btn-success' onclick='cxqb()'>全部</button>&nbsp;"+
+      		"<span id='list_type'>"+
+      		"</span>"+
+      		"<button class='btn btn-info pull-right' style='margin-left: 5px;' @click='nextPage'>下一页</button>"+
+      		"<button class='btn btn-info pull-right' @click='prePage'>上一页</button>"+
+			"</th>"+
+		"</tr>";
+		$("#thead").append($tr);
+		 $.ajax({
+				url:"[[@{/Bcashier/queryBySy}]]",
+				type:"get",
+				data:{},
+				dataType:"json",
+				"success":function(res){
+					$.each(res,function(i,obj){
+						var $td="<button class='btn btn-default' value='"+obj.ctId+"' onclick='splbcx("+obj.ctId+")' style='margin-right:5px;'>"+obj.ctName+"</button>";
+						$("#list_type").append($td);
+					});
+				}
+			 });
+		 queryBySpPage(1); */
+		 }
+		 
+		 function splbcx(id){
+			 $("#xssj1").html("");
+			 $("#xssj2").html("");
+			 $("#xssj3").html("");
+			 alert(id);
+			 var $spname=$("#spname").val();
+			 var _this=this;
+			 var obj={
+					 pageNum:1,
+					 ctId:id,
+					 cmName:$spname
+			 }
+			 $.ajax({
+				url:"[[@{/Bcashier/queryBySpPage}]]",
+				type:"post",
+				data:JSON.stringify(obj),
+				dataType:"json",
+				contentType:"application/json",
+				"success":function(res){
+					_this.PageList=res;
+					$.each(res.list,function(i,obj){
+						if(i>=0&&i<=4){
+							var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
+                            	"<div class='commodity'>"+
+                    		"<div class='commodity_img'>"+
+                    			"<img src='/commodity/"+obj.imgPath+"'/>"+
+                    		"</div>"+
+                    		"<div class='commodity_info'>"+
+                    			"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+                    			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
+                    			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
+                    			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
+                    			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                    		"</div>"+
+                    	"</div>"+
+                    "</td>";
+						}
+						$("#xssj1").append($td);
+						if(i>=5&&i<=9){
+    								var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
+                                	"<div class='commodity'>"+
+                        		"<div class='commodity_img'>"+
+                        			"<img src='/commodity/"+obj.imgPath+"'/>"+
+                        		"</div>"+
+                        		"<div class='commodity_info'>"+
+	                        		"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+                        			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
+                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
+                        			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
+                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                        		"</div>"+
+                        	"</div>"+
+                        	"</td>";
+							$("#xssj2").append($td);
+						}
+						if(i>=10&&i<=14){
+							var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
+                        	"<div class='commodity'>"+
+                		"<div class='commodity_img'>"+
+                			"<img src='/commodity/"+obj.imgPath+"'/>"+
+                		"</div>"+
+                		"<div class='commodity_info'>"+
+                    		"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+                			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
+                			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
+                			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
+                			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                		"</div>"+
+                	"</div>"+
+                	"</td>";
+					$("#xssj3").append($td);
+						}
+					});
+					
+				}
+			 });
+			 
+		 }
+		 
+		 function cxqb(){
+			 $("#xssj1").html("");
+			 $("#xssj2").html("");
+			 $("#xssj3").html("");
+			 var $spname=$("#spname").val();
+			 var _this=this;
+			 var obj={
+					 pageNum:1,
+					 ctId:"",
+					 cmName:$spname
+			 }
+			 $.ajax({
+				url:"[[@{/Bcashier/queryBySpPage}]]",
+				type:"post",
+				data:JSON.stringify(obj),
+				dataType:"json",
+				contentType:"application/json",
+				"success":function(res){
+					_this.PageList=res;
+					$.each(res.list,function(i,obj){
+						if(i>=0&&i<=4){
+							var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
+                            	"<div class='commodity'>"+
+                    		"<div class='commodity_img'>"+
+                    			"<img src='/commodity/"+obj.imgPath+"'/>"+
+                    		"</div>"+
+                    		"<div class='commodity_info'>"+
+                    			"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+                    			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
+                    			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
+                    			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
+                    			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                    		"</div>"+
+                    	"</div>"+
+                    "</td>";
+						}
+						$("#xssj1").append($td);
+						if(i>=5&&i<=9){
+    								var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
+                                	"<div class='commodity'>"+
+                        		"<div class='commodity_img'>"+
+                        			"<img src='/commodity/"+obj.imgPath+"'/>"+
+                        		"</div>"+
+                        		"<div class='commodity_info'>"+
+	                        		"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+                        			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
+                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
+                        			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
+                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                        		"</div>"+
+                        	"</div>"+
+                        	"</td>";
+							$("#xssj2").append($td);
+						}
+						if(i>=10&&i<=14){
+							var $td="<td onclick='hqys(this,"+obj.barCode+")'>"+
+                        	"<div class='commodity'>"+
+                		"<div class='commodity_img'>"+
+                			"<img src='/commodity/"+obj.imgPath+"'/>"+
+                		"</div>"+
+                		"<div class='commodity_info'>"+
+                    		"<p class='info_color ellipsis-type' style='display:none;'>"+obj.colorName+"</p>"+
+                			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
+                			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
+                			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
+                			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                		"</div>"+
+                	"</div>"+
+                	"</td>";
+					$("#xssj3").append($td);
+						}
+					});
+					
+				}
+			 });
+		 }
+		 
     </script>
 </body>
 </html>
