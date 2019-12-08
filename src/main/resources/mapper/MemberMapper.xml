@@ -390,4 +390,10 @@
   <select id="queryCont" resultType="int" parameterType="int">
   			select count(*) from member where member_id=#{0}
   </select>
+  
+  <select id="queryBySyHy" resultMap="BaseResultMap">
+  			SELECT * FROM member AS m
+			LEFT JOIN member_level AS ml ON ml.`ml_id`=m.`ml_id`
+			WHERE ml.`status`=0
+  </select>
 </mapper>

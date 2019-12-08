@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.forest.biz.TransactionRecordDetailsBiz;
+import com.forest.biz.TransactionRecordMainBiz;
 import com.forest.entity.TransactionRecordDetails;
 import com.forest.entity.TransactionRecordMain;
 import com.github.pagehelper.PageInfo;
@@ -22,6 +23,8 @@ public class TransactionRecordDetailsAction {
 				@Autowired
 				private TransactionRecordDetailsBiz transactionRecordDetailsBiz;
 				
+				@Autowired
+				private TransactionRecordMainBiz transactionRecordMainBiz;
 				/**
 				 * 按商品进行成交记录分页查询
 				 * @param pageNum
@@ -52,6 +55,12 @@ public class TransactionRecordDetailsAction {
 				@RequestMapping(value = "insertByDetails",method = RequestMethod.POST)
 				@ResponseBody
 				public boolean insertByDetails(@RequestBody TransactionRecordMain trm) {
+					boolean b=transactionRecordMainBiz.updateByAll(trm);
+					if(b) {
+						System.out.println("修改成功！");
+					}else {
+						System.out.println("修改失败!");
+					}
 					return transactionRecordDetailsBiz.insertByDetails(trm.getDetails());
 				}
 }
