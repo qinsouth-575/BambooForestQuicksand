@@ -151,4 +151,15 @@ public class MemberManageAction {
 				public int queryCont(int MemberId) {
 					return memberBiz.queryCont(MemberId);
 				}
+				
+				/**
+				 * 显示收银页面的会员
+				 * @param pageNum
+				 * @return
+				 */
+				@RequestMapping("queryBySyHy")
+				@ResponseBody
+				public PageInfo<Member> queryBySyHy(Integer pageNum){
+					return memberBiz.queryBySyHy(pageNum);
+				}
 }

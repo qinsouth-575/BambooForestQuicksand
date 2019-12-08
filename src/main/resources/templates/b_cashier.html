@@ -149,6 +149,7 @@
                 			<th colspan="3" style="background-color: #FFF;">
                 				<div class="pull-left">
                         			<i class="fa fa-shopping-cart m-r-10" aria-hidden="true" style="font-size: 33px;margin: 6px 0 6px 9px;"></i>
+                        			<span id="hyname"></span>
                 				</div>
                 				
                 				<div class="pull-right">
@@ -171,7 +172,7 @@
                 			<td colspan="3">
                     			<i class="fa fa-archive m-r-20" aria-hidden="true"></i>
                     			<button class="btn btn-default" onclick="gq()">挂起</button>
-                    			<button class="btn btn-danger" data-toggle="modal" data-target=".bs-sk">收款</button>
+                    			<button class="btn btn-danger" data-toggle="modal" data-target=".bs-sk" onclick="js()">收款</button>
                 			</td>
                 		</tr>
                 	</tfoot>
@@ -280,7 +281,7 @@
 											<col width="20%">
 										</colgroup>
                                         <tbody>
-                                            <tr>
+                                            <tr id="SyHy1">
                                             <td>
 		                                    	<div class='commodity'>
 				                            		<div class='commodity_img1'>
@@ -342,11 +343,11 @@
                             					
                                             </tr>
                                             
-                                            <tr>
+                                            <tr id="SyHy2">
                                                 
                                             </tr>
                                             
-                                            <tr>
+                                            <tr id="SyHy3">
                                                
                                             </tr>
                                         </tbody>
@@ -417,7 +418,7 @@
 	
 	
 	
-	    <div class="modal fade bs-sk" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="bs-ee">
+	    <div class="modal fade bs-sk" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="bs-sk">
   		<div class="modal-dialog modal-lg">
     		<div class="modal-content">
 				<div class="modal-header">
@@ -425,26 +426,61 @@
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				</div>
 				<div class="modal-body">
-					<table>
-					<tr>
-						<td>总额:<span>1000.00</span></td>
-					</tr>
-					<tr>
-						<td>折扣:<span>1000.00</span></td>
-					</tr>
-					<tr>
-						<td>实收:<input type="text" value="1000.00"></td>
-					</tr>
-					<tr>
-						<td>未收:<span>0.00</span></td>
-					</tr>
-					<tr>
-						<td><p>结算方式</p></td>
-					</tr>
-					</table>
-				</div>
+					<div class="row">
+						<div class="col-sm-5">
+							总额:<span id="skzje">1000.00</span>
+						</div>
+						<div class="col-sm-5">
+							折扣:<span id="skzk">1000.00</span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-5">
+							实收:<input type="text" value="1000.00" id="skss">
+						</div>
+						<div class="col-sm-5">
+							未收:<span id="skws">0.00</span>
+						</div>
+					</div>
+						<div class="row">
+						<div class="col-sm-5">
+							<p>结算方式:<select id="jsfs">
+								<option value="0">现金</option>
+								<option value="1">刷卡</option>
+								<option value="2">余额</option>
+								<option value="3">支付宝</option>
+								<option value="4">微信</option>
+							</select></p>
+						</div>
+						<div class="col-sm-5">
+							<p>营业员:<select id="yyy">
+							</select></p>
+						</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<table>
+								<colgroup>
+						<col width="50%">
+						<col width="35%">
+						<col width="14%">
+						</colgroup>
+									<tr>
+										<th>商品名字</th>
+										<th>商品数量</th>
+										<th>商品价格</th>
+									</tr>
+									<tbody id="skxq">
+									
+									</tbody>
+								</table>
+							</div>
+						</div>
+						
+						
+						</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">结算</button>
+					<button type="button" class="btn btn-primary" onclick="qrsk()">结算</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
@@ -508,7 +544,8 @@
     		 data(){
     			 return {
     				 PageList:{},
-    				 gdList:[]
+    				 gdList:[],
+    				 SyPage:{}
     			 }
     		 },
     		 methods:{
@@ -560,7 +597,7 @@
                             			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
                             			"<p class='info_money'>"+obj.salePrice+"</p>"+
                             		"</div>"+
-                            	"</div>"+
+                           	"</div>"+
                             "</td>";
     							}
     							$("#xssj1").append($td);
@@ -644,7 +681,7 @@
                             			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                             			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
                             			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-                            			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                            			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
                             		"</div>"+
                             	"</div>"+
                             "</td>";
@@ -661,7 +698,7 @@
 	                            			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
 		                        			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
 		                        			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-		                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
+		                        			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
 		                        		"</div>"+
 		                        	"</div>"+
 		                        	"</td>";
@@ -678,7 +715,7 @@
 	                    			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                         			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
                         			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                        			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
                         		"</div>"+
                         	"</div>"+
                         	"</td>";
@@ -689,9 +726,105 @@
     					}
     				 });
     				 		
+    			 },
+    			 queryBySyHy:function(pageNum){
+    				 var _this=this;
+    				 $.ajax({
+    					url:"[[@{/MemberManage/queryBySyHy}]]",
+    					type:"get",
+    					data:{
+    						pageNum:pageNum
+    					},
+    					dataType:"json",
+    					"success":function(res){
+    						_this.SyPage=res;
+    						if(res.list!=null){
+    							$("#SyHy1").html("");
+    							$("#SyHy2").html("");
+    							$("#SyHy3").html("");
+    							$.each(res.list,function(i,obj){
+    								if(i>=0&&i<=3){
+    								var $tr="<td onclick='hqsyhy(this)'>"+
+		                                    	"<div class='commodity'>"+
+				                            		"<div class='commodity_img1'>"+
+				                            			"<img src='/commodity/dasd'/>"+
+				                            		"</div>"+
+				                            		"<div class='commodity_info'>"+
+				                            			"<p class='info_discount' style='display:none;'>"+obj.discount+"</p>"+
+				                            			"<p class='info_memberName' style='display:none;'>"+obj.memberName+"</p>"+
+				                            			"<p class='info_memberId' style='display:none;'>"+obj.memberId+"</p>"+
+				                            			"<p class='info_mlName' style='display:none;'>"+obj.ml_name+"</p>"+
+				                            			"<p class='info_balance' style='display:none;'>"+obj.balance+"</p>"+
+				                            			"<p class='info_upgradeRule' style='display:none;'>"+obj.upgradeRule+"</p>"+
+				                            			"<p class='info_upgrade' style='display:none;'>"+obj.upgrade+"</p>"+
+				                            			"<p class='info_name ellipsis-type' title=''>"+obj.memberName+"("+obj.memberId+")</p>"+
+				                            			"<p class='info_i ellipsis-type'>"+
+				                            				"等级:<span>"+obj.ml_name+"</span>"+
+				                            			"</p>"+
+				                            			"<p>余额:<span class='info_i'>"+obj.balance+"</span></p>"+
+				                            		"</div>"+
+		                            			"</div>"+
+                            					"</td>";
+                            					$("#SyHy1").append($tr);
+    								}
+    								if(i>=4&&i<=8){
+    									var $tr="<td onclick='hqsyhy(this)'>"+
+                                    	"<div class='commodity'>"+
+		                            		"<div class='commodity_img1'>"+
+		                            			"<img src='/commodity/dasd'/>"+
+		                            		"</div>"+
+		                            		"<div class='commodity_info'>"+
+			                            		"<p class='info_discount' style='display:none;'>"+obj.discount+"</p>"+
+		                            			"<p class='info_memberName' style='display:none;'>"+obj.memberName+"</p>"+
+		                            			"<p class='info_memberId' style='display:none;'>"+obj.memberId+"</p>"+
+		                            			"<p class='info_mlName' style='display:none;'>"+obj.ml_name+"</p>"+
+		                            			"<p class='info_balance' style='display:none;'>"+obj.balance+"</p>"+
+		                            			"<p class='info_upgradeRule' style='display:none;'>"+obj.upgradeRule+"</p>"+
+		                            			"<p class='info_upgrade' style='display:none;'>"+obj.upgrade+"</p>"+
+		                            			"<p class='info_name ellipsis-type' title=''>"+obj.memberName+"("+obj.memberId+")</p>"+
+		                            			"<p class='info_i ellipsis-type'>"+
+		                            				"等级:<span>"+obj.ml_name+"</span>"+
+		                            			"</p>"+
+		                            			"<p class='info_i '>余额:<span>"+obj.balance+"</span></p>"+
+		                            		"</div>"+
+                            			"</div>"+
+                    					"</td>";
+                    					$("#SyHy2").append($tr);
+    								}
+    								
+    								if(i>=9&&i<=13){
+    									var $tr="<td onclick='hqsyhy(this)'>"+
+                                    	"<div class='commodity'>"+
+		                            		"<div class='commodity_img1'>"+
+		                            			"<img src='/commodity/dasd'/>"+
+		                            		"</div>"+
+		                            		"<div class='commodity_info'>"+
+			                            		"<p class='info_discount' style='display:none;'>"+obj.discount+"</p>"+
+		                            			"<p class='info_memberName' style='display:none;'>"+obj.memberName+"</p>"+
+		                            			"<p class='info_memberId' style='display:none;'>"+obj.memberId+"</p>"+
+		                            			"<p class='info_mlName' style='display:none;'>"+obj.ml_name+"</p>"+
+		                            			"<p class='info_balance' style='display:none;'>"+obj.balance+"</p>"+
+		                            			"<p class='info_upgradeRule' style='display:none;'>"+obj.upgradeRule+"</p>"+
+		                            			"<p class='info_upgrade' style='display:none;'>"+obj.upgrade+"</p>"+
+		                            			"<p class='info_name ellipsis-type' title=''>"+obj.memberName+"("+obj.memberId+")</p>"+
+		                            			"<p class='info_i ellipsis-type'>"+
+		                            				"等级:<span>"+obj.ml_name+"</span>"+
+		                            			"</p>"+
+		                            			"<p class='info_i '>余额:<span>"+obj.balance+"</span></p>"+
+		                            		"</div>"+
+                            			"</div>"+
+                    					"</td>";
+                    					$("#SyHy2").append($tr);
+    								}
+    								
+    							});
+    						}
+    					}
+    				 });
     			 }
     			 },
     		 created:function(){
+    			 this.queryBySyHy(1);
     			 this.queryBySy();
     			 this.queryBySpPage(1);
 	 		}
@@ -722,6 +855,7 @@
 						alert("没有找到");
 						pd=true;
 					}else{
+						if(hyxx==""||hyxx==null){
 						pd=false;
 						alert("已存在这个商品");
 						this.spq[i].quantity+=1;
@@ -736,28 +870,80 @@
 							}
 						});
 						i=this.spq.length;//跳出循环
+						}else{
+							pd=false;
+							alert("已存在这个商品");
+							this.spq[i].quantity+=1;
+							$("#gwcl>tr").each(function(){
+								if($(this).find("td:first").attr("value")==spq[i].articleNo){
+									var zk=hyxx.discount*0.01;
+									var sad=parseInt($(this).find("td:first").next().text());//获取商品数量
+									var $fhjf=sad+1;//商品数量+1
+									$(this).find("td:first").next().text($fhjf);//给这个商品的数量赋值
+									var $xj=sd*$fhjf*zk;//商品价格(数量和单价相乘)
+									spq[i].totalPrice=$xj.toFixed(2);//赋值给我商品总金额
+									$(this).find("td:last").text($xj.toFixed(2));//页面的价格变
+								}
+							});
+							i=this.spq.length;//跳出循环
+							alert("选择会员之后选择的商品");
+						}
 					}
 					
 				}
 				
 				if(pd==true){
+					if(hyxx==""||hyxx==null){
 					spq.push(sfg);
 					var $sda="<tr>"+
         			"<td class='ellipsis-type' value='"+sfg.articleNo+"'>"+sfg.commodityName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
         			"<td>"+sfg.quantity+"</td>"+
+        			"<td style='display:none;' class='money'>"+sfg.totalPrice+"</td>"+
         			"<td>"+sfg.totalPrice+"</td>"+
         			"</tr>";
         			$("#gwcl").append($sda);
+					}else{
+						var zk=hyxx.discount*0.01;
+						var $totalPrice=sfg.totalPrice;
+						var $money=$totalPrice*zk;
+						sfg.totalPrice=$money.toFixed(2);
+						spq.push(sfg);
+						var $sda="<tr>"+
+	        			"<td class='ellipsis-type' value='"+sfg.articleNo+"'>"+sfg.commodityName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
+	        			"<td>"+sfg.quantity+"</td>"+
+	        			"<td style='display:none;' class='money'>"+sfg.totalPrice+"</td>"+
+	        			"<td>"+sfg.totalPrice+"</td>"+
+	        			"</tr>";
+	        			$("#gwcl").append($sda);
+						alert("选择会员之后选择的商品");
+					}
 				}
 				
 				}else{
+					if(hyxx==""||hyxx==null){
 					this.spq.push(sfg);
 					var $sda="<tr>"+
         			"<td class='ellipsis-type' value='"+sfg.articleNo+"'>"+sfg.commodityName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
         			"<td>"+sfg.quantity+"</td>"+
+        			"<td style='display:none;' class='money'>"+sfg.totalPrice+"</td>"+
         			"<td>"+sfg.totalPrice+"</td>"+
         			"</tr>";
         			$("#gwcl").append($sda);
+					}else{
+						var zk=hyxx.discount*0.01;
+						var $totalPrice=sfg.totalPrice;
+						var $money=$totalPrice*zk;
+						sfg.totalPrice=$money.toFixed(2);
+						spq.push(sfg);
+						var $sda="<tr>"+
+	        			"<td class='ellipsis-type' value='"+sfg.articleNo+"'>"+sfg.commodityName+"<br/><i class='fa fa-code' aria-hidden='true'></i></td>"+
+	        			"<td>"+sfg.quantity+"</td>"+
+	        			"<td style='display:none;' class='money'>"+sfg.totalPrice+"</td>"+
+	        			"<td>"+sfg.totalPrice+"</td>"+
+	        			"</tr>";
+	        			$("#gwcl").append($sda);
+						alert("选择会员之后选择的商品");
+					}
 				}
 				var zjzsl=0;
 				var zjzje=0;
@@ -768,7 +954,7 @@
 					zjzje+=parseInt(obj.totalPrice);//增加总金额
 				});
 				zsl3=zjzsl;
-				zjg=zjzje;
+				zjg=zjzje.toFixed(2);
 				alert("总数量:"+zsl3);
 				$("#zsl").text(zsl3);
 				$("#zje").text(zjg);
@@ -1090,7 +1276,7 @@
                     			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                     			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
                     			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-                    			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                    			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
                     		"</div>"+
                     	"</div>"+
                     "</td>";
@@ -1107,7 +1293,7 @@
                         			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                         			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
                         			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                        			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
                         		"</div>"+
                         	"</div>"+
                         	"</td>";
@@ -1124,7 +1310,7 @@
                 			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                 			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
                 			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-                			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
                 		"</div>"+
                 	"</div>"+
                 	"</td>";
@@ -1168,7 +1354,7 @@
                     			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                     			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
                     			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-                    			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                    			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
                     		"</div>"+
                     	"</div>"+
                     "</td>";
@@ -1185,7 +1371,7 @@
                         			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                         			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
                         			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-                        			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                        			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
                         		"</div>"+
                         	"</div>"+
                         	"</td>";
@@ -1202,7 +1388,7 @@
                 			"<p class='info_size ellipsis-type' style='display:none;'>"+obj.sizeName+"</p>"+
                 			"<p class='info_name ellipsis-type' title='"+obj.cmName+"'>"+obj.cmName+"</p>"+
                 			"<p class='info_i ellipsis-type' title='"+obj.colorName+" / "+obj.sizeName+"'>"+obj.colorName+" / "+obj.sizeName+"</p>"+
-                			"<p class='info_money'>"+obj.salePrice+"</p>"+
+                			"<p class='info_money'>"+obj.salePrice.toFixed(2)+"</p>"+
                 		"</div>"+
                 	"</div>"+
                 	"</td>";
@@ -1214,6 +1400,244 @@
 			 });
 		 }
 		 
+		 var hyxx="";//会员信息
+		 
+		 function hqsyhy(obj){
+			 hyxx="";
+			var discount=$(obj).find(".info_discount").text();
+ 			var memberName=$(obj).find(".info_memberName").text();
+ 			var memberId=$(obj).find(".info_memberId").text();
+ 			var ml_name=$(obj).find(".info_mlName").text();
+ 			var balance=$(obj).find(".info_balance").text();
+ 			var upgradeRule=$(obj).find(".info_upgradeRule").text();
+ 			var upgrade=$(obj).find(".info_upgrade").text();
+			 var obj={
+					 discount:discount,
+					 memberName:memberName,
+					 memberId:memberId,
+					 ml_name:ml_name,
+					 balance:balance,
+					 upgradeRule:upgradeRule,
+					 upgrade:upgrade
+			 };
+			 hyxx=obj;
+			 alert(hyxx.discount);
+			 $("#hyname").html(hyxx.memberName+"("+hyxx.memberId+")");
+			 if(this.spq!=null||this.sqp!=""){
+				 hyList=JSON.stringify(this.spq);
+				 var zk=hyxx.discount*0.01;
+				 alert(zk);
+				 var $zjg=0;
+				  $("#gwcl>tr").each(function(i){
+					  	var $money=$(this).find(".money").text();
+					  	alert($money);
+					  	var $zq2=($money*zk).toFixed(2);
+					  	spq[i].totalPrice=$zq2;
+					  	alert(spq[i].totalPrice);
+					  	$zjg+=Number($zq2);
+						$(this).find("td:last").text($zq2);
+					  	
+				  });
+				  alert($zjg);
+				  zjg=$zjg.toFixed(2);
+				  $("#zje").html(zjg);
+			 }
+			 
+		 }
+		 
+		 function js(){
+			 $("#yyy").html("");
+			 $("#skxq").html("");
+			 $.ajax({
+				url:"[[@{/query}]]",
+				type:"get",
+				data:{},
+				dataType:"json",
+				"success":function(res){
+					$.each(res,function(i,obj){
+						var $tr="<option>"+obj.staffName+"</option>";
+						$("#yyy").append($tr);
+					});
+				}
+			 });
+			 
+			 $("#skzje").html(zjg);
+			 $("#skss").attr("value",zjg);
+			 if(hyxx!=""||hyxx!=null){
+				 $("#skzk").html(hyxx.discount*0.01);
+			 }else{
+				 $("#skzk").html("0.00");
+			 }
+			 
+			 $.each(spq,function(i,obj){
+				 var $td="<tr>"+
+									"<td>"+obj.commodityName+"</td>"+
+									"<td>"+obj.quantity+"</td>"+
+									"<td>"+obj.totalPrice+"</td>"+
+									"</tr>";
+				$("#skxq").append($td);
+			 });
+		 }
+		 function qrsk(){
+			 alert(ddh);
+			 if(this.ddh!=""){
+				//成交记录主表
+	    			var createtime =new Date();
+	   				var year=createtime.getFullYear();
+	   				var month=createtime.getMonth()+1;
+	   				var date=createtime.getDate();
+	   				var hours=createtime.getHours();
+	   				var minutes=createtime.getMinutes();
+	   				var seconds=createtime.getSeconds();
+	   				var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
+	   				for(var i=0;i<spq.length;i++){
+	   					spq[i].orderNumber=ddh;
+	   					spq[i].state=0;
+	   				}
+	                var rtm={
+	               		 orderNumber:ddh,//订单号
+	               		 client:0,//客户编号
+	               		 totalSum:zjg,//总额
+	               		 discount:0.00,//折扣
+	               		 actualIncome:zjg,//实收
+	               		 notIncome:0,//未收
+	               		 paymount:0,//支付方式
+	               		 shopId:1,//店铺编号
+	               		 cashier:"阿关",//收营员
+	               		 shopAssistant:"阿威",//营业员
+	               		 state:0,//成交状态
+	               		 createTime:create,//下单时间
+	               		 remark:"备注",//备注
+	               		 details:spq//成交详表记录
+	                }
+	                
+	                if(hyxx!=""){
+		   				rtm.client=hyxx.memberId;
+		   				rtm.discount=hyxx.discount;
+		   			 }
+	               	var inp=$("#skss").val();
+	               	alert("input里面的值"+inp);
+	                rtm.actualIncome=$("#skss").val();
+	                rtm.notIncome=$("#skws").html();
+	                rtm.paymount=$("#jsfs").val();
+	                rtm.cashier=$("#yyy").val();
+	                rtm.shopAssistant=$("#yyy").val();
+	                
+	                $.ajax({
+	                   	url:"[[@{/TransactionRecordDetails/deleteById}]]",
+	                   	type:"delete",
+	                   	data:{
+	                   		orderNumber:ddh
+	                   	},
+	                   	dataType:"json",
+	                   	"success":function(res){
+	                   		if(res){
+	                   			alert("删除挂单成功!");
+	                   			alert(JSON.stringify(rtm.spq));
+	                   		 		$.ajax({
+	                            	url:"[[@{/TransactionRecordDetails/insertByDetails}]]",
+	                            	type:"post",
+	                            	data:JSON.stringify(rtm),
+	                            	dataType:"json",
+	                            	contentType:"application/json",
+	                            	"success":function(res){
+	                            		if(res){
+	                            			alert("新增挂单成功！");
+	                            			spq.length = 0;
+	                            			ddh="";//清空订单号
+	                            			$("#gwcl").html("");
+	                            			$("#zsl").text("0");
+	                        				$("#zje").text("0");
+	                        				ddh="";
+	                        				$('#bs-sk').modal('hide');
+	                            		}
+	                            	}
+	                             });
+	                   		}else{
+	                   			alert("删除挂单失败!");
+	                   		}
+	                   	}
+	                    });
+	    			alert("已存在订单");
+			 }else{
+				 if(spq.length!=0){
+		    			var random_no = "";//订单号
+		                for (var i = 0; i < 2; i++) //j位随机数，用以加在时间戳后面。
+		                {
+		                    random_no += Math.floor(Math.random() * 10);
+		                }
+		                ddh = new Date().getTime() + random_no;
+		                alert(ddh);
+		                //获取当前时间
+		                var createtime =new Date();
+		   				var year=createtime.getFullYear();
+		   				var month=createtime.getMonth()+1;
+		   				var date=createtime.getDate();
+		   				var hours=createtime.getHours();
+		   				var minutes=createtime.getMinutes();
+		   				var seconds=createtime.getSeconds();
+		   				var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
+		   				alert(JSON.stringify(spq));
+		   				for(var i=0;i<spq.length;i++){
+		   					alert(i);
+		   					spq[i].orderNumber=ddh;
+		   					spq[i].state=0;
+		   				}
+		   			 
+		                //成交记录主表
+		                var rtm={
+		               		 orderNumber:ddh,//订单号
+		               		 client:0,//客户编号
+		               		 totalSum:zjg,//总额
+		               		 discount:0.00,//折扣
+		               		 actualIncome:zjg,//实收
+		               		 notIncome:0,//未收
+		               		 paymount:0,//支付方式
+		               		 shopId:1,//店铺编号
+		               		 cashier:"阿关",//收营员
+		               		 shopAssistant:"阿威",//营业员
+		               		 state:0,//成交状态
+		               		 createTime:create,//下单时间
+		               		 remark:"备注",//备注
+		               		 details:spq//成交详表记录
+		                }
+		                alert(JSON.stringify(rtm));
+		               
+		                if(hyxx!=""){
+			   				rtm.client=hyxx.memberId;
+			   				rtm.discount=hyxx.discount;
+			   			 }
+		                var inp=$("#skss").val();
+		               	alert("input里面的值"+inp);
+		                rtm.actualIncome=$("#skss").val();
+		                rtm.notIncome=$("#skws").html();
+		                rtm.paymount=$("#jsfs").val();
+		                rtm.cashier=$("#yyy").val();
+		                rtm.shopAssistant=$("#yyy").val();
+		                
+		                 $.ajax({
+		               	url:"[[@{/TransactionRecordMain/insertAllGd}]]",
+		               	type:"post",
+		               	data:JSON.stringify(rtm),
+		               	dataType:"json",
+		               	contentType:"application/json",
+		               	"success":function(res){
+		               		alert("结算成功！");
+		               		if(res.msg=="挂单成功"){
+		               			spq.length = 0;
+		               			$("#gwcl").html("");
+		               			$("#zsl").text("0");
+		           				$("#zje").text("0");
+		           				ddh="";
+		           				$('#bs-sk').modal('hide');
+		               		}
+		               	}
+		                });
+		                }else{
+		               	 alert("你还没选择商品");
+		                }
+			 }
+		 }
     </script>
 </body>
 </html>

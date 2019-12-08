@@ -39,4 +39,6 @@ public interface MemberMapper {
     int updatebi(Member m);
     
     int queryCont(int MemberId);
+    
+    List<Member> queryBySyHy();
 }
