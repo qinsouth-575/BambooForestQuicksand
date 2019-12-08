@@ -144,9 +144,9 @@ public class StaffAction {
 	@ResponseBody
 	public Staff StaffSession(HttpSession session) {
 		Staff staff=(Staff) session.getAttribute("account");
-		System.out.println("session中获取：" + staff + "，为了拿id查询");
+		System.out.println("StaffAction - StaffSession - session中获取：" + staff + "，为了拿id查询");
 		staff = sb.queryId(staff.getStaffId());
-		System.out.println("根据ID查询：" + staff);
+		System.out.println("StaffAction - StaffSession - 根据ID查询：" + staff);
 		return staff;
 	}
 	
