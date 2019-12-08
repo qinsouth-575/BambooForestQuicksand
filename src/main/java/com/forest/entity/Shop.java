@@ -8,6 +8,8 @@ public class Shop {
     private String shopName;
 
     private String phone;
+    
+    private String linkman;
 
     private String telephone;
 
@@ -20,6 +22,7 @@ public class Shop {
     private String street;
 
     private String info;
+    
     private int staffcount;
     
     @Override
@@ -76,7 +79,7 @@ public class Shop {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    private String linkman;
+    
     public String getLinkman() {
 		return linkman;
 	}

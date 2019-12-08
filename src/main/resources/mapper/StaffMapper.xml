@@ -256,6 +256,13 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where staff_id = #{staffId,jdbcType=INTEGER}
   </update>
+  
+  
+  
+  
+  
+  
+  
   <select id="queryNameAndPwd" resultMap="BaseResultMap">
   	SELECT * FROM `staff` WHERE `job_number`=#{jobNumber} AND `password`=#{password}
   </select>
@@ -283,4 +290,5 @@
   		SET head_portrait_path=#{headPortraitPath} 
   		WHERE staff_id=#{staffId}
   </update>
+  
 </mapper>

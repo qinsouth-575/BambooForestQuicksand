@@ -14,11 +14,20 @@ public class Staff {
     private String staffName;
 
     private String password;
-    private String shopName;
-    private String posName;
+
+	private Integer staffState;
+
+    private Date createTime;
+    
     private String trade;
+    
     private String headPortraitPath;
+    
     private String phone;
+    
+    private String shopName;
+    
+    private String posName;
 	
 	private String randomCode;	//随机数验证码 - 11
     
@@ -76,10 +85,6 @@ public class Staff {
 	public void setPosName(String posName) {
 		this.posName = posName;
 	}
-
-	private Integer staffState;
-
-    private Date createTime;
 
     public Integer getStaffId() {
         return staffId;
