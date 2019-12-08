@@ -194,7 +194,7 @@ public class StaffAction {
 			 session.setAttribute("user", user);
 			 
 			 System.out.println("修改后：" + user);
-			 return "/head/" + file.getOriginalFilename();
+			 return file.getOriginalFilename();
 		}else {
 			 return "break";
 		}

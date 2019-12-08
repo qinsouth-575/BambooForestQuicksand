@@ -110,7 +110,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
-                            	<img src="assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img v-bind:src="'/head/' + session.headPortraitPath" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
                     </ul>
@@ -190,7 +190,7 @@
 										<img src class="img-circle" width="150" />
 									</div>
 									
-									<a href="#" style="background: none repeat scroll 0 0 #FFFFFF; color: #9e9e9e; 
+									<a href="javascript:;" style="background: none repeat scroll 0 0 #FFFFFF; color: #9e9e9e; 
 									 display: block; height: 32px; line-height: 32px; 
 									 text-align: center; width: 220px; opacity: 0.8;">上传头像 </a> 
 									
@@ -312,8 +312,10 @@
 						//alert(res);
 						
 						if (res != "break") {
-							$(".img-circle").attr("src", res);
-							$(".profile-pic").attr("src", res);
+							$(".img-circle").attr("src", "/head/" + res);
+							//$(".profile-pic").attr("src", res);
+							
+							vv.session.headPortraitPath = res;
 						} else if (res == "break") {
 							alert("修改失败，请重试！");
 						}
@@ -323,11 +325,13 @@
 			
 		});
 		
-		var vv=new Vue({
+		var vv = new Vue({
 			el : "#user",
 			data(){
 				return {
-					session:[]
+					session : {
+						headPortraitPath : "default.png"
+					}
 				};
 			},methods:{
 				querySession:function(){
@@ -339,7 +343,7 @@
 							this_.session=res;
 							//alert(JSON.stringify(this_.session));
 							$(".img-circle").attr("src", "/head/" + this_.session.headPortraitPath);
-							$(".profile-pic").attr("src", "/head/" + this_.session.headPortraitPath);
+							//$(".profile-pic").attr("src", "/head/" + this_.session.headPortraitPath);
 						}
 					});
 				},

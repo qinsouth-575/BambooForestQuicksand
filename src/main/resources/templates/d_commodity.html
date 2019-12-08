@@ -108,7 +108,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
-                            	<img src="/assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img v-bind:src="'/head/' + loginStaff.headPortraitPath" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
                     </ul>
@@ -304,6 +304,9 @@
 			el:"#main-wrapper",
 			data(){
 				return {
+					loginStaff : {
+						headPortraitPath : "default.png"
+					},
 					ctList:[],
 					ct:{
 						ctId : 0,
@@ -312,6 +315,7 @@
 				};
 			},methods:{
 				queryHeadPic : function(){
+					var this_=this;
 					//1.Ajax查询后台 获得session后的值
 					$.ajax({
 						url:"[[@{/session}]]",
@@ -319,7 +323,8 @@
 						dataType : "json",
 						success:function(res){
 							//alert(JSON.stringify(res));
-							$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+							//$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+							this_.loginStaff = res;
 						}
 					});
 				},

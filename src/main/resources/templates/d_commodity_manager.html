@@ -108,7 +108,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
-                            	<img src="/assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img v-bind:src="'/head/' + loginStaff.headPortraitPath" alt="user" class="profile-pic m-r-5" />丶秦南<!--  src="/assets/images/users/HeadPortrait.jpg" -->
                             </a>
                         </li>
                     </ul>
@@ -317,7 +317,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" @click="excelUpload">Excel导入</button>
 						<a th:href="@{/excelFiles/download}" class="btn btn-primary">下载范本</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal" id="modelCancel">取消</button>
 					</div>
 				</div>
 			</div>
@@ -348,6 +348,7 @@
 			el : "#main-wrapper",
 			data(){
 				return {
+					loginStaff : {},
 					pageCmd : {},
 					shopList : [],
 					typeList : [],
@@ -403,13 +404,15 @@
 					});
 				},
 				queryHeadPic : function(){
+	 				var this_ = this;
 					$.ajax({
 						url:"[[@{/session}]]",
 						type:"get",
 						dataType : "json",
 						success:function(res){
 							//alert(JSON.stringify(res));	session中保存的用户信息
-							$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+							//$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+							this_.loginStaff = res;
 						}
 					});
 				},
@@ -515,6 +518,8 @@
 					success:function(result){
 						if(result == "success"){
 							//
+							$("#modelCancel").click();
+							vue.queryPage(1);
 						} else {
 							alert(result);
 						}

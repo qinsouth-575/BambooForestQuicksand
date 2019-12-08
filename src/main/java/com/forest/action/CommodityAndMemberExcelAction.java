@@ -78,6 +78,7 @@ public class CommodityAndMemberExcelAction {
 	}
 	
 	@RequestMapping("/excelUpload")
+	@ResponseBody
 	public String excelUpload(MultipartFile file, int shopId) {
 		log.debug("BambooForestQuicksand - CommodityAndMemberExcelAction - excelUpload - 商品管理 - 导入商品信息");
 		try {
