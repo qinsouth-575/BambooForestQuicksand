@@ -46,10 +46,10 @@
 			</div>
 			<form action="javascript:void(0);" method="get">
 				<div class="username">
-					<input type="text" class="userName" name="UserName" value="UserName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'UserName';}">
+					<input type="text" class="userName" name="username" value="UserName" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'UserName';}">
 				</div>
 				<div class="userpwd">
-					<input type="password" class="userPwd" name="Password_abcd" value="Password_abcd" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password_abcd';}">
+					<input type="password" class="userPwd" name="password" value="Password_abcd" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password_abcd';}">
 				</div>
 				<div class="random">
 					<input type="text" class="randomCode" value="RandomCode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'RandomCode';}">
@@ -58,7 +58,7 @@
 				</div>
 			
 				<div class="signin">
-					<input type="submit" value="登录">
+					<input type="submit" id="login" value="登录">
 				</div>
 			</form>
 		</div>
@@ -76,7 +76,7 @@
 				});
 				
 				//2.登录提交验证
-				$("input[type='submit']").on("click", function(){
+				$("input#login").on("click", function(){
 					if($(".userName").val()==null||$(".userName").val()==""){
 						alert("账户名不能为空");
 						return false;
@@ -87,13 +87,18 @@
 						alert("请输入随机数验证码！");
 						return false;
 					} else {
+						//alert($(".userName").val() + " - " + $(".userPwd").val() + " - " + $(".randomCode").val());
+						//return true;
+						
+						//location.href = "http://localhost:8080/login?username=" + $(".userName").val() + "&password=" + $(".userPwd").val();
+						
 						var user = {
-							jobNumber : $(".userName").val(),
-							password : $(".userPwd").val(),
-							randomCode : $(".randomCode").val()
-						};
-						//alert(JSON.stringify(user));		数据正常
-		
+								jobNumber : $(".userName").val(),
+								password : $(".userPwd").val(),
+								randomCode : $(".randomCode").val()
+							};
+							//alert(JSON.stringify(user));		数据正常
+			
 						$.ajax({
 		 					url : "[[@{/login}]]",
 							type : "post",
@@ -104,7 +109,7 @@
 								//alert(res.message);
 								
 								if(res.code == "3"){
-									location.href = "[[@{/finduser}]]";
+									location.href = "[[@{/statistics/toPage}]]";
 								} else {
 									alert(res.message);
 									$("#getRandomCode").attr("src", "/getRandomCode?"+Math.random());
@@ -114,6 +119,8 @@
 						/* Ajax代码结束 */
 					}
 				});
+				
+				//alert(1231);
 			});
 		</script>
 	</body>

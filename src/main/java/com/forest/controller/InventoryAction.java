@@ -1,4 +1,4 @@
-package com.forest.action;
+package com.forest.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;

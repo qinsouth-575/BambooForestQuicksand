@@ -164,6 +164,136 @@ public class JurisdictionExample {
             return (Criteria) this;
         }
 
+        public Criteria andDescriptionIsNull() {
+            addCriterion("description is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIsNotNull() {
+            addCriterion("description is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionEqualTo(String value) {
+            addCriterion("description =", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotEqualTo(String value) {
+            addCriterion("description <>", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThan(String value) {
+            addCriterion("description >", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionGreaterThanOrEqualTo(String value) {
+            addCriterion("description >=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThan(String value) {
+            addCriterion("description <", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLessThanOrEqualTo(String value) {
+            addCriterion("description <=", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionLike(String value) {
+            addCriterion("description like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotLike(String value) {
+            addCriterion("description not like", value, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionIn(List<String> values) {
+            addCriterion("description in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotIn(List<String> values) {
+            addCriterion("description not in", values, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionBetween(String value1, String value2) {
+            addCriterion("description between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andDescriptionNotBetween(String value1, String value2) {
+            addCriterion("description not between", value1, value2, "description");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdIsNull() {
+            addCriterion("parent_jur_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdIsNotNull() {
+            addCriterion("parent_jur_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdEqualTo(Integer value) {
+            addCriterion("parent_jur_id =", value, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdNotEqualTo(Integer value) {
+            addCriterion("parent_jur_id <>", value, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdGreaterThan(Integer value) {
+            addCriterion("parent_jur_id >", value, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("parent_jur_id >=", value, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdLessThan(Integer value) {
+            addCriterion("parent_jur_id <", value, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdLessThanOrEqualTo(Integer value) {
+            addCriterion("parent_jur_id <=", value, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdIn(List<Integer> values) {
+            addCriterion("parent_jur_id in", values, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdNotIn(List<Integer> values) {
+            addCriterion("parent_jur_id not in", values, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdBetween(Integer value1, Integer value2) {
+            addCriterion("parent_jur_id between", value1, value2, "parentJurId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentJurIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("parent_jur_id not between", value1, value2, "parentJurId");
+            return (Criteria) this;
+        }
+
         public Criteria andJurNameIsNull() {
             addCriterion("jur_name is null");
             return (Criteria) this;
@@ -231,66 +361,6 @@ public class JurisdictionExample {
 
         public Criteria andJurNameNotBetween(String value1, String value2) {
             addCriterion("jur_name not between", value1, value2, "jurName");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdIsNull() {
-            addCriterion("parent_jur_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdIsNotNull() {
-            addCriterion("parent_jur_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdEqualTo(Integer value) {
-            addCriterion("parent_jur_id =", value, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdNotEqualTo(Integer value) {
-            addCriterion("parent_jur_id <>", value, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdGreaterThan(Integer value) {
-            addCriterion("parent_jur_id >", value, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("parent_jur_id >=", value, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdLessThan(Integer value) {
-            addCriterion("parent_jur_id <", value, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdLessThanOrEqualTo(Integer value) {
-            addCriterion("parent_jur_id <=", value, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdIn(List<Integer> values) {
-            addCriterion("parent_jur_id in", values, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdNotIn(List<Integer> values) {
-            addCriterion("parent_jur_id not in", values, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdBetween(Integer value1, Integer value2) {
-            addCriterion("parent_jur_id between", value1, value2, "parentJurId");
-            return (Criteria) this;
-        }
-
-        public Criteria andParentJurIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("parent_jur_id not between", value1, value2, "parentJurId");
             return (Criteria) this;
         }
     }

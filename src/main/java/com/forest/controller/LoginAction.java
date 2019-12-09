@@ -1,4 +1,4 @@
-package com.forest.action;
+package com.forest.controller;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.forest.biz.LoginBiz;
+import com.forest.biz.UserService;
 import com.forest.entity.Staff;
 
 @Controller
@@ -34,26 +38,29 @@ public class LoginAction {
 	private static Logger log = Logger.getLogger(LoginAction.class);
 	
 	@Autowired
-	private LoginBiz lb;
+	private UserService us;
 	
 	@RequestMapping("/find")
 	public String find() {
-		//System.out.println(111);
 		return "a_login";
 	}
 	@RequestMapping("/findshop")
+    @RequiresPermissions("findshop")
 	public String findShop() {
 		return "c_shop";
 	}
 	@RequestMapping("/findstaff")
+    @RequiresPermissions("findstaff")
 	public String findStaff() {
 		return "c_staff";
 	}
 	@RequestMapping("/finduser")
+    @RequiresPermissions("finduser")
 	public String findUser() {
 		return "c_user";
 	}
 	@RequestMapping("/findposition")
+    @RequiresPermissions("findposition")
 	public String findPosition() {
 		return "c_position-of-authority";
 	}
@@ -66,14 +73,6 @@ public class LoginAction {
 		
 		Map<String, String> map = new HashMap<String, String>();
 		
-		//执行查询，验证用户名和密码
-		user = lb.queryNameAndPwd(user);
-		if (user == null) {
-			map.put("code", "1");
-			map.put("message", "登录失败，用户名或密码输入错误！");
-			return map;
-		}
-		
 		//获取session中保存的验证码
 		String randomJson = (String) session.getAttribute("randomCode");
 		if (!randomJson.equalsIgnoreCase(randomCode)) {
@@ -82,12 +81,48 @@ public class LoginAction {
 			return map;
 		}
 		
+		try{
+            Subject subject = SecurityUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getJobNumber(), user.getPassword());
+            subject.login(token);
+            log.info("登录成功");
+            
+            //Session subjectSession = subject.getSession();
+            Staff userr = us.findUserByName(user.getJobNumber());
+            userr.setPassword(user.getPassword());
+            log.info("登录成功后查询：" + userr);
+            session.setAttribute("account", userr);
+            
+    		map.put("code", "3");
+    		map.put("message", "登录成功！");
+    		return map;
+    		
+            //return "redirect:/finduser";
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        log.info("登录失败！");
+        
+		map.put("code", "1");
+		map.put("message", "登录失败，用户名或密码输入错误！");
+		return map;
+		
+        //return "redirect:/find";
+        
+		//执行查询，验证用户名和密码
+		/*user = lb.queryNameAndPwd(user);
+		if (user == null) {
+			map.put("code", "1");
+			map.put("message", "登录失败，用户名或密码输入错误！");
+			return map;
+		}
+		
 		session.setAttribute("account", user);
 		System.out.println("保存进session：" + user);
 
 		map.put("code", "3");
 		map.put("message", "登录成功！");
-		return map;
+		return map;*/
 	}
 	
 	//安全退出
@@ -99,10 +134,6 @@ public class LoginAction {
 		
 		return new Staff(0);
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -177,4 +208,5 @@ public class LoginAction {
     }
     
     //尚未继续开发
+    
 }

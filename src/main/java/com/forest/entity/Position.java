@@ -5,6 +5,8 @@ public class Position {
 
     private String posName;
 
+    private String description;
+
     public Integer getPosId() {
         return posId;
     }
@@ -19,5 +21,13 @@ public class Position {
 
     public void setPosName(String posName) {
         this.posName = posName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

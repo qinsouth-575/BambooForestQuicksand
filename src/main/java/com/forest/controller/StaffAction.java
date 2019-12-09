@@ -1,4 +1,4 @@
-package com.forest.action;
+package com.forest.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,6 +9,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -95,6 +97,7 @@ public class StaffAction {
 	 * 
 	 */
 	@PostMapping("/deleteStaffId")
+    @RequiresPermissions("deleteStaffId")
 	@ResponseBody
 	public Map<String,String> delete(Integer id){
 		System.out.println(id);
@@ -110,6 +113,7 @@ public class StaffAction {
 	 * 
 	 */
 	@PostMapping("/insertStaff")
+    @RequiresPermissions("insertStaff")
 	@ResponseBody
 	public Map<String,String> insert(@RequestBody Staff staff){
 		System.out.println(staff);
@@ -126,10 +130,29 @@ public class StaffAction {
 	 *
 	 */
 	@PostMapping("/updateStaff")
+    @RequiresPermissions("updateStaff")
 	@ResponseBody
 	public Map<String,String> update(@RequestBody Staff staff){
 		System.out.println(staff);
 		sb.update(staff);
+		Map<String,String> map=new HashMap<String, String>();
+		map.put("code", "修改成功");
+		return map;
+	}
+	
+	/**
+	 * 修改账户信息、工号、密码、手机号、行业
+	 */
+	@RequestMapping("/updateUser")
+    @RequiresPermissions("updateUser")
+	@ResponseBody
+	public Map<String,String> updateUser(@RequestBody Staff staff){
+		System.out.println(staff);
+		
+		String salt = "db788fe7-59b5-4fdb-a04f-5cc0301a5dc9";
+		staff.setPassword(new SimpleHash("MD5",staff.getPassword(),salt,3).toString());
+		System.out.println(sb.updateStaff(staff));
+		
 		Map<String,String> map=new HashMap<String, String>();
 		map.put("code", "修改成功");
 		return map;
@@ -143,24 +166,13 @@ public class StaffAction {
 	@RequestMapping(value = "/session", method = RequestMethod.GET)
 	@ResponseBody
 	public Staff StaffSession(HttpSession session) {
-		Staff staff=(Staff) session.getAttribute("account");
+		Staff staff = (Staff) session.getAttribute("account");
+		String password = staff.getPassword();
 		System.out.println("StaffAction - StaffSession - session中获取：" + staff + "，为了拿id查询");
 		staff = sb.queryId(staff.getStaffId());
+		staff.setPassword(password);
 		System.out.println("StaffAction - StaffSession - 根据ID查询：" + staff);
 		return staff;
-	}
-	
-	/**
-	 * 修改账户信息、工号、密码、手机号、行业
-	 */
-	@RequestMapping("/updateUser")
-	@ResponseBody
-	public Map<String,String> updateUser(@RequestBody Staff staff){
-		System.out.println(staff);
-		System.out.println(sb.updateStaff(staff));
-		Map<String,String> map=new HashMap<String, String>();
-		map.put("code", "修改成功");
-		return map;
 	}
 	
 	/**

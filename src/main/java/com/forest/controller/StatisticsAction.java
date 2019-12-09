@@ -1,6 +1,7 @@
-package com.forest.action;
+package com.forest.controller;
 
 import org.apache.log4j.Logger;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ public class StatisticsAction {
 
 	//统计报表 - 跳转 统计报表管理页面
 	@RequestMapping(value = "toPage", method = RequestMethod.GET)
+    @RequiresPermissions("statistics/toPage")
 	public String toStatistics() {
 		log.debug("BambooForestQuicksand - StatisticsAction - toStatistics - 统计报表 - 跳转统计页面");
 		return "a_statistics";

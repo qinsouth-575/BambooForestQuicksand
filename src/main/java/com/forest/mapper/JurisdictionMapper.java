@@ -1,9 +1,11 @@
 package com.forest.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.forest.entity.Jurisdiction;
 import com.forest.entity.JurisdictionExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface JurisdictionMapper {
     int countByExample(JurisdictionExample example);
@@ -27,4 +29,13 @@ public interface JurisdictionMapper {
     int updateByPrimaryKeySelective(Jurisdiction record);
 
     int updateByPrimaryKey(Jurisdiction record);
+
+    
+    
+    List<Integer> listPermissionIdsByRoleIds(List<Integer> role_ids) ;
+
+    List<Jurisdiction> listPermissionsByPermissionIds(List<Integer> permissions_ids);
+    
+    
+    
 }

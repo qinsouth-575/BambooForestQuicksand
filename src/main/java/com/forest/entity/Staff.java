@@ -15,14 +15,14 @@ public class Staff {
 
     private String password;
 
-	private Integer staffState;
+    private Integer staffState;
 
     private Date createTime;
-    
+
     private String trade;
-    
+
     private String headPortraitPath;
-    
+
     private String phone;
     
     private String shopName;
@@ -30,6 +30,8 @@ public class Staff {
     private String posName;
 	
 	private String randomCode;	//随机数验证码 - 11
+
+    private String salt;
     
 	public Staff() {
 		super();
@@ -44,46 +46,6 @@ public class Staff {
 		super();
 		this.staffId = staffId;
 		this.headPortraitPath = headPortraitPath;
-	}
-
-	public String getTrade() {
-		return trade;
-	}
-
-	public void setTrade(String trade) {
-		this.trade = trade;
-	}
-
-	public String getHeadPortraitPath() {
-		return headPortraitPath;
-	}
-
-	public void setHeadPortraitPath(String headPortraitPath) {
-		this.headPortraitPath = headPortraitPath;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getShopName() {
-		return shopName;
-	}
-
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
-	}
-
-	public String getPosName() {
-		return posName;
-	}
-
-	public void setPosName(String posName) {
-		this.posName = posName;
 	}
 
     public Integer getStaffId() {
@@ -149,24 +111,70 @@ public class Staff {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-	
-	/**
-	 * - 11.读取随机数验证吗
-	 * @return
-	 */
+
+    public String getTrade() {
+        return trade;
+    }
+
+    public void setTrade(String trade) {
+        this.trade = trade;
+    }
+
+    public String getHeadPortraitPath() {
+        return headPortraitPath;
+    }
+
+    public void setHeadPortraitPath(String headPortraitPath) {
+        this.headPortraitPath = headPortraitPath;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getPosName() {
+		return posName;
+	}
+
+	public void setPosName(String posName) {
+		this.posName = posName;
+	}
+
 	public String getRandomCode() {
 		return randomCode;
 	}
+
 	public void setRandomCode(String randomCode) {
 		this.randomCode = randomCode;
 	}
 
+	public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
 	@Override
 	public String toString() {
 		return "Staff [staffId=" + staffId + ", shopId=" + shopId + ", posId=" + posId + ", jobNumber=" + jobNumber
-				+ ", staffName=" + staffName + ", password=" + password + ", shopName=" + shopName + ", posName="
-				+ posName + ", trade=" + trade + ", headPortraitPath=" + headPortraitPath + ", phone=" + phone
-				+ ", randomCode=" + randomCode + ", staffState=" + staffState + ", createTime=" + createTime + "]";
+				+ ", staffName=" + staffName + ", password=" + password + ", staffState=" + staffState + ", createTime="
+				+ createTime + ", trade=" + trade + ", headPortraitPath=" + headPortraitPath + ", phone=" + phone
+				+ ", shopName=" + shopName + ", posName=" + posName + ", randomCode=" + randomCode + ", salt=" + salt
+				+ "]";
 	}
-
+    
 }

@@ -8,7 +8,7 @@ public class Shop {
     private String shopName;
 
     private String phone;
-    
+
     private String linkman;
 
     private String telephone;
@@ -24,12 +24,12 @@ public class Shop {
     private String info;
     
     private int staffcount;
-    
-    @Override
+
+	@Override
 	public String toString() {
 		return "Shop [shopId=" + shopId + ", account=" + account + ", shopName=" + shopName + ", phone=" + phone
-				+ ", telephone=" + telephone + ", province=" + province + ", city=" + city + ", region=" + region
-				+ ", street=" + street + ", info=" + info + ", staffcount=" + staffcount + ", linkman=" + linkman + "]";
+				+ ", linkman=" + linkman + ", telephone=" + telephone + ", province=" + province + ", city=" + city
+				+ ", region=" + region + ", street=" + street + ", info=" + info + ", staffcount=" + staffcount + "]";
 	}
 
 	public int getStaffcount() {
@@ -39,8 +39,8 @@ public class Shop {
 	public void setStaffcount(int staffcount) {
 		this.staffcount = staffcount;
 	}
-
-	public Short getShopId() {
+	
+    public Short getShopId() {
         return shopId;
     }
 
@@ -72,6 +72,14 @@ public class Shop {
         this.phone = phone;
     }
 
+    public String getLinkman() {
+        return linkman;
+    }
+
+    public void setLinkman(String linkman) {
+        this.linkman = linkman;
+    }
+
     public String getTelephone() {
         return telephone;
     }
@@ -79,16 +87,8 @@ public class Shop {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-    
-    public String getLinkman() {
-		return linkman;
-	}
 
-	public void setLinkman(String linkman) {
-		this.linkman = linkman;
-	}
-
-	public String getProvince() {
+    public String getProvince() {
         return province;
     }
 

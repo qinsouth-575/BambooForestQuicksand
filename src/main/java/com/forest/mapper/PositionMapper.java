@@ -1,9 +1,11 @@
 package com.forest.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.forest.entity.Position;
 import com.forest.entity.PositionExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface PositionMapper {
     int countByExample(PositionExample example);
@@ -27,4 +29,11 @@ public interface PositionMapper {
     int updateByPrimaryKeySelective(Position record);
 
     int updateByPrimaryKey(Position record);
+    
+
+    
+    List<Position> listRolesByRoleIds(List<Integer> role_ids);
+    
+    
+    
 }

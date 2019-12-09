@@ -1,4 +1,4 @@
-package com.forest.action;
+package com.forest.controller;
 
 import java.util.Date;
 import java.util.HashMap;

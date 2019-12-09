@@ -1,7 +1,8 @@
-package com.forest.action;
+package com.forest.controller;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class PosAction {
 		 * 查询所有职位
 		 */
 		@RequestMapping("/queryAll")
+	    @RequiresPermissions("queryAll")
 		@ResponseBody
 		public List<Position> queryAll(){
 			return pb.queryAll();

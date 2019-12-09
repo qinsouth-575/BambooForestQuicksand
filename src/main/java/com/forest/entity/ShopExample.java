@@ -374,6 +374,76 @@ public class ShopExample {
             return (Criteria) this;
         }
 
+        public Criteria andLinkmanIsNull() {
+            addCriterion("linkman is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanIsNotNull() {
+            addCriterion("linkman is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanEqualTo(String value) {
+            addCriterion("linkman =", value, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanNotEqualTo(String value) {
+            addCriterion("linkman <>", value, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanGreaterThan(String value) {
+            addCriterion("linkman >", value, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanGreaterThanOrEqualTo(String value) {
+            addCriterion("linkman >=", value, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanLessThan(String value) {
+            addCriterion("linkman <", value, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanLessThanOrEqualTo(String value) {
+            addCriterion("linkman <=", value, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanLike(String value) {
+            addCriterion("linkman like", value, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanNotLike(String value) {
+            addCriterion("linkman not like", value, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanIn(List<String> values) {
+            addCriterion("linkman in", values, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanNotIn(List<String> values) {
+            addCriterion("linkman not in", values, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanBetween(String value1, String value2) {
+            addCriterion("linkman between", value1, value2, "linkman");
+            return (Criteria) this;
+        }
+
+        public Criteria andLinkmanNotBetween(String value1, String value2) {
+            addCriterion("linkman not between", value1, value2, "linkman");
+            return (Criteria) this;
+        }
+
         public Criteria andTelephoneIsNull() {
             addCriterion("telephone is null");
             return (Criteria) this;

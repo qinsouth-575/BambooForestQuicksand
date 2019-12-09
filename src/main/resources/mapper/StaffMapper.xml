@@ -12,8 +12,29 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="trade" property="trade" jdbcType="VARCHAR" />
     <result column="head_portrait_path" property="headPortraitPath" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="CHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="listRoleIdsByUserId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+  	SELECT s.pos_id 
+	FROM sta_pos_relation s 
+	WHERE s.staff_id = #{id}
+  </select>
+  <select id="findUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	SELECT * 
+	FROM staff u 
+	WHERE u.job_number = #{name}
+  </select>
+  <select id="login" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	SELECT * 
+	FROM staff 
+	WHERE job_number=#{username} AND password = #{password}
+  </select>
+  
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -73,7 +94,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-	`staff_id`,`shop_id`,`pos_id`,`job_number`,`staff_name`,`password`,`staff_state`,`create_time`,`trade`,`head_portrait_path`,`phone`
+    staff_id, shop_id, pos_id, job_number, staff_name, password, staff_state, create_time, 
+    trade, head_portrait_path, phone, salt
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.StaffExample" >
     select
@@ -107,9 +129,15 @@
   </delete>
   <insert id="insert" parameterType="com.forest.entity.Staff" >
     insert into staff (staff_id, shop_id, pos_id, 
-      job_number, staff_name, password,staff_state,create_time)
+      job_number, staff_name, password, 
+      staff_state, create_time, trade, 
+      head_portrait_path, phone, salt
+      )
     values (#{staffId,jdbcType=INTEGER}, #{shopId,jdbcType=SMALLINT}, #{posId,jdbcType=INTEGER}, 
-      #{jobNumber,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},1,#{createTime})
+      #{jobNumber,jdbcType=VARCHAR}, #{staffName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{staffState,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{trade,jdbcType=VARCHAR}, 
+      #{headPortraitPath,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, #{salt,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.forest.entity.Staff" >
     insert into staff
@@ -138,6 +166,18 @@
       <if test="createTime != null" >
         create_time,
       </if>
+      <if test="trade != null" >
+        trade,
+      </if>
+      <if test="headPortraitPath != null" >
+        head_portrait_path,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="staffId != null" >
@@ -163,6 +203,18 @@
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="trade != null" >
+        #{trade,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortraitPath != null" >
+        #{headPortraitPath,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -199,6 +251,18 @@
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.trade != null" >
+        trade = #{record.trade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headPortraitPath != null" >
+        head_portrait_path = #{record.headPortraitPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=CHAR},
+      </if>
+      <if test="record.salt != null" >
+        salt = #{record.salt,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -213,7 +277,11 @@
       staff_name = #{record.staffName,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       staff_state = #{record.staffState,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      trade = #{record.trade,jdbcType=VARCHAR},
+      head_portrait_path = #{record.headPortraitPath,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=CHAR},
+      salt = #{record.salt,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -242,6 +310,18 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="trade != null" >
+        trade = #{trade,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortraitPath != null" >
+        head_portrait_path = #{headPortraitPath,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
     </set>
     where staff_id = #{staffId,jdbcType=INTEGER}
   </update>
@@ -253,13 +333,13 @@
       staff_name = #{staffName,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       staff_state = #{staffState,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      trade = #{trade,jdbcType=VARCHAR},
+      head_portrait_path = #{headPortraitPath,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
+      salt = #{salt,jdbcType=VARCHAR}
     where staff_id = #{staffId,jdbcType=INTEGER}
   </update>
-  
-  
-  
-  
   
   
   
@@ -290,5 +370,4 @@
   		SET head_portrait_path=#{headPortraitPath} 
   		WHERE staff_id=#{staffId}
   </update>
-  
 </mapper>

@@ -3,9 +3,32 @@
 <mapper namespace="com.forest.mapper.JurisdictionMapper" >
   <resultMap id="BaseResultMap" type="com.forest.entity.Jurisdiction" >
     <id column="jur_id" property="jurId" jdbcType="INTEGER" />
-    <result column="jur_name" property="jurName" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="parent_jur_id" property="parentJurId" jdbcType="INTEGER" />
+    <result column="jur_name" property="jurName" jdbcType="VARCHAR" />
   </resultMap>
+  
+  <select id="listPermissionIdsByRoleIds"  parameterType="java.util.List" resultType="java.lang.Integer">
+    SELECT p.jur_id 
+	FROM jur_pos_relation p 
+	WHERE p.pos_id IN 
+    <foreach  item="item" collection="list" index="index"  open="(" separator="," close=")">#{item}</foreach>
+  </select>
+
+  <select id="listPermissionsByPermissionIds"  parameterType="java.util.List" resultMap="BaseResultMap">
+    SELECT * 
+	FROM `jurisdiction` p 
+	WHERE p.jur_id IN
+    	<foreach  item="item" collection="list" index="index"  open="(" separator="," close=")">#{item}</foreach>
+    	OR p.parent_jur_id IN
+    	<foreach  item="item" collection="list" index="index"  open="(" separator="," close=")">#{item}</foreach>
+  </select>
+  
+  
+  
+  
+  
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -65,7 +88,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    jur_id, jur_name, parent_jur_id
+    jur_id, description, parent_jur_id, jur_name
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.forest.entity.JurisdictionExample" >
     select
@@ -98,10 +121,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.forest.entity.Jurisdiction" >
-    insert into jurisdiction (jur_id, jur_name, parent_jur_id
-      )
-    values (#{jurId,jdbcType=INTEGER}, #{jurName,jdbcType=VARCHAR}, #{parentJurId,jdbcType=INTEGER}
-      )
+    insert into jurisdiction (jur_id, description, parent_jur_id, 
+      jur_name)
+    values (#{jurId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{parentJurId,jdbcType=INTEGER}, 
+      #{jurName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.forest.entity.Jurisdiction" >
     insert into jurisdiction
@@ -109,22 +132,28 @@
       <if test="jurId != null" >
         jur_id,
       </if>
-      <if test="jurName != null" >
-        jur_name,
+      <if test="description != null" >
+        description,
       </if>
       <if test="parentJurId != null" >
         parent_jur_id,
+      </if>
+      <if test="jurName != null" >
+        jur_name,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jurId != null" >
         #{jurId,jdbcType=INTEGER},
       </if>
-      <if test="jurName != null" >
-        #{jurName,jdbcType=VARCHAR},
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
       </if>
       <if test="parentJurId != null" >
         #{parentJurId,jdbcType=INTEGER},
+      </if>
+      <if test="jurName != null" >
+        #{jurName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -140,11 +169,14 @@
       <if test="record.jurId != null" >
         jur_id = #{record.jurId,jdbcType=INTEGER},
       </if>
-      <if test="record.jurName != null" >
-        jur_name = #{record.jurName,jdbcType=VARCHAR},
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
       </if>
       <if test="record.parentJurId != null" >
         parent_jur_id = #{record.parentJurId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jurName != null" >
+        jur_name = #{record.jurName,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -154,8 +186,9 @@
   <update id="updateByExample" parameterType="map" >
     update jurisdiction
     set jur_id = #{record.jurId,jdbcType=INTEGER},
-      jur_name = #{record.jurName,jdbcType=VARCHAR},
-      parent_jur_id = #{record.parentJurId,jdbcType=INTEGER}
+      description = #{record.description,jdbcType=VARCHAR},
+      parent_jur_id = #{record.parentJurId,jdbcType=INTEGER},
+      jur_name = #{record.jurName,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -163,19 +196,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.forest.entity.Jurisdiction" >
     update jurisdiction
     <set >
-      <if test="jurName != null" >
-        jur_name = #{jurName,jdbcType=VARCHAR},
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
       </if>
       <if test="parentJurId != null" >
         parent_jur_id = #{parentJurId,jdbcType=INTEGER},
+      </if>
+      <if test="jurName != null" >
+        jur_name = #{jurName,jdbcType=VARCHAR},
       </if>
     </set>
     where jur_id = #{jurId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.forest.entity.Jurisdiction" >
     update jurisdiction
-    set jur_name = #{jurName,jdbcType=VARCHAR},
-      parent_jur_id = #{parentJurId,jdbcType=INTEGER}
+    set description = #{description,jdbcType=VARCHAR},
+      parent_jur_id = #{parentJurId,jdbcType=INTEGER},
+      jur_name = #{jurName,jdbcType=VARCHAR}
     where jur_id = #{jurId,jdbcType=INTEGER}
   </update>
 </mapper>

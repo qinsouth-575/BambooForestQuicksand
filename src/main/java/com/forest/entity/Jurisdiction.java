@@ -3,9 +3,11 @@ package com.forest.entity;
 public class Jurisdiction {
     private Integer jurId;
 
-    private String jurName;
+    private String description;
 
     private Integer parentJurId;
+
+    private String jurName;
 
     public Integer getJurId() {
         return jurId;
@@ -15,12 +17,12 @@ public class Jurisdiction {
         this.jurId = jurId;
     }
 
-    public String getJurName() {
-        return jurName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setJurName(String jurName) {
-        this.jurName = jurName;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getParentJurId() {
@@ -29,5 +31,13 @@ public class Jurisdiction {
 
     public void setParentJurId(Integer parentJurId) {
         this.parentJurId = parentJurId;
+    }
+
+    public String getJurName() {
+        return jurName;
+    }
+
+    public void setJurName(String jurName) {
+        this.jurName = jurName;
     }
 }
