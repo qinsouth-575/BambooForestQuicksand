@@ -109,7 +109,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
-                            	<img src="/assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img v-bind:src="'/head/' + loginStaff.headPortraitPath" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
                     </ul>
@@ -398,6 +398,7 @@
     		data(){
     			return {
     				je:0,
+					loginStaff : {},
     				poinsert:[],
     			　	checked : false, 		//是否全选
 			　　　　	checkList : [], 		//双向数据绑定的数组，此处用的id
@@ -426,6 +427,19 @@
     				$("#hj").text(zje);
     			}
 			},methods:{
+				queryHeadPic : function(){
+	 				var this_ = this;
+					$.ajax({
+						url:"[[@{/session}]]",
+						type:"get",
+						dataType : "json",
+						success:function(res){
+							//alert(JSON.stringify(res));	session中保存的用户信息
+							//$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+							this_.loginStaff = res;
+						}
+					});
+				},
 				checkAll : function(){
 	   		　　		if(this.checked){
 	   		　　　　　　	this.checkList = [];
@@ -443,7 +457,7 @@
     						pageNum:dqy,
     						cmName:""
     				};
-    				//alert(JSON.stringify(obj));
+    				////alert(JSON.stringify(obj));
     				$.ajax({
 						url:"[[@{/po/queryCommodityMain}]]",
 						type:"post",
@@ -455,7 +469,7 @@
 								value.sum = 1;
 							})
 							that.poinsert=res;
-							//alert(JSON.stringify(that.poinsert));
+							////alert(JSON.stringify(that.poinsert));
 						}
 						
 					});
@@ -464,7 +478,7 @@
     				if(ctName=="全部"){
     					ctName="";
     				}
-    				//alert(ctName);
+    				////alert(ctName);
     				var that=this;
     				var obj={
     						pageNum:1,
@@ -568,7 +582,7 @@
     					type:"get",
     					success:function(res){
     						$(".zbr").val(res.staffName);
-    						//alert(res.shopId);
+    						////alert(res.shopId);
     						that.supid=res.shopId;
     					}
     				});
@@ -586,8 +600,8 @@
     			insert:function(){
     				
     				var that=this;
-    				//alert(that.list.pmId=1);
-    				//alert(JSON.stringify(that.fxList));
+    				////alert(that.list.pmId=1);
+    				////alert(JSON.stringify(that.fxList));
     				var obj={
     						pmOdd:$("#billno").val(),
     						deliveryTime:$("#billdate").val(),
@@ -598,7 +612,7 @@
     						remark:$(".remark").val(),
     						list:[]
     				}
-    				//alert(JSON.stringify(obj));
+    				////alert(JSON.stringify(obj));
     				for(var i=0;i<that.fxList.length;i++){
     					var obj1={
     							pmId:$("#billno").val(),
@@ -610,7 +624,7 @@
     					obj.list[i]=obj1;
     					
     				}
-    				//alert(JSON.stringify(obj1));
+    				////alert(JSON.stringify(obj1));
     				$.ajax({
     					url:"[[@{/po/insert}]]",
     					type:"post",
@@ -618,13 +632,15 @@
     					contentType:"application/json;charset=utf-8",
     					dataType:"json",
     					success:function(res){
-    						alert(res.message);
-    						that.qx();
+    						//alert(res.message);
+    						//that.qx();
+    						
+    						location.href="toCommodityMD";
     					}
     				});
     			},
     			qx:function(){
-    				//alert(1);
+    				////alert(1);
     				this.fxList=[];
     				$("#zsl").empty();
     				$("#hj").empty();
@@ -635,6 +651,7 @@
     			}
     		},created:function(){
     			this.goPage(1);
+				this.queryHeadPic();		//4.获取session中保存的登录用户的信息，更新头像
     			var now=new Date();
 				var year=now.getFullYear();
 				var month=now.getMonth()+1;

@@ -37,11 +37,11 @@ public class ShopAction {
 			return map;
 		}
 		@RequestMapping("/queryId")
-	    @RequiresPermissions("queryId")
 		@ResponseBody
 		public Shop queryId(Integer id) {
-			System.out.println(sb.queryId(id).getLinkman());
-			return sb.queryId(id);
+			Shop shop = sb.queryId(id);
+			System.out.println("查询到店铺信息：" + shop);
+			return shop;
 		}
 		@PostMapping("/update")
 	    @RequiresPermissions("update")

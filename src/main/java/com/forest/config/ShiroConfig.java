@@ -81,12 +81,17 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/color/**", "anon");
         
         filterChainDefinitionMap.put("/find", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/getRandomCode", "anon");
         //filterChainDefinitionMap.put("/finderror", "anon");
         filterChainDefinitionMap.put("/loginOut", "anon");
 
         filterChainDefinitionMap.put("/queryAll", "anon");
-        
+        filterChainDefinitionMap.put("/queryId", "anon");
+        filterChainDefinitionMap.put("/queryId/**", "anon");
+
+        filterChainDefinitionMap.put("/pos/queryAll", "anon");
+
         filterChainDefinitionMap.put("/query", "anon");
         filterChainDefinitionMap.put("/querySandP", "anon");
         filterChainDefinitionMap.put("/queryPos", "anon");
@@ -100,9 +105,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/**", "authc");
 
         // 配置shiro默认登录界面地址，前后端分离中登录界面跳转应由前端路由控制，后台仅返回json数据
-        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setLoginUrl("/find");
         // 登录成功后要跳转的链接
-        shiroFilterFactoryBean.setSuccessUrl("/statistics/toPage");
+        shiroFilterFactoryBean.setSuccessUrl("/findshop");
         // 设置无权限时跳转的 url;
         shiroFilterFactoryBean.setUnauthorizedUrl("/finderror");
 

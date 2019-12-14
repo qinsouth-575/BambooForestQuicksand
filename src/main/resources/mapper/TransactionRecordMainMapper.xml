@@ -388,4 +388,21 @@
   <select id="queryById" parameterType="String" resultMap="BaseResultMap">
   			select * from transaction_record_main where order_number=#{0}
   </select>
+  
+  <update id="updateByAll" parameterType="com.forest.entity.TransactionRecordMain">
+  			update transaction_record_main
+    	set client = #{client,jdbcType=INTEGER},
+      total_sum = #{totalSum,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=REAL},
+      actual_income = #{actualIncome,jdbcType=DECIMAL},
+      not_income = #{notIncome,jdbcType=DECIMAL},
+      paymount = #{paymount,jdbcType=SMALLINT},
+      shop_id = #{shopId,jdbcType=SMALLINT},
+      cashier = #{cashier,jdbcType=VARCHAR},
+      shop_assistant = #{shopAssistant,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+  </update>
 </mapper>

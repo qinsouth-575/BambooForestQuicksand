@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="com.forest.entity.TransactionRecordDetails" >
     <id column="trd_id" property="trdId" jdbcType="INTEGER" />
     <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
-    <result column="article_no" property="articleNo" jdbcType="VARCHAR" />
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="raw_total_price" property="rawTotalPrice" jdbcType="DECIMAL" />
     <result column="discount" property="discount" jdbcType="REAL" />
@@ -12,6 +11,10 @@
     <result column="state" property="state" jdbcType="TINYINT" />
     <result column="create_time" property="createTime" jdbcType="VARCHAR" />
     <result column="cm_name" property="cmName" jdbcType="VARCHAR" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="commodity_norms" property="commodityNorms" jdbcType="VARCHAR" />
+    <result column="commodity_color" property="commodityColor" jdbcType="VARCHAR" />
+    <result column="article_no" property="articleNo" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -259,8 +262,8 @@
     where trd_id = #{trdId,jdbcType=INTEGER}
   </update>                
   <select id="queryAll" resultMap="BaseResultMap">
-  			SELECT d.`trd_id`,c.`cm_name`,d.`quantity`,d.`total_price`,m.`create_time` FROM `transaction_record_details` AS d
-			LEFT JOIN `commodity_main` AS c ON d.`article_no`=c.`article_no`
+  			SELECT d.`trd_id`,d.`quantity`,d.`total_price`,m.`create_time`,d.`commodity_name` 
+  			FROM `transaction_record_details` AS d
 			LEFT JOIN `transaction_record_main` AS m ON m.`order_number`=d.`order_number`
 			WHERE m.`client`>0 AND d.`state`=0 AND m.`state`=0
 			<if test="orderNumber != null" >
@@ -273,9 +276,9 @@
   </select>
   
   <insert id="insertByDetails">
-  			insert into transaction_record_details(order_number,article_no,quantity,raw_total_price,discount,total_price,state) values
+  			insert into transaction_record_details(order_number,commodity_name,commodity_norms,commodity_color,article_no,quantity,raw_total_price,discount,total_price,state) values
 		    <foreach collection="details" item="dt" separator=",">
-      		(#{dt.orderNumber},#{dt.articleNo},#{dt.quantity},#{dt.rawTotalPrice},#{dt.discount},#{dt.totalPrice},#{dt.state})
+      		(#{dt.orderNumber},#{dt.commodityName},#{dt.commodityNorms},#{dt.commodityColor},#{dt.articleNo},#{dt.quantity},#{dt.rawTotalPrice},#{dt.discount},#{dt.totalPrice},#{dt.state})
       		</foreach>;
   </insert>
   
@@ -284,10 +287,7 @@
   </delete>
   
   <select id="queryById" parameterType="String" resultMap="BaseResultMap">	
-		SELECT *,cm.`cm_name` as cmName FROM `transaction_record_details` AS trd
-		LEFT JOIN `commodity_details` AS cd ON trd.`article_no`=cd.`bar_code`
-		LEFT JOIN `commodity_main` AS cm ON cd.`cm_id`=cm.`cm_id`
-		WHERE trd.`order_number`=#{0}
-		GROUP BY trd.`article_no`
+		SELECT * FROM `transaction_record_details`
+		WHERE state=1 and order_number=#{0}
   </select>
 </mapper>

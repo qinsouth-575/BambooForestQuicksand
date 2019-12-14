@@ -120,7 +120,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
-                            	<img src="/assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img v-bind:src="'/head/' + loginStaff.headPortraitPath" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
                     </ul>
@@ -433,6 +433,7 @@
 				el:"#etc",
 				data(){
 					return {
+    					loginStaff : {},
 						PageList:{
 							list:[]
 						},
@@ -441,6 +442,19 @@
 					}
 				},
 				methods:{
+					queryHeadPic : function(){
+		 				var this_ = this;
+						$.ajax({
+							url:"[[@{/session}]]",
+							type:"get",
+							dataType : "json",
+							success:function(res){
+								//alert(JSON.stringify(res));	session中保存的用户信息
+								//$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+								this_.loginStaff = res;
+							}
+						});
+					},
 					toMember:function(){
 						location.href="http://localhost:8080/MemberManage/toMember";
 					},
@@ -519,8 +533,6 @@
 						var $city1=$("#city1").val();
 						var $district1=$("#district1").val();
 						var $street=$("#street").val();
-						alert($city1);
-						alert($district1);
 						if($phoen!=""&&$memberName!=""&&$mlId!="请选择等级"&&$password!=""&&$province1!=""&&$city1!=""&&$district1!=""&&$street!=""){
 							var createtime =new Date();
 							var year=createtime.getFullYear();
@@ -530,7 +542,6 @@
 							var minutes=createtime.getMinutes();
 							var seconds=createtime.getSeconds();
 							var create=year+"-"+month+"-"+date+" "+hours+":"+minutes+":"+seconds;
-							alert(create);
 							obj={
 									phoen:$phoen,
 									memberName:$memberName,
@@ -575,7 +586,6 @@
 								$(".province").val(_is.memberList.province).trigger('change');
 								$(".city").val(_is.memberList.city).trigger('change');
 								$(".region").val(_is.memberList.region).trigger('change');
-								alert(JSON.stringify(_is.memberList));
 							}
 						});
 						
@@ -583,7 +593,6 @@
 					xg:function(){
 						var _tis=this;
 						var s=JSON.stringify(_tis.memberList);
-						alert(s);
 						$.ajax({
 							url:"[[@{/MemberManage/updateById}]]",
 							type:"put",
@@ -605,6 +614,7 @@
 				},created:function(){
 	 				this.goPage(1);
 	 				this.queryAllLe();
+					this.queryHeadPic();		//4.获取session中保存的登录用户的信息，更新头像
 	 			}
 			});
 	</script>

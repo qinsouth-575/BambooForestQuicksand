@@ -116,7 +116,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
-                            	<img src="/assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img v-bind:src="'/head/' + loginStaff.headPortraitPath" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
                     </ul>
@@ -368,12 +368,26 @@
 				el:"#etc",
 				data(){
 					return {
+    					loginStaff : {},
 						PageList:{
 							list:[]
 						}
 					}
 				},
 				methods:{
+					queryHeadPic : function(){
+		 				var this_ = this;
+						$.ajax({
+							url:"[[@{/session}]]",
+							type:"get",
+							dataType : "json",
+							success:function(res){
+								//alert(JSON.stringify(res));	session中保存的用户信息
+								//$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+								this_.loginStaff = res;
+							}
+						});
+					},
 					toMember:function(){
 						location.href="http://localhost:8080/MemberManage/toMember";
 					},
@@ -427,8 +441,7 @@
 												var p=parseInt($rechargeMoney);
 												var i=parseInt(res.integral);
 												var $integral=p+i;
-												alert(res.balance);
-												alert($balance);
+												//alert($balance);
 												var obt={
 														balance:$balance,
 														integral:$integral,
@@ -526,6 +539,7 @@
 	 				}
 				},created:function(){
 	 				this.goPage(1);
+					this.queryHeadPic();		//4.获取session中保存的登录用户的信息，更新头像
 	 			}
 			});
 	</script>

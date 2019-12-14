@@ -109,7 +109,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
-                            	<img src="/assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img v-bind:src="'/head/' + loginStaff.headPortraitPath" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
                     </ul>
@@ -408,10 +408,24 @@
     			el:"#po",
     			data(){
     				return {
+    					loginStaff : {},
     					po:[],
     					shop:[]
     				}
     			},methods:{
+					queryHeadPic : function(){
+		 				var this_ = this;
+						$.ajax({
+							url:"[[@{/session}]]",
+							type:"get",
+							dataType : "json",
+							success:function(res){
+								//alert(JSON.stringify(res));	session中保存的用户信息
+								//$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+								this_.loginStaff = res;
+							}
+						});
+					},
     				goPage:function(pageNum){
     					var sp=$(".shop").val();
     					if(sp=="全部店铺"){
@@ -425,7 +439,7 @@
     							shopName:sp,
     							pmOdd:$("#podd").val()
     					};
-    					//alert(JSON.stringify(obj));
+    					////alert(JSON.stringify(obj));
     					$.ajax({
     						url:"[[@{/po/queryPurchaseMain}]]",
     						
@@ -435,7 +449,7 @@
     						dataType:"json",
     						success:function(res){
     							that.po=res;
-    							//alert(JSON.stringify(that.po));
+    							////alert(JSON.stringify(that.po));
     						}
     						
     					});
@@ -446,7 +460,7 @@
     				goPrePage:function(){
         				if(this.po.hasPreviousPage){
             				this.goPage(this.po.prePage)
-            				//alert(this.po.hasPreviousPage + " - " + this.po.prePage);
+            				////alert(this.po.hasPreviousPage + " - " + this.po.prePage);
         				}
         			},
         			goNextPage:function(){
@@ -472,7 +486,7 @@
     				},
     				toupdate : function(pmId,statu){
     					if(statu=="已审核"){
-    						alert("已经审核，不能被修改");
+    						//alert("已经审核，不能被修改");
     						return;
     					}
     					location.href="/po/toCommodityMDUpdate?pmId="+pmId;
@@ -487,7 +501,7 @@
     						},
     						dataType:"json",
     						success:function(res){
-    							alert(res.message);
+    							//alert(res.message);
     							vue.goPage(1);
     						}
     					});
@@ -501,12 +515,13 @@
     						},
     						dataType:"json",
     						success:function(res){
-    							alert(res.message);
+    							//alert(res.message);
     							vue.goPage(1);
     						}
     					});
     				}
     			},created:function(){
+    				this.queryHeadPic();		//4.获取session中保存的登录用户的信息，更新头像
     				this.goPage(1);
     				this.queryShop();
     			}

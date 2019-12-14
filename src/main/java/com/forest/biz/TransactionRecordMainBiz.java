@@ -77,4 +77,13 @@ public class TransactionRecordMainBiz {
 				public TransactionRecordMain queryById(String orderNumber) {
 						return transactionRecordMainMapper.queryById(orderNumber);
 				}
+				
+				/**
+				 * 根据订单号修改
+				 * @param trm
+				 * @return
+				 */
+				public boolean updateByAll(TransactionRecordMain trm) {
+						return transactionRecordMainMapper.updateByAll(trm)>0;
+				}
 }

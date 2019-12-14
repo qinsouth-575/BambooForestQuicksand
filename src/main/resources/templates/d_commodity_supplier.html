@@ -109,7 +109,7 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" th:href="@{/finduser}" aria-haspopup="true" aria-expanded="false">
-                            	<img src="/assets/images/users/HeadPortrait.jpg" alt="user" class="profile-pic m-r-5" />丶秦南
+                            	<img v-bind:src="'/head/' + loginStaff.headPortraitPath" alt="user" class="profile-pic m-r-5" />丶秦南
                             </a>
                         </li>
                     </ul>
@@ -442,11 +442,25 @@
     		el:"#supper",
     		data(){
     			return {
+					loginStaff : {},
     				supplier:{},
     				sup:{},
     				supp:{}
     			};
     		},methods:{
+				queryHeadPic : function(){
+	 				var this_ = this;
+					$.ajax({
+						url:"[[@{/session}]]",
+						type:"get",
+						dataType : "json",
+						success:function(res){
+							//alert(JSON.stringify(res));	session中保存的用户信息
+							//$(".profile-pic").attr("src", "/head/" + res.headPortraitPath);
+							this_.loginStaff = res;
+						}
+					});
+				},
     			goPage:function(pageNum){
     				var this_=this;
     				var su={
@@ -469,7 +483,7 @@
     			goPrePage:function(){
     				if(this.supplier.hasPreviousPage){
         				this.goPage(this.supplier.prePage)
-        				//alert(this.supplier.hasPreviousPage + " - " + this.supplier.prePage);
+        				////alert(this.supplier.hasPreviousPage + " - " + this.supplier.prePage);
     				}
     			},
     			goNextPage:function(){
@@ -497,7 +511,7 @@
         						this_.goPage(this_.supplier.pageNum);
         						return false;
     						}
-    						alert(res.message);
+    						//alert(res.message);
     					}
     				});
     			},
@@ -510,7 +524,7 @@
     					data:this_.sup,
     					dataType:"json",
     					success:function(res){
-    						alert(res.code);
+    						//alert(res.code);
     						this_.goPage(1);
     						this_.sup="";
     					}
@@ -564,7 +578,7 @@
     					dataType:"json",
     					contentType:"application/json;charset=utf-8",
     					success:function(res){
-    						alert(res.code);
+    						//alert(res.code);
     						this_.goPage(1);
     					}
     				});
@@ -591,6 +605,7 @@
     			}
     		},
     		created:function(){
+				this.queryHeadPic();		//4.获取session中保存的登录用户的信息，更新头像
     			this.goPage(1);
     		}
     	});

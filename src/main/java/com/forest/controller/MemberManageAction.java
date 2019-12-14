@@ -142,13 +142,13 @@ public class MemberManageAction {
 				}
 				
 				/**
-				 * 根据会员编号查询是否存在该会员(用于充值)
-				 * @param MemberId
+				 * 显示收银页面的会员
+				 * @param pageNum
 				 * @return
 				 */
-				@RequestMapping("/queryCont")
+				@RequestMapping("queryBySyHy")
 				@ResponseBody
-				public int queryCont(int MemberId) {
-					return memberBiz.queryCont(MemberId);
+				public PageInfo<Member> queryBySyHy(Integer pageNum){
+					return memberBiz.queryBySyHy(pageNum);
 				}
 }

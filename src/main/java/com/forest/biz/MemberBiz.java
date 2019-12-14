@@ -73,4 +73,16 @@ public class MemberBiz {
 				public int queryCont(int MemberId) {
 					return memberMapper.queryCont(MemberId);
 				}
+				
+				/**
+				 * 显示收银页面的会员
+				 * @param pageNum
+				 * @return
+				 */
+				public PageInfo<Member> queryBySyHy(Integer pageNum){
+					PageHelper.startPage(pageNum, 14);
+					List<Member> list=memberMapper.queryBySyHy();
+					PageInfo<Member> page=new PageInfo<Member>(list);
+					return page;
+				}
 }
